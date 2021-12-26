@@ -17,7 +17,12 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/dashboard';
+    public const HOME = '/dashboard';            //for default user
+
+    public static function redirectTo($guard)  //guard = admin
+    {
+        return $guard.'/dashboard';         // admin/dashboard
+    }
 
     /**
      * The controller namespace for the application.
