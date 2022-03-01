@@ -35,4 +35,4 @@ Route::get('/admin/logout' , [AdminController::class , 'destroy'])->name('admin.
 
 Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
-})->name('dashboard');
+})->name('User_dashboard');
