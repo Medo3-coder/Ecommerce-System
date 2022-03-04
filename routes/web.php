@@ -18,21 +18,30 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'admin' , 'middleware' =>['admin:admin']] , function(){
-    Route::get('/login' , [AdminController::class , 'loginForm']);
-    Route::post('/login' , [AdminController::class , 'store'])->name('admin.login');
-});
 
-Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
-    return view('admin.index');
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
 })->name('dashboard');
 
 
-//admin route
 
-Route::get('/admin/logout' , [AdminController::class , 'destroy'])->name('admin.logout');
+require 'admin.php';
+
+// Route::group(['prefix' => 'admin' , 'middleware' =>['admin:admin']] , function(){
+//     Route::get('/login' , [AdminController::class , 'loginForm']);
+//     Route::post('/login' , [AdminController::class , 'store'])->name('admin.login');
+// });
+
+// Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
+//     return view('admin.index');
+// })->name('dashboard');
 
 
-Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('User_dashboard');
+// //admin route
+
+// Route::get('/admin/logout' , [AdminController::class , 'destroy'])->name('admin.logout');
+
+
+// Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('User_dashboard');
