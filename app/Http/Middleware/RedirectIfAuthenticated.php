@@ -17,21 +17,15 @@ class RedirectIfAuthenticated
      * @param  string|null  ...$guards
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle($request, Closure $next, $guard =null)
+    public function handle(Request $request, Closure $next, ...$guards)
     {
-        switch($guard)
-        {
-            case 'admin':
-                if(Auth::guard($guard)->check())
-                {
-                    return redirect('/admin');
-                }
-                break;
-                if(Auth::guard($guard)->check())
-                {
-                    return redirect('/');
-                }
-                break;
+        $guards = empty($guards) ? [null] : $guards;
+
+        foreach ($guards as $guard) {
+            if (Auth::guard($guard)->check()) {
+                return redirect($guard.'/dashboard');   // user or admin / dashboard
+            }
+
         }
 
         return $next($request);

@@ -38,7 +38,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text bg-transparent text-white"><i class="ti-user"></i></span>
                         </div>
-                        <input type="email" class="form-control pl-15 bg-transparent text-white plc-white" id="email" name="email" placeholder="Email">
+                        <input type="email" class="form-control pl-15 bg-transparent text-white plc-white" id="email" name="email" placeholder="Email" value="{{ old('email') }}">
                     </div>
                 </div>
                 <div class="form-group">
