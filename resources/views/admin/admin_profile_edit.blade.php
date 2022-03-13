@@ -5,6 +5,7 @@
 
 
 
+
 <div class="container-full">
 
     <!-- Main content -->
@@ -60,7 +61,7 @@
                                 <div class="form-group">
                                     <h5>Profile Iamge<span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="file" name="profile_photo_path" class="form-control" required=""> </div>
+                                        <input type="file" name="profile_photo_path" class="form-control" required="" id="image"> </div>
                                 </div>
 
                             </div>     {{-- end col md 6  --}}
@@ -72,12 +73,12 @@
                                 <div class="form-group">
                                     @if (!empty($adminData->profile_photo_path))
 
-                                    <img class="rounded-circle" src=" {{ asset('upload/admin_images/'.$adminData->profile_photo_path) }}" alt="User Avatar">
+                                    <img  class="rounded-circle" src=" {{ asset('upload/admin_images/'.$adminData->profile_photo_path) }}" alt="User Avatar">
 
                                     @else
 
 
-                                   <img class="rounded-circle" src=" {{ asset('upload/no_image.jpg') }}" alt="User Avatar" style="width: 100px ; height:100px">
+                                   <img id="showImage" class="rounded-circle" src=" {{ asset('upload/no_image.jpg') }}" alt="User Avatar" style="width: 100px ; height:100px">
 
                                     @endif
                                 </div>
@@ -123,6 +124,25 @@
        </section>
     <!-- /.content -->
   </div>
+
+
+  <script type="text/javascript">
+
+  //to show image before add it
+      $(document).ready(function(){
+        $('#image').change(function(e){
+            var reader = new FileReader();
+            reader.onload = function(e){
+                $('#showImage').attr('src',e.target.result);
+            }
+            reader.readAsDataURL(e.target.files['0']);
+        });
+
+      });
+  </script>
+
+
+
 
 
 @endsection
