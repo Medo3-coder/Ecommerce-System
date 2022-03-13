@@ -101,10 +101,27 @@
 			</ul>
 		  </li>
 
+
+          @php
+          // show admin photo in header
+              $adminData = DB::table('admins')->first()
+          @endphp
+
+
+
 	      <!-- User Account-->
           <li class="dropdown user user-menu">
 			<a href="#" class="waves-effect waves-light rounded dropdown-toggle p-0" data-toggle="dropdown" title="User">
-				<img src="{{ asset('backend/images/avatar/1.jpg') }}" alt="">
+                @if (!empty($adminData->profile_photo_path))
+
+                <img  class="rounded-circle" src=" {{ asset('upload/admin_images/'.$adminData->profile_photo_path) }}" alt="User Avatar">
+
+                @else
+
+
+               <img  class="rounded-circle" src=" {{ asset('upload/no_image.jpg') }}" alt="User Avatar" style="width: 100px ; height:100px">
+
+                @endif
 			</a>
 			<ul class="dropdown-menu animated flipInX">
 			  <li class="user-body">

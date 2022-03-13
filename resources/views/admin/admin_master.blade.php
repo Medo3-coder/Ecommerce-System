@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ asset('backend/images/favicon.ico') }}">
 
     <title>Medo Admin - Dashboard</title>
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
 	<!-- Vendors Style-->
 	<link rel="stylesheet" href="{{ asset('backend/css/vendors_css.css') }}">
 
@@ -17,9 +18,12 @@
 	<link rel="stylesheet" href="{{ asset('backend/css/style.css') }}">
 	<link rel="stylesheet" href="{{ asset('backend/css/skin_color.css') }}">
 
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
 
     {{-- jQuery CDN --}}
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 
   </head>
 
@@ -323,6 +327,31 @@
 	<!-- Sunny Admin App -->
 	<script src="{{ asset('backend/js/template.js') }}"></script>
 	<script src="{{ asset('backend/js/pages/dashboard.js') }}"></script>
+
+
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script>
+    @if(Session::has('message'))
+    var type = "{{ Session::get('alert-type' , 'info') }}"
+    switch(type){
+        case 'info':
+           toastr.info("{{ Session::get('message') }}");
+           break ;
+           case 'success':
+           toastr.success("{{ Session::get('message') }}");
+           break ;
+           case 'warning':
+           toastr.warning("{{ Session::get('message') }}");
+           break ;
+           case 'error':
+           toastr.error("{{ Session::get('message') }}");
+           break ;
+    }
+    @endif
+</script>
 
 
 

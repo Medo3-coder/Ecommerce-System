@@ -20,7 +20,9 @@
            <div class="box-body">
              <div class="row">
                <div class="col">
-                   <form novalidate="">
+                   <form method="POST" action="{{ route('admin.profile.update') }}" enctype="multipart/form-data">
+
+                    @csrf
                      <div class="row">
                        <div class="col-12">
 
@@ -61,7 +63,7 @@
                                 <div class="form-group">
                                     <h5>Profile Iamge<span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="file" name="profile_photo_path" class="form-control" required="" id="image"> </div>
+                                        <input type="file" name="profile_photo_path" class="form-control" id="image"> </div>
                                 </div>
 
                             </div>     {{-- end col md 6  --}}
@@ -91,7 +93,7 @@
 
 
 
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <h5>Password Input Field <span class="text-danger">*</span></h5>
@@ -100,7 +102,7 @@
                                 </div>
                             </div>
 
-                        </div>
+                        </div> --}}
 
 
 
@@ -139,6 +141,7 @@
         });
 
       });
+
   </script>
 
 
