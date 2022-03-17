@@ -20,11 +20,6 @@ Route::get('/', function () {
 });
 
 
-//front routes
-Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('User_dashboard');
-
 
 
 
@@ -55,3 +50,11 @@ Route::group(['middleware' => ['auth:sanctum,admin', 'verified']], function () {
 
 
 // Route::get('/admin/profile/edit' , [AdminProfileController::class , 'adminProfileEdit'])->name('admin.profile.edit');
+
+
+
+//user all routes
+Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('User_dashboard');
+
