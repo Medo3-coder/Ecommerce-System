@@ -61,5 +61,8 @@ Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function 
     return view('dashboard');
 })->name('User_dashboard');
 
+<<<<<<< HEAD
 Route::get('/', [IndexController::class , 'index']);
 
+=======
+>>>>>>> b69f68263fba9f8875988920309db5c07f617c8f
