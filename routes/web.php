@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
+use App\Http\Controllers\frontend\IndexController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,15 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-
-//front routes
-Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('User_dashboard');
 
 
 
@@ -43,6 +39,8 @@ Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', f
 
 
 Route::group(['middleware' => ['auth:sanctum,admin', 'verified']], function () {
+
+    //Profile
     Route::get('/admin/profile', [AdminProfileController::class, 'adminProfile'])->name('admin.profile');
     Route::get('/admin/profile/edit', [AdminProfileController::class, 'adminProfileEdit'])->name('admin.profile.edit');
     Route::post('/admin/profile/update', [AdminProfileController::class, 'adminProfileUpdate'])->name('admin.profile.update');
@@ -55,3 +53,13 @@ Route::group(['middleware' => ['auth:sanctum,admin', 'verified']], function () {
 
 
 // Route::get('/admin/profile/edit' , [AdminProfileController::class , 'adminProfileEdit'])->name('admin.profile.edit');
+
+
+
+//user all routes
+Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('User_dashboard');
+
+Route::get('/', [IndexController::class , 'index']);
+
