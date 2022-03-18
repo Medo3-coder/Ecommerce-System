@@ -1,5 +1,7 @@
 @extends('frontend.main_master')
 
+@section('title', 'Login')
+
 @section('content')
     <div class="breadcrumb">
         <div class="container">
@@ -18,7 +20,7 @@
             <div class="sign-in-page">
                 <div class="row">
                     <!-- Sign-in -->
-                    <div class="col-md-6 col-sm-6 sign-in">
+                    {{-- <div class="col-md-6 col-sm-6 sign-in">
                         <h4 class="">Sign in</h4>
                         <p class="">Hello, Welcome to your account.</p>
                         <div class="social-sign-in outer-top-xs">
@@ -31,21 +33,21 @@
                                 <label class="info-title" for="exampleInputEmail1">Email Address <span>*</span></label>
                                 <input type="email" name="email" class="form-control unicase-form-control text-input"
                                     id="email">
-                                {{-- @error('email')
+                                @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror --}}
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label class="info-title" for="exampleInputPassword1">Password <span>*</span></label>
                                 <input type="password" name="password" class="form-control unicase-form-control text-input"
                                     id="password">
-                                {{-- @error('password')
+                                @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror --}}
+                                @enderror
                             </div>
                             <div class="radio outer-xs">
                                 <label>
@@ -59,7 +61,7 @@
                             </div>
                             <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Login</button>
                         </form>
-                    </div>
+                    </div> --}}
                     <!-- Sign-in -->
 
 

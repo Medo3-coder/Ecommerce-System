@@ -1,5 +1,9 @@
 @extends('frontend.main_master')
 
+
+
+@section('title', 'Login')
+
 @section('content')
     <div class="breadcrumb">
         <div class="container">
@@ -31,21 +35,21 @@
                                 <label class="info-title" for="exampleInputEmail1">Email Address <span>*</span></label>
                                 <input type="email" name="email" class="form-control unicase-form-control text-input"
                                     id="email">
-                                {{-- @error('email')
+                                @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror --}}
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label class="info-title" for="exampleInputPassword1">Password <span>*</span></label>
                                 <input type="password" name="password" class="form-control unicase-form-control text-input"
                                     id="password">
-                                {{-- @error('password')
+                                @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror --}}
+                                @enderror
                             </div>
                             <div class="radio outer-xs">
                                 <label>
@@ -58,14 +62,20 @@
                                 @endif
                             </div>
                             <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Login</button>
+
                         </form>
+                        <br>
+
+                        <h4 class="checkout-subtitle">Create a new account</h4>
+                        <a href="{{ route('register') }}" class="btn-upper btn btn-primary checkout-page-button"
+                            style="float: right">Sign-up</a>
                     </div>
                     <!-- Sign-in -->
 
 
                     <!-- create a new account -->
-                    <div class="col-md-6 col-sm-6 create-new-account">
-                        <h4 class="checkout-subtitle">Create a new account</h4>
+                    {{-- <div class="col-md-6 col-sm-6 create-new-account">
+
                         <p class="text title-tag-line">Create your new account.</p>
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
@@ -128,7 +138,7 @@
                         </form>
 
 
-                    </div>
+                    </div> --}}
                     <!-- create a new account -->
 
                 </div><!-- /.row -->
