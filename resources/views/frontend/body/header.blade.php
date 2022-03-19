@@ -14,7 +14,7 @@
 
                         {{-- to hide login page when he login --}}
                         @auth
-                            <li><a href="{{ route('login') }}"><i class="icon fa fa-user"></i>User Profile</a></li>
+                            <li><a href="{{ route('User_dashboard') }}"><i class="icon fa fa-user"></i>User Profile</a></li>
                         @else
                             <li><a href="{{ route('login') }}"><i class="icon fa fa-lock"></i>Login</a></li>
                         @endauth

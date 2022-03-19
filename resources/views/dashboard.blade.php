@@ -10,9 +10,13 @@
             <div class="row">
                 <div class="col-md-2">
                     <br>
-                    @if (!empty($adminData->profile_photo_path))
+                    @php
+                        $id = Auth::user()->id;
+                        $user = App\Models\User::find($id);
+                    @endphp
+                    @if (!empty($user->profile_photo_path))
                         <img class="card-img-top" style="border-radius: 50% ;width: 170px ; height:200px"
-                            src="{{ asset('upload/admin_images/' . $adminData->profile_photo_path) }}"
+                            src="{{ asset('upload/user_images/' . $user->profile_photo_path) }}"
                             style="width: 100px ; height:100px">
                     @else
                         <img class="card-img-top" style="border-radius: 50% ;width: 170px ; height:200px"
@@ -23,9 +27,9 @@
                     <ul class="list-group list-group-flush">
 
                         <a href="" class="btn btn-primary btn-sm btn-block"> Home </a>
-                        <a href="" class="btn btn-primary btn-sm btn-block"> Profile Update </a>
+                        <a href="{{ route('user.profile') }}" class="btn btn-primary btn-sm btn-block"> Profile Update </a>
                         <a href="" class="btn btn-primary btn-sm btn-block"> Change Password </a>
-                        <a href="" class="btn btn-danger btn-sm btn-block"> Logout </a>
+                        <a href="{{ route('user.logout') }}" class="btn btn-danger btn-sm btn-block"> Logout </a>
 
 
                     </ul>
