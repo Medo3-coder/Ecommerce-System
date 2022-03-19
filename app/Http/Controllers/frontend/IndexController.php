@@ -44,7 +44,11 @@ class IndexController extends Controller
             $image = $request->file('profile_photo_path');
             $destinationPath  = public_path('upload/user_images/');
             //to replace new Image  of old image
-            $repalceOldImg =  unlink($destinationPath . $Data->profile_photo_path);
+            if(!empty($Data->profile_photo_path))
+            {
+                $repalceOldImg =  unlink($destinationPath . $Data->profile_photo_path);
+            }
+
             $imageName = date('YmdHi') . $image->getClientOriginalName();
             $image->move($destinationPath, $imageName);
             // $imagePath = $destinationPath . $imageName;
@@ -59,5 +63,12 @@ class IndexController extends Controller
             'alert-type' => 'success'
         );
         return redirect()->route('User_dashboard')->with($notification);
+    }
+
+    public function userChangePassword()
+    {
+        $id = Auth::user()->id;
+        $user = User::find($id);
+        return view('frontend.profile.change_password' , compact('user'));
     }
 }

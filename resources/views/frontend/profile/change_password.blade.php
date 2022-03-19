@@ -1,7 +1,12 @@
 @extends('frontend.main_master')
-@section('title', 'user Profile')
+@section('title', 'Change Password')
 
 @section('content')
+
+{{-- @php
+//to get athenticated user data
+    $user = DB::table('users')->where('id' , Auth::user()->id)->first();
+@endphp --}}
 
     <div class="body-content">
 
@@ -14,7 +19,7 @@
 
                     @if (!empty($user->profile_photo_path))
                         <img class="card-img-top" style="border-radius: 50% ;width: 170px ; height:200px"
-                            src="{{ asset('upload/user_images/'.$user->profile_photo_path) }}"
+                            src="{{ asset('upload/user_images/' . $user->profile_photo_path) }}"
                             style="width: 100px ; height:100px">
                     @else
                         <img class="card-img-top" style="border-radius: 50% ;width: 170px ; height:200px"
@@ -26,7 +31,8 @@
 
                         <a href="{{ route('User_dashboard') }}" class="btn btn-primary btn-sm btn-block"> Home </a>
                         <a href="{{ route('user.profile') }}" class="btn btn-primary btn-sm btn-block"> Profile Update </a>
-                        <a href=" {{ route('change.password') }}" class="btn btn-primary btn-sm btn-block"> Change Password </a>
+                        <a href=" {{ route('change.password') }}" class="btn btn-primary btn-sm btn-block"> Change Password
+                        </a>
                         <a href="{{ route('user.logout') }}" class="btn btn-danger btn-sm btn-block"> Logout </a>
 
 
@@ -45,35 +51,38 @@
 
                     <div class="card">
                         <h3 class="text-center">
-                            <span class="text-danger"> Hi...</span> <strong>{{ Auth::user()->name }}</strong>
-                            Update Your Profile
-                        <h3>
+                            <span class="text-danger"></span> <strong>Change Password</strong>
+
+                            <h3>
 
 
-                                <form action="{{ route('user.profile.store') }}" method="POST" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('update.change.password') }}">
                                     @csrf
 
                                     <div class="form-group">
-                                        <label class="info-title" for="exampleInputEmail1">Name <span> </span></label>
-                                        <input type="text" name="name" class="form-control" value="{{ $user->name }}">
+                                        <h5>Current Password<span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="password" id="current_password" name="oldpassword" type="password"
+                                                class="form-control" required="">
+                                        </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="info-title" for="exampleInputEmail1">Email <span> </span></label>
-                                        <input type="email" name="email" class="form-control"
-                                            value="{{ $user->email }}">
+                                        <h5>New Password<span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="password" id="password" type="password" name="password"
+                                                class="form-control" required="">
+                                        </div>
                                     </div>
 
 
                                     <div class="form-group">
-                                        <label class="info-title" for="exampleInputEmail1">Phone <span> </span></label>
-                                        <input type="text" name="phone" class="form-control" value="{{ $user->phone }}">
-                                    </div>
+                                        <h5>Confirm Password<span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="password" id="password_confirmation" type="password"
+                                                name="password_confirmation" class="form-control" required="">
+                                        </div>
 
-                                    <div class="form-group">
-                                        <label class="info-title" for="exampleInputEmail1">User Image <span>
-                                            </span></label>
-                                        <input type="file" name="profile_photo_path" class="form-control">
                                     </div>
 
                                     <div class="form-group">
