@@ -66,9 +66,10 @@
                         </form>
                         <br>
 
-                        <h4 class="checkout-subtitle">Create a new account</h4>
-                        <a href="{{ route('register') }}" class="btn-upper btn btn-primary checkout-page-button"
-                            style="float: right">Sign-up</a>
+                        <p class="mt-15 mb-0 text-white">Don't have an account? <a href="{{ route('register') }}"
+                                class="text-info ml-5">Sign Up</a></p>
+
+
                     </div>
                     <!-- Sign-in -->
 
