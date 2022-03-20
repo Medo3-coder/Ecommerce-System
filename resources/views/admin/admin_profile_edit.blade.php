@@ -1,10 +1,7 @@
 @extends('admin.admin_master')
 
-
+@section('title','Admin Profile Edit')
 @section('admin')
-
-
-
 
 <div class="container-full">
 

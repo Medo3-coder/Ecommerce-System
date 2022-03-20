@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ asset('backend/images/favicon.ico') }}">
 
-    <title>Medo Admin - Dashboard</title>
+    <title>@yield('title')</title>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 	<!-- Vendors Style-->
 	<link rel="stylesheet" href="{{ asset('backend/css/vendors_css.css') }}">
