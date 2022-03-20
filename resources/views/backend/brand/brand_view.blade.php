@@ -92,7 +92,7 @@
                         <div class="box-body">
                             <div class="table-responsive">
 
-                                <form method="POST" action="{{ route('update.change.password') }}"
+                                <form method="POST" action="{{ route('brand.store') }}"
                                     enctype="multipart/form-data">
 
                                     @csrf
@@ -100,6 +100,11 @@
                                         <h5>Brand Name English<span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="text" name="brand_name_en" class="form-control">
+                                            @error('brand_name_en')
+                                            <span class="text-danger" role="alert">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
                                         </div>
                                     </div>
 
@@ -110,6 +115,11 @@
                                         <h5>Brand Name hindi<span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="text" name="brand_name_hin" class="form-control">
+                                            @error('brand_name_hin')
+                                                <span class="text-danger" role="alert">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
 
@@ -119,6 +129,11 @@
                                         <h5>Brand Name Arabic<span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="text" name="brand_name_ar" class="form-control">
+                                            @error('brand_name_ar')
+                                            <span class="text-danger" role="alert">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
                                         </div>
                                     </div>
 
@@ -126,11 +141,16 @@
                                         <label class="info-title" for="exampleInputEmail1">User Image <span>
                                             </span></label>
                                         <input type="file" name="brand_image" class="form-control">
+                                        @error('brand_image')
+                                        <span class="text-danger" role="alert">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                     </div>
 
                             </div>
                             <div class="text-xs-right">
-                                <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Update">
+                                <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Add">
                             </div>
                             </form>
 
