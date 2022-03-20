@@ -28,28 +28,21 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin:admin']], function ()
     Route::post('/login', [AdminController::class, 'store'])->name('admin.login');
 });
 
-Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
-    return view('admin.index');
-})->name('dashboard');
 
+Route::middleware(['auth:admin'])->group(function () {
 
+    Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
+        return view('admin.index');
+    })->name('dashboard');
 
-
-Route::group(['middleware' => ['auth:sanctum,admin', 'verified']], function () {
-
-    //Profile
+    // Admin All Routes
     Route::get('/admin/profile', [AdminProfileController::class, 'adminProfile'])->name('admin.profile');
     Route::get('/admin/profile/edit', [AdminProfileController::class, 'adminProfileEdit'])->name('admin.profile.edit');
     Route::post('/admin/profile/update', [AdminProfileController::class, 'adminProfileUpdate'])->name('admin.profile.update');
     Route::get('/admin/change/password', [AdminProfileController::class, 'adminProfilepassword'])->name('admin.change.password');
     Route::post('/update/change/password', [AdminProfileController::class, 'adminUpdateChangePassword'])->name('update.change.password');
-
     Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
 });
-
-
-
-// Route::get('/admin/profile/edit' , [AdminProfileController::class , 'adminProfileEdit'])->name('admin.profile.edit');
 
 
 
@@ -58,18 +51,14 @@ Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function 
     return view('dashboard');
 })->name('User_dashboard');
 
-Route::get('/', [IndexController::class , 'index']);
+Route::get('/', [IndexController::class, 'index']);
 
+Route::get('/user/logout', [IndexController::class, 'userLogout'])->name('user.logout');
 
+Route::get('/user/profile', [IndexController::class, 'userProfile'])->name('user.profile');
 
-Route::get('/user/logout', [IndexController::class , 'userLogout'])->name('user.logout');
+Route::post('/user/profile/store', [IndexController::class, 'userProfileStore'])->name('user.profile.store');
 
+Route::get('/user/change/password', [IndexController::class, 'userChangePassword'])->name('change.password');
 
-Route::get('/user/profile', [IndexController::class , 'userProfile'])->name('user.profile');
-
-Route::post('/user/profile/store', [IndexController::class , 'userProfileStore'])->name('user.profile.store');
-
-Route::get('/user/change/password', [IndexController::class , 'userChangePassword'])->name('change.password');
-
-
-
+Route::post('/user/pasword/update', [IndexController::class, 'userPasswordUpdate'])->name('user.password.update');

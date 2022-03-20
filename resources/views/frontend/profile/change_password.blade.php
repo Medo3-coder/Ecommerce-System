@@ -3,7 +3,7 @@
 
 @section('content')
 
-{{-- @php
+    {{-- @php
 //to get athenticated user data
     $user = DB::table('users')->where('id' , Auth::user()->id)->first();
 @endphp --}}
@@ -56,23 +56,33 @@
                             <h3>
 
 
-                                <form method="POST" action="{{ route('update.change.password') }}">
+                                <form method="POST" action="{{ route('user.password.update') }}" id="password-update">
                                     @csrf
 
                                     <div class="form-group">
                                         <h5>Current Password<span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="password" id="current_password" name="oldpassword" type="password"
-                                                class="form-control" required="">
+                                                class="form-control">
                                         </div>
+                                        @error('oldpassword')
+                                            <span class="invalid-feedback" role="alert">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group">
                                         <h5>New Password<span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="password" id="password" type="password" name="password"
-                                                class="form-control" required="">
+                                                class="form-control">
                                         </div>
+                                        @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
                                     </div>
 
 
@@ -80,13 +90,20 @@
                                         <h5>Confirm Password<span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="password" id="password_confirmation" type="password"
-                                                name="password_confirmation" class="form-control" required="">
+                                                name="password_confirmation" class="form-control">
+
                                         </div>
+                                        @error('password_confirmation')
+                                            <span class="invalid-feedback" role="alert">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
 
                                     </div>
 
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-danger">Update</button>
+                                        <button type="submit"
+                                            class="btn btn-danger">Update</button>
                                     </div>
 
 
@@ -105,6 +122,42 @@
         </div>
 
     </div>
+
+
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+
+
+        $(document).ready(function() {
+            $(document).on('submit', '#password-update', function(e) {
+                e.preventDefault()
+
+                var url = $(this).attr('action')
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: new FormData(this),
+                    dataType: 'json',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function(res) {
+                        console.log(res)
+                        toastr.success(res.success);
+                    },
+                    error: function(res) {
+                        $.each(res.errors, function(index, value) {
+                            console.log(res)
+                            toastr.success(res.errors);
+                        });
+
+                    },
+
+                })
+            })
+        })
+    </script> --}}
+
 
 
 @endsection

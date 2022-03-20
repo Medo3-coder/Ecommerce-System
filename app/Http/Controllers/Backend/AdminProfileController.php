@@ -48,7 +48,11 @@ class AdminProfileController extends Controller
             $image = $request->file('profile_photo_path');
             $destinationPath  = public_path('upload/admin_images/');
             //to replace new Image  of old image
-            $rmfOldImg =  unlink($destinationPath . $adminData->profile_photo_path);
+            if(!empty($adminData->profile_photo_path))
+            {
+                $repalceOldImg = unlink($destinationPath . $adminData->profile_photo_path);
+            }
+
             $imageName = date('YmdHi') . $image->getClientOriginalName();
             $image->move($destinationPath, $imageName);
             // $imagePath = $destinationPath . $imageName;
@@ -73,7 +77,8 @@ class AdminProfileController extends Controller
 
         $validateData = $request->validate([
             'oldpassword' => 'required',
-            'password'    => 'required|confirmed',
+            'password'    => 'required|confirmed|min:4|max:20',
+            'password_confirmation' => 'required| min:4|max:20'
         ]);
 
         $hashedPassword = Admin::find(1)->password;
