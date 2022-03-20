@@ -16,6 +16,7 @@ class BrandController extends Controller
         $brand = Brand::latest()->get();              //limit check
         return view('backend.brand.brand_view', compact('brand'));
     }
+
     public function brandStore(Request $request)
     {
         $request->validate(
