@@ -56,8 +56,11 @@
                                                 <td><img src="{{ asset($item->brand_image) }}" alt="noImg"
                                                         style="width: 70px; height:40px"></td>
                                                 <td>
-                                                    <a href="" class="btn btn-info">Edit</a>
-                                                    <a href="" class="btn btn-danger">Delete</a>
+                                                    <a href="{{ route('brand.edit', $item->id) }}" class="btn btn-info"
+                                                        title="Edit Data"> <i class="fa fa-pencil"></i> </a>
+
+                                                    <a   href="{{ route('brand.delete', $item->id) }}" class="btn btn-danger"
+                                                        id="delete" title="Delete Data"> <i class="fa fa-trash"></i></a>
                                                 </td>
 
                                             </tr>
@@ -92,8 +95,7 @@
                         <div class="box-body">
                             <div class="table-responsive">
 
-                                <form method="POST" action="{{ route('brand.store') }}"
-                                    enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('brand.store') }}" enctype="multipart/form-data">
 
                                     @csrf
                                     <div class="form-group">
@@ -101,10 +103,10 @@
                                         <div class="controls">
                                             <input type="text" name="brand_name_en" class="form-control">
                                             @error('brand_name_en')
-                                            <span class="text-danger" role="alert">
-                                                {{ $message }}
-                                            </span>
-                                        @enderror
+                                                <span class="text-danger" role="alert">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
 
@@ -130,10 +132,10 @@
                                         <div class="controls">
                                             <input type="text" name="brand_name_ar" class="form-control">
                                             @error('brand_name_ar')
-                                            <span class="text-danger" role="alert">
-                                                {{ $message }}
-                                            </span>
-                                        @enderror
+                                                <span class="text-danger" role="alert">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
 
@@ -142,15 +144,15 @@
                                             </span></label>
                                         <input type="file" name="brand_image" class="form-control">
                                         @error('brand_image')
-                                        <span class="text-danger" role="alert">
-                                            {{ $message }}
-                                        </span>
-                                    @enderror
+                                            <span class="text-danger" role="alert">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
                                     </div>
 
                             </div>
                             <div class="text-xs-right">
-                                <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Add">
+                                <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Add" id="add">
                             </div>
                             </form>
 
@@ -172,6 +174,52 @@
     <!-- /.content -->
 
     </div>
+
+
+
+    <script type="text/javascript">
+        $(function() {
+            $(document).on('click', '#delete', function(e) {
+                e.preventDefault()
+
+                var link = $(this).attr('href');
+
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Are you sure you want to delete this record?',
+                    showDenyButton: false,
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes'
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: 'post',
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            url: link,
+                            data: {
+                                '_method': 'get'
+                            },
+                            success: function(response, textStatus, xhr) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: response,
+                                    showDenyButton: false,
+                                    showCancelButton: false,
+                                    confirmButtonText: 'Yes'
+                                }).then((result) => {
+                                    window.location = '/brand/view';
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
 
 
 

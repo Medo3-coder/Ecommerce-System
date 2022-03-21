@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,47 +11,50 @@
     <link rel="icon" href="{{ asset('backend/images/favicon.ico') }}">
 
     <title>@yield('title')</title>
-<meta name="csrf-token" content="{{ csrf_token() }}">
-	<!-- Vendors Style-->
-	<link rel="stylesheet" href="{{ asset('backend/css/vendors_css.css') }}">
 
-	<!-- Style-->
-	<link rel="stylesheet" href="{{ asset('backend/css/style.css') }}">
-	<link rel="stylesheet" href="{{ asset('backend/css/skin_color.css') }}">
+    <!-- Vendors Style-->
+    <link rel="stylesheet" href="{{ asset('backend/css/vendors_css.css') }}">
 
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <!-- Style-->
+    <link rel="stylesheet" href="{{ asset('backend/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/css/skin_color.css') }}">
+
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
 
     {{-- jQuery CDN --}}
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 
-  </head>
+</head>
 
 <body class="hold-transition dark-skin sidebar-mini theme-primary fixed">
 
-<div class="wrapper">
+    <div class="wrapper">
 
-    @include('admin.body.header')
-
-
-  <!-- Left side column. contains the logo and sidebar -->
-
-    @include('admin.body.sidebar')
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-
-    {{-- the changed part --}}
-   @yield('admin')
+        @include('admin.body.header')
 
 
-  </div>
-  <!-- /.content-wrapper -->
-  @include('admin.body.footer')
+        <!-- Left side column. contains the logo and sidebar -->
 
-  <!-- Control Sidebar -->
-  {{-- <aside class="control-sidebar">
+        @include('admin.body.sidebar')
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- toastr. notifiction -->
+            @include('admin.body.toastr')
+
+            {{-- the changed part --}}
+            @yield('admin')
+
+
+        </div>
+        <!-- /.content-wrapper -->
+        @include('admin.body.footer')
+
+        <!-- Control Sidebar -->
+        {{-- <aside class="control-sidebar">
 
 	<div class="rpanel-title"><span class="pull-right btn btn-circle btn-danger"><i class="ion ion-close text-white" data-toggle="control-sidebar"></i></span> </div>  <!-- Create the tabs -->
     <ul class="nav nav-tabs control-sidebar-tabs">
@@ -307,60 +311,121 @@
       <!-- /.tab-pane -->
     </div>
   </aside> --}}
-  <!-- /.control-sidebar -->
+        <!-- /.control-sidebar -->
 
-  <!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
+        <!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
+        <div class="control-sidebar-bg"></div>
 
-</div>
-<!-- ./wrapper -->
+    </div>
+    <!-- ./wrapper -->
 
 
 
-	<!-- Vendor JS -->
-	<script src="{{ asset('backend/js/vendors.min.js') }}"></script>
+    <!-- Vendor JS -->
+    <script src="{{ asset('backend/js/vendors.min.js') }}"></script>
     <script src="{{ asset('../assets/icons/feather-icons/feather.min.js') }}"></script>
-	<script src="{{ asset('../assets/vendor_components/easypiechart/dist/jquery.easypiechart.js') }}"></script>
-	<script src="{{ asset('../assets/vendor_components/apexcharts-bundle/irregular-data-series.js') }}"></script>
-	<script src="{{ asset('../assets/vendor_components/apexcharts-bundle/dist/apexcharts.js') }}"></script>
+    <script src="{{ asset('../assets/vendor_components/easypiechart/dist/jquery.easypiechart.js') }}"></script>
+    <script src="{{ asset('../assets/vendor_components/apexcharts-bundle/irregular-data-series.js') }}"></script>
+    <script src="{{ asset('../assets/vendor_components/apexcharts-bundle/dist/apexcharts.js') }}"></script>
+
+
+
+    <!-- Sunny Admin App -->
+    <script src="{{ asset('backend/js/template.js') }}"></script>
+    <script src="{{ asset('backend/js/pages/dashboard.js') }}"></script>
 
     <!-- DataTable CDN -->
     <script src="{{ asset('../assets/vendor_components/datatable/datatables.min.js') }}"></script>
-	<script src="{{ asset('backend/js/pages/data-table.js') }}"></script>
+    <script src="{{ asset('backend/js/pages/data-table.js') }}"></script>
 
-	<!-- Sunny Admin App -->
-	<script src="{{ asset('backend/js/template.js') }}"></script>
-	<script src="{{ asset('backend/js/pages/dashboard.js') }}"></script>
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    {{-- <script type="text/javascript">
+        $(document).ready(function() {
 
-<script>
-    @if(Session::has('message'))
-    var type = "{{ Session::get('alert-type' , 'info') }}"
-    switch(type){
-        case 'info':
-           toastr.info("{{ Session::get('message') }}");
-           break ;
-           case 'success':
-           toastr.success("{{ Session::get('message') }}");
-           break ;
-           case 'warning':
-           toastr.warning("{{ Session::get('message') }}");
-           break ;
-           case 'error':
-           toastr.error("{{ Session::get('message') }}");
-           break ;
-    }
-    @endif
-</script>
+            $('.delete-form').on('submit', function(e) {
+                e.preventDefault();
+                var button = $(this);
 
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Are you sure you want to delete this record?',
+                    showDenyButton: false,
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes'
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: 'post',
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            url: button.data('route'),
+                            data: {
+                                '_method': 'delete'
+                            },
+                            success: function(response, textStatus, xhr) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: response,
+                                    showDenyButton: false,
+                                    showCancelButton: false,
+                                    confirmButtonText: 'Yes'
+                                }).then((result) => {
+                                    window.location = '/posts'
+                                });
+                            }
+                        });
+                    }
+                });
+
+            })
+        });
+    </script> --}}
+
+
+    {{-- <script type="text/javascript">
+        $(function() {
+            $(document).on('click', '#add', function(e) {
+
+
+                var link = $(this).attr('href');
+
+                        window.location.href=link
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Your work has been saved',
+                            showConfirmButton: false,
+                            timer: 1500
+                            });
+
+
+            });
+        });
+    </script> --}}
+
+
+
+    Add
+
+
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
+
+    @stack('js')
 
 
 
 
 
 </body>
+
 </html>
