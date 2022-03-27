@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\helpers\uploadImg;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\brand\BrandStoreRequest;
+use App\Http\Requests\Admin\brand\BrandUpdateRequest;
 use App\Models\Brand;
 use App\Services\brandService;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class BrandController extends Controller
     public function brandStore(BrandStoreRequest $request, brandService $service)
     {
         $validation = $request->validated();
-        $brand = $service->StoreBrand(
+        $brand = $service->storeBrand(
             $request->brand_name_en,
             $request->brand_name_hin,
             $request->brand_name_ar,
@@ -43,61 +44,22 @@ class BrandController extends Controller
         return view('backend.brand.brand_edit', compact('brand'));
     }
 
-    public function brandUpdate(Request $request, $id)
+    public function brandUpdate(BrandUpdateRequest $request, $id, brandService $service)
     {
-        $validatedData = $request->validate(
-            [
-                'brand_name_en' => 'required|max:25',
-                'brand_name_hin' => 'required|max:25',
-                'brand_name_ar' => 'required|max:25',
 
-            ],
-            [
-                'brand_name_en.required' => 'Input Brand English Name',
-                'brand_name_hin.required' => 'Input Brand Hindi Name',
-                'brand_name_ar.required' => 'Input Brand Arabic Name',
-            ]
+        $validation = $request->validated();
+        $updateBrand = $service->updateBrand(
+            $id,
+            $request->brand_name_en,
+            $request->brand_name_hin,
+            $request->brand_name_ar,
+            $request->brand_image
         );
-
-        $image = $request->file('brand_image');
-
-        if ($image) {
-            $this->deleteOldImage($id);
-
-            $save_Url = uploadImg::uploadImageBrand($image);
-            Brand::findOrFail($id)->update([
-                'brand_name_en' => $request->brand_name_en,
-                'brand_name_hin' => $request->brand_name_hin,
-                'brand_name_ar' => $request->brand_name_ar,
-                'brand_slug_en' =>  strtolower(str_replace(' ', '-', $request->brand_name_en)),
-                'brand_slug_hin' => str_replace(' ', '-', $request->brand_name_hin),
-                'brand_slug_ar' => str_replace(' ', '-', $request->brand_name_ar),
-                'brand_image' => $save_Url
-
-            ]);
-
-            $notification = array(
-                'message' => 'Brand updated Successfully',
-                'alert-type' => 'info'
-            );
-            return redirect()->route('all.brand')->with($notification);
-        } else {
-            Brand::findOrFail($id)->update([
-                'brand_name_en' => $request->brand_name_en,
-                'brand_name_hin' => $request->brand_name_hin,
-                'brand_name_ar' => $request->brand_name_ar,
-                'brand_slug_en' =>  strtolower(str_replace(' ', '-', $request->brand_name_en)),
-                'brand_slug_hin' => str_replace(' ', '-', $request->brand_name_hin),
-                'brand_slug_ar' => str_replace(' ', '-', $request->brand_name_ar),
-
-
-            ]);
-            $notification = array(
-                'message' => 'Brand updated Successfully',
-                'alert-type' => 'info'
-            );
-            return redirect()->route('all.brand')->with($notification);
-        }
+        $notification = array(
+            'message' => 'Brand updated Successfully',
+            'alert-type' => 'info'
+        );
+        return redirect(route('all.brand'))->with($notification);
     }
 
     public function brandDelete($id)
@@ -108,14 +70,5 @@ class BrandController extends Controller
         $brand->delete();
 
         return response('Post deleted successfully.', 200);
-    }
-
-
-    protected function deleteOldImage($id)
-    {
-        $image = Brand::findOrFail($id);
-        if ($image) {
-            $repalceOldImg = unlink($image->brand_image);
-        }
     }
 }
