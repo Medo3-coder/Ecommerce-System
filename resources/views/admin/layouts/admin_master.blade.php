@@ -8,6 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <link rel="icon" href="{{ asset('backend/images/favicon.ico') }}">
 
     <title>@yield('title')</title>
@@ -33,17 +34,17 @@
 
     <div class="wrapper">
 
-        @include('admin.body.header')
+        @include('admin.layouts.header')
 
 
         <!-- Left side column. contains the logo and sidebar -->
 
-        @include('admin.body.sidebar')
+        @include('admin.layouts.sidebar')
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- toastr. notifiction -->
-            @include('admin.body.toastr')
+            @include('admin.layouts.toastr')
 
             {{-- the changed part --}}
             @yield('admin')
@@ -51,7 +52,7 @@
 
         </div>
         <!-- /.content-wrapper -->
-        @include('admin.body.footer')
+        @include('admin.layouts.footer')
 
         <!-- Control Sidebar -->
         {{-- <aside class="control-sidebar">

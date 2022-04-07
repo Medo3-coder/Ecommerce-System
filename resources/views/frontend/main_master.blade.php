@@ -39,14 +39,14 @@
 
 
 
- @include('frontend.body.header')
+ @include('frontend.layouts.header')
 <!-- ============================================== HEADER : END ============================================== -->
 
 @yield('content')
 <!-- /#top-banner-and-menu -->
 
 <!-- ============================================================= FOOTER ============================================================= -->
-@include('frontend.body.footer')
+@include('frontend.layouts.footer')
 
 <header class="header-style-1">
 

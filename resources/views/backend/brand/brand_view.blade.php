@@ -1,7 +1,8 @@
-@extends('admin.admin_master')
+@extends('admin.layouts.admin_master')
 
 @section('title', 'Brands')
 @section('admin')
+
 
     <div class="container-full">
         <!-- Content Header (Page header) -->
@@ -59,8 +60,9 @@
                                                     <a href="{{ route('brand.edit', $item->id) }}" class="btn btn-info"
                                                         title="Edit Data"> <i class="fa fa-pencil"></i> </a>
 
-                                                    <a   href="{{ route('brand.delete', $item->id) }}" class="btn btn-danger"
-                                                        id="delete" title="Delete Data"> <i class="fa fa-trash"></i></a>
+                                                    <a href="{{ route('brand.delete', $item->id) }}"
+                                                        class="btn btn-danger" id="delete" title="Delete Data"> <i
+                                                            class="fa fa-trash"></i></a>
                                                 </td>
 
                                             </tr>
@@ -96,12 +98,14 @@
                             <div class="table-responsive">
 
                                 <form method="POST" action="{{ route('brand.store') }}" enctype="multipart/form-data">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                                     @csrf
                                     <div class="form-group">
                                         <h5>Brand Name English<span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" id="brand_name_en" name="brand_name_en" class="form-control">
+                                            <input type="text" id="brand_name_en" name="brand_name_en"
+                                                class="form-control">
                                             @error('brand_name_en')
                                                 <span class="text-danger" role="alert">
                                                     {{ $message }}
@@ -110,13 +114,11 @@
                                         </div>
                                     </div>
 
-
-
-
                                     <div class="form-group">
                                         <h5>Brand Name hindi<span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" id="brand_name_hin" name="brand_name_hin" class="form-control">
+                                            <input type="text" id="brand_name_hin" name="brand_name_hin"
+                                                class="form-control">
                                             @error('brand_name_hin')
                                                 <span class="text-danger" role="alert">
                                                     {{ $message }}
@@ -125,12 +127,11 @@
                                         </div>
                                     </div>
 
-
-
                                     <div class="form-group">
                                         <h5>Brand Name Arabic<span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" id="brand_name_ar"  name="brand_name_ar" class="form-control">
+                                            <input type="text" id="brand_name_ar" name="brand_name_ar"
+                                                class="form-control">
                                             @error('brand_name_ar')
                                                 <span class="text-danger" role="alert">
                                                     {{ $message }}
@@ -142,7 +143,7 @@
                                     <div class="form-group">
                                         <label class="info-title" for="exampleInputEmail1">User Image <span>
                                             </span></label>
-                                        <input type="file" id="brand_image"  name="brand_image" class="form-control">
+                                        <input type="file" id="brand_image" name="brand_image" class="form-control">
                                         @error('brand_image')
                                             <span class="text-danger" role="alert">
                                                 {{ $message }}
@@ -152,7 +153,8 @@
 
                             </div>
                             <div class="text-xs-right">
-                                <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Add" id="add_Brand">
+                                <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Add" id="ajaxSubmit">
+                                {{-- <button class="btn btn-primary" id="ajaxSubmit">Submit</button> --}}
                             </div>
                             </form>
 
@@ -219,48 +221,50 @@
         });
     </script>
 
-<script>
-    $(document).ready(function() {
+    <script>
+        $(document).ready(function() {
 
-        $('#add_brand').on('click', function(event) {
-            event.preventDefault();
-          var brand_name_en = $('#brand_name_en').val();
-          var brand_name_hin = $('#brand_name_hin').val();
-          var brand_name_ar = $('#brand_name_ar').val();
-          var brand_image = $('#brand_image').val();
-          if(brand_name_en!="" && brand_name_hin!="" && brand_name_ar!="" && brand_image!=""){
-            /*  $("#butsave").attr("disabled", "disabled"); */
-              $.ajax({
-                  url: "/store",
-                  type: "POST",
-                  data: {
-                      _token: $("#csrf").val(),
-                    //   type: 1,
-                    brand_name_en: brand_name_en,
-                    brand_name_hin: brand_name_hin,
-                    brand_name_ar: brand_name_ar,
-                    brand_image: brand_image
-                  },
-                  cache: false,
-                  success: function(dataResult){
-                      console.log(dataResult);
-                      var dataResult = JSON.parse(dataResult);
-                      if(dataResult.statusCode==200){
-                        window.location = "/brand/view";
-                      }
-                      else if(dataResult.statusCode==201){
-                         alert("Error occured !");
-                      }
+            $('#add_brand').on('click', function(event) {
+                event.preventDefault();
+                var brand_name_en = $('#brand_name_en').val();
+                var brand_name_hin = $('#brand_name_hin').val();
+                var brand_name_ar = $('#brand_name_ar').val();
+                var brand_image = $('#brand_image').val();
+                if (brand_name_en != "" && brand_name_hin != "" && brand_name_ar != "" && brand_image !=
+                    "") {
+                    /*  $("#butsave").attr("disabled", "disabled"); */
+                    $.ajax({
+                        url: "/store",
+                        type: "POST",
+                        data: {
+                            _token: $("#csrf").val(),
+                            //   type: 1,
+                            brand_name_en: brand_name_en,
+                            brand_name_hin: brand_name_hin,
+                            brand_name_ar: brand_name_ar,
+                            brand_image: brand_image
+                        },
+                        cache: false,
+                        success: function(dataResult) {
+                            console.log(dataResult);
+                            var dataResult = JSON.parse(dataResult);
+                            if (dataResult.statusCode == 200) {
+                                window.location = "/brand/view";
+                            } else if (dataResult.statusCode == 201) {
+                                alert("Error occured !");
+                            }
 
-                  }
-              });
-          }
-          else{
-              alert('Please fill all the field !');
-          }
-      });
-    });
+                        }
+                    });
+                } else {
+                    alert('Please fill all the field !');
+                }
+            });
+        });
     </script>
+
+
+
 
 
 

@@ -1,6 +1,5 @@
-@extends('admin.admin_master')
+@extends('admin.layouts.admin_master')
 @section('title','Admin Profile')
-
 @section('admin')
 
 
