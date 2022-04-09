@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BrandController;
+use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\frontend\IndexController;
 use Illuminate\Support\Facades\Route;
 
@@ -87,15 +88,15 @@ Route::prefix('brand')->group(function(){
 
 Route::prefix('Category')->group(function(){
 
-    Route::get('/view' , [BrandController::class , 'brandView'])->name('all.brand');
+    Route::get('/view' , [CategoryController::class , 'categoryView'])->name('all.category');
 
-    Route::post('/store' , [BrandController::class , 'brandStore'])->name('brand.store');
+    Route::post('/store' , [CategoryController::class , 'categoryStore'])->name('category.store');
 
-    Route::get('/edit/{id}' , [BrandController::class , 'brandEdit'])->name('brand.edit');
+    Route::get('/edit/{id}' , [CategoryController::class , 'categoryEdit'])->name('category.edit');
 
-    Route::post('/update/{id}' , [BrandController::class , 'brandUpdate'])->name('brand.update');
+    Route::post('/update/{id}' , [CategoryController::class , 'categoryUpdate'])->name('category.update');
 
-    Route::get('/delete/{id}' , [BrandController::class , 'brandDelete'])->name('brand.delete');
+    Route::get('/delete/{id}' , [CategoryController::class , 'categoryDelete'])->name('category.delete');
 
 });
 
