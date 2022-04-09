@@ -16,7 +16,7 @@ class CategoryController extends Controller
         return view('backend.category.category_view', compact('category'));
     }
 
-    public function categoryStore(categoryRequest $request , categoryService $service)
+    public function categoryStore(categoryRequest $request, categoryService $service)
     {
         $validation = $request->validated();
         $category = $service->storeCategory(
@@ -34,13 +34,12 @@ class CategoryController extends Controller
     }
 
 
-    public function categoryEdit($id)
+    public function categoryEdit(Category $category)
     {
-        $category = Category::findOrFail($id);
         return view('backend.category.category_edit', compact('category'));
     }
 
-    public function categoryUpdate(categoryRequest $request , $id , categoryService $service)
+    public function categoryUpdate(categoryRequest $request, $id, categoryService $service)
     {
         $validation = $request->validated();
         $updateCategory = $service->updateCategory(
@@ -56,5 +55,16 @@ class CategoryController extends Controller
         );
         // return view('backend.category.category_view')->with($notification);
         return redirect(route('all.category'))->with($notification);
+    }
+
+    public function categoryDelete(Category $category)
+    {
+        //route model binding
+        $category->delete();
+        $notification = array(
+            'message' => 'Category deleted Successfully',
+            'alert-type' => 'success'
+        );
+        return response('Post deleted successfully.', 200);
     }
 }

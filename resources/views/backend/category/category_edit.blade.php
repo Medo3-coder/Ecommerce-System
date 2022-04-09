@@ -160,7 +160,7 @@
                                     showCancelButton: false,
                                     confirmButtonText: 'Yes'
                                 });
-                                window.location = '/brand/view';
+                                window.location = '/category/view';
                             }
                         });
                     }

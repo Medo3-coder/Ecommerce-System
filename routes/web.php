@@ -86,17 +86,17 @@ Route::prefix('brand')->group(function(){
 });
 
 
-Route::prefix('Category')->group(function(){
+Route::prefix('category')->group(function(){
 
     Route::get('/view' , [CategoryController::class , 'categoryView'])->name('all.category');
 
     Route::post('/store' , [CategoryController::class , 'categoryStore'])->name('category.store');
 
-    Route::get('/edit/{id}' , [CategoryController::class , 'categoryEdit'])->name('category.edit');
+    Route::get('/edit/{category}' , [CategoryController::class , 'categoryEdit'])->name('category.edit');
 
-    Route::post('/update/{id}' , [CategoryController::class , 'categoryUpdate'])->name('category.update');
+    Route::post('/update/{category}' , [CategoryController::class , 'categoryUpdate'])->name('category.update');
 
-    Route::get('/delete/{id}' , [CategoryController::class , 'categoryDelete'])->name('category.delete');
+    Route::get('/delete/{category}' , [CategoryController::class , 'categoryDelete'])->name('category.delete');
 
 });
 
