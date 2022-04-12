@@ -30,7 +30,9 @@ class CategoryController extends Controller
             'message' => 'Category Store Successfully',
             'alert-type' => 'success'
         );
-        return redirect(route('all.category'))->with($notification);
+       // return redirect(route('all.category'))->with($notification);
+        return response()->json(['success'=>'Category Store Successfully']);
+        // return response('Category Store Successfully', 200);
     }
 
 
@@ -61,10 +63,7 @@ class CategoryController extends Controller
     {
         //route model binding
         $category->delete();
-        $notification = array(
-            'message' => 'Category deleted Successfully',
-            'alert-type' => 'success'
-        );
+
         return response('Post deleted successfully.', 200);
     }
 }
