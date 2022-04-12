@@ -30,11 +30,10 @@ class CategoryController extends Controller
             'message' => 'Category Store Successfully',
             'alert-type' => 'success'
         );
-
-       // return redirect(route('all.category'))->with($notification);
-       return view('backend.category._tr',[
-           'item' => $category
-       ]);
+       return redirect(route('all.category'))->with($notification);
+       //    return view('backend.category._tr',[
+       //     'item' => $category
+       // ]);
         // return response()->json(['success'=>'Category Store Successfully']);
         // return response('Category Store Successfully', 200);
     }

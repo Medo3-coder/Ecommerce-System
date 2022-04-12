@@ -15,7 +15,7 @@ class categoryService
         string $category_icon
     ) {
 
-        return Category::create([
+        Category::create([
             'category_name_en' => $category_name_en,
             'category_name_hin' => $category_name_hin,
             'category_name_ar' => $category_name_ar,
