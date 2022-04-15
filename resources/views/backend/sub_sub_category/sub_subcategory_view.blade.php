@@ -1,6 +1,6 @@
 @extends('admin.layouts.admin_master')
 
-@section('title', 'Category')
+@section('title', 'Sub SubCategory')
 
 @section('admin')
 
@@ -12,7 +12,7 @@
         <div class="content-header">
             <div class="d-flex align-items-center">
                 <div class="mr-auto">
-                    <h3 class="page-title"><a href="{{ url()->current() }}">Category</a></h3>
+                    <h3 class="page-title"><a href="{{ url()->current() }}">Sub SubCategory</a></h3>
                     <div class="d-inline-block align-items-center">
                         <nav>
                             <ol class="breadcrumb">
@@ -35,7 +35,7 @@
 
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Category List</h3>
+                            <h3 class="box-title">SubCategory List</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -43,27 +43,25 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Category Icon</th>
-                                            <th>Category En</th>
-                                            <th>Category Hin</th>
-                                            <th>Category Ar</th>
+                                            <th>Category</th>
+                                            <th>ٍSubCategory En</th>
+                                            <th>Sub SubCategory En</th>
                                             <th>Action</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($category as $item)
+                                        @foreach ($sub_subcategory as $item)
                                             <tr>
-                                                <td><span><i class="{{ $item->category_icon }}"></i></span></td>
-                                                <td>{{ $item->category_name_en }}</td>
-                                                <td>{{ $item->category_name_hin }}</td>
-                                                <td>{{ $item->category_name_ar }}</td>
+                                                <td>{{ $item->category->category_name_en ?? '' }}</td>
+                                                <td>{{ $item->subCategory->sub_category_name_en ?? '' }}</td>
+                                                <td>{{ $item->subsubcategory_name_en ?? '' }}</td>
                                                 <td>
-                                                    <a href="{{ route('category.edit', $item->id) }}"
+                                                    <a href="{{ route('subcategory.edit', $item->id) }}"
                                                         class="btn btn-info" title="Edit Data"> <i
                                                             class="fa fa-pencil"></i> </a>
 
-                                                    <a href="{{ route('category.delete', $item->id) }}"
+                                                    <a href="{{ route('subcategory.delete', $item->id) }}"
                                                         class="btn btn-danger" id="delete" data-id="{{ $item->id }}"
                                                         title="Delete Data"> <i class="fa fa-trash"></i></a>
                                                 </td>
@@ -94,7 +92,7 @@
 
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Category List</h3>
+                            <h3 class="box-title">Add Sub SubCategory</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -102,16 +100,16 @@
                                 <span class="success"
                                     style="color:green; margin-top:10px; margin-bottom: 10px;"></span>
 
-                                <form method="POST" action="{{ route('category.store') }}" id="ajaxform">
+                                <form method="POST" action="{{ route('subcategory.store') }}" id="ajaxform">
 
 
                                     @csrf
                                     <div class="form-group">
-                                        <h5>Category English<span class="text-danger">*</span></h5>
+                                        <h5>Sub SubCategory English<span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" id="category_name_en" name="category_name_en"
+                                            <input type="text" id="subsubcategory_name_en" name="subsubcategory_name_en"
                                                 class="form-control">
-                                            @error('category_name_en')
+                                            @error('subsubcategory_name_en')
                                                 <span class="text-danger" role="alert">
                                                     {{ $message }}
                                                 </span>
@@ -120,11 +118,11 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <h5>Category hindi<span class="text-danger">*</span></h5>
+                                        <h5>Sub SubCategory hindi<span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" id="category_name_hin" name="category_name_hin"
+                                            <input type="text" id="subsubcategory_name_hin" name="subsubcategory_name_hin"
                                                 class="form-control">
-                                            @error('category_name_hin')
+                                            @error('subsubcategory_name_hin')
                                                 <span class="text-danger" role="alert">
                                                     {{ $message }}
                                                 </span>
@@ -133,11 +131,11 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <h5>Category Arabic<span class="text-danger">*</span></h5>
+                                        <h5>Sub SubCategory Arabic<span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" id="category_name_ar" name="category_name_ar"
+                                            <input type="text" id="subsubcategory_name_ar" name="subsubcategory_name_ar"
                                                 class="form-control">
-                                            @error('category_name_ar')
+                                            @error('subsubcategory_name_ar')
                                                 <span class="text-danger" role="alert">
                                                     {{ $message }}
                                                 </span>
@@ -146,11 +144,33 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <h5>Category Icon<span class="text-danger">*</span></h5>
+                                        <h5>Category Select <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" id="category_icon" name="category_icon"
-                                                class="form-control">
-                                            @error('category_icon')
+                                            <select name="category_id" class="form-control">
+                                                <option selected="" disabled="">Select Your Category</option>
+                                                @foreach ($category as $categories)
+                                                    <option value="{{ $categories->id }}">
+                                                        {{ $categories->category_name_en }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('category_id')
+                                                <span class="text-danger" role="alert">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        <h5>SubCategory Select <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <select name="subcategory_id" class="form-control">
+                                                <option selected="" disabled="">Select Your SubCategory</option>
+
+                                            </select>
+                                            @error('category_id')
                                                 <span class="text-danger" role="alert">
                                                     {{ $message }}
                                                 </span>
@@ -186,6 +206,7 @@
 
 
 
+
     <script type="text/javascript">
         $(function() {
             $(document).on('click', '#delete', function(e) {
@@ -212,8 +233,7 @@
                                 '_method': 'get'
                             },
                             success: function(response, textStatus, xhr) {
-                                $(that).parent().parent().remove();
-
+                                $(that).parent().parent().remove()
                                 Swal.fire({
                                     icon: 'success',
                                     title: response,
@@ -222,7 +242,7 @@
                                     confirmButtonText: 'Yes'
                                 }).then((result) => {
                                     // window.location = '/category/view';
-                                    // $(that).parent().parent().remove();
+                                    // that.parent().parent().remove()
                                     // window.location.reload();
                                 });
                             }
@@ -234,45 +254,29 @@
     </script>
 
 
-    {{-- <script type="text/javascript">
-        $(".save-data").click(function(event) {
-            event.preventDefault();
+<script type="text/javascript">
+    $(document).ready(function() {
+      $('select[name="category_id"]').on('change', function(){
+          var category_id = $(this).val();
+          if(category_id) {
+              $.ajax({
+                  url: "{{  url('/category/subcategory/ajax') }}/"+category_id,
+                  type:"GET",
+                  dataType:"json",
+                  success:function(data) {
+                     var d =$('select[name="subcategory_id"]').empty();
+                        $.each(data, function(key, value){
+                            $('select[name="subcategory_id"]').append('<option value="'+ value.id +'">' + value.sub_category_name_en + '</option>');
+                        });
+                  },
+              });
+          } else {
+              alert('danger');
+          }
+      });
+  });
+  </script>
 
 
 
-            let category_name_en = $("input[name=category_name_en]").val();
-            let category_name_hin = $("input[name=category_name_hin]").val();
-            let category_name_ar = $("input[name=category_name_ar]").val();
-            let category_icon = $("input[name=category_icon]").val();
-
-
-            $.ajax({
-
-                type: "POST",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                url: "{{ route('category.store') }}",
-                data: {
-                    category_name_en: category_name_en,
-                    category_name_hin: category_name_hin,
-                    category_name_ar: category_name_ar,
-                    category_icon: category_icon,
-
-                },
-                success: function(response) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: response.success,
-
-                    })
-
-                    window.location.reload();
-                },
-                error: function(error) {
-                    alert(data.error);
-                }
-            });
-        });
-    </script> --}}
 @endsection

@@ -16,7 +16,7 @@ class BrandController extends Controller
 {
     public function brandView()
     {
-        $brand = Brand::orderBy('id', 'DESC')->get();          //limit check
+        $brand = Brand::orderBy('id', 'DESC')->paginate(10);          //limit check
         return view('backend.brand.brand_view', compact('brand'));
     }
 

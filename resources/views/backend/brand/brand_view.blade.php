@@ -184,6 +184,7 @@
             $(document).on('click', '#delete', function(e) {
                 e.preventDefault()
 
+                that = this ;
                 var link = $(this).attr('href');
 
                 Swal.fire({
@@ -205,6 +206,7 @@
                                 '_method': 'get'
                             },
                             success: function(response, textStatus, xhr) {
+                                $(that).parent().parent().remove();
                                 Swal.fire({
                                     icon: 'success',
                                     title: response,
@@ -212,7 +214,7 @@
                                     showCancelButton: false,
                                     confirmButtonText: 'Yes'
                                 });
-                                window.location = '/brand/view';
+                                // window.location = '/brand/view';
                             }
                         });
                     }

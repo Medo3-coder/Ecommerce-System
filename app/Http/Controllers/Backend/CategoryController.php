@@ -12,7 +12,7 @@ class CategoryController extends Controller
 {
     public function categoryView()
     {
-        $category = Category::latest()->get();          //limit check
+        $category = Category::latest()->paginate(10);           //limit check
         return view('backend.category.category_view', compact('category'));
     }
 
