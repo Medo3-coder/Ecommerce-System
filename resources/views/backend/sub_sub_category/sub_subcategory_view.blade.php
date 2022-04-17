@@ -57,11 +57,11 @@
                                                 <td>{{ $item->subCategory->sub_category_name_en ?? '' }}</td>
                                                 <td>{{ $item->subsubcategory_name_en ?? '' }}</td>
                                                 <td>
-                                                    <a href="{{ route('subcategory.edit', $item->id) }}"
+                                                    <a href="{{ route('subsubcategory.edit', $item->id) }}"
                                                         class="btn btn-info" title="Edit Data"> <i
                                                             class="fa fa-pencil"></i> </a>
 
-                                                    <a href="{{ route('subcategory.delete', $item->id) }}"
+                                                    <a href="{{ route('subsubcategory.delete', $item->id) }}"
                                                         class="btn btn-danger" id="delete" data-id="{{ $item->id }}"
                                                         title="Delete Data"> <i class="fa fa-trash"></i></a>
                                                 </td>
@@ -100,10 +100,46 @@
                                 <span class="success"
                                     style="color:green; margin-top:10px; margin-bottom: 10px;"></span>
 
-                                <form method="POST" action="{{ route('subcategory.store') }}" id="ajaxform">
+                                <form method="POST" action="{{ route('subsubcategory.store') }}" id="ajaxform">
 
 
                                     @csrf
+
+                                    <div class="form-group">
+                                        <h5>Category Select <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <select name="category_id" class="form-control">
+                                                <option selected="" disabled="">Select Your Category</option>
+                                                @foreach ($category as $categories)
+                                                    <option value="{{ $categories->id }}">
+                                                        {{ $categories->category_name_en }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('category_id')
+                                                <span class="text-danger" role="alert">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        <h5>SubCategory Select <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <select name="subcategory_id" class="form-control">
+                                                <option selected="" disabled="">Select Your SubCategory</option>
+
+                                            </select>
+                                            @error('subcategory_id')
+                                                <span class="text-danger" role="alert">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
                                     <div class="form-group">
                                         <h5>Sub SubCategory English<span class="text-danger">*</span></h5>
                                         <div class="controls">
@@ -142,42 +178,6 @@
                                             @enderror
                                         </div>
                                     </div>
-
-                                    <div class="form-group">
-                                        <h5>Category Select <span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <select name="category_id" class="form-control">
-                                                <option selected="" disabled="">Select Your Category</option>
-                                                @foreach ($category as $categories)
-                                                    <option value="{{ $categories->id }}">
-                                                        {{ $categories->category_name_en }}</option>
-                                                @endforeach
-                                            </select>
-                                            @error('category_id')
-                                                <span class="text-danger" role="alert">
-                                                    {{ $message }}
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="form-group">
-                                        <h5>SubCategory Select <span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <select name="subcategory_id" class="form-control">
-                                                <option selected="" disabled="">Select Your SubCategory</option>
-
-                                            </select>
-                                            @error('category_id')
-                                                <span class="text-danger" role="alert">
-                                                    {{ $message }}
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
 
 
                             </div>
