@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Arr;
@@ -61,4 +62,54 @@ class Handler extends ExceptionHandler
 
     //     return redirect()->guest(route($login));
     // }
+
+    // public function render($request , Exception $exception )
+    // {
+    //       if($this->isHttpException($exception))
+    //       {
+    //           if(request()->is('admin/*'))
+    //           {
+    //               if($exception->getStatusCode() == 404)
+    //               {
+    //                     return response()->view('admin.errors.404' , [] , 404);
+    //               }
+    //           }
+    //           else
+    //           {
+    //                 if($exception->getStatusCode() == 404)
+    //                 {
+    //                     return response()->view('errors.404' , [] , 404);
+    //                 }
+    //           }
+    //       }
+    //       return parent::render($request , $exception);
+    // }
+
+
+
+    public function render($request, Throwable $exception)
+    {
+
+            if ($this->isHttpException($exception)) {
+
+                if (request()->is('admin/*')) {
+                    if ($exception->getStatusCode() == 404) {
+                        return response()->view('admin.errors.404', [], 404);
+                    }
+                }
+                else
+                {
+                    if ($exception->getStatusCode() == 404) {
+                        return response()->view('frontend.errors.404', [], 404);
+                    }
+                }
+
+
+            }
+
+        return parent::render($request, $exception);
+    }
+
+
+
 }
