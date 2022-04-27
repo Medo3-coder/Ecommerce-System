@@ -78,11 +78,6 @@ class SubSubCategoryController extends Controller
     {
 
         $sub_subcategory->delete();
-
-        $notification = array(
-            'message' => 'SubSubCategory Deleted Successfully',
-            'alert-type' =>'success'
-        );
         return response('Post deleted successfully.', 200);
 
     }

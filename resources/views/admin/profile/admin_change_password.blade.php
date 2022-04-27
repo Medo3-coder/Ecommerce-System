@@ -1,4 +1,5 @@
 @extends('admin.layouts.admin_master')
+@section('title', 'Admin Change Password')
 
 
 @section('admin')

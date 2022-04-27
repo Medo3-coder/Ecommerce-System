@@ -60,11 +60,7 @@ class AdminProfileController extends Controller
         }
         $adminData->save();
 
-        $notification = array(
-            'message' => 'Admin Updated Successfully',
-            'alert-type' => 'success'
-        );
-        return redirect()->route('admin.profile')->with($notification);
+        return redirect()->route('admin.profile')->with('success', 'Profile Updated Successfully');
     }
 
     public function adminProfilepassword()
@@ -92,11 +88,8 @@ class AdminProfileController extends Controller
             Auth::logout();
             return redirect()->route('admin.logout');
         } else {
-            $notification = array(
-                'message' => 'password not match',
-                'alert-type' => 'error'
-            );
-            return redirect()->back()->with($notification);
+
+            return redirect()->back()->with('error', 'Your old password does not match');
         }
     }
 }

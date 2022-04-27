@@ -16,7 +16,7 @@ class BrandController extends Controller
 {
     public function brandView()
     {
-        $brand = Brand::orderBy('id', 'DESC')->paginate(10);          //limit check
+        $brand = Brand::latest()->paginate(10);        //limit check
         return view('backend.brand.brand_view', compact('brand'));
     }
 
@@ -30,12 +30,7 @@ class BrandController extends Controller
             $request->brand_image
 
         );
-
-        $notification = array(
-            'message' => 'Brand Store Successfully',
-            'alert-type' => 'success'
-        );
-        return redirect()->back()->with($notification);
+        return back()->with('success', 'Brand Added Successfully');
     }
 
     public function brandEdit($id)
@@ -55,11 +50,8 @@ class BrandController extends Controller
             $request->brand_name_ar,
             $request->brand_image
         );
-        $notification = array(
-            'message' => 'Brand updated Successfully',
-            'alert-type' => 'info'
-        );
-        return redirect(route('all.brand'))->with($notification);
+
+        return redirect()->route('all.brand')->with('success', 'Brand Updated Successfully');
     }
 
     public function brandDelete($id)

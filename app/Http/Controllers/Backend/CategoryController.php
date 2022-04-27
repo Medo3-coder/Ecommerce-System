@@ -25,17 +25,7 @@ class CategoryController extends Controller
             $request->category_name_ar,
             $request->category_icon
         );
-
-        $notification = array(
-            'message' => 'Category Store Successfully',
-            'alert-type' => 'success'
-        );
-       return redirect(route('all.category'))->with($notification);
-       //    return view('backend.category._tr',[
-       //     'item' => $category
-       // ]);
-        // return response()->json(['success'=>'Category Store Successfully']);
-        // return response('Category Store Successfully', 200);
+        return back()->with('success', 'Category Added Successfully');
     }
 
 
@@ -54,12 +44,7 @@ class CategoryController extends Controller
             $request->category_name_ar,
             $request->category_icon
         );
-        $notification = array(
-            'message' => 'Category updated Successfully',
-            'alert-type' => 'info'
-        );
-        // return view('backend.category.category_view')->with($notification);
-        return redirect(route('all.category'))->with($notification);
+        return redirect()->route('all.category')->with('success', 'Category Updated Successfully');
     }
 
     public function categoryDelete(Category $category)

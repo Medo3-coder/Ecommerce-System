@@ -29,13 +29,7 @@ class SubCategoryController extends Controller
             $request->category_id,
         );
 
-        $notification = array(
-            'message' => 'SubCategory Created Successfully',
-            'alert-type' => 'success'
-        );
-        return redirect(route('all.subcategory'))->with($notification);
-        // return redirect()->back()->with('success', 'SubCategory Added Successfully');
-
+        return back()->with('success', 'SubCategory Added Successfully');
     }
 
 
@@ -45,7 +39,7 @@ class SubCategoryController extends Controller
         return view('backend.sub_category.subcategory_edit', compact('subcategory', 'category'));
     }
 
-    public function subCategoryUpdate(subCategoryRequest $request, subCategorySevice $service , $id)
+    public function subCategoryUpdate(subCategoryRequest $request, subCategorySevice $service, $id)
     {
         $validation = $request->validated();
         $service->updateSubCategory(
@@ -56,22 +50,12 @@ class SubCategoryController extends Controller
             $request->category_id,
         );
 
-        $notification = array(
-            'message' => 'SubCategory Updated Successfully',
-            'alert-type' => 'success'
-        );
-        return redirect(route('all.subcategory'))->with($notification);
-        // return redirect()->back()->with('success', 'SubCategory Updated Successfully');
+        return redirect(route('all.subcategory'))->with('success', 'SubCategory Updated Successfully');
     }
 
     public function subCategoryDelete(SubCategory $subcategory)
     {
         $subcategory->delete();
-        $notification = array(
-            'message' => 'SubCategory Deleted Successfully',
-            'alert-type' => 'success'
-        );
         return response('Post deleted successfully.', 200);
-        // return redirect()->back()->with('success', 'SubCategory Deleted Successfully');
     }
 }
