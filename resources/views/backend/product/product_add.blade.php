@@ -102,7 +102,7 @@
                                                     <h5>Sub SubCategory Select <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <select name="subsubcategory_id" class="form-control">
-                                                            <option selected="" disabled="">Select Brand</option>
+                                                            <option selected="" disabled="">Select SubCategory</option>
                                                         </select>
                                                         @error('subsubcategory_id')
                                                             <span class="text-danger" role="alert">
@@ -640,5 +640,65 @@
         </section>
         <!-- /.content -->
     </div>
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('select[name="category_id"]').on('change', function() {
+                var category_id = $(this).val();
+                if (category_id) {
+                    $.ajax({
+                        url: "{{ url('/category/subcategory/ajax') }}/" + category_id,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $('select[name="subcategory_id"]').empty();
+                            $.each(data, function(key, value) {
+                                $('select[name="subcategory_id"]').append(
+                                    '<option value="' + value.id + '">' + value
+                                    .sub_category_name_en +
+                                    '</option>"');
+                            });
+                        }
+                    });
+                } else {
+                    alert('danger');
+                }
+            });
+
+
+
+
+
+
+            $('select[name="subcategory_id"]').on('change', function() {
+                var subcategory_id = $(this).val();
+                if (subcategory_id) {
+                    $.ajax({
+                        url: "{{ url('/category/sub-subcategory/ajax') }}/" + subcategory_id,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $('select[name="subsubcategory_id"]').empty();
+                            $.each(data, function(key, value) {
+                                $('select[name="subsubcategory_id"]').append(
+                                    '<option value="' + value.id + '">' + value
+                                    .subsubcategory_name_en +
+                                    '</option>"');
+                            });
+                        }
+                    });
+                } else {
+                    alert('danger');
+                }
+            })
+
+
+
+
+
+
+        });
+    </script>
 
 @endsection

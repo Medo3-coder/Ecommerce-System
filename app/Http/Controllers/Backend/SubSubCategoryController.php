@@ -20,11 +20,21 @@ class SubSubCategoryController extends Controller
         return view('backend.sub_sub_category.sub_subcategory_view', compact('sub_subcategory', 'category'));
     }
 
+     // get subcategory by ajax  request
     public function getSubCategory($category_id)
     {
         $category = SubCategory::where('category_id', $category_id)->orderBy('sub_category_name_en', 'ASC')->get();
         return json_encode($category);
     }
+
+
+    // get sub_subcategory by ajax  request
+    public function getSubSubCategory($subcategory_id)
+    {
+        $sub_subcategory = SubSubCategory::where('subcategory_id', $subcategory_id)->orderBy('subsubcategory_name_en', 'ASC')->get();
+        return json_encode($sub_subcategory);
+    }
+
     public function subSubCategoryStore(SubRequest $request, subSubCategoryService $service)
     {
         $validation = $request->validated();
@@ -37,22 +47,17 @@ class SubSubCategoryController extends Controller
             $request->category_id
         );
 
-        $notification = array(
-            'message' => 'SubSubCategory Created Successfully',
-            'alert-type' => 'success'
-        );
-
-        return redirect(route('all.subsubcategory'))->with($notification);
+        return redirect()->route('all.subsubcategory')->with('success', 'Sub SubCategory Added Successfully');
     }
 
     public function subSubCategoryEdit(SubSubCategory $sub_subcategory)
     {
         $category = Category::orderBy('category_name_en', 'ASC')->get();
         $subcategory = SubCategory::orderBy('sub_category_name_en', 'ASC')->get();
-        return view('backend.sub_sub_category.sub_subcategory_edit', compact('sub_subcategory','subcategory', 'category'));
+        return view('backend.sub_sub_category.sub_subcategory_edit', compact('sub_subcategory', 'subcategory', 'category'));
     }
 
-    public function subSubCategoryUpdate(SubRequest $request , subSubCategoryService $service , $id)
+    public function subSubCategoryUpdate(SubRequest $request, subSubCategoryService $service, $id)
     {
 
         $validation = $request->validated();
@@ -66,12 +71,7 @@ class SubSubCategoryController extends Controller
             $request->category_id
         );
 
-        $notification = array(
-            'message' => 'SubSubCategory Updated Successfully',
-            'alert-type' => 'success'
-        );
-
-        return redirect(route('all.subsubcategory'))->with($notification);
+        return redirect()->route('all.subsubcategory')->with('success', 'Sub SubCategory Updated Successfully');
     }
 
     public function subSubCategoryDelete(SubSubCategory $sub_subcategory)
@@ -79,6 +79,5 @@ class SubSubCategoryController extends Controller
 
         $sub_subcategory->delete();
         return response('Post deleted successfully.', 200);
-
     }
 }
