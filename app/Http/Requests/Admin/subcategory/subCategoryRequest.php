@@ -24,9 +24,9 @@ class subCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'sub_category_name_en' => 'required|max:25',
-            'sub_category_name_hin' => 'required|max:25',
-            'sub_category_name_ar' => 'required|max:25',
+            'sub_category_name_en' => 'required|max:225',
+            'sub_category_name_hin' => 'required|max:225',
+            'sub_category_name_ar' => 'required|max:225',
             'category_id' => 'required',
 
 

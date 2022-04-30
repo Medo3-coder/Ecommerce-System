@@ -59,7 +59,7 @@
                                                 <td>{{ $item->sub_category_name_en }}</td>
                                                 <td>{{ $item->sub_category_name_hin }}</td>
                                                 <td>{{ $item->sub_category_name_ar }}</td>
-                                                <td>
+                                                <td width="30%">
                                                     <a href="{{ route('subcategory.edit', $item->id) }}"
                                                         class="btn btn-info" title="Edit Data"> <i
                                                             class="fa fa-pencil"></i> </a>

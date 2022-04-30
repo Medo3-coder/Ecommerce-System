@@ -14,8 +14,8 @@ class SubSubCategoryController extends Controller
 {
     public function subSubCategoryView()
     {
-        $category = Category::orderBy('category_name_en', 'ASC')->paginate();
-        $sub_subcategory = SubSubCategory::latest()->paginate(10);
+        $category = Category::orderBy('category_name_en', 'ASC')->get();
+        $sub_subcategory = SubSubCategory::latest()->get();
 
         return view('backend.sub_sub_category.sub_subcategory_view', compact('sub_subcategory', 'category'));
     }
