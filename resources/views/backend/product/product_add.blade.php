@@ -190,19 +190,19 @@
 
                                             <div class="col-md-4">
 
+
+
                                                 <div class="form-group">
-                                                    <h5>Product Tag En <span class="text-danger">*</span></h5>
+                                                    <h5>Product Code <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="product_tags_en" class="form-control"
-                                                            value="loresm ipsum" data-role="tagsinput">
-                                                        @error('product_tags_en')
+                                                        <input type="text" name="product_code" class="form-control">
+                                                        @error('product_code')
                                                             <span class="text-danger" role="alert">
                                                                 {{ $message }}
                                                             </span>
                                                         @enderror
                                                     </div>
                                                 </div>
-
 
                                             </div>
 
@@ -251,17 +251,23 @@
 
 
                                             <div class="col-md-4">
+
+
+
+
                                                 <div class="form-group">
-                                                    <h5>Product Code <span class="text-danger">*</span></h5>
+                                                    <h5>Product Tag En <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="product_code" class="form-control">
-                                                        @error('product_code')
+                                                        <input type="text" name="product_tags_en" class="form-control"
+                                                            value="loresm ipsum" data-role="tagsinput">
+                                                        @error('product_tags_en')
                                                             <span class="text-danger" role="alert">
                                                                 {{ $message }}
                                                             </span>
                                                         @enderror
                                                     </div>
                                                 </div>
+
 
 
 
@@ -426,17 +432,6 @@
 
 
                                             <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <h5>Main Thumbnail <span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <input type="file" name="product_thambnail" class="form-control">
-                                                        @error('product_thambnail')
-                                                            <span class="text-danger" role="alert">
-                                                                {{ $message }}
-                                                            </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
 
 
                                             </div>
@@ -544,12 +539,16 @@
                                                 <div class="form-group">
                                                     <h5>Multi Image <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="file" name="multi_img[]" class="form-control">
+                                                        <input type="file" name="multi_img[]" class="form-control"
+                                                        multiple="" id="multiImg">
                                                         @error('multi_img')
                                                             <span class="text-danger" role="alert">
                                                                 {{ $message }}
                                                             </span>
                                                         @enderror
+                                                        <div class="row" id="preview_img">
+
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -558,14 +557,20 @@
 
                                             <div class="col-md-4">
 
-                                                {{-- <div class="form-group">
-                                                <h5>Long Description English <span class="text-danger">*</span></h5>
-                                                <div class="controls">
-                                                    <textarea id="editor1" name="long_descp_en" rows="10" cols="80">
-                                                        This is my textarea to be replaced with CKEditor.
-                                                  </textarea>
+                                                <div class="form-group">
+                                                    <h5>Main Thumbnail <span class="text-danger">*</span></h5>
+                                                    <div class="controls">
+                                                        <input type="file" name="product_thambnail" class="form-control"
+                                                        onChange="mainThumbUrl(this)">
+                                                        @error('product_thambnail')
+                                                            <span class="text-danger" role="alert">
+                                                                {{ $message }}
+                                                            </span>
+                                                        @enderror
+                                                        <img src="" id="mainThumb" alt="">
+                                                    </div>
                                                 </div>
-                                            </div> --}}
+
 
                                             </div>
 
@@ -700,6 +705,54 @@
 
 
         });
+    </script>
+
+    {{-- script for image preview --}}
+
+    <script type="text/javascript">
+
+        function mainThumbUrl(input){
+            if (input.files && input.files[0]){
+                var reader = new FileReader();
+                reader.onload = function(e){
+                    $('#mainThumb').attr('src' , e.target.result).width(90).height(90);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+
+
+<script>
+
+    $(document).ready(function(){
+     $('#multiImg').on('change', function(){ //on file input change
+        if (window.File && window.FileReader && window.FileList && window.Blob) //check File API supported browser
+        {
+            var data = $(this)[0].files; //this file data
+
+            $.each(data, function(index, file){ //loop though each file
+                if(/(\.|\/)(gif|jpe?g|png)$/i.test(file.type)){ //check supported file type
+                    var fRead = new FileReader(); //new filereader
+                    fRead.onload = (function(file){ //trigger function on successful read
+                    return function(e) {
+                        var img = $('<img/>').addClass('thumb').attr('src', e.target.result) .width(80)
+                    .height(80); //create image element
+                        $('#preview_img').append(img); //append image to output element
+                    };
+                    })(file);
+                    fRead.readAsDataURL(file); //URL representing the file's data.
+                }
+            });
+
+        }else{
+            alert("Your browser doesn't support File API!"); //if File API is absent
+        }
+     });
+    });
+
     </script>
 
 @endsection
