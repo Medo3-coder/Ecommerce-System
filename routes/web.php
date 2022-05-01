@@ -135,5 +135,7 @@ Route::prefix('product')->group(function () {
 
     Route::get('/add', [ProductController::class, 'addProduct'])->name('add-product');
 
+    Route::post('/store', [ProductController::class, 'storeProduct'])->name('store-product');
+
 
 });

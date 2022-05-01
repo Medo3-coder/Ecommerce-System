@@ -22,7 +22,8 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col">
-                            <form novalidate>
+                            <form method="POST" action="{{ route('store-product') }}" enctype="multipart/form-data">
+                                @csrf
                                 <div class="row">
                                     <div class="col-12">
 
@@ -449,6 +450,11 @@
                                                         <textarea name="short_descp_ar" id="textarea" class="form-control" required placeholder="Textarea text">
 
                                                 </textarea>
+                                                @error('short_descp_ar')
+                                                <span class="text-danger" role="alert">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
                                                     </div>
                                                 </div>
 
@@ -463,6 +469,11 @@
                                                         <textarea name="short_descp_en" id="textarea" class="form-control" required placeholder="Textarea text">
 
                                                 </textarea>
+                                                @error('short_descp_en')
+                                                <span class="text-danger" role="alert">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
                                                     </div>
                                                 </div>
 
