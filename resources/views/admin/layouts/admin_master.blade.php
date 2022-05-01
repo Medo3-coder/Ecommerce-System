@@ -346,7 +346,7 @@
 
     <!-- DataTable CDN -->
     <script src="{{ asset('../assets/vendor_components/datatable/datatables.min.js') }}"></script>
-    <script src="{{ asset('backend/js/pages/data-table.js') }}"></script>
+    {{-- <script src="{{ asset('backend/js/pages/data-table.js') }}"></script> --}}
 
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

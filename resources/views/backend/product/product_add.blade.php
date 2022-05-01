@@ -199,7 +199,9 @@
                                                         <input type="text"  name="product_code" class="form-control generate_Code" required="" >
 
                                                         <span class="input-group-append">
-                                                            <input class="btn btn-primary" id="generate_inField" value="generate">
+                                                            <button class="btn btn-primary" type="button"  id="generate_inField"> Generate </button>
+
+
                                                          </span>
 
 
