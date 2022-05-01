@@ -77,7 +77,13 @@ class ProductController extends Controller
 
     	]);
 
-    return back()->with('success', 'Product Added Successfully');
+    return redirect()->route('manage-product')->with('success', 'Product Added Successfully');
 
 	}
+
+    public function manageProduct(){
+
+            $products = Product::latest()->get();
+            return view('backend.product.product_manage', compact('products'));
+    }
 }

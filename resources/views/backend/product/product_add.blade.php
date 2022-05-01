@@ -118,7 +118,7 @@
                                                 <div class="form-group">
                                                     <h5>Product Name English <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="product_name_en" class="form-control">
+                                                        <input type="text" name="product_name_en" class="form-control" required="">
                                                         @error('product_name_en')
                                                             <span class="text-danger" role="alert">
                                                                 {{ $message }}
@@ -136,7 +136,7 @@
                                                 <div class="form-group">
                                                     <h5>Product Name Hindi <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="product_name_hin" class="form-control">
+                                                        <input type="text" name="product_name_hin" class="form-control" required="">
                                                         @error('product_name_hin')
                                                             <span class="text-danger" role="alert">
                                                                 {{ $message }}
@@ -159,7 +159,7 @@
                                                 <div class="form-group">
                                                     <h5>Product Name Arabic <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="product_name_ar" class="form-control">
+                                                        <input type="text" name="product_name_ar" class="form-control" required="">
                                                         @error('product_name_ar')
                                                             <span class="text-danger" role="alert">
                                                                 {{ $message }}
@@ -176,7 +176,7 @@
                                                 <div class="form-group">
                                                     <h5>Product Quantity <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="product_qty" class="form-control">
+                                                        <input type="text" name="product_qty" class="form-control" required="">
                                                         @error('product_qty')
                                                             <span class="text-danger" role="alert">
                                                                 {{ $message }}
@@ -196,7 +196,14 @@
                                                 <div class="form-group">
                                                     <h5>Product Code <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="product_code" class="form-control">
+                                                        <input type="text"  name="product_code" class="form-control generate_Code" required="" >
+
+                                                        <span class="input-group-append">
+                                                            <input class="btn btn-primary" id="generate_inField" value="generate">
+                                                         </span>
+
+
+
                                                         @error('product_code')
                                                             <span class="text-danger" role="alert">
                                                                 {{ $message }}
@@ -204,6 +211,7 @@
                                                         @enderror
                                                     </div>
                                                 </div>
+
 
                                             </div>
 
@@ -219,7 +227,7 @@
                                                     <h5>Product Tag Hindi <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_tags_hin" class="form-control"
-                                                            value="loresm ipsum" data-role="tagsinput">
+                                                            value="loresm ipsum" data-role="tagsinput" required="">
                                                         @error('product_tags_hin')
                                                             <span class="text-danger" role="alert">
                                                                 {{ $message }}
@@ -238,7 +246,7 @@
                                                     <h5>Product Tag Arabic <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_tags_ar" class="form-control"
-                                                            value="loresm ipsum" data-role="tagsinput">
+                                                            value="loresm ipsum" data-role="tagsinput" required="">
                                                         @error('product_tags_ar')
                                                             <span class="text-danger" role="alert">
                                                                 {{ $message }}
@@ -260,7 +268,7 @@
                                                     <h5>Product Tag En <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_tags_en" class="form-control"
-                                                            value="loresm ipsum" data-role="tagsinput">
+                                                            value="loresm ipsum" data-role="tagsinput" required="">
                                                         @error('product_tags_en')
                                                             <span class="text-danger" role="alert">
                                                                 {{ $message }}
@@ -286,7 +294,7 @@
                                                     <h5>Product Size English <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_size_en" class="form-control"
-                                                            value="small,medium,larg" data-role="tagsinput">
+                                                            value="small,medium,larg" data-role="tagsinput" required="">
                                                         @error('product_size_en')
                                                             <span class="text-danger" role="alert">
                                                                 {{ $message }}
@@ -306,7 +314,7 @@
                                                     <h5>Product Size Hindi <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_size_hin" class="form-control"
-                                                            value="small,medium,larg" data-role="tagsinput">
+                                                            value="small,medium,larg" data-role="tagsinput" required="">
                                                         @error('product_size_hin')
                                                             <span class="text-danger" role="alert">
                                                                 {{ $message }}
@@ -323,7 +331,7 @@
                                                     <h5>Product Size Arabic <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_size_ar" class="form-control"
-                                                            value="كبير,وسط,صغير" data-role="tagsinput">
+                                                            value="كبير,وسط,صغير" data-role="tagsinput" required="">
                                                         @error('product_size_hin')
                                                             <span class="text-danger" role="alert">
                                                                 {{ $message }}
@@ -346,7 +354,7 @@
                                                     <h5>Product Color English <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_color_en" class="form-control"
-                                                            value="red,black,blue" data-role="tagsinput">
+                                                            value="red,black,blue" data-role="tagsinput" required="">
                                                         @error('product_color_en')
                                                             <span class="text-danger" role="alert">
                                                                 {{ $message }}
@@ -366,7 +374,7 @@
                                                     <h5>Product Color Hindi <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_color_hin" class="form-control"
-                                                            value="red,black,blue" data-role="tagsinput">
+                                                            value="red,black,blue" data-role="tagsinput" required="">
                                                         @error('product_color_hin')
                                                             <span class="text-danger" role="alert">
                                                                 {{ $message }}
@@ -383,7 +391,7 @@
                                                     <h5>Product Color Arabic <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_color_ar" class="form-control"
-                                                            value="احمر,اسود ,ازرق" data-role="tagsinput">
+                                                            value="احمر,اسود ,ازرق" data-role="tagsinput" required="">
                                                         @error('product_color_ar')
                                                             <span class="text-danger" role="alert">
                                                                 {{ $message }}
@@ -404,7 +412,7 @@
                                                 <div class="form-group">
                                                     <h5>Product Selling Price <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="selling_price" class="form-control">
+                                                        <input type="text" name="selling_price" class="form-control" required="">
                                                         @error('selling_price')
                                                             <span class="text-danger" role="alert">
                                                                 {{ $message }}
@@ -420,7 +428,7 @@
                                                 <div class="form-group">
                                                     <h5>Product Discount Price <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="discount_price" class="form-control">
+                                                        <input type="text" name="discount_price" class="form-control" required="">
                                                         @error('discount_price')
                                                             <span class="text-danger" role="alert">
                                                                 {{ $message }}
@@ -447,7 +455,8 @@
                                                 <div class="form-group">
                                                     <h5>Short Description Arabic <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <textarea name="short_descp_ar" id="textarea" class="form-control" required placeholder="Textarea text">
+                                                        <textarea name="short_descp_ar" id="textarea" class="form-control"
+                                                         required placeholder="Textarea text" required="">
 
                                                 </textarea>
                                                 @error('short_descp_ar')
@@ -466,7 +475,7 @@
                                                     <h5>Short Description English <span class="text-danger">*</span>
                                                     </h5>
                                                     <div class="controls">
-                                                        <textarea name="short_descp_en" id="textarea" class="form-control" required placeholder="Textarea text">
+                                                        <textarea name="short_descp_en" id="textarea" class="form-control" required="" required placeholder="Textarea text">
 
                                                 </textarea>
                                                 @error('short_descp_en')
@@ -484,7 +493,7 @@
                                                 <div class="form-group">
                                                     <h5>Short Description Hindi <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <textarea name="short_descp_hin" id="textarea" class="form-control" required placeholder="Textarea text">
+                                                        <textarea name="short_descp_hin" required="" id="textarea" class="form-control" required placeholder="Textarea text">
 
                                                 </textarea>
                                                     </div>
@@ -504,7 +513,7 @@
                                                 <div class="form-group">
                                                     <h5>Long Description English <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <textarea id="editor1" name="long_descp_en" rows="10" cols="80">
+                                                        <textarea id="editor1" name="long_descp_en" rows="10" cols="80" required="">
                                                         This is my textarea to be replaced with CKEditor.
                                                   </textarea>
                                                     </div>
@@ -516,7 +525,7 @@
                                                 <div class="form-group">
                                                     <h5>Long Description Hindi <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <textarea id="editor2" name="long_descp_hin" rows="10" cols="80">
+                                                        <textarea id="editor2" name="long_descp_hin" rows="10" cols="80" required="">
                                                         This is my textarea to be replaced with CKEditor.
                                                   </textarea>
                                                     </div>
@@ -530,7 +539,7 @@
                                                 <div class="form-group">
                                                     <h5>Long Description Arabic <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <textarea id="editor3" name="long_descp_ar" rows="10" cols="80">
+                                                        <textarea id="editor3" name="long_descp_ar" rows="10" cols="80" required="">
                                                         This is my textarea to be replaced with CKEditor.
                                                   </textarea>
                                                     </div>
@@ -551,7 +560,7 @@
                                                     <h5>Multi Image <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="file" name="multi_img[]" class="form-control"
-                                                        multiple="" id="multiImg">
+                                                        multiple="" id="multiImg" required="">
                                                         @error('multi_img')
                                                             <span class="text-danger" role="alert">
                                                                 {{ $message }}
@@ -572,7 +581,7 @@
                                                     <h5>Main Thumbnail <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="file" name="product_thambnail" class="form-control"
-                                                        onChange="mainThumbUrl(this)">
+                                                        onChange="mainThumbUrl(this)" required="">
                                                         @error('product_thambnail')
                                                             <span class="text-danger" role="alert">
                                                                 {{ $message }}
@@ -765,5 +774,28 @@
     });
 
     </script>
+
+
+
+<script>
+
+function makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() *
+ charactersLength));
+   }
+   return result;
+}
+
+
+$(document).on('click' , '#generate_inField', function (){
+    let result = makeid(6);
+    $('.generate_Code').val(result);
+})
+
+</script>
 
 @endsection
