@@ -49,14 +49,18 @@ class ProductService
 
 
 
-    private function productThumbnail($image)
+    public  function productThumbnail($image)
     {
         return FileService::thumbnail("upload/products/thambnail/", $image);
     }
 
 
-    private function productMultiImg($images)
+    private  function productMultiImg($images)
     {
         return FileService::multiImage("upload/products/multi-Image/", $images);
     }
+
+
+
+
 }

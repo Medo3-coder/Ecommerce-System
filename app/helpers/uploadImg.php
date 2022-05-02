@@ -25,4 +25,13 @@ class uploadImg{
     return $save_Url;
 }
 
+public static function uploadMultiple($image)
+{
+    $make_name = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+    Image::make($image)->resize(917,1000)->save('upload/products/multi-image/'.$make_name);
+    $uploadPath = 'upload/products/multi-image/'.$make_name;
+
+    return $uploadPath;
+}
+
 }

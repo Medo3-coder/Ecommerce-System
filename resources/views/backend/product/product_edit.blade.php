@@ -721,6 +721,141 @@
             <!-- /.box -->
 
         </section>
+
+
+        <section class="content">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="box bt-3 border-info">
+                        <div class="box-header">
+                            <h4 class="box-title">Product Multiple Image <strong>Update</strong></h4>
+                        </div>
+
+
+                        <form method="post" action="{{ route('update-product-image') }}" enctype="multipart/form-data">
+                            @csrf
+                            <div class="row row-sm">
+
+                                @foreach ($multi_img as $img)
+                                    <div class="col-md-3">
+
+                                        <div class="card">
+                                            {{-- <img class="card-img-top" src="{{ asset($img->photo_name) }}"
+                                                style="width:280px; height:130px"> --}}
+
+
+                                            @if (!empty($img->photo_name))
+                                                <img class="card-img-top" src="{{ asset($img->photo_name) }}"
+                                                    style="width:280px; height:130px">
+                                            @else
+                                                <img class="card-img-top" src="{{ asset('upload/no_image.jpg') }}"
+                                                    style="width:280px; height:130px" alt="User Avatar">
+                                            @endif
+
+
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    <a href="" class="btn btn-sm btn-danger" id="delete"
+                                                        title="Delete Data"><i class="fa fa-trash"></i> </a>
+                                                </h5>
+                                            </div>
+                                            <p class="card-text">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Change Image <span
+                                                        class="tx-danger">*</span></label>
+                                                <input type="file" name="multi_img[{{ $img->id }}]">
+                                            </div>
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                            </div>
+
+                            <div class="text-xs-right">
+                                <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Update Image">
+                            </div>
+                            <br><br>
+
+                        </form>
+
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="content">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="box bt-3 border-info">
+                        <div class="box-header">
+                            <h4 class="box-title">Product Thambnail Image <strong>Update</strong></h4>
+                        </div>
+
+
+                        <form method="post" action="{{ route('update-product-thambnail', $product->id) }}"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <div class="row row-sm">
+
+
+                                <div class="col-md-3">
+
+                                    <div class="card">
+                                        {{-- <img class="card-img-top" src="{{ asset($img->photo_name) }}"
+                                                style="width:280px; height:130px"> --}}
+
+
+                                        @if (!empty($product->product_thambnail))
+                                            <img class="card-img-top" src="{{ asset($product->product_thambnail) }}"
+                                                style="width:280px; height:130px">
+                                        @else
+                                            <img class="card-img-top" src="{{ asset('upload/no_image.jpg') }}"
+                                                style="width:280px; height:130px" alt="User Avatar">
+                                        @endif
+
+
+                                        <div class="card-body">
+
+                                        </div>
+                                        <p class="card-text">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Change Image <span
+                                                    class="tx-danger">*</span></label>
+                                            <input type="file" name="product_thambnail" onChange="mainThumbUrl(this)">
+                                            <img src="" id="mainThumb" alt="">
+                                        </div>
+
+                                        </p>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="text-xs-right">
+                                <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Update Image">
+                            </div>
+                            <br><br>
+
+                        </form>
+
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
         <!-- /.content -->
     </div>
 
@@ -852,6 +987,19 @@
             let result = makeid(8);
             $('.generate_Code').val(result);
         })
+    </script>
+
+
+    <script type="text/javascript">
+        function mainThumbUrl(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#mainThumb').attr('src', e.target.result).width(90).height(90);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
     </script>
 
 @endsection
