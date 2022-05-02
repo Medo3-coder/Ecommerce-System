@@ -59,7 +59,7 @@
                                                 <td>{{ $item->product_name_ar }}</td>
                                                 <td>{{ $item->product_qty }}</td>
                                                 <td>
-                                                    <a href="{{ route('category.edit', $item->id) }}"
+                                                    <a href="{{ route('edit-product', $item->id) }}"
                                                         class="btn btn-info" title="Edit Data"> <i
                                                             class="fa fa-pencil"></i> </a>
 

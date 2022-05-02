@@ -63,7 +63,7 @@ class brandService
     }
 
 
-    private static function deleteOldImage($id)
+    private  function deleteOldImage($id)
     {
         $image = Brand::findOrFail($id);
         if ($image) {
@@ -73,12 +73,10 @@ class brandService
 
 
 
-    private static function uploadImageBrand($image)
+    private  function uploadImageBrand($image)
     {
-        $unique_name = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
-        Image::make($image)->resize(300, 300)->save('upload/brand/' . $unique_name);
-        $save_Url = 'upload/brand/' . $unique_name;
 
-        return $save_Url;
+
+        return FileService::ImageBrand("upload/brands/", $image);
     }
 }

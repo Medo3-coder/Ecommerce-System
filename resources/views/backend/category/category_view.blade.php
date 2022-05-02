@@ -184,7 +184,7 @@
 
 
 
-
+    <script src="{{ asset('backend/js/pages/data-table.js') }}"></script>
 
     <script type="text/javascript">
         $(function() {
