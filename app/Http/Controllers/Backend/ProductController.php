@@ -60,6 +60,7 @@ class ProductController extends Controller
         return redirect()->route('manage-product')->with('success', 'Product Updated without Image Successfully');
     }
 
+    //product multi Image Update
     public function multiImageUpdate(Request $request)
     {
 
@@ -82,6 +83,7 @@ class ProductController extends Controller
         return redirect()->route('manage-product')->with('success', 'Product Updated with Image Successfully');
     }
 
+    //product single Image Update
     public function thambnailImageUpdate(Request $request, productService $productService , $id)
     {
 
@@ -102,4 +104,16 @@ class ProductController extends Controller
 
         return redirect()->route('manage-product')->with('success', 'Updated Thumbnail Image Successfully');
     }
+
+ //// Multi Image Delete ////
+ public function MultiImageDelete($id){
+
+    $oldimg = MultiImg::findOrFail($id);
+    unlink($oldimg->photo_name);
+    $oldimg->delete();
+    return response('Post deleted successfully.', 200);
+
+} // end method
+
+
 }

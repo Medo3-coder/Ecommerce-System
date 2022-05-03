@@ -740,7 +740,7 @@
                                 @foreach ($multi_img as $img)
                                     <div class="col-md-3">
 
-                                        <div class="card">
+                                        <div class="card" id="imgPhoto">
                                             {{-- <img class="card-img-top" src="{{ asset($img->photo_name) }}"
                                                 style="width:280px; height:130px"> --}}
 
@@ -756,8 +756,10 @@
 
                                             <div class="card-body">
                                                 <h5 class="card-title">
-                                                    <a href="" class="btn btn-sm btn-danger" id="delete"
-                                                        title="Delete Data"><i class="fa fa-trash"></i> </a>
+                                                    <a href="{{ route('product.multiimg.delete', $img->id) }}"
+                                                        class="btn btn-sm btn-danger" id="delete"
+                                                        data-id="{{ $img->id }}" title="Delete Data"><i
+                                                            class="fa fa-trash"></i> </a>
                                                 </h5>
                                             </div>
                                             <p class="card-text">
@@ -1002,4 +1004,98 @@
         }
     </script>
 
+    {{-- <script type="text/javascript">
+    $(function() {
+        $(document).on('click', '#delete', function(e) {
+            e.preventDefault()
+            that = this;
+            var link = $(this).attr('href');
+
+            Swal.fire({
+                icon: 'warning',
+                title: 'Are you sure you want to delete this record?',
+                showDenyButton: false,
+                showCancelButton: true,
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'post',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: link,
+                        data: {
+                            '_method': 'get'
+                        },
+                        success: function(response, textStatus, xhr) {
+                            $(".Img").remove();
+
+                            Swal.fire({
+                                icon: 'success',
+                                title: response,
+                                showDenyButton: false,
+                                showCancelButton: false,
+                                confirmButtonText: 'Yes'
+                            }).then((result) => {
+                                // window.location = '/category/view';
+                                // $(that).parent().parent().remove();
+                                // window.location.reload();
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script> --}}
+
+
+    <script type="text/javascript">
+        $(function() {
+            $(document).on('click', '#delete', function(e) {
+                e.preventDefault();
+                var link = $(this).attr("href");
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "Delete This Data?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        $.ajax({
+                            type: 'post',
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            url: link,
+                            data: {
+                                '_method': 'get'
+                            },
+                            success: function(response, textStatus, xhr) {
+                                $("#imgPhoto").remove();
+
+
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: response,
+                                    showDenyButton: false,
+                                    showCancelButton: false,
+                                    confirmButtonText: 'Yes'
+                                }).then((result) => {
+
+                                });
+                            }
+                        });
+                    }
+                })
+            });
+        });
+    </script>
 @endsection
