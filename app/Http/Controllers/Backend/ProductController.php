@@ -105,15 +105,43 @@ class ProductController extends Controller
         return redirect()->route('manage-product')->with('success', 'Updated Thumbnail Image Successfully');
     }
 
- //// Multi Image Delete ////
- public function MultiImageDelete($id){
+    // Multi Image Delete
+    public function MultiImageDelete($id){
 
-    $oldimg = MultiImg::findOrFail($id);
-    unlink($oldimg->photo_name);
-    $oldimg->delete();
-    return response('Post deleted successfully.', 200);
+        $oldimg = MultiImg::findOrFail($id);
+        unlink($oldimg->photo_name);
+        $oldimg->delete();
+        return response('Post deleted successfully.', 200);
 
-} // end method
+    }
+
+    public function showProduct(Product $product)
+    {
+
+        $categories = Category::latest()->get();
+        $brands = Brand::latest()->get();
+        $subcategory = SubCategory::latest()->get();
+        $sub_Subcategory = SubSubCategory::latest()->get();
+        $multi_img = MultiImg::where('product_id', $product->id)->get();
+        return view('backend.product.product_show', compact('product', 'categories', 'brands', 'sub_Subcategory', 'subcategory', 'multi_img'));
+    }
+
+    public function productInactive(Product $product)
+    {
+         $product->update([
+             'status' => 0,
+         ]);
+         return back()->with('success', 'Product Inactive Successfully');
+    }
+
+    public function productActive(Product $product)
+    {
+        $product->update([
+            'status' => 1,
+        ]);
+        return back()->with('success', 'Product Active Successfully');
+    }
+
 
 
 }
