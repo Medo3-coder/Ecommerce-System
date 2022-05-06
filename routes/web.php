@@ -8,6 +8,7 @@ use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\backend\SubSubCategoryController;
 use App\Http\Controllers\frontend\IndexController;
+use App\Http\Controllers\backend\SliderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -156,7 +157,22 @@ Route::prefix('product')->group(function () {
     Route::get('/active/{product}', [ProductController::class, 'productActive'])->name('product.active');
 
     Route::get('/delete/{product}', [ProductController::class, 'productDelete'])->name('product.delete');
+});
 
 
+
+
+
+Route::prefix('slider')->group(function () {
+
+    Route::get('/view', [SliderController::class, 'sliderView'])->name('manage-slider');
+
+    Route::post('/store', [SliderController::class, 'sliderStore'])->name('slider.store');
+
+    // Route::get('/edit/{id}', [BrandController::class, 'brandEdit'])->name('brand.edit');
+
+    // Route::post('/update', [BrandController::class, 'brandUpdate'])->name('brand.update');
+
+    // Route::get('/delete/{id}', [BrandController::class, 'brandDelete'])->name('brand.delete');
 
 });

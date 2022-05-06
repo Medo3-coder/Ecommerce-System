@@ -40,4 +40,15 @@ class FileService
 
         return  $save_Url;
     }
+
+
+    public static function uploadSliderImage($path, $image)
+    {
+        helper::generatePath($path);
+        $unique_name = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+        Image::make($image)->resize(870, 370)->save($path . $unique_name);
+        $save_Url = $path . $unique_name;
+
+        return  $save_Url;
+    }
 }
