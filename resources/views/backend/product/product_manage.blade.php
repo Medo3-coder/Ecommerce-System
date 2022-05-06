@@ -92,7 +92,7 @@
                                                         class="btn btn-info" title="Edit Data"> <i
                                                             class="fa fa-pencil"></i> </a>
 
-                                                    <a href="{{ route('category.delete', $item->id) }}"
+                                                    <a href="{{ route('product.delete', $item->id) }}"
                                                         class="btn btn-danger" id="delete" data-id="{{ $item->id }}"
                                                         title="Delete Data"> <i class="fa fa-trash"></i></a>
 
@@ -192,45 +192,5 @@
     </script>
 
 
-    {{-- <script type="text/javascript">
-        $(".save-data").click(function(event) {
-            event.preventDefault();
 
-
-
-            let category_name_en = $("input[name=category_name_en]").val();
-            let category_name_hin = $("input[name=category_name_hin]").val();
-            let category_name_ar = $("input[name=category_name_ar]").val();
-            let category_icon = $("input[name=category_icon]").val();
-
-
-            $.ajax({
-
-                type: "POST",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                url: "{{ route('category.store') }}",
-                data: {
-                    category_name_en: category_name_en,
-                    category_name_hin: category_name_hin,
-                    category_name_ar: category_name_ar,
-                    category_icon: category_icon,
-
-                },
-                success: function(response) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: response.success,
-
-                    })
-
-                    window.location.reload();
-                },
-                error: function(error) {
-                    alert(data.error);
-                }
-            });
-        });
-    </script> --}}
 @endsection

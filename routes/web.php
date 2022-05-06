@@ -155,6 +155,8 @@ Route::prefix('product')->group(function () {
 
     Route::get('/active/{product}', [ProductController::class, 'productActive'])->name('product.active');
 
+    Route::get('/delete/{product}', [ProductController::class, 'productDelete'])->name('product.delete');
+
 
 
 });

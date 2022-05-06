@@ -142,6 +142,25 @@ class ProductController extends Controller
         return back()->with('success', 'Product Active Successfully');
     }
 
+    public function productDelete(Product $product)
+    {
+        if(!empty($product->product_thambnail)){
+            unlink($product->product_thambnail);
+        }
+
+        $product->delete();
+        $images = MultiImg::where('product_id', $product->id)->get();
+        foreach ($images as $img) {   // delete multi image
+            if(!empty($img->photo_name))
+            {
+                unlink($img->photo_name);
+            }
+
+            $images->delete();
+        }
+        return response('Product deleted successfully.', 200);
+    }
+
 
 
 }
