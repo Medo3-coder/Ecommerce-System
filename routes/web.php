@@ -72,111 +72,110 @@ Route::post('/user/pasword/update', [IndexController::class, 'userPasswordUpdate
 
 // Admin Brand All Routes
 
-Route::prefix('brand')->group(function () {
+Route::prefix('admin/brand')->group(function () {
 
-    Route::get('/view', [BrandController::class, 'brandView'])->name('all.brand');
+    Route::get('/view', [BrandController::class, 'brandView'])->name('all.brand')->middleware('auth:admin');
 
-    Route::post('/store', [BrandController::class, 'brandStore'])->name('brand.store');
+    Route::post('/store', [BrandController::class, 'brandStore'])->name('brand.store')->middleware('auth:admin');
 
-    Route::get('/edit/{id}', [BrandController::class, 'brandEdit'])->name('brand.edit');
+    Route::get('/edit/{id}', [BrandController::class, 'brandEdit'])->name('brand.edit')->middleware('auth:admin');
 
-    Route::post('/update/{id}', [BrandController::class, 'brandUpdate'])->name('brand.update');
+    Route::post('/update/{id}', [BrandController::class, 'brandUpdate'])->name('brand.update')->middleware('auth:admin');
 
-    Route::get('/delete/{id}', [BrandController::class, 'brandDelete'])->name('brand.delete');
+    Route::get('/delete/{id}', [BrandController::class, 'brandDelete'])->name('brand.delete')->middleware('auth:admin');
 });
 
 
-Route::prefix('category')->group(function () {
+Route::prefix('admin/category')->group(function () {
 
-    Route::get('/view', [CategoryController::class, 'categoryView'])->name('all.category');
+    Route::get('/view', [CategoryController::class, 'categoryView'])->name('all.category')->middleware('auth:admin');
 
-    Route::post('/store', [CategoryController::class, 'categoryStore'])->name('category.store');
+    Route::post('/store', [CategoryController::class, 'categoryStore'])->name('category.store')->middleware('auth:admin');
 
-    Route::get('/edit/{category}', [CategoryController::class, 'categoryEdit'])->name('category.edit');
+    Route::get('/edit/{category}', [CategoryController::class, 'categoryEdit'])->name('category.edit')->middleware('auth:admin');
 
-    Route::post('/update/{category}', [CategoryController::class, 'categoryUpdate'])->name('category.update');
+    Route::post('/update/{category}', [CategoryController::class, 'categoryUpdate'])->name('category.update')->middleware('auth:admin');
 
-    Route::get('/delete/{category}', [CategoryController::class, 'categoryDelete'])->name('category.delete');
+    Route::get('/delete/{category}', [CategoryController::class, 'categoryDelete'])->name('category.delete')->middleware('auth:admin');
 
 
     // Admin Sub Category All Routes
 
-    Route::get('/sub/view', [SubCategoryController::class, 'subCategoryView'])->name('all.subcategory');
+    Route::get('/sub/view', [SubCategoryController::class, 'subCategoryView'])->name('all.subcategory')->middleware('auth:admin');
 
-    Route::post('/sub/store', [SubCategoryController::class, 'subCategoryStore'])->name('subcategory.store');
+    Route::post('/sub/store', [SubCategoryController::class, 'subCategoryStore'])->name('subcategory.store')->middleware('auth:admin');
 
-    Route::get('/sub/edit/{subcategory}', [SubCategoryController::class, 'subCategoryEdit'])->name('subcategory.edit');
+    Route::get('/sub/edit/{subcategory}', [SubCategoryController::class, 'subCategoryEdit'])->name('subcategory.edit')->middleware('auth:admin');
 
-    Route::post('/sub/update/{subcategory}', [SubCategoryController::class, 'subCategoryUpdate'])->name('subcategory.update');
+    Route::post('/sub/update/{subcategory}', [SubCategoryController::class, 'subCategoryUpdate'])->name('subcategory.update')->middleware('auth:admin');
 
-    Route::get('/sub/delete/{subcategory}', [SubCategoryController::class, 'subCategoryDelete'])->name('subcategory.delete');
+    Route::get('/sub/delete/{subcategory}', [SubCategoryController::class, 'subCategoryDelete'])->name('subcategory.delete')->middleware('auth:admin');
 
     // Admin Sub->Sub Category All Routes
 
-    Route::get('/sub/sub/view', [SubSubCategoryController::class, 'subSubCategoryView'])->name('all.subsubcategory');
+    Route::get('/sub/sub/view', [SubSubCategoryController::class, 'subSubCategoryView'])->name('all.subsubcategory')->middleware('auth:admin');
 
-    Route::get('/subcategory/ajax/{category_id}', [SubSubCategoryController::class, 'getSubCategory']);
+    Route::get('/subcategory/ajax/{category_id}', [SubSubCategoryController::class, 'getSubCategory'])->middleware('auth:admin');
 
-    Route::get('/sub-subcategory/ajax/{subcategory_id}', [SubSubCategoryController::class, 'getSubSubCategory']);
+    Route::get('/sub-subcategory/ajax/{subcategory_id}', [SubSubCategoryController::class, 'getSubSubCategory'])->middleware('auth:admin');
 
-    Route::post('/sub/sub/store', [SubSubCategoryController::class, 'subSubCategoryStore'])->name('subsubcategory.store');
+    Route::post('/sub/sub/store', [SubSubCategoryController::class, 'subSubCategoryStore'])->name('subsubcategory.store')->middleware('auth:admin');
 
-    Route::get('/sub/sub/edit/{sub_subcategory}', [SubSubCategoryController::class, 'subSubCategoryEdit'])->name('subsubcategory.edit');
+    Route::get('/sub/sub/edit/{sub_subcategory}', [SubSubCategoryController::class, 'subSubCategoryEdit'])->name('subsubcategory.edit')->middleware('auth:admin');
 
-    Route::post('sub/sub/update/{sub_subcategory}', [SubSubCategoryController::class, 'subSubCategoryUpdate'])->name('subsubcategory.update');
+    Route::post('sub/sub/update/{sub_subcategory}', [SubSubCategoryController::class, 'subSubCategoryUpdate'])->name('subsubcategory.update')->middleware('auth:admin');
 
-    Route::get('/sub/sub/delete/{sub_subcategory}', [SubSubCategoryController::class, 'subSubCategoryDelete'])->name('subsubcategory.delete');
+    Route::get('/sub/sub/delete/{sub_subcategory}', [SubSubCategoryController::class, 'subSubCategoryDelete'])->name('subsubcategory.delete')->middleware('auth:admin');
 });
 
 
 
 // Admin product All Routes
 
-Route::prefix('product')->group(function () {
+Route::prefix('admin/product')->group(function () {
 
-    Route::get('/add', [ProductController::class, 'addProduct'])->name('add-product');
+    Route::get('/add', [ProductController::class, 'addProduct'])->name('add-product')->middleware('auth:admin');
 
-    Route::post('/store', [ProductController::class, 'storeProduct'])->name('store-product');
+    Route::post('/store', [ProductController::class, 'storeProduct'])->name('store-product')->middleware('auth:admin');
 
-    Route::get('/manage', [ProductController::class, 'manageProduct'])->name('manage-product');
+    Route::get('/manage', [ProductController::class, 'manageProduct'])->name('manage-product')->middleware('auth:admin');
 
-    Route::get('/edit/{product}', [ProductController::class, 'editProduct'])->name('edit-product');
+    Route::get('/edit/{product}', [ProductController::class, 'editProduct'])->name('edit-product')->middleware('auth:admin');
 
-    Route::post('/data/update/{product}', [ProductController::class, 'UpdateProduct'])->name('update-product');
+    Route::post('/data/update/{product}', [ProductController::class, 'UpdateProduct'])->name('update-product')->middleware('auth:admin');
 
-    Route::post('/image/update', [ProductController::class, 'multiImageUpdate'])->name('update-product-image');
+    Route::post('/image/update', [ProductController::class, 'multiImageUpdate'])->name('update-product-image')->middleware('auth:admin');
 
-    Route::post('/thambnail/update/{id}', [ProductController::class, 'thambnailImageUpdate'])->name('update-product-thambnail');
+    Route::post('/thambnail/update/{id}', [ProductController::class, 'thambnailImageUpdate'])->name('update-product-thambnail')->middleware('auth:admin');
 
-    Route::get('/multiimg/delete/{id}', [ProductController::class, 'MultiImageDelete'])->name('product.multiimg.delete');
+    Route::get('/multiimg/delete/{id}', [ProductController::class, 'MultiImageDelete'])->name('product.multiimg.delete')->middleware('auth:admin');
 
-    Route::get('/show/{product}', [ProductController::class, 'showProduct'])->name('show-product');
+    Route::get('/show/{product}', [ProductController::class, 'showProduct'])->name('show-product')->middleware('auth:admin');
 
-    Route::get('/inactive/{product}', [ProductController::class, 'productInactive'])->name('product.inactive');
+    Route::get('/inactive/{product}', [ProductController::class, 'productInactive'])->name('product.inactive')->middleware('auth:admin');
 
-    Route::get('/active/{product}', [ProductController::class, 'productActive'])->name('product.active');
+    Route::get('/active/{product}', [ProductController::class, 'productActive'])->name('product.active')->middleware('auth:admin');
 
-    Route::get('/delete/{product}', [ProductController::class, 'productDelete'])->name('product.delete');
+    Route::get('/delete/{product}', [ProductController::class, 'productDelete'])->name('product.delete')->middleware('auth:admin');
 });
 
 
 
 
 
-Route::prefix('slider')->group(function () {
+Route::prefix('admin/slider')->group(function () {
 
-    Route::get('/view', [SliderController::class, 'sliderView'])->name('manage-slider');
+    Route::get('/view', [SliderController::class, 'sliderView'])->name('manage-slider')->middleware('auth:admin');
 
-    Route::post('/store', [SliderController::class, 'sliderStore'])->name('slider.store');
+    Route::post('/store', [SliderController::class, 'sliderStore'])->name('slider.store')->middleware('auth:admin');
 
-    Route::get('/inactive/{slider}', [SliderController::class, 'sliderInactive'])->name('slider.inactive');
+    Route::get('/inactive/{slider}', [SliderController::class, 'sliderInactive'])->name('slider.inactive')->middleware('auth:admin');
 
-    Route::get('/active/{slider}', [SliderController::class, 'sliderActive'])->name('slider.active');
+    Route::get('/active/{slider}', [SliderController::class, 'sliderActive'])->name('slider.active')->middleware('auth:admin');
 
-    Route::get('/delete/{slider}', [SliderController::class, 'sliderDelete'])->name('slider.delete');
+    Route::get('/delete/{slider}', [SliderController::class, 'sliderDelete'])->name('slider.delete')->middleware('auth:admin');
 
-    Route::post('/update/{id}', [SliderController::class, 'sliderUpdate'])->name('slider.update');
+    Route::post('/update/{id}', [SliderController::class, 'sliderUpdate'])->name('slider.update')->middleware('auth:admin');
 
-    Route::get('/edit/{slider}', [SliderController::class, 'sliderEdit'])->name('slider.edit');
-
+    Route::get('/edit/{slider}', [SliderController::class, 'sliderEdit'])->name('slider.edit')->middleware('auth:admin');
 });

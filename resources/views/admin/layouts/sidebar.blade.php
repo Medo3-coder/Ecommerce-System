@@ -29,7 +29,7 @@ $route = Route::current()->getName(); // to get current route name
                 </a>
             </li>
 
-            <li class="treeview {{ $prefix == 'brand' ? 'active' : '' }}">
+            <li class="treeview {{ $prefix == 'admin/brand' ? 'active' : '' }}">
                 <a href="#">
                     <i data-feather="message-circle"></i>
                     <span>Brands</span>
@@ -44,7 +44,7 @@ $route = Route::current()->getName(); // to get current route name
                 </ul>
             </li>
 
-            <li class="treeview {{ $prefix == '/category' ? 'active' : '' }} ">
+            <li class="treeview {{ $prefix == 'admin/category' ? 'active' : '' }} ">
                 <a href="#">
                     <i data-feather="mail"></i> <span>Category</span>
                     <span class="pull-right-container">
@@ -63,7 +63,7 @@ $route = Route::current()->getName(); // to get current route name
                 </ul>
             </li>
 
-            <li class="treeview {{ $prefix == '/product' ? 'active' : '' }}">
+            <li class="treeview {{ $prefix == 'admin/product' ? 'active' : '' }}">
                 <a href="#">
                     <i data-feather="file"></i>
                     <span>Products</span>
@@ -84,7 +84,7 @@ $route = Route::current()->getName(); // to get current route name
 
 
 
-            <li class="treeview {{ $prefix == '/slider' ? 'active' : '' }}">
+            <li class="treeview {{ $prefix == 'admin/slider' ? 'active' : '' }}">
                 <a href="#">
                     <i data-feather="file"></i>
                     <span>Slider</span>
