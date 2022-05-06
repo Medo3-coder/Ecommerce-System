@@ -30,4 +30,15 @@ class SliderController extends Controller
 
         return redirect()->route('manage-slider')->with('success', 'Slider Added Successfully');
     }
+
+    public function sliderDelete(Slider $slider)
+    {
+        $image = $slider->slider_img;
+        if ($image) {
+            unlink($image);
+        }
+
+        $slider->delete();
+        return response('Slider deleted successfully.', 200);
+    }
 }

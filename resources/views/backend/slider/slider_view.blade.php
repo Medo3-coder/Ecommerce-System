@@ -94,7 +94,7 @@
                                                     <a href="{{ route('brand.edit', $item->id) }}" class="btn btn-info"
                                                         title="Edit Data"> <i class="fa fa-pencil"></i> </a>
 
-                                                    <a href="{{ route('brand.delete', $item->id) }}"
+                                                    <a href="{{ route('slider.delete', $item->id) }}"
                                                         class="btn btn-danger" id="delete" title="Delete Data"> <i
                                                             class="fa fa-trash"></i></a>
 
@@ -164,7 +164,8 @@
                                     <div class="form-group">
                                         <label class="info-title" for="exampleInputEmail1">User Image <span>
                                             </span></label>
-                                        <input type="file" id="slider_img" name="slider_img" class="form-control">
+                                        <input type="file" id="slider_img" name="slider_img" class="form-control" onChange="sliderchange(this)">
+                                        <img src="" id="sliderShow" alt="">
                                         @error('slider_img')
                                             <span class="text-danger" role="alert">
                                                 {{ $message }}
@@ -204,7 +205,6 @@
         $(function() {
             $(document).on('click', '#delete', function(e) {
                 e.preventDefault()
-
                 that = this;
                 var link = $(this).attr('href');
 
@@ -228,14 +228,18 @@
                             },
                             success: function(response, textStatus, xhr) {
                                 $(that).parent().parent().remove();
+
                                 Swal.fire({
                                     icon: 'success',
                                     title: response,
                                     showDenyButton: false,
                                     showCancelButton: false,
                                     confirmButtonText: 'Yes'
+                                }).then((result) => {
+                                    // window.location = '/category/view';
+                                    // $(that).parent().parent().remove();
+                                    // window.location.reload();
                                 });
-                                // window.location = '/brand/view';
                             }
                         });
                     }
@@ -292,6 +296,26 @@
             });
         });
     </script>
+
+
+
+<script type="text/javascript">
+
+  function sliderchange(input)
+  {
+      if(input.files && input.files[0])
+      {
+            var reader = new FileReader();
+            reader.onload = function(e)
+            {
+                $('#sliderShow').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+      }
+
+  }
+
+</script>
 
 
 

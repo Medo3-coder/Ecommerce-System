@@ -173,6 +173,6 @@ Route::prefix('slider')->group(function () {
 
     // Route::post('/update', [BrandController::class, 'brandUpdate'])->name('brand.update');
 
-    // Route::get('/delete/{id}', [BrandController::class, 'brandDelete'])->name('brand.delete');
+    Route::get('/delete/{slider}', [SliderController::class, 'sliderDelete'])->name('slider.delete');
 
 });
