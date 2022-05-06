@@ -1,6 +1,6 @@
 @extends('admin.layouts.admin_master')
 
-@section('title', 'Brands')
+@section('title', 'Sliders')
 @section('admin')
 
 
@@ -91,22 +91,22 @@
                                                 </td>
                                                 <td width="30%">
 
-                                                    <a href="{{ route('brand.edit', $item->id) }}" class="btn btn-info"
+                                                    <a href="{{ route('slider.edit', $item->id) }}" class="btn btn-info"
                                                         title="Edit Data"> <i class="fa fa-pencil"></i> </a>
 
                                                     <a href="{{ route('slider.delete', $item->id) }}"
                                                         class="btn btn-danger" id="delete" title="Delete Data"> <i
                                                             class="fa fa-trash"></i></a>
 
-                                                    @if ($item->status == 1)
-                                                        <a href="{{ route('product.inactive', $item->id) }}"
-                                                            class="btn btn-danger" title="Inactive Now"> <i
-                                                                class="fa fa-arrow-down"></i> </a>
-                                                    @else
-                                                        <a href="{{ route('product.active', $item->id) }}"
-                                                            class="btn btn-success btn-sm" title="Active Now"> <i
-                                                                class="fa fa-arrow-up"></i> </a>
-                                                    @endif
+                                                            @if ($item->status == 1)
+                                                            <a href="{{ route('slider.inactive', $item->id) }}"
+                                                                class="btn btn-danger" title="Inactive Now"> <i
+                                                                    class="fa fa-arrow-down"></i> </a>
+                                                        @else
+                                                            <a href="{{ route('slider.active', $item->id) }}"
+                                                                class="btn btn-success" title="Active Now"> <i
+                                                                    class="fa fa-arrow-up"></i> </a>
+                                                        @endif
                                                 </td>
 
                                             </tr>
