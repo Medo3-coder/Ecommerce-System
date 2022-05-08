@@ -6,7 +6,28 @@
             <div class="header-top-inner">
                 <div class="cnt-account">
                     <ul class="list-unstyled">
-                        <li><a href="#"><i class="icon fa fa-user"></i>My Account</a></li>
+                        {{-- @if (session()->get('language') == 'hindi')
+                            <li><a href="{{ route('User_dashboard') }}"><i class="icon fa fa-user"></i>আমার অ্যাকাউন্ট</a>
+                            </li>
+                        @else
+                            <li><a href="{{ route('User_dashboard') }}"><i class="icon fa fa-user"></i>My Account</a></li>
+                        @endif --}}
+
+
+                        <li><a href="#"><i class="icon fa fa-user"></i>
+                                @if (session()->get('language') == 'arabic')
+                                    حسابي الشخصي
+                                @elseif (session()->get('language') == 'hindi')
+                                    मेरी प्रोफाइल
+                                @else
+                                    My Account
+                                @endif
+                            </a></li>
+
+
+
+
+                        {{-- <li><a href="#"><i class="icon fa fa-user"></i>My Account</a></li> --}}
                         <li><a href="#"><i class="icon fa fa-heart"></i>Wishlist</a></li>
                         <li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
                         <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
@@ -14,7 +35,8 @@
 
                         {{-- to hide login page when he login --}}
                         @auth
-                            <li><a href="{{ route('User_dashboard') }}"><i class="icon fa fa-user"></i>User Profile</a></li>
+                            <li><a href="{{ route('User_dashboard') }}"><i class="icon fa fa-user"></i>User Profile</a>
+                            </li>
                         @else
                             <li><a href="{{ route('login') }}"><i class="icon fa fa-lock"></i>Login</a></li>
                         @endauth
@@ -36,13 +58,37 @@
                                 <li><a href="#">GBP</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown"
-                                data-toggle="dropdown"><span class="value">English </span><b
-                                    class="caret"></b></a>
+                        <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">
+                            @if(session()->get('language') == 'hindi')
+                            भाषा: हिन्दी
+                            @elseif(session()->get('language') == 'arabic')
+                            حسابي الشخصي
+                            @else
+                             Language
+                             @endif
+                              </span><b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">English</a></li>
-                                <li><a href="#">French</a></li>
-                                <li><a href="#">German</a></li>
+
+                                @if(session()->get('language') == 'hindi')
+                                <li><a href="{{ route('english.language') }}">English</a></li>
+                                <li><a href="{{ route('arabic.language') }}">Arabic</a></li>
+
+                                @elseif(session()->get('language') == 'arabic')
+
+                                <li><a href="{{ route('hindi.language') }}">Hindi</a></li>
+                                <li><a href="{{ route('english.language') }}">English</a></li>
+
+                                @else
+                                <li><a href="{{ route('arabic.language') }}">Arabic</a></li>
+                                <li><a href="{{ route('hindi.language') }}">Hindi</a></li>
+                                 @endif
+
+
+
+
+
+
+
                             </ul>
                         </li>
                     </ul>
@@ -243,7 +289,8 @@
                                                     <div class="col-xs-12 col-sm-6 col-md-4 col-menu banner-image">
                                                         <img class="img-responsive"
                                                             src="{{ asset('frontend/assets/images/banners/top-menu-banner') }}.jpg"
-                                                            alt=""> </div>
+                                                            alt="">
+                                                    </div>
                                                     <!-- /.yamm-content -->
                                                 </div>
                                             </div>

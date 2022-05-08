@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\LanguageController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\backend\SubSubCategoryController;
@@ -179,3 +180,15 @@ Route::prefix('admin/slider')->group(function () {
 
     Route::get('/edit/{slider}', [SliderController::class, 'sliderEdit'])->name('slider.edit')->middleware('auth:admin');
 });
+
+
+
+
+//// Frontend All Routes /////
+/// Multi Language All Routes ////
+
+Route::get('/language/hindi', [LanguageController::class, 'hindi'])->name('hindi.language');
+
+Route::get('/language/english', [LanguageController::class, 'english'])->name('english.language');
+
+Route::get('/language/arabic', [LanguageController::class, 'arabic'])->name('arabic.language');
