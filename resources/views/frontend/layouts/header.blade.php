@@ -61,11 +61,11 @@
                         <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown"
                                 data-toggle="dropdown"><span class="value">
                                     @if (session()->get('language') == 'hindi')
-                                        भाषा: हिन्दी
+                                       हिन्दी
                                     @elseif(session()->get('language') == 'arabic')
-                                        حسابي الشخصي
+                                          العربية
                                     @else
-                                        Language
+                                         English
                                     @endif
                                 </span><b class="caret"></b></a>
                             <ul class="dropdown-menu">

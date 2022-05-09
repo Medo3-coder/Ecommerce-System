@@ -18,4 +18,14 @@ class Category extends Model
         'category_slug_ar',
         'category_icon',
     ];
+
+    public function subCategories()
+    {
+        return $this->hasMany(SubCategory::class);
+    }
+
+    public function subSubCategories()
+    {
+        return $this->hasMany(SubSubCategory::class);
+    }
 }
