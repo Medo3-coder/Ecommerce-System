@@ -1107,7 +1107,26 @@
                                                                     alt=""></a> </div>
                                                         <!-- /.image -->
 
-                                                        <div class="tag new"><span>new</span></div>
+                                                        @php
+                                                            $discountAmount = $product->selling_price - $product->discount_price;
+                                                            $netPrice = ($discountAmount / $product->selling_price) * 100;
+                                                            $discount_percent = 100 - $netPrice;
+
+                                                        @endphp
+                                                       @if($product->discount_price == NULL)
+                                                        <div class="tag new">
+                                                            <span>new</span>
+                                                        </div>
+                                                        @else
+                                                        <div class="tag hot">
+                                                            <span>{{ round($discount_percent) }}%</span>
+                                                        </div>
+                                                        @endif
+
+
+
+
+
                                                     </div>
                                                     <!-- /.product-image -->
 
@@ -1123,8 +1142,23 @@
                                                         </a></h3>
                                                         <div class="rating rateit-small"></div>
                                                         <div class="description"></div>
-                                                        <div class="product-price"> <span class="price"> $450.99
-                                                            </span> <span class="price-before-discount">$ 800</span> </div>
+                                                      @if ( $product->discount_price == NULL)
+                                                    <div class="product-price">
+                                                          <span class="price">
+                                                            ${{ $product->selling_price }}
+                                                          </span>
+                                                    </div>
+                                                      @else
+                                                      <div class="product-price">
+                                                          <span class="price">
+                                                         ${{  round($discountAmount) }}
+                                                         </span>
+                                                         <span class="price-before-discount">$ {{ $product->selling_price }}</span> </div>
+                                                      @endif
+
+
+
+
                                                         <!-- /.product-price -->
 
                                                     </div>
@@ -1193,7 +1227,26 @@
                                                         alt=""></a> </div>
                                             <!-- /.image -->
 
-                                            <div class="tag new"><span>new</span></div>
+                                            @php
+                                                $discountAmount = $product->selling_price - $product->discount_price;
+                                                $netPrice = ($discountAmount / $product->selling_price) * 100;
+                                                $discount_percent = 100 - $netPrice;
+
+                                            @endphp
+                                           @if($product->discount_price == NULL)
+                                            <div class="tag new">
+                                                <span>new</span>
+                                            </div>
+                                            @else
+                                            <div class="tag hot">
+                                                <span>{{ round($discount_percent) }}%</span>
+                                            </div>
+                                            @endif
+
+
+
+
+
                                         </div>
                                         <!-- /.product-image -->
 
@@ -1209,8 +1262,23 @@
                                             </a></h3>
                                             <div class="rating rateit-small"></div>
                                             <div class="description"></div>
-                                            <div class="product-price"> <span class="price"> $450.99
-                                                </span> <span class="price-before-discount">$ 800</span> </div>
+                                          @if ( $product->discount_price == NULL)
+                                        <div class="product-price">
+                                              <span class="price">
+                                                ${{ $product->selling_price }}
+                                              </span>
+                                        </div>
+                                          @else
+                                          <div class="product-price">
+                                              <span class="price">
+                                             ${{  round($discountAmount) }}
+                                             </span>
+                                             <span class="price-before-discount">$ {{ $product->selling_price }}</span> </div>
+                                          @endif
+
+
+
+
                                             <!-- /.product-price -->
 
                                         </div>
