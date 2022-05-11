@@ -66,8 +66,9 @@
                                                         <span class="badge badge-pill badge-danger"> No Discount</span>
                                                     @else
                                                         @php
-                                                            $amount = $item->selling_price - $item->discount_price;
-                                                            $discount_percent = ($amount / $item->selling_price) * 100;
+                                                            // $amount = $item->selling_price - $item->discount_price;
+                                                            $discount_percent = ($item->discount_price/ $item->selling_price) * 100;
+                                                            // $rateOFDicount = 100 - $discount_percent;
                                                         @endphp
 
                                                         <span class="badge badge-pill badge-success">{{ round($discount_percent)  }}%</span>

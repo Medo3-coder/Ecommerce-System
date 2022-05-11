@@ -97,6 +97,15 @@
     }
     @endif
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js" integrity="sha512-jNDtFf7qgU0eH/+Z42FG4fw3w7DM/9zbgNPe3wfJlCylVDTT3IgKW5r92Vy9IHa6U50vyMz5gRByIu4YIXFtaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script>
+   $(document).ready(function(){
+    $('.image').lazyload();
+   })
+
+</script>
 </body>
 
 

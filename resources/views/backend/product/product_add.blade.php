@@ -688,7 +688,7 @@
                 var category_id = $(this).val();
                 if (category_id) {
                     $.ajax({
-                        url: "{{ url('/category/subcategory/ajax') }}/" + category_id,
+                        url: "{{ url('admin/category/subcategory/ajax') }}/" + category_id,
                         type: "GET",
                         dataType: "json",
                         success: function(data) {
@@ -716,7 +716,7 @@
                 var subcategory_id = $(this).val();
                 if (subcategory_id) {
                     $.ajax({
-                        url: "{{ url('/category/sub-subcategory/ajax') }}/" + subcategory_id,
+                        url: "{{ url('admin/category/sub-subcategory/ajax') }}/" + subcategory_id,
                         type: "GET",
                         dataType: "json",
                         success: function(data) {

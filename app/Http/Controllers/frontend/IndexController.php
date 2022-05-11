@@ -4,6 +4,8 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Product;
+use App\Models\Slider;
 use App\Models\SubCategory;
 use App\Models\SubSubCategory;
 use App\Models\User;
@@ -16,12 +18,11 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $categories = Category::orderBy('category_name_en', 'ASC')->get();
-        // $subcategories = SubCategory::with('sub_sub_category')->orderBy('sub_category_name_en', 'ASC')->get();
-        // // dd($subcategories);
-        // $sub_Subcategory   = SubSubCategory::orderBy('subsubcategory_name_en', 'ASC')->limit(20)->get();
+        $categories = Category::orderBy('category_name_en', 'ASC')->limit(8)->get();
+        $sliders =  Slider::where('status' , 1)->orderBy('id', 'DESC')->limit(3)->get();
+        $products = Product::where('status' , 1)->orderBy('id', 'DESC')->limit(6)->get();
 
-        return view('frontend.index' , compact('categories') );
+        return view('frontend.index' , compact('categories' , 'sliders' , 'products'));
     }
 
     public function userLogout()
