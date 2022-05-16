@@ -23,11 +23,15 @@ class ProductService
 
         $product = Product::create($data);
 
-        MultiImg::create([
-            'product_id' => $product->id,
-            'photo_name' => $this->productMultiImg($data['multi_img']),
+        $images = $this->productMultiImg($data['multi_img']);
+        foreach($images  as $image)
+        {
+            MultiImg::create([
+                'product_id' => $product->id,
+                'photo_name' => $image,
+            ]);
+        }
 
-        ]);
 
         return $product;
     }
@@ -55,7 +59,7 @@ class ProductService
     }
 
 
-    private  function productMultiImg($images)
+    public  function productMultiImg($images)
     {
         return FileService::multiImage("upload/products/multi-Image/", $images);
     }

@@ -21,11 +21,8 @@ class Category extends Model
 
     public function subCategories()
     {
-        return $this->hasMany(SubCategory::class);
+        return $this->hasMany(SubCategory::class)->orderBy('sub_category_name_en', 'ASC');
     }
 
-    public function subSubCategories()
-    {
-        return $this->hasMany(SubSubCategory::class);
-    }
+
 }

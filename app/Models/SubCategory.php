@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SubCategory extends Model
 {
+    // protected $with = ['subSubCategories'];    // load SubSubCategory realtion with subcategory
     use HasFactory;
     protected  $fillable = [
         'category_id',
@@ -24,9 +25,9 @@ class SubCategory extends Model
         return $this->belongsTo(Category::class , 'category_id' , 'id');
     }
 
-    public function sub_sub_category()
+    public function subSubCategories()
     {
-        return $this->hasMany(SubSubCategory::class , 'subcategory_id' , 'id');
+        return $this->hasMany(SubSubCategory::class , 'subcategory_id' , 'id')->orderBy('subsubcategory_name_en', 'ASC');
     }
 
 

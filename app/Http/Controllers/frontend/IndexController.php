@@ -4,6 +4,7 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\MultiImg;
 use App\Models\Product;
 use App\Models\Slider;
 use App\Models\SubCategory;
@@ -18,9 +19,11 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $categories = Category::orderBy('category_name_en', 'ASC')->limit(8)->get();
+        $categories = Category::with(['subCategories'])->orderBy('category_name_en', 'ASC')->limit(8)->get();
+    //   dd($categories);
         $sliders =  Slider::where('status' , 1)->orderBy('id', 'DESC')->limit(3)->get();
         $products = Product::where('status' , 1)->orderBy('id', 'DESC')->limit(6)->get();
+
 
         return view('frontend.index' , compact('categories' , 'sliders' , 'products'));
     }
@@ -115,6 +118,18 @@ class IndexController extends Controller
             return redirect()->back()->with($notification);
         }
 
+
+    }
+
+    public function productDetails( $id , $slug )
+    {
+        $product = Product::findOrFail($id);
+        $discountAmount = $product->selling_price - $product->discount_price;
+        $netPrice = ($discountAmount / $product->selling_price) * 100;
+        $discount_percent= 100 - $netPrice;
+        $discount_percentage = round($discount_percent);
+		$multiImag = MultiImg::where('product_id',$id)->get();
+         return view('frontend.product.product_details' , compact('product' , 'discountAmount','discount_percentage' , 'discount_percent','multiImag'));
 
     }
 }

@@ -33,7 +33,9 @@ class ProductController extends Controller
 
     public function StoreProduct(StoreProduct $request, productService $productService)
     {
+
         $productService->storeProduct($request->validated());
+
         return redirect()->route('manage-product')->with('success', 'Product Added Successfully');
     }
 

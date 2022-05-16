@@ -1,5 +1,7 @@
 @extends('frontend.main_master')
 
+@section('title' , 'Online Shop')
+
 @section('content')
     <div class="body-content outer-top-xs" id="top-banner-and-menu">
         <div class="container">
@@ -19,6 +21,8 @@
                                                 aria-hidden="true"></i>
                                             @if (session()->get('language') == 'hindi')
                                                 {{ $category->category_name_hin }}
+                                            @elseif(session()->get('language') == 'arabic')
+                                                {{ $category->category_name_ar }}
                                             @else
                                                 {{ $category->category_name_en }}
                                             @endif
@@ -26,15 +30,7 @@
                                         <ul class="dropdown-menu mega-menu">
                                             <li class="yamm-content">
                                                 <div class="row">
-
-                                                    <!--   // Get SubCategory Table Data -->
-                                                    @php
-                                                        $subcategories = App\Models\SubCategory::where('category_id', $category->id)
-                                                            ->orderBy('sub_category_name_en', 'ASC')
-                                                            ->get();
-                                                    @endphp
-
-                                                    @foreach ($subcategories as $subcategory)
+                                                    @foreach ($category->subCategories as $subcategory)
                                                         <div class="col-sm-12 col-md-3">
                                                             <h2 class="title">
                                                                 @if (session()->get('language') == 'hindi')
@@ -46,14 +42,14 @@
                                                                 @endif
                                                             </h2>
 
-                                                            <!--   // Get SubSubCategory Table Data -->
+                                                            {{-- <!--   // Get SubSubCategory Table Data -->
                                                             @php
                                                                 $subsubcategories = App\Models\SubSubCategory::where('subcategory_id', $subcategory->id)
                                                                     ->orderBy('subsubcategory_name_en', 'ASC')
                                                                     ->get();
-                                                            @endphp
+                                                            @endphp --}}
 
-                                                            @foreach ($subsubcategories as $subsubcategory)
+                                                            @foreach ($subcategory->subSubCategories as $subsubcategory)
                                                                 <ul class="links list-unstyled">
                                                                     <li><a href="#">
                                                                         @if (session()->get('language') == 'hindi')
@@ -1102,8 +1098,8 @@
                                             <div class="products">
                                                 <div class="product">
                                                     <div class="product-image">
-                                                        <div class="image"> <a href="detail.html"><img
-                                                                    src="{{ asset($product->product_thambnail) }}"
+                                                        <div class="image"> <a href="{{ url('/product/details/'.$product->id.'/'.$product->product_slug_en)}}">
+                                                            <img src="{{ asset($product->product_thambnail) }}"
                                                                     alt=""></a> </div>
                                                         <!-- /.image -->
 
@@ -1131,7 +1127,8 @@
                                                     <!-- /.product-image -->
 
                                                     <div class="product-info text-left">
-                                                        <h3 class="name"><a href="detail.html">
+                                                        {{-- <a href="{{route('route.name',['param1'=>$variable1,'param2'=>$variable2])}}">Click Here</a> --}}
+                                                        <h3 class="name"><a href="{{ url('/product/details/'.$product->id.'/'.$product->product_slug_en)}}">
                                                             @if(session()->get('language') == 'hindi')
                                                             {{ $product->product_name_hin }}
                                                             @elseif(session()->get('language') == 'arabic')
@@ -1222,7 +1219,7 @@
                                 <div class="products">
                                     <div class="product">
                                         <div class="product-image">
-                                            <div class="image"> <a href="detail.html"><img
+                                            <div class="image"> <a href="{{ url('/product/details/'.$product->id.'/'.$product->product_slug_en)}}"><img
                                                         src="{{ asset($product->product_thambnail) }}"
                                                         alt=""></a> </div>
                                             <!-- /.image -->

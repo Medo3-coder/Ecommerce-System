@@ -21,13 +21,14 @@ class FileService
     public static function multiImage($path, $images)
     {
         helper::generatePath($path);
+        $names = [];
         foreach ($images as $img) {
             $make_name = hexdec(uniqid()) . '.' . $img->getClientOriginalExtension();
             Image::make($img)->resize(917, 1000)->save($path . $make_name);
-            $uploadPath = $path . $make_name;
+            $names[] = $path . $make_name;
         }
+        return $names;
 
-        return $uploadPath;
     }
 
 
