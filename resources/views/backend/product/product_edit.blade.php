@@ -674,11 +674,13 @@
 
                                             <div class="controls">
                                                 <fieldset>
+                                                    <input type="hidden" name="hot_deals" value="0">
                                                     <input type="checkbox" id="checkbox_2" name="hot_deals" value="1"
                                                         {{ $product->hot_deals == 1 ? 'checked' : '' }}>
                                                     <label for="checkbox_2">Hot Deals</label>
                                                 </fieldset>
                                                 <fieldset>
+                                                    <input type="hidden" name="featured" value="0">
                                                     <input type="checkbox" id="checkbox_3" name="featured" value="1"
                                                         {{ $product->featured == 1 ? 'checked' : '' }}>
                                                     <label for="checkbox_3">Featured</label>
@@ -691,11 +693,13 @@
 
                                             <div class="controls">
                                                 <fieldset>
+                                                    <input type="hidden" name="special_offer" value="0">
                                                     <input type="checkbox" id="checkbox_4" name="special_offer" value="1"
                                                         {{ $product->special_offer == 1 ? 'checked' : '' }}>
                                                     <label for="checkbox_4">Special offer</label>
                                                 </fieldset>
                                                 <fieldset>
+                                                    <input type="hidden" name="special_deals" value="0">
                                                     <input type="checkbox" id="checkbox_5" name="special_deals" value="1"
                                                         {{ $product->special_deals == 1 ? 'checked' : '' }}>
                                                     <label for="checkbox_5">Special Deals</label>

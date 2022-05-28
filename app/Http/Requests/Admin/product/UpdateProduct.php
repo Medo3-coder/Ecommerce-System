@@ -50,10 +50,10 @@ class UpdateProduct extends FormRequest
             'long_descp_en' => 'required|max:600',
             'long_descp_hin' => 'required|max:600',
             'long_descp_ar' => 'required|max:600',
-            'hot_deals' => 'nullable',
-            'featured' => 'nullable',
-            'special_offer' => 'nullable',
-            'special_deals' => 'nullable',
+            'hot_deals' => 'nullable|boolean',
+            'featured' => 'nullable|boolean',
+            'special_offer' => 'nullable|boolean',
+            'special_deals' => 'nullable|boolean',
 
 
 
