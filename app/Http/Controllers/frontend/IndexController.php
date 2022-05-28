@@ -23,9 +23,10 @@ class IndexController extends Controller
     //   dd($categories);
         $sliders =  Slider::where('status' , 1)->orderBy('id', 'DESC')->limit(3)->get();
         $products = Product::where('status' , 1)->orderBy('id', 'DESC')->limit(6)->get();
+        $featured = Product::where('featured', 1)->orderBy('id', 'DESC')->limit(6)->get();
 
 
-        return view('frontend.index' , compact('categories' , 'sliders' , 'products'));
+        return view('frontend.index' , compact('categories' , 'sliders' , 'products' , 'featured'));
     }
 
     public function userLogout()
