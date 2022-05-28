@@ -48,7 +48,7 @@ class ProductService
         $product = Product::find($data['id']);
         $product->update($data);
 
-        dd($product);
+        // dd($product);
         return $product;
     }
 
