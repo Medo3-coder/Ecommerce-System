@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\MultiImg;
 use App\Models\Product;
@@ -28,11 +29,16 @@ class IndexController extends Controller
         $special_offer = Product::where('special_offer',1)->orderBy('id', 'DESC')->limit(6)->get();
         $special_deals = Product::where('special_deals',1)->orderBy('id', 'DESC')->limit(3)->get();
         $skip_category_0 = Category::skip(0)->first();
-        $skip_product_0 = Product::where('status' , 1)->where('category_id', $skip_category_0->id)->orderBy('id', 'DESC')->get();
+        $skip_product_0 = Product::where('status' , 1)->where('category_id', $skip_category_0->id)->orderBy('id', 'DESC')->limit(8)->get();
+        $skip_category_3 = Category::skip(3)->first();
+        $skip_product_3 = Product::where('status' , 1)->where('category_id', $skip_category_3->id)->orderBy('id', 'DESC')->limit(8)->get();
+        $skip_brand_Lenovo = Brand::skip(6)->first();
+        $skip_product_Lenovo = Product::where('status' , 1)->where('brand_id', $skip_brand_Lenovo->id)->orderBy('id', 'DESC')->limit(8)->get();
 
 
-        return view('frontend.index' , compact('categories' , 'sliders' , 'products' , 'featured' , 'hot_deals','special_offer'
-     , 'special_deals' , 'skip_product_0' , 'skip_category_0'));
+        return view('frontend.index' ,
+        compact('categories' , 'sliders' , 'products' , 'featured' , 'hot_deals','special_offer'
+     , 'special_deals' , 'skip_product_0' , 'skip_category_0' , 'skip_product_3' , 'skip_category_3' , 'skip_product_Lenovo' , 'skip_brand_Lenovo'));
     }
 
     public function userLogout()
