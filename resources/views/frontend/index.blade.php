@@ -159,8 +159,15 @@
                                                                 </a>
                                                             </h3>
                                                             <div class="rating rateit-small"></div>
+                                                            @if ($product->discount_price == null)
                                                             <div class="product-price"> <span class="price">
-                                                                    $ {{ $product->selling_price }}</span> </div>
+                                                                    {{ $product->selling_price }} </div>
+                                                        @else
+                                                            <div class="product-price"> <span class="price">
+                                                                    ${{ round($discountAmount) }} </span> <span
+                                                                    class="price-before-discount">{{ $product->selling_price }} </span>
+                                                            </div>
+                                                        @endif
                                                             <!-- /.product-price -->
 
                                                         </div>
@@ -241,8 +248,15 @@
                                                         </a>
                                                     </h3>
                                                         <div class="rating rateit-small"></div>
+                                                        @if ($product->discount_price == null)
                                                         <div class="product-price"> <span class="price">
-                                                            $ {{ $product->selling_price }}</span> </div>
+                                                                {{ $product->selling_price }} </div>
+                                                    @else
+                                                        <div class="product-price"> <span class="price">
+                                                                ${{ round($discountAmount) }} </span> <span
+                                                                class="price-before-discount">{{ $product->selling_price }} </span>
+                                                        </div>
+                                                    @endif
                                                         <!-- /.product-price -->
 
                                                     </div>
