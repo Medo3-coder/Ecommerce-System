@@ -165,7 +165,13 @@ class IndexController extends Controller
 
     public function productTag($tag)
     {
-        $products = Product::where('status', 1)->where('product_tags_en', $tag)->where('product_tags_ar', $tag)->where('product_tags_hin', $tag)->paginate(4);
+        $products = Product::where('status', 1)->
+         where('product_tags_en', $tag)
+        ->orWhere('product_tags_ar', $tag)
+        ->orWhere('product_tags_hin', $tag)
+        ->paginate(4);
+        // dd($products);
+
         $categories = Category::with(['subCategories'])->orderBy('category_name_en', 'ASC')->limit(8)->get();
         //   dd($products);
         // get tags by name
