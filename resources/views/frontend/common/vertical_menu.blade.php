@@ -24,9 +24,9 @@
                                                 {{ $subcategory->sub_category_name_hin }}
                                             @elseif(session()->get('language') == 'arabic')
                                                 {{ $subcategory->sub_category_name_ar }}
+                                            @else
+                                                {{ $subcategory->sub_category_name_en }}
                                         </h2>
-                                    @else
-                                        {{ $subcategory->sub_category_name_en }}
                                 @endif
                                 </h2>
 
