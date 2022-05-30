@@ -197,3 +197,8 @@ Route::get('/language/arabic', [LanguageController::class, 'arabic'])->name('ara
 
 // Frontend Product Details Page url
 Route::get('/product/details/{id}/{slug}', [IndexController::class, 'productDetails']);
+
+
+//product tags
+
+Route::get('/product/tag/{tag}', [IndexController::class, 'productTag']);

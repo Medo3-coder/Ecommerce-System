@@ -150,4 +150,11 @@ class IndexController extends Controller
          return view('frontend.product.product_details' , compact('product' , 'discountAmount','discount_percentage' , 'discount_percent','multiImag'));
 
     }
+
+
+    public function productTag($tag)
+    {
+      $product = Product::where('status',1)->where('product_tags_en' , $tag)->where('product_tags_ar' , $tag)->where('product_tags_hin' , $tag)->get();
+        return view('frontend.common.tags_view' , compact('product'));
+    }
 }
