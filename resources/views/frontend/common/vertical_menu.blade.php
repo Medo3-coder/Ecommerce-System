@@ -4,8 +4,15 @@
         <ul class="nav">
 
             @foreach ($categories as $category)
-                <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon {{ $category->category_icon }}" aria-hidden="true"></i>
+            {{-- <a href="{{ url('category/product/' .$category->id.'/' .$category->category_slug_en ) }}"> --}}
+                <li class="dropdown menu-item">
+                    {{-- <a href="{{ url('category/product/' .$category->id.'/' .$category->category_slug_en ) }}"> --}}
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon {{ $category->category_icon }}" aria-hidden="true">
+
+
+                    </i>
+
                         @if (session()->get('language') == 'hindi')
                             {{ $category->category_name_hin }}
                         @elseif(session()->get('language') == 'arabic')
@@ -13,7 +20,9 @@
                         @else
                             {{ $category->category_name_en }}
                         @endif
+
                     </a>
+                    {{-- </a> --}}
                     <ul class="dropdown-menu mega-menu">
                         <li class="yamm-content">
                             <div class="row">
@@ -41,7 +50,7 @@
 
                                 @foreach ($subcategory->subSubCategories as $subsubcategory)
                                     <ul class="links list-unstyled">
-                                        <li><a href="#">
+                                        <li><a href="{{ url('subsubcategory/product/'.$subsubcategory->id.'/'.$subsubcategory->subsubcategory_slug_en ) }}">
                                                 @if (session()->get('language') == 'hindi')
                                                     {{ $subsubcategory->subsubcategory_name_hin }}
                                                 @elseif(session()->get('language') == 'arabic')
@@ -49,7 +58,8 @@
                                                 @else
                                                     {{ $subsubcategory->subsubcategory_name_en }}
                                                 @endif
-                                            </a></li>
+                                            </a>
+                                        </li>
 
                                     </ul>
                                 @endforeach

@@ -160,7 +160,8 @@ class IndexController extends Controller
         $discount_percent = 100 - $netPrice;
         $discount_percentage = round($discount_percent);
         $multiImag = MultiImg::where('product_id', $id)->get();
-        return view('frontend.product.product_details', compact('product', 'discountAmount', 'discount_percentage', 'discount_percent', 'multiImag'));
+        $categories = Category::with(['subCategories'])->orderBy('category_name_en', 'ASC')->limit(8)->get();
+        return view('frontend.product.product_details', compact('product', 'discountAmount', 'discount_percentage', 'discount_percent', 'multiImag' ,'categories'));
     }
 
 
@@ -182,6 +183,19 @@ class IndexController extends Controller
         return view('frontend.common.tags_view', compact('products', 'categories' ,'tags_en', 'tags_ar', 'tags_hin'));
     }
 
+    public function categoryWiseProduct($id , $slug)
+    {
+        $products = Product::where('status', 1)->
+        where('category_id', $id)->orderBy('id', 'DESC')->paginate(8);
+        // dd($products);
+        $categories = Category::with(['subCategories'])->orderBy('category_name_en', 'ASC')->limit(8)->get();
+        $tags_en = Product::groupBy('product_tags_en')->select('product_tags_en')->get();
+        $tags_ar = Product::groupBy('product_tags_ar')->select('product_tags_ar')->get();
+        $tags_hin = Product::groupBy('product_tags_hin')->select('product_tags_hin')->get();
+        return view('frontend.product.category_view', compact('products', 'categories' ,'tags_en', 'tags_ar', 'tags_hin'));
+    }
+
+
 
     public function subCategoryWiseProduct($id , $slug)
     {
@@ -196,12 +210,7 @@ class IndexController extends Controller
     }
 
 
-    // protected function Tags($tags_en , $tags_ar ,$tags_hin)
-    // {
-    //     $tags_en = Product::groupBy('product_tags_en')->select('product_tags_en')->get();
-    //     $tags_ar = Product::groupBy('product_tags_ar')->select('product_tags_ar')->get();
-    //     $tags_hin = Product::groupBy('product_tags_hin')->select('product_tags_hin')->get();
-    // }
+
 
 
     /**
@@ -214,7 +223,22 @@ class IndexController extends Controller
     {
         if (!is_null($this->layout)) {
            $categories = Category::with(['subCategories'])->orderBy('category_name_en', 'ASC')->limit(8)->get();
-            $this->layout = View::make($this->layout , compact('categories'));
+            $this->layout = View::make($this->layout , $this->$categories);
         }
+    }
+
+
+    public function subSubCategoryWiseProduct($id , $slug)
+    {
+        $products = Product::where('status', 1)->
+        where('subsubcategory_id', $id)->orderBy('id', 'DESC')->paginate(6);
+        $categories = Category::with(['subCategories'])->orderBy('category_name_en', 'ASC')->limit(8)->get();
+
+        $tags_en = Product::groupBy('product_tags_en')->select('product_tags_en')->get();
+        $tags_ar = Product::groupBy('product_tags_ar')->select('product_tags_ar')->get();
+        $tags_hin = Product::groupBy('product_tags_hin')->select('product_tags_hin')->get();
+
+        return view('frontend.product.subsubcategory_view', compact('products', 'categories' ,'tags_en', 'tags_ar', 'tags_hin'));
+
     }
 }

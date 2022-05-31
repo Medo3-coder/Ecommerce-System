@@ -204,4 +204,10 @@ Route::get('/product/details/{id}/{slug}', [IndexController::class, 'productDeta
 Route::get('/product/tag/{tag}', [IndexController::class, 'productTag']);
 
 
+Route::get('/category/product/{id}/{slug}', [IndexController::class, 'categoryWiseProduct']);
+
+// Frontend SubCategory wise Data
 Route::get('/subcategory/product/{id}/{slug}', [IndexController::class, 'subCategoryWiseProduct']);
+
+// Frontend Sub-SubCategory wise Data
+Route::get('/subsubcategory/product/{id}/{slug}', [IndexController::class, 'subSubCategoryWiseProduct']);

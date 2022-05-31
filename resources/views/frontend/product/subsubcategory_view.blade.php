@@ -1,6 +1,6 @@
 @extends('frontend.main_master')
 @section('content')
-@section('title', 'Subcategory Products')
+@section('title',  'Sub Subcategory Products')
 
 
 
@@ -11,7 +11,7 @@
     <div class="container">
         <div class="breadcrumb-inner">
             <ul class="list-inline list-unstyled">
-                <li><a href="#">Home</a></li>
+                <li><a href="{{ url('/') }}">Home</a></li>
                 <li class='active'>Handbags</li>
             </ul>
         </div>

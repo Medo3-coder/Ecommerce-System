@@ -241,6 +241,7 @@
                                 @endphp --}}
 
                                 @foreach ($categories as $category)
+
                                     <li class="dropdown yamm mega-menu"> <a href="home.html" data-hover="dropdown"
                                             class="dropdown-toggle"
                                             data-toggle="dropdown">
@@ -293,7 +294,7 @@
 
                                                                 @foreach ($subcategory->subSubCategories as $subsubcategory)
                                                                     <ul class="links">
-                                                                        <li><a href="#">
+                                                                        <li><a href="{{ url('subsubcategory/product/'.$subsubcategory->id.'/'.$subsubcategory->subsubcategory_slug_en ) }}">
                                                                                 @if (session()->get('language') == 'hindi')
                                                                                 {{ $subsubcategory->subsubcategory_name_hin }}
                                                                                 @elseif(session()->get('language') == 'arabic')
