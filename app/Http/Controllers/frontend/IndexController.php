@@ -161,14 +161,20 @@ class IndexController extends Controller
         $discount_percent = 100 - $netPrice;
         $discount_percentage = round($discount_percent);
 
-          $color =  $Service->productColorSelect($product);
-          //  dd($color);
-          $size = $Service->productSizeSelect($product);
-         // dd($size);
+        $color =  $Service->productColorSelect($product);
+
+
+        $size = $Service->productSizeSelect($product);
+
+        //related product
+        $related_product = Product::where('category_id', $product->category_id)
+        ->where('id', '!=',$product->id)->orderBy('id', 'DESC')->limit(8)->get();
+        // dd($related_product);
+
 
         $multiImag = MultiImg::where('product_id', $id)->get();
         // $categories = Category::with(['subCategories'])->orderBy('category_name_en', 'ASC')->limit(8)->get();
-        return view('frontend.product.product_details', compact('product', 'discountAmount', 'discount_percentage', 'discount_percent', 'multiImag' ,'color','size'));
+        return view('frontend.product.product_details', compact('product', 'discountAmount' , 'related_product', 'discount_percentage', 'discount_percent', 'multiImag' ,'color','size'));
     }
 
 
