@@ -11,6 +11,7 @@ use App\Models\Slider;
 use App\Models\SubCategory;
 use App\Models\SubSubCategory;
 use App\Models\User;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -152,16 +153,22 @@ class IndexController extends Controller
         }
     }
 
-    public function productDetails($id, $slug)
+    public function productDetails($id, $slug , ProductService $Service)
     {
         $product = Product::findOrFail($id);
         $discountAmount = $product->selling_price - $product->discount_price;
         $netPrice = ($discountAmount / $product->selling_price) * 100;
         $discount_percent = 100 - $netPrice;
         $discount_percentage = round($discount_percent);
+
+          $color =  $Service->productColorSelect($product);
+          //  dd($color);
+          $size = $Service->productSizeSelect($product);
+         // dd($size);
+
         $multiImag = MultiImg::where('product_id', $id)->get();
-        $categories = Category::with(['subCategories'])->orderBy('category_name_en', 'ASC')->limit(8)->get();
-        return view('frontend.product.product_details', compact('product', 'discountAmount', 'discount_percentage', 'discount_percent', 'multiImag' ,'categories'));
+        // $categories = Category::with(['subCategories'])->orderBy('category_name_en', 'ASC')->limit(8)->get();
+        return view('frontend.product.product_details', compact('product', 'discountAmount', 'discount_percentage', 'discount_percent', 'multiImag' ,'color','size'));
     }
 
 

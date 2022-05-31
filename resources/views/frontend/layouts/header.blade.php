@@ -1,7 +1,4 @@
 <header class="header-style-1">
-    {{-- @php
-    dd($categories);
-    @endphp --}}
 
     <!-- ============================================== TOP MENU ============================================== -->
     <div class="top-bar animate-dropdown">
@@ -236,12 +233,11 @@
                                 </li>
 
                                 <!--   // Get Category Table Data -->
-                                {{-- @php
+                                @php
                                     $categories = App\Models\Category::orderBy('category_name_en', 'ASC')->limit(8)->get();
-                                @endphp --}}
+                                @endphp
 
                                 @foreach ($categories as $category)
-
                                     <li class="dropdown yamm mega-menu"> <a href="home.html" data-hover="dropdown"
                                             class="dropdown-toggle"
                                             data-toggle="dropdown">
@@ -260,21 +256,22 @@
 
 
                                                         <!--   // Get SubCategory Table Data -->
-                                                        {{-- @php
+                                                        @php
                                                             $subcategories = App\Models\SubCategory::where('category_id', $category->id)
                                                                 ->orderBy('sub_category_name_en', 'ASC')
                                                                 ->get();
-                                                        @endphp --}}
+                                                        @endphp
 
 
-                                                        @foreach ($category->subcategories as $subcategory)
+                                                        @foreach ($subcategories as $subcategory)
                                                             <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
-                                                                <a href="{{ url('subcategory/product/' .$subcategory->id. '/' .$subcategory->sub_category_slug_en) }}">
+
+ <a href="{{ url('subcategory/product/' .$subcategory->id. '/' .$subcategory->sub_category_slug_en) }}">
                                                                 <h2 class="title">
                                                                     @if (session()->get('language') == 'hindi')
                                                                     {{ $subcategory->sub_category_name_hin }}
                                                                     @elseif(session()->get('language') == 'arabic')
-                                                                    {{ $subcategory->sub_category_name_ar }}
+                                                                    {{ $subcategory->sub_category_name_ar }}</h2>
                                                                     @else
                                                                     {{ $subcategory->sub_category_name_en }}
                                                                     @endif
@@ -284,15 +281,14 @@
 
 
                                                                 <!--   // Get SubSubCategory Table Data -->
-                                                                {{-- @php
+                                                                @php
                                                                     $subsubcategories = App\Models\SubSubCategory::where('subcategory_id', $subcategory->id)
                                                                         ->orderBy('subsubcategory_name_en', 'ASC')
                                                                         ->get();
+                                                                @endphp
 
-                                                                @endphp --}}
 
-
-                                                                @foreach ($subcategory->subSubCategories as $subsubcategory)
+                                                                @foreach ($subsubcategories as $subsubcategory)
                                                                     <ul class="links">
                                                                         <li><a href="{{ url('subsubcategory/product/'.$subsubcategory->id.'/'.$subsubcategory->subsubcategory_slug_en ) }}">
                                                                                 @if (session()->get('language') == 'hindi')

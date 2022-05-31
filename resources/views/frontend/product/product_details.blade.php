@@ -459,6 +459,59 @@
                                         </div><!-- /.row -->
                                     </div><!-- /.price-container -->
 
+
+                                    {{-- // Add product size and color  --}}
+
+                                    <div class="row">
+
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="info-title control-label">Color <span>*</span></label>
+                                                <select class="form-control unicase-form-control selectpicker" style="display: none;">
+                                                    <option selected="" disabled="">Choose Color</option>
+                                                    @foreach ($color['product_color_en'] as $color)
+                                                    <option value="{{ $color }}">{{ $color }}</option>
+                                                    @endforeach
+
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+
+                                            <div class="form-group">
+                                                <label class="info-title control-label">Size<span>*</span></label>
+                                                <select class="form-control unicase-form-control selectpicker" style="display: none;">
+                                                    <option selected="" disabled=""> Choose Size </option>
+                                                    @foreach ($size['product_size_en'] as $size)
+                                                    <option value="{{ $size }}">{{ $size }}</option>
+                                                    @endforeach
+
+
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+                                    </div><!-- /.row -->
+
+                                       {{-- //End Add product size and color  --}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                     <div class="quantity-container info-container">
                                         <div class="row">
 

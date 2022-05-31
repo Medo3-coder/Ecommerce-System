@@ -24,8 +24,7 @@ class ProductService
         $product = Product::create($data);
 
         $images = $this->productMultiImg($data['multi_img']);
-        foreach($images  as $image)
-        {
+        foreach ($images  as $image) {
             MultiImg::create([
                 'product_id' => $product->id,
                 'photo_name' => $image,
@@ -37,7 +36,7 @@ class ProductService
     }
 
 
-    public function productDataUpdate(array $data , $product_id)
+    public function productDataUpdate(array $data, $product_id)
     {
         $data['id'] = $product_id;
         $data['product_slug_en'] = strtolower(str_replace(' ', '-', $data['product_name_en']));
@@ -66,6 +65,41 @@ class ProductService
     }
 
 
+    public  function productColorSelect($product)
+    {
+        $color_en = $product->product_color_en;
+        $product_color_en = explode(',', $color_en);
 
+        $color_ar = $product->product_color_ar;
+        $product_color_ar = explode(',', $color_ar);
 
+        $color_hin = $product->product_color_hin;
+        $product_color_hin = explode(',', $color_hin);
+
+        return  [
+            'product_color_en' => $product_color_en,
+            'product_color_hin' => $product_color_hin,
+            'product_color_ar' => $product_color_ar,
+        ];
+    }
+
+    public function productSizeSelect($product)
+    {
+
+        $size_en = $product->product_size_en;
+        $product_size_en = explode(',', $size_en);
+
+        $size_ar = $product->product_size_ar;
+        $product_size_ar = explode(',', $size_ar);
+
+        $size_hin = $product->product_size_hin;
+        $product_size_hin = explode(',', $size_hin);
+
+        return [
+            'product_size_en' => $product_size_en,
+            'product_size_hin' => $product_size_hin,
+            'product_size_ar' => $product_size_ar,
+
+        ];
+    }
 }
