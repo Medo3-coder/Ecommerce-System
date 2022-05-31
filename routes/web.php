@@ -202,3 +202,6 @@ Route::get('/product/details/{id}/{slug}', [IndexController::class, 'productDeta
 //product tags
 
 Route::get('/product/tag/{tag}', [IndexController::class, 'productTag']);
+
+
+Route::get('/subcategory/product/{id}/{slug}', [IndexController::class, 'subCategoryWiseProduct']);

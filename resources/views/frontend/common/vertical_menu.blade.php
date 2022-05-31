@@ -19,6 +19,7 @@
                             <div class="row">
                                 @foreach ($category->subCategories as $subcategory)
                                     <div class="col-sm-12 col-md-3">
+                                        <a href="{{ url('subcategory/product/' .$subcategory->id. '/' .$subcategory->sub_category_slug_en) }}">
                                         <h2 class="title">
                                             @if (session()->get('language') == 'hindi')
                                                 {{ $subcategory->sub_category_name_hin }}
@@ -27,6 +28,7 @@
                                             @else
                                                 {{ $subcategory->sub_category_name_en }}
                                         </h2>
+                                        </a>
                                 @endif
                                 </h2>
 

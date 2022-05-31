@@ -14,6 +14,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\View;
 use Validator;
 
 class IndexController extends Controller
@@ -179,5 +180,41 @@ class IndexController extends Controller
         $tags_ar = Product::groupBy('product_tags_ar')->select('product_tags_ar')->get();
         $tags_hin = Product::groupBy('product_tags_hin')->select('product_tags_hin')->get();
         return view('frontend.common.tags_view', compact('products', 'categories' ,'tags_en', 'tags_ar', 'tags_hin'));
+    }
+
+
+    public function subCategoryWiseProduct($id , $slug)
+    {
+        $products = Product::where('status', 1)->
+        where('subcategory_id', $id)->orderBy('id', 'DESC')->paginate(4);
+        // dd($products);
+        $categories = Category::with(['subCategories'])->orderBy('category_name_en', 'ASC')->limit(8)->get();
+        $tags_en = Product::groupBy('product_tags_en')->select('product_tags_en')->get();
+        $tags_ar = Product::groupBy('product_tags_ar')->select('product_tags_ar')->get();
+        $tags_hin = Product::groupBy('product_tags_hin')->select('product_tags_hin')->get();
+        return view('frontend.product.subcategory_view', compact('products', 'categories' ,'tags_en', 'tags_ar', 'tags_hin'));
+    }
+
+
+    // protected function Tags($tags_en , $tags_ar ,$tags_hin)
+    // {
+    //     $tags_en = Product::groupBy('product_tags_en')->select('product_tags_en')->get();
+    //     $tags_ar = Product::groupBy('product_tags_ar')->select('product_tags_ar')->get();
+    //     $tags_hin = Product::groupBy('product_tags_hin')->select('product_tags_hin')->get();
+    // }
+
+
+    /**
+     * Setup the layout used by the controller.
+     *
+     * @return void
+     */
+    protected $layout = 'layouts.frontend.header';
+    protected function setupLayout()
+    {
+        if (!is_null($this->layout)) {
+           $categories = Category::with(['subCategories'])->orderBy('category_name_en', 'ASC')->limit(8)->get();
+            $this->layout = View::make($this->layout , compact('categories'));
+        }
     }
 }
