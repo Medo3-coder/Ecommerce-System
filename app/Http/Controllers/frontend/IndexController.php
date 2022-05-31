@@ -163,7 +163,7 @@ class IndexController extends Controller
 
         $color =  $Service->productColorSelect($product);
 
-
+        $hot_deals = Product::where('hot_deals', 1)->orderBy('id', 'DESC')->limit(3)->get();
         $size = $Service->productSizeSelect($product);
 
         //related product
@@ -174,7 +174,7 @@ class IndexController extends Controller
 
         $multiImag = MultiImg::where('product_id', $id)->get();
         // $categories = Category::with(['subCategories'])->orderBy('category_name_en', 'ASC')->limit(8)->get();
-        return view('frontend.product.product_details', compact('product', 'discountAmount' , 'related_product', 'discount_percentage', 'discount_percent', 'multiImag' ,'color','size'));
+        return view('frontend.product.product_details', compact('product', 'hot_deals', 'discountAmount' , 'related_product', 'discount_percentage', 'discount_percent', 'multiImag' ,'color','size'));
     }
 
 
