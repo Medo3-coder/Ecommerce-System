@@ -231,14 +231,14 @@ class IndexController extends Controller
      *
      * @return void
      */
-    protected $layout = 'layouts.frontend.header';
-    protected function setupLayout()
-    {
-        if (!is_null($this->layout)) {
-           $categories = Category::with(['subCategories'])->orderBy('category_name_en', 'ASC')->limit(8)->get();
-            $this->layout = View::make($this->layout , $this->$categories);
-        }
-    }
+    // protected $layout = 'layouts.frontend.header';
+    // protected function setupLayout()
+    // {
+    //     if (!is_null($this->layout)) {
+    //        $categories = Category::with(['subCategories'])->orderBy('category_name_en', 'ASC')->limit(8)->get();
+    //         $this->layout = View::make($this->layout , $this->$categories);
+    //     }
+    // }
 
 
     public function subSubCategoryWiseProduct($id , $slug)
