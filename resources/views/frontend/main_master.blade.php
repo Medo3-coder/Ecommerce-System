@@ -169,26 +169,20 @@
 
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Choose Color</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
+                        <select class="form-control" id="exampleFormControlSelect1" name="color">
+
+
                         </select>
                       </div>
 
 
 
 
-                      <div class="form-group">
+                      <div class="form-group" id="sizeArea">
                         <label for="exampleFormControlSelect1">Choose Size</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
+                        <select class="form-control" id="exampleFormControlSelect1" name="size">
+
+
                         </select>
                       </div>
 
@@ -253,6 +247,8 @@ $.ajaxSetup({
 
 function productView(id) {
 //    alert(id);
+
+console.log(id);
     $.ajax({
         url:'/product/view/modal/'+id,
         type:'GET',
@@ -267,7 +263,30 @@ function productView(id) {
             $('#product-brand').text(data.product.brand.brand_name_en);
             $('#product-image').attr('src','/'+ data.product.product_thambnail);
 
-        }
+            //color
+           // console.log(data.color.product_color_en);
+           $('select[name="color"]').empty();
+            $.each(data.color.product_color_en , function(key , value){
+                $('select[name="color"]').append('<option value =" '+ value +' ">' + value +'</option>')
+            });
+
+            //size
+            $('select[name="size"]').empty();
+             $.each(data.size.product_size_en , function (key , value){
+                $('select[name="size"]').append('<option value=" '+ value +' ">' + value + '</option>')
+             });
+
+             //to hide div size if no size option for product
+             if(data.size.product_size_en == "")
+             {
+                 $('#sizeArea').hide();
+             }
+             else
+             {
+                 $('#sizeArea').show();
+             }
+
+           }
     })
  }
 

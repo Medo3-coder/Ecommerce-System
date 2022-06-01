@@ -3,6 +3,7 @@
 
 
 @section('admin')
+{{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous"> --}}
 
     <div class="container-full">
         <!-- Content Header (Page header) -->
@@ -342,7 +343,7 @@
                                                     <div class="controls">
                                                         <input type="text" name="product_size_en" class="form-control"
                                                             value="{{ $product->product_size_en }}" data-role="tagsinput"
-                                                            required="">
+                                                            >
                                                         @error('product_size_en')
                                                             <span class="text-danger" role="alert">
                                                                 {{ $message }}
@@ -363,7 +364,7 @@
                                                     <div class="controls">
                                                         <input type="text" name="product_size_hin" class="form-control"
                                                             value="{{ $product->product_size_hin }}"
-                                                            data-role="tagsinput" required="">
+                                                            data-role="tagsinput" >
                                                         @error('product_size_hin')
                                                             <span class="text-danger" role="alert">
                                                                 {{ $message }}
@@ -381,7 +382,7 @@
                                                     <div class="controls">
                                                         <input type="text" name="product_size_ar" class="form-control"
                                                             value="{{ $product->product_size_ar }}" data-role="tagsinput"
-                                                            required="">
+                                                            >
                                                         @error('product_size_hin')
                                                             <span class="text-danger" role="alert">
                                                                 {{ $message }}
