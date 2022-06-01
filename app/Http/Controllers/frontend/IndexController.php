@@ -259,10 +259,14 @@ class IndexController extends Controller
     public function productViewModal($id , ProductService $Service)
     {
         $product = Product::with(['brand' , 'category'])->findOrFail($id);
+
+        $discountAmount = $product->selling_price - $product->discount_price;
+        $netPrice = 100 - ($discountAmount / $product->selling_price) * 100;
+
         $color = $Service->productColorSelect($product);
         $size  = $Service->productSizeSelect($product);
 
-        return response()->json(['product' => $product, 'color' => $color, 'size' => $size]);
+        return response()->json(['product' => $product, 'color' => $color, 'size' => $size , 'discountAmount' => $discountAmount] );
 
     }
 }

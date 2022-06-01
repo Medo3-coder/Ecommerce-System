@@ -32,7 +32,7 @@ class UpdateProduct extends FormRequest
             'product_name_hin' => 'required',
             'product_name_ar' => 'required',
             'product_code' => 'required',
-            'product_qty' => 'required',
+            'product_qty' => 'nullable',
             'product_tags_en' => 'required',
             'product_tags_hin' => 'required',
             'product_tags_ar' => 'required',
