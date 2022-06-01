@@ -5,6 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="description" content="">
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 <meta name="author" content="">
 <meta name="keywords" content="MediaCenter, Template, eCommerce">
 <meta name="robots" content="all">
@@ -128,7 +129,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Product Name</h5>
+          <h5 class="modal-title" id="exampleModalLabel" ><span id="product-name"></span></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -144,7 +145,8 @@
                 <div class="col-md-4">
 
                     <div class="card" style="width: 18rem;">
-                        <img src="" class="card-img-top" alt="..." style="width:200px; height:200;">
+                        <img src="" class="card-img-top" alt="..." style="width:200px; height:180;"
+                        id="product-image">
                       </div>
 
                 </div><!-- /.col-md-4 -->
@@ -153,11 +155,11 @@
 
 
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Product Price :</li>
-                        <li class="list-group-item">Product Code :</li>
-                        <li class="list-group-item">Category :</li>
-                        <li class="list-group-item">Brand :</li>
-                        <li class="list-group-item">Stock :</li>
+                        <li class="list-group-item">Price : $ <strong id="product-price"> </strong></li>
+                        <li class="list-group-item">Code : <strong id="product-code"> </strong></li>
+                        <li class="list-group-item">Category : <strong id="product-category"> </strong></li>
+                        <li class="list-group-item">Brand : <strong id="product-brand"> </strong></li>
+                        <li class="list-group-item">Stock : <strong id="product-price"> </strong></li>
                       </ul>
 
                 </div><!-- /.col-md-4 -->
@@ -218,7 +220,58 @@
 
       </div>
     </div>
-  </div>
+  </div><!-- End Add to Cart Product Modal -->
+
+
+  {{-- <script>
+    $(document).ready(function(){
+        $('.add-to-cart').click(function(){
+            var product_id = $(this).attr('product-id');
+            $.ajax({
+                url: "{{ route('cart.add') }}",
+                method: 'POST',
+                data: {product_id: product_id, _token: '{{ csrf_token() }}'},
+                success: function(data){
+                    toastr.success('Product added to cart');
+                }
+            });
+        });
+    });
+  </script> --}}
+
+
+
+  <script class="">
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+//product view
+
+function productView(id) {
+//    alert(id);
+    $.ajax({
+        url:'/product/view/modal/'+id,
+        type:'GET',
+        dataType:'json',
+        success:function(data){
+
+            // console.log(data.product.product_name_en);
+            $('#product-name').text(data.product.product_name_en);
+            $('#product-price').text(data.product.selling_price);
+            $('#product-code').text(data.product.product_code);
+            $('#product-category').text(data.product.category.category_name_en);
+            $('#product-brand').text(data.product.brand.brand_name_en);
+            $('#product-image').attr('src','/'+ data.product.product_thambnail);
+
+        }
+    })
+ }
+
+  </script>
 
 
 </body>

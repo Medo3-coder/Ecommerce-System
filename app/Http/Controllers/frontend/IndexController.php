@@ -254,4 +254,15 @@ class IndexController extends Controller
         return view('frontend.product.subsubcategory_view', compact('products', 'categories' ,'tags_en', 'tags_ar', 'tags_hin'));
 
     }
+
+     // Product View Modal with Ajax
+    public function productViewModal($id , ProductService $Service)
+    {
+        $product = Product::with(['brand' , 'category'])->findOrFail($id);
+        $color = $Service->productColorSelect($product);
+        $size  = $Service->productSizeSelect($product);
+
+        return response()->json(['product' => $product, 'color' => $color, 'size' => $size]);
+
+    }
 }

@@ -41,9 +41,7 @@ class Product extends Model
         'product_status',
         'product_image',
         'created_at',
-
         'hot_deals',
-
         'featured',
         'special_offer',
         'special_deals',

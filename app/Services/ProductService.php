@@ -67,19 +67,19 @@ class ProductService
 
     public  function productColorSelect($product)
     {
-        $color_en = $product->product_color_en;
-        $product_color_en = explode(',', $color_en);
+        $color = $product->product_color_en;
+        $color_en = explode(',', $color);
 
-        $color_ar = $product->product_color_ar;
-        $product_color_ar = explode(',', $color_ar);
+        $color = $product->product_color_ar;
+        $color_ar = explode(',', $color);
 
-        $color_hin = $product->product_color_hin;
-        $product_color_hin = explode(',', $color_hin);
+        $color = $product->product_color_hin;
+        $color_hin = explode(',', $color);
 
         return  [
-            'product_color_en' => $product_color_en,
-            'product_color_hin' => $product_color_hin,
-            'product_color_ar' => $product_color_ar,
+            'product_color_en' => $color_en,
+            'product_color_hin' => $color_ar,
+            'product_color_ar' => $color_hin,
         ];
     }
 
