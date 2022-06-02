@@ -188,8 +188,8 @@
                             <div class="col-md-4">
 
                                 <div class="form-group" id="colorArea">
-                                    <label for="exampleFormControlSelect1">Choose Color</label>
-                                    <select class="form-control" id="exampleFormControlSelect1" name="color">
+                                    <label for="color">Choose Color</label>
+                                    <select class="form-control" id="color" name="color">
 
 
                                     </select>
@@ -199,8 +199,8 @@
 
 
                                 <div class="form-group" id="sizeArea">
-                                    <label for="exampleFormControlSelect1">Choose Size</label>
-                                    <select class="form-control" id="exampleFormControlSelect1" name="size">
+                                    <label for="size">Choose Size</label>
+                                    <select class="form-control" id="size" name="size">
 
 
                                     </select>
@@ -208,14 +208,14 @@
 
 
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Quantity</label>
-                                    <input type="number" class="form-control" id="exampleInputEmail1" value="1"
-                                        min="1">
+                                    <label for="Qty">Quantity</label>
+                                    <input type="number" class="form-control" id="Qty" value="1" min="1">
 
                                 </div>
-
+                                <input type="hidden" name="product_id">
                                 <div class="col-auto">
-                                    <button type="submit" class="btn btn-primary mb-2">Add To Cart</button>
+                                    <button type="submit" class="btn btn-primary mb-2" onclick="addToCart()">Add To
+                                        Cart</button>
                                 </div>
 
 
@@ -282,6 +282,8 @@
                         $('#product-category').text(data.product.category.category_name_en);
                         $('#product-brand').text(data.product.brand.brand_name_en);
                         $('#product-image').attr('src', '/' + data.product.product_thambnail);
+                        $('#product_id').val(id); // passing prduct id to hidden input on cart
+                        $('#Qty').val(1);
 
 
                         //product price
@@ -348,6 +350,36 @@
                 })
             }
         </script>
+
+
+        {{-- ./Add to cart Start --}}
+        <script>
+            function addToCart() {
+                let product_id = $('#product_id').val();
+                let product_name = $('#product-name').text();
+                let color = $('#color option:selected').text();
+                let size = $('#size option:selected').text();
+                let quantity = $('#Qty').val();
+
+                $.ajax({
+                    url: "/cart/data/store/" + id,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        product_id: product_id,
+                        product_name: product_name,
+                        color: color,
+                        size: size,
+                        quantity: quantity
+                    },
+                    success:function(data){
+                        console.log(data);
+                    }
+                })
+            }
+        </script>
+
+        {{-- Add to cart end --}}
 
 
 </body>
