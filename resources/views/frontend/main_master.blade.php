@@ -137,7 +137,7 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel"><strong><span
                                     id="product-name"></span></strong></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModals">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -212,11 +212,10 @@
                                     <input type="number" class="form-control" id="Qty" value="1" min="1">
 
                                 </div>
-                                <input type="hidden" name="product_id">
-                                <div class="col-auto">
-                                    <button type="submit" class="btn btn-primary mb-2" onclick="addToCart()">Add To
-                                        Cart</button>
-                                </div>
+
+                                <input type="hidden" id="product_id">
+                                <button type="submit" class="btn btn-primary mb-2" onclick="addToCart()" >Add to Cart</button>
+
 
 
                             </div> <!-- /.col-md-4 -->
@@ -267,8 +266,9 @@
 
             function productView(id) {
                 //    alert(id);
+            //    console.log(id);
 
-                console.log(id);
+
                 $.ajax({
                     url: '/product/view/modal/' + id,
                     type: 'GET',
@@ -283,7 +283,9 @@
                         $('#product-brand').text(data.product.brand.brand_name_en);
                         $('#product-image').attr('src', '/' + data.product.product_thambnail);
                         $('#product_id').val(id); // passing prduct id to hidden input on cart
+
                         $('#Qty').val(1);
+
 
 
                         //product price
@@ -355,27 +357,29 @@
         {{-- ./Add to cart Start --}}
         <script>
             function addToCart() {
-                let product_id = $('#product_id').val();
-                let product_name = $('#product-name').text();
-                let color = $('#color option:selected').text();
-                let size = $('#size option:selected').text();
-                let quantity = $('#Qty').val();
+                var id = $('#product_id').val();
+                var product_name = $('#product-name').text();
+                var color = $('#color option:selected').text();
+                var size = $('#size option:selected').text();
+                var quantity = $('#Qty').val();
+                console.log(id);
 
                 $.ajax({
-                    url: "/cart/data/store/" + id,
+                    url: "/cart/data/store/"+id,
                     type: 'POST',
                     dataType: 'json',
                     data: {
-                        product_id: product_id,
+
                         product_name: product_name,
                         color: color,
                         size: size,
                         quantity: quantity
                     },
                     success:function(data){
+                        $('#closeModals').click();
                         console.log(data);
                     }
-                })
+                });
             }
         </script>
 
