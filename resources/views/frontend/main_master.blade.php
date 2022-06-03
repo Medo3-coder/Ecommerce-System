@@ -82,6 +82,10 @@
         <script src="{{ asset('frontend/assets/js/scripts.js') }}"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
+        {{-- //sweet alert  --}}
+
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
         <script>
             @if (Session::has('message'))
@@ -362,7 +366,7 @@
                 var color = $('#color option:selected').text();
                 var size = $('#size option:selected').text();
                 var quantity = $('#Qty').val();
-                console.log(id);
+                // console.log(id);
 
                 $.ajax({
                     url: "/cart/data/store/"+id,
@@ -377,7 +381,30 @@
                     },
                     success:function(data){
                         $('#closeModals').click();
-                        console.log(data);
+
+                       const Toast = Swal.mixin({
+                        toast:true,
+                        position: 'top-end',
+                        icon: 'success',
+
+                        showConfirmButton: false,
+                        timer: 3000
+                        });
+
+                        if($.isEmptyObject(data.error))
+                        {
+                            Toast.fire({
+                                icon: 'success',
+                                title: data.success,
+                        });
+                        }
+                        else
+                         {
+                            Toast.fire({
+                                icon: 'error',
+                                title: data.error,
+                          });
+                        }
                     }
                 });
             }

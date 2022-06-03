@@ -46,5 +46,6 @@ class CartController extends Controller
 
             return response()->json(['success' => 'Product added to cart successfully!']);
         }
+        return response()->json(['error' => 'Something went wrong!']);
     }
 }
