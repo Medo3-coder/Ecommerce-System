@@ -140,7 +140,7 @@
                             </div><!-- /.gallery-holder -->
                             <div class='col-sm-6 col-md-7 product-info-block'>
                                 <div class="product-info">
-                                    <h1 class="name">
+                                    <h1 class="name"  id="product-name">
                                         @if (session()->get('language') == 'hindi')
                                             {{ $product->product_name_hin }}
                                         @elseif (session()->get('language') == 'arabic')
@@ -251,7 +251,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="info-title control-label">Color <span>*</span></label>
-                                                <select class="form-control unicase-form-control selectpicker" style="display: none;">
+                                                <select class="form-control unicase-form-control selectpicker" id="color" style="display: none;">
                                                     <option selected="" disabled="">Choose Color</option>
                                                     @foreach ($color['product_color_en'] as $color)
                                                     <option value="{{ $color }}">{{ ucwords($color) }}</option>
@@ -265,8 +265,11 @@
                                         <div class="col-sm-6">
 
                                             <div class="form-group">
+                                                @if($product->product_size_en== null)
+
+                                                @else
                                                 <label class="info-title control-label">Size<span>*</span></label>
-                                                <select class="form-control unicase-form-control selectpicker" style="display: none;">
+                                                <select class="form-control unicase-form-control selectpicker" style="display: none;" id="size">
                                                     <option selected="" disabled=""> Choose Size </option>
                                                     @foreach ($size['product_size_en'] as $size)
                                                     <option value="{{ $size }}">{{ ucwords($size) }}</option>
@@ -274,6 +277,8 @@
 
 
                                                 </select>
+                                                @endif
+
                                             </div>
 
                                         </div>
@@ -313,14 +318,16 @@
                                                                     class="ir"><i
                                                                         class="icon fa fa-sort-desc"></i></span></div>
                                                         </div>
-                                                        <input type="text" value="1">
+                                                        <input type="text" id="Qty" value="1" min="1">
                                                     </div>
                                                 </div>
                                             </div>
 
+                                            <input type="hidden" id="product_id" value="{{ $product->id }}" min="1">
                                             <div class="col-sm-7">
-                                                <a href="#" class="btn btn-primary"><i
-                                                        class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</a>
+                                                   <button type="submit" class="btn btn-primary" onclick="addToCart()"><i
+                                                        class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART
+                                                    </button>
                                             </div>
 
 
