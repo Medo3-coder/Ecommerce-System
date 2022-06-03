@@ -48,4 +48,25 @@ class CartController extends Controller
         }
         return response()->json(['error' => 'Something went wrong!']);
     }
+
+
+    public function addMiniCart()
+    {
+        //This method will return a Collection of CartItems which you can iterate over and show the content to your customers.
+         $cart = Cart::content();
+         //If you want to know how many items there are in your cart, you can use the count() method.
+         $cartQty = Cart::count();
+         //The total() method can be used to get the calculated total of all items in the cart,
+         $cartTotal = Cart::total();
+
+         return response()->json(['cart' => $cart, 'cartQty' => $cartQty, 'cartTotal' => round($cartTotal)]);
+
+    }
+
+
+
+
+
+
+
 }

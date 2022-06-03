@@ -413,6 +413,25 @@
         {{-- Add to cart end --}}
 
 
+        <script type="text/javascript">
+
+
+          function miniCart()
+          {
+              $.ajax({
+                  url:'/product/mini/cart',
+                  type:'GET',
+                  dataType:'json',
+                  success: function(response){
+                     console.log(response);
+                  }
+
+              })
+          }
+
+        </script>
+
+
 </body>
 
 
