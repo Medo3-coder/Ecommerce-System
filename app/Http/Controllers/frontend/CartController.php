@@ -12,8 +12,9 @@ class CartController extends Controller
     public function addToCart(Request $request, $id)
     {
         $product = Product::findOrFail($id);
-
+        $discountAmount = $product->selling_price - $product->discount_price;
         if ($product->discount_price == null) {
+
             Cart::add([
                 'id' => $id,
                 'name' => $request->product_name,
@@ -21,26 +22,26 @@ class CartController extends Controller
                 'price' => $product->selling_price,
                 'weight' => 1,
                 'options' => [
+                    'image' => $product->product_thambnail,
                     'color' => $request->color,
                     'size' => $request->size,
-                    'image' => $request->product_thambnail,
+
                 ],
             ]);
 
             return response()->json(['success' => 'Product added to cart successfully!']);
-        }
-        else
-        {
+        } else {
+
             Cart::add([
                 'id' => $id,
                 'name' => $request->product_name,
                 'qty' => $request->quantity,
-                'price' => $product->discount_price,
+                'price' => $discountAmount,
                 'weight' => 1,
                 'options' => [
+                    'image' => $product->product_thambnail,
                     'color' => $request->color,
                     'size' => $request->size,
-                    'image' => $request->product_thambnail,
                 ],
             ]);
 
@@ -53,20 +54,20 @@ class CartController extends Controller
     public function addMiniCart()
     {
         //This method will return a Collection of CartItems which you can iterate over and show the content to your customers.
-         $carts = Cart::content();
-         //If you want to know how many items there are in your cart, you can use the count() method.
-         $cartQty = Cart::count();
-         //The total() method can be used to get the calculated total of all items in the cart,
-         $cartTotal = Cart::total();
+        $carts = Cart::content();
+        //If you want to know how many items there are in your cart, you can use the count() method.
+        $cartQty = Cart::count();
+        //The total() method can be used to get the calculated total of all items in the cart,
+        $cartTotal = Cart::total();
 
-         return response()->json(['carts' => $carts, 'cartQty' => $cartQty, 'cartTotal' => round($cartTotal)]);
-
+        return response()->json(['carts' => $carts, 'cartQty' => $cartQty, 'cartTotal' => $cartTotal]);
     }
 
 
 
-
-
-
-
+    public function removeMiniCart($rowId)
+    {
+        Cart::remove($rowId);
+        return response()->json(['success' => 'Product Remove from Cart']);
+    }
 }
