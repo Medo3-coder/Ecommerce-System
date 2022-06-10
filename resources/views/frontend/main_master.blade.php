@@ -501,11 +501,34 @@
    function addToWishList(product_id) {
     $.ajax({
         method:'POST',
-        url:'/add-to-wishlist/'+id,
+        url:'/add-to-wishlist/'+product_id,
         dataType:'json',
 
         success:function(data){
-            alert('Added to wishlist');
+            // alert('Added to wishlist');
+
+            // Start Message
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+
+                showConfirmButton: false,
+                timer: 3000
+            })
+            if ($.isEmptyObject(data.error)) {
+                Toast.fire({
+                    type: 'success',
+                    icon: 'success',
+                    title: data.success
+                })
+            } else {
+                Toast.fire({
+                    type: 'error',
+                    icon: 'error',
+                    title: data.error
+                })
+            }
+            // End Message
         }
 
     });

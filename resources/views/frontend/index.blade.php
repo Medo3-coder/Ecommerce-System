@@ -672,11 +672,9 @@
                                                     </li>
 
 
-
-                                                        <button class="btn btn-primary icon" data-toggle="dropdown"
-                                                        type="button"> <i class="icon fa fa-heart" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)">
-                                                            </i>
-                                                         </button>
+                                                         <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)">
+                                                             <i class="fa fa-heart"></i>
+                                                        </button>
 
                                                     <li class="lnk"> <a class="add-to-cart"
                                                             href="detail.html" title="Compare"> <i class="fa fa-signal"
