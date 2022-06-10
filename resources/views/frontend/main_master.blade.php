@@ -493,6 +493,32 @@
         </script>
 
 
+
+<!-- /// Start Add Wishlist Page //// -->
+  <script type="text/javascript">
+
+
+   function addToWishList(product_id) {
+    $.ajax({
+        method:'POST',
+        url:'/add-to-wishlist/'+id,
+        dataType:'json',
+
+        success:function(data){
+            alert('Added to wishlist');
+        }
+
+    });
+    }
+
+
+
+
+
+
+ </script>
+<!-- /// End Add Wishlist Page //// -->
+
 </body>
 
 

@@ -11,6 +11,7 @@ use App\Http\Controllers\backend\SubSubCategoryController;
 use App\Http\Controllers\frontend\IndexController;
 use App\Http\Controllers\backend\SliderController;
 use App\Http\Controllers\frontend\CartController;
+use App\Http\Controllers\User\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -225,3 +226,6 @@ Route::get('/product/mini/cart/', [CartController::class, 'addMiniCart']);
 
 // Remove mini cart
 Route::get('/minicart/product-remove/{rowId}', [CartController::class, 'removeMiniCart']);
+
+// Add to Wishlist
+Route::post('/add-to-wishlist/{product_id}' , [WishlistController::class, 'addToWishlist']);
