@@ -485,6 +485,7 @@
                                 title: data.error
                             })
                         }
+
                         // End Message
                     }
                 });
@@ -494,75 +495,64 @@
 
 
 
-<!-- /// Start Add Wishlist Page //// -->
-  <script type="text/javascript">
+        <!-- /// Start Add Wishlist Page //// -->
+        <script type="text/javascript">
+            function addToWishList(product_id) {
+                $.ajax({
+                    method: 'POST',
+                    url: '/add-to-wishlist/' + product_id,
+                    dataType: 'json',
 
+                    success: function(data) {
+                        // alert('Added to wishlist');
 
-   function addToWishList(product_id) {
-    $.ajax({
-        method:'POST',
-        url:'/add-to-wishlist/'+product_id,
-        dataType:'json',
+                        // Start Message
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
 
-        success:function(data){
-            // alert('Added to wishlist');
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                        if ($.isEmptyObject(data.error)) {
+                            Toast.fire({
+                                type: 'success',
+                                icon: 'success',
+                                title: data.success
+                            })
+                        } else {
+                            Toast.fire({
+                                type: 'error',
+                                icon: 'error',
+                                title: data.error
+                            })
+                        }
+                        // End Message
+                    }
 
-            // Start Message
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-
-                showConfirmButton: false,
-                timer: 3000
-            })
-            if ($.isEmptyObject(data.error)) {
-                Toast.fire({
-                    type: 'success',
-                    icon: 'success',
-                    title: data.success
-                })
-            } else {
-                Toast.fire({
-                    type: 'error',
-                    icon: 'error',
-                    title: data.error
-                })
+                });
             }
-            // End Message
-        }
-
-    });
-    }
+        </script>
+        <!-- /// End Add Wishlist Page //// -->
 
 
+        <!-- /// Load Wishlist Data -->
+        <script type="text/javascript">
+            function wishlist() {
+                $.ajax({
+                    type: 'GET',
+                    url: '/get-wishlist-product',
+                    dataType: 'json',
+                    success: function(response) {
 
+                        // console.log(response);
 
+                        var rows = "";
 
-
- </script>
-<!-- /// End Add Wishlist Page //// -->
-
-
-<!-- /// Load Wishlist Data -->
-<script type="text/javascript">
-
-  function wishlist()
-  {
-      $.ajax({
-         type:'GET',
-         url:'/get-wishlist-product',
-         dataType:'json',
-         success: function(response)
-         {
-
-            // console.log(response);
-
-             var rows = "";
-
-            $.each(response , function(key, value) {
-                var discountAmount = value.product.selling_price - value.product.discount_price;
-                rows +=
-            `<tr>
+                        $.each(response, function(key, value) {
+                            var discountAmount = value.product.selling_price - value.product.discount_price;
+                            rows +=
+                                `<tr>
                 <td class="col-md-2"><img src="/${value.product.product_thambnail}" alt="imga"></td>
                 <td class="col-md-7">
                     <div class="product-name"><a href="#">${value.product.product_name_en}</a></div>
@@ -583,23 +573,60 @@
 
                 </td>
                 <td class="col-md-1 close-btn">
-                    <a href="#" class=""><i class="fa fa-times"></i></a>
+                    <button type="submit" id="${value.id}" class="" onclick="wishListRemove(this.id)"><i class="fa fa-times"></i></button>
                 </td>
             </tr>`;
 
 
-            });
+                        });
 
-            $('#wishlist').html(rows);
-         }
-      });
-  }
+                        $('#wishlist').html(rows);
+                    }
+                });
+            }
 
-  wishlist();
+            wishlist();
 
-</script>
+            ///// Start Wishlist Remove ////
 
-<!-- /// End Load Wisch list Data -->
+            function wishListRemove(id) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/wishlist-remove/' + id,
+                    dataType: 'json',
+                    success: function(data) {
+                        wishlist();
+                     // Start Message
+                     const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                        if ($.isEmptyObject(data.error)) {
+                            Toast.fire({
+                                type: 'success',
+                                icon: 'success',
+                                title: data.success
+                            })
+                        } else {
+                            Toast.fire({
+                                type: 'error',
+                                icon: 'error',
+                                title: data.error
+                            })
+                        }
+                        // End Message
+                    }
+
+                });
+            }
+
+
+            // End Wishlist remove
+        </script>
+
 
 </body>
 

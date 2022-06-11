@@ -235,3 +235,6 @@ Route::get('/wishlist' , [WishlistController::class, 'viewWishlist'])->name('wis
 
 //send product data to wishlist page
 Route::get('/get-wishlist-product' , [WishlistController::class, 'getWishlistProduct']);
+
+//remove product from wishlist
+Route::get('/wishlist-remove/{id}' , [WishlistController::class , 'removeWishlistProduct']);
