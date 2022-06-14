@@ -25,4 +25,10 @@ class CartPageController extends Controller
 
         return response()->json(['carts' => $carts, 'cartQty' => $cartQty, 'cartTotal' => $cartTotal]);
     }
+
+    public function removeCartProduct($id)
+    {
+        Cart::remove($id);
+        return response()->json(['success' => 'Product removed from cart successfully!']);
+    }
 }

@@ -247,6 +247,8 @@ Route::get('/cart' , [CartPageController::class, 'myCart'])->name('my-cart');
 
 Route::get('/get-cart-product' , [CartPageController::class, 'getCartProduct']);
 
+Route::delete('/cart-remove/{id}' , [CartPageController::class , 'removeCartProduct']);
+
 });
 
 

@@ -683,7 +683,7 @@
 
                 </td>
                 <td class="col-md-1 close-btn">
-                    <button type="submit" id="${value.id}" class="" onclick="wishListRemove(this.id)"><i class="fa fa-times"></i></button>
+                    <button type="submit" id="${value.rowId}" class="" onclick="cartRemove(this.id)"><i class="fa fa-times"></i></button>
                 </td>
             </tr>`;
                         });
@@ -694,6 +694,48 @@
             }
 
             cart()
+
+
+
+            ///// Start cartPage Remove ////
+
+            function cartRemove(id) {
+                $.ajax({
+                    type: 'DELETE',
+                    url: '/user/cart-remove/'+id,
+                    dataType: 'json',
+                    success: function(data) {
+                        cart();
+                        miniCart();
+                        // Start Message
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                        if ($.isEmptyObject(data.error)) {
+                            Toast.fire({
+                                type: 'success',
+                                icon: 'success',
+                                title: data.success
+                            })
+                        } else {
+                            Toast.fire({
+                                type: 'error',
+                                icon: 'error',
+                                title: data.error
+                            })
+                        }
+                        // End Message
+                    }
+
+                });
+            }
+
+
+            // End cartPage remove
         </script>
 
 
