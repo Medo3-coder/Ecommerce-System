@@ -242,16 +242,17 @@ Route::get('/get-wishlist-product' , [WishlistController::class, 'getWishlistPro
 //remove product from wishlist
 Route::get('/wishlist-remove/{id}' , [WishlistController::class , 'removeWishlistProduct']);
 
-//cart page
-Route::get('/cart' , [CartPageController::class, 'myCart'])->name('my-cart');
 
-Route::get('/get-cart-product' , [CartPageController::class, 'getCartProduct']);
 
-Route::delete('/cart-remove/{id}' , [CartPageController::class , 'removeCartProduct']);
 
 });
 
+//Mycart page
+Route::get('/cart' , [CartPageController::class, 'myCart'])->name('my-cart');
 
+Route::get('/user/get-cart-product' , [CartPageController::class, 'getCartProduct']);
+
+Route::delete('/user/cart-remove/{id}' , [CartPageController::class , 'removeCartProduct']);
 
 
 

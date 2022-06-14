@@ -219,7 +219,7 @@
                                 </div>
 
                                 <input type="hidden" id="product_id">
-                                <button type="submit" class="btn btn-primary mb-2" onclick="addToCart()">Add to
+                                <button type="submit" id="addToMiniCart" class="btn btn-primary mb-2" onclick="addToCart()">Add to
                                     Cart</button>
 
 
@@ -312,11 +312,15 @@
                             $('#available').empty();
                             $('#stockout').empty();
                             $('#available').text('available');
+                            $('#addToMiniCart').show();
 
                         } else {
                             $('#available').empty();
                             $('#stockout').empty();
                             $('#stockout').text('stockOut');
+                            $('#addToMiniCart').hide();
+
+
                         }
 
 
