@@ -257,6 +257,8 @@ Route::delete('/user/cart-remove/{id}' , [CartPageController::class , 'removeCar
 
 Route::get('/cart-increment/{rowId}' , [CartPageController::class , 'incrementCartProduct']);
 
+Route::get('/cart-decrement/{rowId}' , [CartPageController::class , 'decrementCartProduct']);
+
 
 
 

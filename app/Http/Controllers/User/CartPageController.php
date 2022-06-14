@@ -36,6 +36,13 @@ class CartPageController extends Controller
     {
        $row =  Cart::get($rowId);
        Cart::update($rowId , $row->qty + 1 );
-       return response()->json('increment');
+       return response()->json('Increment');
+    }
+
+    public function decrementCartProduct($rowId)
+    {
+        $row = Cart::get($rowId);
+        Cart::update($rowId , $row->qty - 1 );
+        return response()->json('Decrement');
     }
 }
