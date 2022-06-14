@@ -673,9 +673,9 @@
                      </td>
 
                      <td class="col-md-2">
-                        <button type="submit" class="btn btn-success btn-sm">+</button>
+                        <button type="submit" class="btn btn-danger btn-sm" id="${value.rowId}" class="" onclick="cartDecrement(this.id)">-</button>
                         <input type="text" value="${value.qty}" min="1" max="100" disabled="" style="width:25px">
-                        <button type="submit" class="btn btn-danger btn-sm">-</button>
+                        <button type="submit" class="btn btn-success btn-sm" id="${value.rowId}" class="" onclick="cartIncrement(this.id)">+</button>
                      </td>
 
                      <td class="col-md-2">
@@ -740,6 +740,26 @@
 
 
             // End cartPage remove
+
+
+
+          // -------- CART INCREMENT --------//
+
+          function cartIncrement(rowId)
+            {
+                // console.log(rowId);
+                $.ajax({
+                      type: 'GET',
+                        url: '/cart-increment/'+rowId,
+                        dataType: 'json',
+                        success: function(data){
+                            cart();
+                            miniCart();
+                        }
+                });
+            }
+
+           // ---------- END CART INCREMENT -----///
         </script>
 
 
