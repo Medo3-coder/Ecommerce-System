@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\backend\CouponController;
 use App\Http\Controllers\Backend\LanguageController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\Backend\SubCategoryController;
@@ -260,5 +261,11 @@ Route::get('/cart-increment/{rowId}' , [CartPageController::class , 'incrementCa
 Route::get('/cart-decrement/{rowId}' , [CartPageController::class , 'decrementCartProduct']);
 
 
+// Admin Coupons All Routes
+
+Route::prefix('admin/coupon')->group(function (){
+
+    Route::get('/view', [CouponController::class , 'couponView'])->name('manage-coupon')->middleware('auth:admin');
+});
 
 
