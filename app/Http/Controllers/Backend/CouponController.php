@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Coupon\StoreCouponRequest;
+use App\Http\Requests\Admin\Coupon\UpdateCouponRequest;
 use App\Http\Requests\CouponRequest;
 use App\Models\Coupon;
 use App\Services\CouponService;
@@ -23,4 +24,26 @@ class CouponController extends Controller
 
         return redirect()->route('manage-coupon')->with('success', 'Coupon added successfully');
     }
+
+    public function couponEdit(Coupon $coupon)
+    {
+        return view('backend.coupon.edit_coupon' , compact('coupon'));
+    }
+
+
+    public function couponUpdate(UpdateCouponRequest $request ,  $id , CouponService $services)
+    {
+        $services->updateCoupon($request->validated() , $id) ;
+
+        return redirect()->route('manage-coupon')->with('success', 'Coupon updated successfully');
+    }
+
+    public function couponDelete(Coupon $coupon)
+    {
+        $coupon->delete();
+        return response('Coupon deleted successfully');
+    }
+
+
+
 }

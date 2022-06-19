@@ -81,10 +81,10 @@
                                                         @endif
                                                 </td>
                                                 <td width="20%">
-                                                    <a href="{{ route('category.edit', $item->id) }}" class="btn btn-info"
+                                                    <a href="{{ route('coupon.edit', $item->id) }}" class="btn btn-info"
                                                         title="Edit Data"> <i class="fa fa-pencil"></i> </a>
 
-                                                    <a href="{{ route('category.delete', $item->id) }}"
+                                                    <a href="{{ route('coupon.delete', $item->id) }}"
                                                         class="btn btn-danger" id="delete" data-id="{{ $item->id }}"
                                                         title="Delete Data"> <i class="fa fa-trash"></i></a>
                                                 </td>
@@ -141,7 +141,7 @@
                                     <div class="form-group">
                                         <h5>Coupon Discount (%)<span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" id="coupon_discount" name="coupon_discount"
+                                            <input type="integer" id="coupon_discount" name="coupon_discount"
                                                 class="form-control">
                                             @error('coupon_discount')
                                                 <span class="text-danger" role="alert">
@@ -214,7 +214,7 @@
                             },
                             url: link,
                             data: {
-                                '_method': 'get'
+                                '_method': 'get',
                             },
                             success: function(response, textStatus, xhr) {
                                 $(that).parent().parent().remove();

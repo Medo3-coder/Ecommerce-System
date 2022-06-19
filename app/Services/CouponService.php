@@ -20,4 +20,15 @@ class CouponService
          return $coupon ;
     }
 
+    public function UpdateCoupon(array $data , $id)
+    {
+        //  $data['id'] = $id;
+         $coupon = Coupon::findOrFail($id);
+         $data['coupon_name'] = strtoupper($data['coupon_name']);
+         $coupon->update($data);
+         return $coupon;
+    }
+
+
+
 }

@@ -267,6 +267,9 @@ Route::prefix('admin/coupon')->group(function (){
 
     Route::get('/view', [CouponController::class , 'couponView'])->name('manage-coupon')->middleware('auth:admin');
     Route::post('/store', [CouponController::class , 'couponStore'])->name('coupon.store')->middleware('auth:admin');
+    Route::get('/edit/{coupon}' , [CouponController::class , 'couponEdit'])->name('coupon.edit')->middleware('auth:admin');
+    Route::post('update/{id}' , [CouponController::class , 'couponUpdate'])->name('coupon.update')->middleware('auth:admin');
+    Route::get('/delete/{coupon}' , [CouponController::class , 'couponDelete'])->name('coupon.delete')->middleware('auth:admin');
 });
 
 
