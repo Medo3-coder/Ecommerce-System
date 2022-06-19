@@ -266,6 +266,7 @@ Route::get('/cart-decrement/{rowId}' , [CartPageController::class , 'decrementCa
 Route::prefix('admin/coupon')->group(function (){
 
     Route::get('/view', [CouponController::class , 'couponView'])->name('manage-coupon')->middleware('auth:admin');
+    Route::post('/store', [CouponController::class , 'couponStore'])->name('coupon.store')->middleware('auth:admin');
 });
 
 

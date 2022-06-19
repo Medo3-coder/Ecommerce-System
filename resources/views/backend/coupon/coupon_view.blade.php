@@ -69,15 +69,18 @@
                                             <tr>
                                                 <td>{{ $item->coupon_name }}</td>
                                                 <td>{{ $item->coupon_discount }}%</td>
-                                                <td>{{ $item->coupon_validity }}</td>
                                                 <td>
-                                                    @if ($item->status == 1)
-                                                        <span class="badge badge-pill badge-success">Active</span>
-                                                    @else
-                                                        <span class="badge badge-pill badge-danger"> Inactive</span>
-                                                        @endif
+                                                    {{ Carbon\Carbon::parse($item->coupon_validity)->format('D, d F Y') }}
+                                                    {{-- {{ $item->coupon_validity }} --}}
                                                 </td>
                                                 <td>
+                                                    @if ($item->coupon_validity >= Carbon\Carbon::now()->format('Y-m-d'))
+                                                        <span class="badge badge-pill badge-success">Valid</span>
+                                                    @else
+                                                        <span class="badge badge-pill badge-danger"> Invalid</span>
+                                                        @endif
+                                                </td>
+                                                <td width="20%">
                                                     <a href="{{ route('category.edit', $item->id) }}" class="btn btn-info"
                                                         title="Edit Data"> <i class="fa fa-pencil"></i> </a>
 
@@ -119,7 +122,7 @@
                             <div class="table-responsive">
                                 <span class="success" style="color:green; margin-top:10px; margin-bottom: 10px;"></span>
 
-                                <form method="POST" action="{{ route('category.store') }}" id="ajaxform">
+                                <form method="POST" action="{{ route('coupon.store') }}" id="ajaxform">
 
 
                                     @csrf
@@ -152,7 +155,7 @@
                                         <h5>Validity Date<span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="date" id="coupon_validity" name="coupon_validity"
-                                                class="form-control">
+                                                class="form-control" min="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
                                             @error('coupon_validity')
                                                 <span class="text-danger" role="alert">
                                                     {{ $message }}
@@ -160,19 +163,6 @@
                                             @enderror
                                         </div>
                                     </div>
-
-                                    <div class="form-group">
-                                        <h5>Category Icon<span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <input type="text" id="status" name="status" class="form-control">
-                                            @error('status')
-                                                <span class="text-danger" role="alert">
-                                                    {{ $message }}
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
 
 
                             </div>
