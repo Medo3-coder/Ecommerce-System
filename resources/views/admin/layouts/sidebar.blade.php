@@ -128,6 +128,10 @@ $route = Route::current()->getName(); // to get current route name
                     <li class="{{ $route == 'manage-division' ? 'active' : '' }}">
                         <a href="{{ route('manage-division') }}"><i class="ti-more"></i>Ship Division</a>
                     </li>
+
+                    <li class="{{ $route == 'manage-district' ? 'active' : '' }}">
+                        <a href="{{ route('manage-district') }}"><i class="ti-more"></i>Ship Division</a>
+                    </li>
                 </ul>
             </li>
 

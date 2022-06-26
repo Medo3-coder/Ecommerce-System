@@ -8,6 +8,7 @@ use App\Http\Controllers\backend\CouponController;
 use App\Http\Controllers\Backend\LanguageController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\Backend\ShippingAreaController;
+use App\Http\Controllers\Backend\ShippingDistrictController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\backend\SubSubCategoryController;
 use App\Http\Controllers\frontend\IndexController;
@@ -282,3 +283,16 @@ Route::prefix('admin/shipping')->group(function () {
    Route::post('/division/update/{id}' , [ShippingAreaController::class , 'updateDivision'])->name('division.update')->middleware('auth:admin');
    Route::get('/division/delete/{shipDivision}' , [ShippingAreaController::class , 'deleteDivision'])->name('division.delete')->middleware('auth:admin');
 });
+
+
+// Admin district all Routes
+Route::prefix('admin/district')->group(function () {
+    Route::get('/view' , [ShippingDistrictController::class , 'districtView'])->name('manage-district')->middleware('auth:admin');
+    Route::post('/store' , [ShippingDistrictController::class , 'districtStore'])->name('district.store')->middleware('auth:admin');
+    Route::get('/edit/{district}' , [ShippingDistrictController::class , 'editdistrict'])->name('district.edit')->middleware('auth:admin');
+    Route::post('/update/{id}' , [ShippingDistrictController::class , 'updatedistrict'])->name('district.update')->middleware('auth:admin');
+    Route::get('/delete/{district}' , [ShippingDistrictController::class , 'deletedistrict'])->name('district.delete')->middleware('auth:admin');
+ });
+
+
+
