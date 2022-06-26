@@ -9,11 +9,13 @@ use App\Http\Controllers\Backend\LanguageController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\Backend\ShippingAreaController;
 use App\Http\Controllers\Backend\ShippingDistrictController;
+
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\backend\SubSubCategoryController;
 use App\Http\Controllers\frontend\IndexController;
 use App\Http\Controllers\backend\SliderController;
 use App\Http\Controllers\frontend\CartController;
+use App\Http\Controllers\Backend\ShippingStateController;
 use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\WishlistController;
 use Illuminate\Support\Facades\Route;
@@ -292,6 +294,17 @@ Route::prefix('admin/district')->group(function () {
     Route::get('/edit/{district}' , [ShippingDistrictController::class , 'editdistrict'])->name('district.edit')->middleware('auth:admin');
     Route::post('/update/{id}' , [ShippingDistrictController::class , 'updatedistrict'])->name('district.update')->middleware('auth:admin');
     Route::get('/delete/{district}' , [ShippingDistrictController::class , 'deletedistrict'])->name('district.delete')->middleware('auth:admin');
+ });
+
+
+
+ // Admin state all Routes
+Route::prefix('admin/state')->group(function () {
+    Route::get('/view' , [ShippingStateController::class , 'stateView'])->name('manage-state')->middleware('auth:admin');
+    Route::post('/store' , [ShippingStateController::class , 'stateStore'])->name('state.store')->middleware('auth:admin');
+    Route::get('/edit/{state}' , [ShippingStateController::class , 'editstate'])->name('state.edit')->middleware('auth:admin');
+    Route::post('/update/{id}' , [ShippingStateController::class , 'updatestate'])->name('state.update')->middleware('auth:admin');
+    Route::get('/delete/{state}' , [ShippingStateController::class , 'deletestate'])->name('state.delete')->middleware('auth:admin');
  });
 
 
