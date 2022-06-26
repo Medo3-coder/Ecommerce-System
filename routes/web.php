@@ -276,6 +276,9 @@ Route::prefix('admin/coupon')->group(function (){
 
 // Admin Shipping all Routes
 Route::prefix('admin/shipping')->group(function () {
-   Route::get('/division/view' , [ShippingAreaController::class , 'divisionView'])->name('manage-division');
-   Route::post('division/store' , [ShippingAreaController::class , 'divisionStore'])->name('division.store');
+   Route::get('/division/view' , [ShippingAreaController::class , 'divisionView'])->name('manage-division')->middleware('auth:admin');
+   Route::post('/division/store' , [ShippingAreaController::class , 'divisionStore'])->name('division.store')->middleware('auth:admin');
+   Route::get('/division/edit/{shipDivision}' , [ShippingAreaController::class , 'editDivision'])->name('division.edit')->middleware('auth:admin');
+   Route::post('/division/update/{id}' , [ShippingAreaController::class , 'updateDivision'])->name('division.update')->middleware('auth:admin');
+   Route::get('/division/delete/{shipDivision}' , [ShippingAreaController::class , 'deleteDivision'])->name('division.delete')->middleware('auth:admin');
 });

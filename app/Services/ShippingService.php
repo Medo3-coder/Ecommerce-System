@@ -11,4 +11,12 @@ class ShippingService
       $division = ShipDivision::create($data);
       return $division ;
    }
+
+   public function UpdateDivision(array $data , $id)
+   {
+      $data['id'] = $id;
+      $division = ShipDivision::find($data['id']);
+      $division->update($data);
+      return $division;
+   }
 }

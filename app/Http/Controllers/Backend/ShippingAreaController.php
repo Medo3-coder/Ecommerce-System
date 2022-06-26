@@ -22,4 +22,21 @@ class ShippingAreaController extends Controller
 
         return redirect()->route('manage-division')->with('success', 'Division added Successfully');
     }
+
+    public function editDivision(ShipDivision $shipDivision)
+    {
+        return view('backend.shipping.division.edit_division' , compact('shipDivision'));
+    }
+
+    public function updateDivision(StoreRequest $request , ShippingService $service , $id)
+    {
+        $service->UpdateDivision($request->validated() , $id);
+        return redirect()->route('manage-division')->with('success', 'Division Updated Successfully');
+    }
+
+    public function deleteDivision(ShipDivision $shipDivision)
+    {
+        $shipDivision->delete();
+        return response('Division Deleted successfully.', 200);
+    }
 }
