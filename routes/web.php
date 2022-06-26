@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\backend\CouponController;
 use App\Http\Controllers\Backend\LanguageController;
 use App\Http\Controllers\backend\ProductController;
+use App\Http\Controllers\Backend\ShippingAreaController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\backend\SubSubCategoryController;
 use App\Http\Controllers\frontend\IndexController;
@@ -273,3 +274,8 @@ Route::prefix('admin/coupon')->group(function (){
 });
 
 
+// Admin Shipping all Routes
+Route::prefix('admin/shipping')->group(function () {
+   Route::get('/division/view' , [ShippingAreaController::class , 'divisionView'])->name('manage-division');
+   Route::post('division/store' , [ShippingAreaController::class , 'divisionStore'])->name('division.store');
+});
