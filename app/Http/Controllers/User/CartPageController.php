@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Coupon;
+use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CartPageController extends Controller
 {
@@ -48,6 +51,22 @@ class CartPageController extends Controller
 
     public function couponApply(Request $request)
     {
+       $coupon = Coupon::where('coupon_name' , $request->coupon_name)->where('coupon_validity' , '>=' , Carbon::now()->format('Y-m-d'))->first();
+       if($coupon)
+       {
+              Session::put('coupon' ,   [
+                 'coupon_name' => $coupon->coupon_name,
+                 'coupon_discount' => $coupon->coupon_discount,
+                 'discount_amount' => round(Cart::total() * ($coupon->coupon_discount / 100)),
+                 'total_amount' =>round(Cart::total() - Cart::total() * ($coupon->coupon_discount / 100)),
 
+              ]);
+            //   Cart::coupon($coupon->coupon_name , $coupon->discount_amount);
+              return response()->json(['success' => 'Coupon applied successfully!']);
+         }
+         else
+         {
+              return response()->json(['error' => 'Coupon Invalid!']);
+       }
     }
 }

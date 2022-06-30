@@ -310,7 +310,7 @@ Route::prefix('admin/state')->group(function () {
  // Frontend Coupon Option
 
 
- Route::post('/coupon-apply' , [CartPageController::class , 'couponApply'])->name('coupon.apply');
+ Route::post('/coupon-apply' , [CartPageController::class , 'couponApply']);
 
 
 

@@ -78,7 +78,7 @@
                                                         <span class="badge badge-pill badge-success">Valid</span>
                                                     @else
                                                         <span class="badge badge-pill badge-danger"> Invalid</span>
-                                                        @endif
+                                                      @endif
                                                 </td>
                                                 <td width="20%">
                                                     <a href="{{ route('coupon.edit', $item->id) }}" class="btn btn-info"
