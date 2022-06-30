@@ -46,6 +46,11 @@
                 </div>
 
                 <div class="col-md-4 col-sm-12 estimate-ship-tax">
+                    @if (Session::has('coupon'))
+
+                    @else
+
+
                     <table class="table">
                         <thead>
                             <tr>
@@ -59,7 +64,7 @@
                                 <tr>
                                     <td>
                                         <div class="form-group">
-                                            <input type="text" class="form-control unicase-form-control text-input" name="coupon_name" placeholder="You Coupon..">
+                                            <input type="text" class="form-control unicase-form-control text-input" id="coupon_name" placeholder="You Coupon..">
                                         </div>
                                         <div class="clearfix pull-right">
                                             <button type="submit" class="btn-upper btn btn-primary" onclick="applyCounpon()">APPLY COUPON</button>
@@ -68,11 +73,12 @@
                                 </tr>
                         </tbody><!-- /tbody -->
                     </table><!-- /table -->
+                    @endif
                 </div><!-- /.estimate-ship-tax -->
 
                 <div class="col-md-4 col-sm-12 cart-shopping-total">
                     <table class="table">
-                        <thead>
+                        <thead id="Coupon_Calculated_Field">
                             <tr>
                                 <th>
                                     <div class="cart-sub-total">

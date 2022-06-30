@@ -804,6 +804,7 @@
                 type:'POST',
                 dataType: 'json',
                 url:"{{ url('/coupon-apply') }}",
+                // url:"/coupon-apply",
                 data:{coupon_name : coupon_name},
                 success : function(data) {
 
@@ -832,6 +833,22 @@
                 }
 
             })
+        }
+
+
+
+
+        function couponCalculation()
+        {
+            $.ajax({
+                type:'GET',
+                url:'/coupon-calculation',
+                dataType: 'json',
+                success: function(data)
+                {
+
+                }
+            });
         }
         </script>
 

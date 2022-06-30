@@ -51,7 +51,9 @@ class CartPageController extends Controller
 
     public function couponApply(Request $request)
     {
-       $coupon = Coupon::where('coupon_name' , $request->coupon_name)->where('coupon_validity' , '>=' , Carbon::now()->format('Y-m-d'))->first();
+        // dd($request->coupon_name);
+        $coupon = Coupon::where('coupon_name',$request->coupon_name)->where('coupon_validity','>=',Carbon::now()->format('Y-m-d'))->first();
+            //    dd($coupon);
        if($coupon)
        {
               Session::put('coupon' ,   [
@@ -68,5 +70,36 @@ class CartPageController extends Controller
          {
               return response()->json(['error' => 'Coupon Invalid!']);
        }
+    }
+
+
+
+    public function couponCalculation()
+    {
+        if(Session::has('coupon'))
+        {
+            return response()->json(
+                [
+                    'subtotal' => Cart::total(),
+                    'coupon_name' => Session::get('coupon.coupon_name'),
+                    'coupon_discount' => Session::get('coupon.coupon_discount'),
+                    'discount_amount' => Session::get('coupon.discount_amount'),
+                    'total_amount' => Session::get('coupon.total_amount'),
+                ]
+            );
+
+        }
+
+        else{
+            return response()->json(
+                [
+                    'total' => Cart::total(),
+                    'coupon_name' => '',
+                    'coupon_discount' => '',
+                    'discount_amount' => '',
+
+                ]
+            );
+        }
     }
 }

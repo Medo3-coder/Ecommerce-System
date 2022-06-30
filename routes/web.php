@@ -312,5 +312,7 @@ Route::prefix('admin/state')->group(function () {
 
  Route::post('/coupon-apply' , [CartPageController::class , 'couponApply']);
 
+ Route::get('/coupon-calculation', [CartPageController::class , 'couponCalculation']);
+
 
 
