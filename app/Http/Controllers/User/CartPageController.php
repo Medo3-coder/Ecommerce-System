@@ -45,4 +45,9 @@ class CartPageController extends Controller
         Cart::update($rowId , $row->qty - 1 );
         return response()->json('Decrement');
     }
+
+    public function couponApply(Request $request)
+    {
+
+    }
 }

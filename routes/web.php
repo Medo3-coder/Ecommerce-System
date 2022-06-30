@@ -307,5 +307,10 @@ Route::prefix('admin/state')->group(function () {
     Route::get('/delete/{state}' , [ShippingStateController::class , 'deletestate'])->name('state.delete')->middleware('auth:admin');
  });
 
+ // Frontend Coupon Option
+
+
+ Route::post('/coupon-apply' , [CartPageController::class , 'couponApply'])->name('coupon.apply');
+
 
 

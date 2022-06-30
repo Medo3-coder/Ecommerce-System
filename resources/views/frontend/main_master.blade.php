@@ -794,6 +794,26 @@
         <!-- //End Load My cart / -->
 
 
+
+
+        <script type="text/javascript">
+        function applyCounpon()
+        {
+            let coupon_name = $('#coupon_name').val();
+            $.ajax({
+                type:'POST',
+                dataType: 'json',
+                url:{{ url('/apply-coupon') }},
+                data:{coupon_name : coupon_name},
+                success : function(data) {
+
+                }
+
+            })
+        }
+        <script>
+
+
 </body>
 
 
