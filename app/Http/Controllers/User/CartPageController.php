@@ -7,6 +7,7 @@ use App\Models\Coupon;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class CartPageController extends Controller
@@ -158,6 +159,31 @@ class CartPageController extends Controller
     {
         Session::forget('coupon');
         return response()->json(['success' => 'Coupon removed successfully!']);
+    }
+
+    public function checkoutCreate()
+    {
+        if(Auth::check())
+        {
+            // return redirect()->route('checkout.index');
+            if(Cart::total() > 0)
+            {
+            $carts = Cart::content();
+            $cartQty = Cart::count();
+            $cartTotal = (int) str_replace(',','',Cart::total());   // 2,700.00 to 2700
+            // $cartTotal =  Cart::total();
+
+            return view('frontend.checkout.checkout_view' , compact('carts' , 'cartQty','cartTotal'));
+            }
+            else
+            {
+                return redirect()->to('/')->with('error','Shopping at Least One Product');
+            }
+        }
+        else
+        {
+            return redirect()->route('login')->with('error','You Need to Login First to Checkout');
+        }
     }
 
 }

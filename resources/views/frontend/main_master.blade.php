@@ -84,7 +84,23 @@
 
         {{-- //sweet alert --}}
 
+
+
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if(Session::has('success'))
+    <script>
+        toastr.success('{!! Session::get('success') !!}')
+    </script>
+    @endif
+
+
+    @if(Session::has('error'))
+    <script>
+        toastr.error('{!! Session::get('error') !!}')
+    </script>
+    @endif
+
 
 
         <script>

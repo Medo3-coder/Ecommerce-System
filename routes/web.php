@@ -317,4 +317,9 @@ Route::prefix('admin/state')->group(function () {
  Route::get('/coupon-remove' , [CartPageController::class , 'couponRemove']);
 
 
+ //checkout
+
+ Route::get('/checkout', [CartPageController::class , 'checkoutCreate'])->name('checkout');
+
+
 

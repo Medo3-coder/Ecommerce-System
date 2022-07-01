@@ -135,7 +135,7 @@
 
                 </div><!-- /.row -->
 
-                @include('frontend.body.brands')
+                @include('frontend.layouts.brands')
             </div><!-- /.sigin-in-->
 
         </div><!-- /.body-content -->
