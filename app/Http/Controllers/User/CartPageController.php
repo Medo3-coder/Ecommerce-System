@@ -32,6 +32,11 @@ class CartPageController extends Controller
     public function removeCartProduct($id)
     {
         Cart::remove($id);
+        if(Session::has('coupon'))
+        {
+            Session::forget('coupon');
+        }
+
         return response()->json(['success' => 'Product removed from cart successfully!']);
     }
 
@@ -44,19 +49,16 @@ class CartPageController extends Controller
 
        if(Session::has('coupon'))
        {
+        $total = (int)str_replace(',','',Cart::total());
               $coupon = Session::get('coupon');
               $coupon = Coupon::where('coupon_name' , $coupon['coupon_name'])->first();
 
-           return response()->json(
-               [
-                   'subtotal' =>(int) str_replace(',','',Cart::total()),
-                   'coupon_name' => Session::get('coupon.coupon_name'),
-                   // 'coupon_name' => Session::get('coupon')['coupon_name'],
-                   'coupon_discount' => Session::get('coupon.coupon_discount'),
-                   'discount_amount' => Session::get('coupon.discount_amount'),
-                   'total_amount' => Session::get('coupon.total_amount'),
-               ]
-           );
+              Session::put('coupon',[
+                'coupon_name' => $coupon->coupon_name,
+                'coupon_discount' => $coupon->coupon_discount,
+                'discount_amount' => round($total* ($coupon->coupon_discount / 100)),
+                'total_amount' =>round($total - $total * $coupon->coupon_discount / 100  ),
+            ]);
 
        }
 
@@ -75,19 +77,16 @@ class CartPageController extends Controller
 
         if(Session::has('coupon'))
        {
+        $total = (int)str_replace(',','',Cart::total());
               $coupon = Session::get('coupon');
               $coupon = Coupon::where('coupon_name' , $coupon['coupon_name'])->first();
 
-           return response()->json(
-               [
-                   'subtotal' =>(int) str_replace(',','',Cart::total()),
-                   'coupon_name' => Session::get('coupon.coupon_name'),
-                   // 'coupon_name' => Session::get('coupon')['coupon_name'],
-                   'coupon_discount' => Session::get('coupon.coupon_discount'),
-                   'discount_amount' => Session::get('coupon.discount_amount'),
-                   'total_amount' => Session::get('coupon.total_amount'),
-               ]
-           );
+              Session::put('coupon',[
+                'coupon_name' => $coupon->coupon_name,
+                'coupon_discount' => $coupon->coupon_discount,
+                'discount_amount' => round($total* ($coupon->coupon_discount / 100)),
+                'total_amount' =>round($total - $total * $coupon->coupon_discount / 100  ),
+            ]);
 
        }
 
@@ -129,7 +128,7 @@ class CartPageController extends Controller
         {
             return response()->json(
                 [
-                    'subtotal' => (int) str_replace(',','',Cart::total()),
+                    'subtotal' => Cart::total(),
                     'coupon_name' => Session::get('coupon.coupon_name'),
                     // 'coupon_name' => Session::get('coupon')['coupon_name'],
                     'coupon_discount' => Session::get('coupon.coupon_discount'),
@@ -143,7 +142,7 @@ class CartPageController extends Controller
         else{
             return response()->json(
                 [
-                    'total' => (int) str_replace(',','',Cart::total()),
+                    'total' => Cart::total(),
                     'coupon_name' => '',
                     'coupon_discount' => '',
                     'discount_amount' => '',

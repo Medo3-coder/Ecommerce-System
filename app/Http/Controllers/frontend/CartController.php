@@ -6,11 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
     public function addToCart(Request $request, $id)
     {
+        if(Session::has('coupon'))
+        {
+            Session::forget('coupon');
+        }
+
         $product = Product::findOrFail($id);
         $discountAmount = $product->selling_price - $product->discount_price;
         if ($product->discount_price == null) {
