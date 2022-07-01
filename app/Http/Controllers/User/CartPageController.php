@@ -82,6 +82,7 @@ class CartPageController extends Controller
                 [
                     'subtotal' => Cart::total(),
                     'coupon_name' => Session::get('coupon.coupon_name'),
+                    // 'coupon_name' => Session::get('coupon')['coupon_name'],
                     'coupon_discount' => Session::get('coupon.coupon_discount'),
                     'discount_amount' => Session::get('coupon.discount_amount'),
                     'total_amount' => Session::get('coupon.total_amount'),
@@ -102,4 +103,15 @@ class CartPageController extends Controller
             );
         }
     }
+
+
+
+    public function couponRemove()
+    {
+        Session::forget('coupon');
+        return response()->json(['success' => 'Coupon removed successfully!']);
+    }
+
 }
+
+

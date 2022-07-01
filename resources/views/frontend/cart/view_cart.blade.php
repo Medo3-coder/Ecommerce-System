@@ -51,7 +51,7 @@
                     @else
 
 
-                    <table class="table">
+                    <table class="table" id="couponField">
                         <thead>
                             <tr>
                                 <th>
@@ -79,7 +79,7 @@
                 <div class="col-md-4 col-sm-12 cart-shopping-total">
                     <table class="table">
                         <thead id="Coupon_Calculated_Field">
-                            <tr>
+                            {{-- <tr>
                                 <th>
                                     <div class="cart-sub-total">
                                         Subtotal<span class="inner-left-md">$600.00</span>
@@ -88,7 +88,7 @@
                                         Grand Total<span class="inner-left-md">$600.00</span>
                                     </div>
                                 </th>
-                            </tr>
+                            </tr> --}}
                         </thead><!-- /thead -->
                         <tbody>
                                 <tr>

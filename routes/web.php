@@ -314,5 +314,7 @@ Route::prefix('admin/state')->group(function () {
 
  Route::get('/coupon-calculation', [CartPageController::class , 'couponCalculation']);
 
+ Route::get('/coupon-remove' , [CartPageController::class , 'couponRemove']);
+
 
 
