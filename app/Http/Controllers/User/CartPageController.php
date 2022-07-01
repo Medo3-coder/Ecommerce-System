@@ -24,7 +24,7 @@ class CartPageController extends Controller
         //If you want to know how many items there are in your cart, you can use the count() method.
         $cartQty = Cart::count();
         //The total() method can be used to get the calculated total of all items in the cart,
-        $cartTotal = Cart::total();
+        $cartTotal = (int) str_replace(',','',Cart::total());   // 2,700.00 to 2700
 
         return response()->json(['carts' => $carts, 'cartQty' => $cartQty, 'cartTotal' => $cartTotal]);
     }
@@ -37,15 +37,62 @@ class CartPageController extends Controller
 
     public function incrementCartProduct($rowId)
     {
-       $row =  Cart::get($rowId);
+         $row =  Cart::get($rowId);
        Cart::update($rowId , $row->qty + 1 );
+
+
+
+       if(Session::has('coupon'))
+       {
+              $coupon = Session::get('coupon');
+              $coupon = Coupon::where('coupon_name' , $coupon['coupon_name'])->first();
+
+           return response()->json(
+               [
+                   'subtotal' =>(int) str_replace(',','',Cart::total()),
+                   'coupon_name' => Session::get('coupon.coupon_name'),
+                   // 'coupon_name' => Session::get('coupon')['coupon_name'],
+                   'coupon_discount' => Session::get('coupon.coupon_discount'),
+                   'discount_amount' => Session::get('coupon.discount_amount'),
+                   'total_amount' => Session::get('coupon.total_amount'),
+               ]
+           );
+
+       }
+
+
        return response()->json('Increment');
+
+
+
     }
 
     public function decrementCartProduct($rowId)
     {
         $row = Cart::get($rowId);
         Cart::update($rowId , $row->qty - 1 );
+
+
+        if(Session::has('coupon'))
+       {
+              $coupon = Session::get('coupon');
+              $coupon = Coupon::where('coupon_name' , $coupon['coupon_name'])->first();
+
+           return response()->json(
+               [
+                   'subtotal' =>(int) str_replace(',','',Cart::total()),
+                   'coupon_name' => Session::get('coupon.coupon_name'),
+                   // 'coupon_name' => Session::get('coupon')['coupon_name'],
+                   'coupon_discount' => Session::get('coupon.coupon_discount'),
+                   'discount_amount' => Session::get('coupon.discount_amount'),
+                   'total_amount' => Session::get('coupon.total_amount'),
+               ]
+           );
+
+       }
+
+
+
         return response()->json('Decrement');
     }
 
@@ -56,11 +103,13 @@ class CartPageController extends Controller
             //    dd($coupon);
        if($coupon)
        {
+        $total = (int)str_replace(',','',Cart::total());
+        // dd($total);
               Session::put('coupon' ,   [
                  'coupon_name' => $coupon->coupon_name,
                  'coupon_discount' => $coupon->coupon_discount,
-                 'discount_amount' => round(Cart::total() * ($coupon->coupon_discount / 100)),
-                 'total_amount' =>round(Cart::total() - Cart::total() * ($coupon->coupon_discount / 100)),
+                 'discount_amount' => round($total* ($coupon->coupon_discount / 100)),
+                 'total_amount' =>round($total - $total * $coupon->coupon_discount / 100  ),
 
               ]);
             //   Cart::coupon($coupon->coupon_name , $coupon->discount_amount);
@@ -80,7 +129,7 @@ class CartPageController extends Controller
         {
             return response()->json(
                 [
-                    'subtotal' => Cart::total(),
+                    'subtotal' => (int) str_replace(',','',Cart::total()),
                     'coupon_name' => Session::get('coupon.coupon_name'),
                     // 'coupon_name' => Session::get('coupon')['coupon_name'],
                     'coupon_discount' => Session::get('coupon.coupon_discount'),
@@ -94,7 +143,7 @@ class CartPageController extends Controller
         else{
             return response()->json(
                 [
-                    'total' => Cart::total(),
+                    'total' => (int) str_replace(',','',Cart::total()),
                     'coupon_name' => '',
                     'coupon_discount' => '',
                     'discount_amount' => '',

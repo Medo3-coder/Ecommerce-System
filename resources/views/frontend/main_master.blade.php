@@ -759,6 +759,7 @@
                         url: '/cart-increment/'+rowId,
                         dataType: 'json',
                         success: function(data){
+                            couponCalculation();
                             cart();
                             miniCart();
                         }
@@ -779,6 +780,7 @@
                url: '/cart-decrement/'+rowId,
                datatypes: 'json',
                 success: function(data){
+                  couponCalculation();
                   cart();
                   miniCart();
                 }
@@ -807,8 +809,8 @@
                 // url:"/coupon-apply",
                 data:{coupon_name : coupon_name},
                 success : function(data) {
-                    couponCalculation();
-                    $('#couponField').hide();
+                    couponCalculation(); // call coupon calculation function
+                    $('#couponField').hide(); // hide coupon field
                     // Start Message
                     const Toast = Swal.mixin({
                             toast: true,
@@ -867,13 +869,15 @@
                         $('#Coupon_Calculated_Field').html(`
                             <tr>
                                 <th>
+                                    <button type="submit" onclick="couponRemove()"><i class="fa fa-times"></i>  </button>
+
                                     <div class="cart-sub-total">
                                         Subtotal<span class="inner-left-md">${data.subtotal}</span>
                                     </div>
 
                                     <div class="cart-sub-total">
                                         Coupon<span class="inner-left-md"> $ ${data.coupon_name}</span>
-                                        <button type="submit" onclick="couponRemove()"><i class="fa fa-times"></i>  </button>
+
                                     </div>
 
                                     <div class="cart-sub-total">

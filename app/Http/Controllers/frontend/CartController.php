@@ -58,7 +58,8 @@ class CartController extends Controller
         //If you want to know how many items there are in your cart, you can use the count() method.
         $cartQty = Cart::count();
         //The total() method can be used to get the calculated total of all items in the cart,
-        $cartTotal = Cart::total();
+        // $cartTotal = Cart::total();
+        $cartTotal = (int)str_replace(',','',Cart::total());   //this is to remove the comma from the total amount
 
         return response()->json(['carts' => $carts, 'cartQty' => $cartQty, 'cartTotal' => $cartTotal]);
     }
