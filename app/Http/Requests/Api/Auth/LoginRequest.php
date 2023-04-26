@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
-class RegisterRequest extends FormRequest {
+class LoginRequest extends FormRequest {
 
   public function __construct(Request $request) {
     $request['phone']        = fixPhone($request['phone']);
@@ -14,13 +14,12 @@ class RegisterRequest extends FormRequest {
 
   public function rules() {
     return [
-      'name'         => 'required|max:50',
       'country_code' => 'required|numeric|digits_between:2,5',
-      'phone'        => 'required|numeric|digits_between:9,10|unique:users,phone,NULL,id,deleted_at,NULL',
-      'email'        => 'required|email|unique:users,email,NULL,id,deleted_at,NULL|max:50',
-      'password'     => 'required|min:6|max:100',
-      'image'        => 'nullable',
+      'phone'        => 'required|numeric|digits_between:9,10|exists:users,phone,deleted_at,NULL',
+      //'email'       => 'required|email|exists:users,email|max:50',
+      'password'    => 'required|min:6|max:100',
+      'device_id'   => 'required|max:250',
+      'device_type' => 'required|in:ios,android,web',
     ];
   }
-
 }

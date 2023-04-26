@@ -77,7 +77,7 @@ trait UploadTrait {
       // file_put_contents(base_path().'storage/images/' . $directory . '/' . $name, base64_decode($file));
       $img = Image::make(base64_decode($file));
 
-      if (null != $resize) {
+      if (null != $resize2) {
         $img->resize($resize1, $resize2, function ($constraint) {
           $constraint->aspectRatio();
         });
