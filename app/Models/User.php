@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Http\Resources\Api\UserResource;
 use Carbon\Carbon;
+use App\Traits\SmsTrait;
+use App\Traits\UploadTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -17,6 +19,9 @@ class User extends Authenticatable {
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use UploadTrait;
+    use SmsTrait ;
+
 
     /**
      * The attributes that are mass assignable.
