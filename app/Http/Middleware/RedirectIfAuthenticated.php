@@ -25,9 +25,7 @@ class RedirectIfAuthenticated
             if (Auth::guard($guard)->check()) {
                 return redirect($guard.'/dashboard');   // user or admin / dashboard
             }
-
         }
-
         return $next($request);
     }
 }

@@ -2,11 +2,9 @@
 
 namespace App\Http;
 
-use Exception;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
-class Kernel extends HttpKernel
-{
+class Kernel extends HttpKernel {
     /**
      * The application's global HTTP middleware stack.
      *
@@ -55,18 +53,23 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $routeMiddleware = [
-        'auth' => \App\Http\Middleware\Authenticate::class,
-        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
-        'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'admin' => \App\Http\Middleware\AdminRedirectIfAuthenticated::class,
-        'user' => \App\Http\Middleware\UserRedirectIfAuthenticated::class,
-        'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
-        'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
-        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-    ];
+        'auth'                      => \App\Http\Middleware\Authenticate::class,
+        'auth.basic'                => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'cache.headers'             => \Illuminate\Http\Middleware\SetCacheHeaders::class,
+        'can'                       => \Illuminate\Auth\Middleware\Authorize::class,
+        // 'guest'                     => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'admin'                     => \App\Http\Middleware\AdminRedirectIfAuthenticated::class,
+        'user'                      => \App\Http\Middleware\UserRedirectIfAuthenticated::class,
+        'password.confirm'          => \Illuminate\Auth\Middleware\RequirePassword::class,
+        'guest'                      => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'signed'                    => \Illuminate\Routing\Middleware\ValidateSignature::class,
+        'throttle'                  => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'verified'                  => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'is-active'                 => \App\Http\Middleware\CheckAuthStatus::class,
+        'OptionalSanctumMiddleware' => \App\Http\Middleware\Api\OptionalSanctumMiddleware::class,
+        'api-lang'                  => \App\Http\Middleware\Api\ApiLang::class,
+        'api-cors'                  => \App\Http\Middleware\Api\ApiCors::class,
 
+    ];
 
 }

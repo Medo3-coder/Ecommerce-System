@@ -66,14 +66,14 @@ class User extends Authenticatable {
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+
         'lat'               => 'decimal:8',
         'lng'               => 'decimal:8',
         'is_notify'         => 'boolean',
         'is_blocked'        => 'boolean',
         'is_approved'       => 'boolean',
         'active'            => 'boolean',
-
+        'email_verified_at' => 'datetime',
     ];
 
     // /**

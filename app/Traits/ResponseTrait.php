@@ -8,8 +8,8 @@ trait ResponseTrait {
      */
 
     public function response($key, $msg, $data = [], $anotherKey = [], $page = false) {
-        $allResponse['key'] = $key;
-        $allResponse['msg'] = $msg;
+        $allResponse['key'] = (string) $key;
+        $allResponse['msg'] = (string) $msg;
 
         //unread notifications count if request ask
         if ('success' == $key && request()->has('count_notifications')) {
@@ -18,19 +18,18 @@ trait ResponseTrait {
                 $count = auth()->user()->notifications()->unread()->count();
             }
             $allResponse['count_notifications'] = $count;
-
-            //if additional data
-            if (!empty($anotherKey)) {
-                foreach ($anotherKey as $otherKey => $value) {
-                    $allResponse[$otherKey] = $value;
-                }
-            }
-            //response data
-            if ($data != [] && (in_array($key, ['success', 'needActive', 'exception']))) {
-                $allResponse['data'] = $data;
-            }
-            return response()->json($allResponse);
         }
+        //if additional data
+        if (!empty($anotherKey)) {
+            foreach ($anotherKey as $otherKey => $value) {
+                $allResponse[$otherKey] = $value;
+            }
+        }
+        //response data
+        if ($data != [] && (in_array($key, ['success', 'needActive', 'exception']))) {
+            $allResponse['data'] = $data;
+        }
+        return response()->json($allResponse);
     }
 
     public function unauthenticatedReturn() {

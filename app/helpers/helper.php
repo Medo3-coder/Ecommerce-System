@@ -39,3 +39,8 @@ if (!function_exists('defaultLang')) {
       return 'ar';
     }
   }
+
+
+  function lang(){
+    return App() -> getLocale();
+}
