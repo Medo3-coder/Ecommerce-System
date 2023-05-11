@@ -10,11 +10,21 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function categoryView()
+    public function index($id = null)
     {
-        $category = Category::latest()->get();         //limit check
-        return view('backend.category.category_view', compact('category'));
+        // $category = Category::latest()->get();         //limit check
+        $categories = Category::where('parent_id' , $id)->paginate(3);
+
+        return view('backend.categories.table', compact('categories'));
     }
+
+
+    public function create($id = null)
+    {
+        $categories = Category::latest()->get();
+        return view('admin.categories.create' , compact('categories' , 'id'));
+    }
+
 
     public function categoryStore(categoryRequest $request, categoryService $service)
     {
@@ -46,6 +56,17 @@ class CategoryController extends Controller
         );
         return redirect()->route('all.category')->with('success', 'Category Updated Successfully');
     }
+
+
+
+    public function show($id)
+    {
+        $category = Category::findOrFail($id);
+        $categories = Category::get();
+        return view('admin.categories.show' , compact('categories'));
+    }
+
+
 
     public function categoryDelete(Category $category)
     {

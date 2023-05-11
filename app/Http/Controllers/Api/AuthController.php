@@ -36,8 +36,10 @@ class AuthController extends Controller {
         if (!$user = User::where('phone', $request['phone'])
             ->where('country_code', $request['country_code'])
             ->first()) {
+
             return $this->failMsg(__('auth.failed'));
         }
+
         if (!$this->isCodeCorrect($user, $request->code)) {
             return $this->failMsg(trans('auth.code_invalid'));
         }

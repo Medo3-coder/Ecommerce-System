@@ -166,7 +166,9 @@ class User extends Authenticatable {
         return $this->morphMany(Device::class, 'morph');
     }
 
-    public function login() {
+    public function login()
+    {
+        // $this->tokens()->delete();
         $this->updateUserDevice();
         $this->updateUserLang();
         $token = $this->createToken(request()->device_type)->plainTextToken;

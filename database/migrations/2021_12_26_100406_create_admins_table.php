@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Admin;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,9 +22,21 @@ class CreateAdminsTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
-            $table->string('profile_photo_path', 2048)->nullable();
+            $table->string('avatar', 50)->nullable();
+            $table->integer('role_id')->default(0);
+            $table->boolean('is_blocked')->default(0);
+            $table->boolean('is_notify')->default(true);
             $table->timestamps();
         });
+
+
+        Admin::create([
+            'name'     => 'Manager',
+            'email'    => 'aait@info.com',
+            'phone'    => '0555105813',
+            'password' => 123456,
+            'role_id'  => 1,
+          ]);
     }
 
     /**
