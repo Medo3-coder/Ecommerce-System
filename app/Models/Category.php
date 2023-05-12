@@ -3,26 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
-// class Category extends Model
-// {
-// use HasFactory;
-
-// protected $fillable = [
-//     'category_name_en',
-//     'category_name_hin',
-//     'category_name_ar',
-//     'category_slug_en',
-//     'category_slug_hin',
-//     'category_slug_ar',
-//     'category_icon',
-// ];
-
-// public function subCategories()
-// {
-//     return $this->hasMany(SubCategory::class)->orderBy('sub_category_name_en', 'ASC');
-// }
-
 use Spatie\Translatable\HasTranslations;
 
 class Category extends Model {
@@ -30,7 +10,7 @@ class Category extends Model {
 
     const IMAGEPATH = 'categories';
 
-    protected $fillable = ['name', 'parent_id', 'image'];
+    protected $fillable  = ['name', 'parent_id', 'image'];
     public $translatable = ['name'];
 
     public function childes() {
@@ -86,5 +66,10 @@ class Category extends Model {
             return __('admin.main_section');
         }
     }
+
+    // public function subCategories()
+    // {
+    //     return $this->hasMany(SubCategory::class)->orderBy('sub_category_name_en', 'ASC');
+    // }
 
 }

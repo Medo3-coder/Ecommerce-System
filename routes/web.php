@@ -100,6 +100,9 @@ Route::prefix('admin/category')->group(function () {
     Route::get('/categories-show/{id?}', [CategoryController::class, 'index'])->name('categories.index')->middleware('auth:admin');
     Route::get('/categories/create/{id?}', [CategoryController::class, 'create'])->name('categories.create')->middleware('auth:admin');
     Route::get('/categories/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit')->middleware('auth:admin');
+    Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store')->middleware('auth:admin');
+
+
     Route::put('/categories/{id}', [CategoryController::class, 'update'])->name('categories.update')->middleware('auth:admin');
     Route::get('/categories/{id}/show', [CategoryController::class, 'show'])->name('categories.show')->middleware('auth:admin');
     Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.delete')->middleware('auth:admin');
