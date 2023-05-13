@@ -1,6 +1,6 @@
 @php
-$prefix = Request::Route()->getPrefix(); // to get route prefix
-$route = Route::current()->getName(); // to get current route name
+    $prefix = Request::Route()->getPrefix(); // to get route prefix
+    $route = Route::current()->getName(); // to get current route name
 @endphp
 
 <aside class="main-sidebar">
@@ -53,13 +53,7 @@ $route = Route::current()->getName(); // to get current route name
                 </a>
                 <ul class="treeview-menu">
                     <li class="{{ $route == 'categories.index' ? 'active' : '' }}"><a
-                            href="{{ route('categories.index') }}"><i class="ti-more"></i>All Category</a></li>
-                    <li class="{{ $route == 'all.subcategory' ? 'active' : '' }}"><a
-                            href="{{ route('all.subcategory') }}"><i class="ti-more"></i> All SubCategory</a>
-                    </li>
-                    <li class="{{ $route == 'all.subsubcategory' ? 'active' : '' }}"><a
-                            href="{{ route('all.subsubcategory') }}"><i class="ti-more"></i> All Sub
-                            SubCategory</a></li>
+                            href="{{ route('categories.index') }}"><i class="ti-more"></i> Categories</a></li>
                 </ul>
             </li>
 

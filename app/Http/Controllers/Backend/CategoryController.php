@@ -9,8 +9,14 @@ use App\Models\Category;
 
 class CategoryController extends Controller {
     public function index($id = null) {
-        $categories = Category::latest()->get();
-        return view('backend.categories.table', compact('categories'));
+        if ($id != null) {
+            $categories = Category::find($id)->getAllChildren();
+        } else {
+            $categories = Category::latest()->get();
+
+        }
+
+        return view('backend.categories.table', compact('categories', 'id'));
     }
 
     public function create($id = null) {
@@ -39,17 +45,14 @@ class CategoryController extends Controller {
     public function show($id) {
         $category   = Category::findOrFail($id);
         $categories = Category::get();
-        return view('admin.categories.show', compact('categories'));
+        return view('backend.categories.show', compact('categories', 'category'));
     }
 
-
-    public function destroy($id)
-    {
+    public function destroy($id) {
         $category = Category::findOrFail($id)->delete();
 
         // Report::addToLog('  حذف قسم') ;
         return response('Post deleted successfully');
     }
-
 
 }

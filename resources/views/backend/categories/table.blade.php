@@ -4,11 +4,8 @@
 
 @section('admin')
 
-
-
     <div class="row m-0 justify-content-between">
     </div>
-
 
     <div class="content-header">
         <div class="d-flex align-items-center">
@@ -45,7 +42,8 @@
                             <tr>
 
                                 <td>{{ $category->name }}</td>
-                                <td><a
+                                <td>
+                                    <a
                                         href="{{ route('categories.index', ['id' => $category->id]) }}">{{ __('admin.view') }}</a>
                                 </td>
                                 <td class="product-action">
@@ -58,9 +56,6 @@
                                     <a class="text-danger" id="delete"
                                         href="{{ route('categories.delete', $category->id) }}"><i
                                             class="fa fa-trash-o"></i></a>
-                                            {{-- <a href="{{ route('categories.delete', $category->id) }}"
-                                                class="btn btn-danger" id="delete"
-                                                title="Delete Data"> <i class="fa fa-trash"></i></a> --}}
                                 </td>
                             </tr>
                         @endforeach
@@ -75,9 +70,5 @@
 @endsection
 
 @push('js')
-@include('backend.shared.deleteOne')
-
-
-
-
+    @include('backend.shared.deleteOne')
 @endpush

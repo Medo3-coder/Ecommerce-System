@@ -4,38 +4,38 @@
             e.preventDefault()
             that = this;
             var link = $(this).attr('href');
-
             Swal.fire({
-                icon: 'warning',
-                title: 'Are you sure you want to delete this record?',
-                showDenyButton: false,
+                title: "{{ __('هل تريد الاستمرار ؟') }}",
+                text: "{{ __('هل انت متأكد انك تريد استكمال عملية الحذف') }}",
+                type: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Yes'
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '{{ __('admin.confirm') }}',
+                confirmButtonClass: 'btn btn-primary',
+                cancelButtonText: '{{ __('admin.cancel') }}',
+                cancelButtonClass: 'btn btn-danger ml-1',
+                buttonsStyling: false,
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
                     $.ajax({
-                        type: 'post',
+                        method: 'DELETE',
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         url: link,
-                        data: {
-                            '_method': 'DELETE',
-                        },
                         success: function(response, textStatus, xhr) {
                             $(that).parent().parent().remove();
-
                             Swal.fire({
-                                icon: 'success',
-                                title: response,
-                                showDenyButton: false,
-                                showCancelButton: false,
-                                confirmButtonText: 'Yes'
-                            }).then((result) => {
-
-                                // window.location.reload();
-                            });
+                                position: 'top-start',
+                                type: 'success',
+                                title: '{{ __('admin.the_selected_has_been_successfully_deleted') }}',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                confirmButtonClass: 'btn btn-primary',
+                                buttonsStyling: false,
+                            })
                         }
                     });
                 }
