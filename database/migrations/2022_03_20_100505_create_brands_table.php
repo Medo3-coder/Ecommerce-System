@@ -4,24 +4,18 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBrandsTable extends Migration
-{
+class CreateBrandsTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
-            $table->string('brand_name_en');
-            $table->string('brand_name_hin');
-            $table->string('brand_name_ar');
-            $table->string('brand_slug_en');
-            $table->string('brand_slug_hin');
-            $table->string('brand_slug_ar');
-            $table->string('brand_image');
+            $table->string('name');
+            $table->string('slug');
+            $table->string('image');
             $table->timestamps();
         });
     }
@@ -31,8 +25,7 @@ class CreateBrandsTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('brands');
     }
 }

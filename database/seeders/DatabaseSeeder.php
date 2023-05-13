@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\Admin::factory()->create();
 
         $this->call(CategoryTableSeeder::class);
+        $this->call(BrandTableSeeder::class);
 
     }
 }
