@@ -42,7 +42,7 @@
                     </thead>
                     <tbody>
                         @foreach ($categories as $category)
-                            <tr class="delete_row">
+                            <tr>
 
                                 <td>{{ $category->name }}</td>
                                 <td><a
@@ -55,9 +55,12 @@
                                     <span class="action-edit text-primary pr-1"><a
                                             href="{{ route('categories.edit', ['id' => $category->id]) }}"><i
                                                 class="fa fa-edit"></i></a></span>
-                                    <span class="text-danger delete-row"
-                                        data-url="{{ url('categories/' . $category->id) }}"><i
-                                            class="fa fa-trash-o"></i></span>
+                                    <a class="text-danger" id="delete"
+                                        href="{{ route('categories.delete', $category->id) }}"><i
+                                            class="fa fa-trash-o"></i></a>
+                                            {{-- <a href="{{ route('categories.delete', $category->id) }}"
+                                                class="btn btn-danger" id="delete"
+                                                title="Delete Data"> <i class="fa fa-trash"></i></a> --}}
                                 </td>
                             </tr>
                         @endforeach
@@ -70,3 +73,11 @@
 
 
 @endsection
+
+@push('js')
+@include('backend.shared.deleteOne')
+
+
+
+
+@endpush

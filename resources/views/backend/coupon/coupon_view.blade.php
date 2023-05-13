@@ -228,7 +228,7 @@
                                 }).then((result) => {
                                     // window.location = '/category/view';
                                     // $(that).parent().parent().remove();
-                                    // window.location.reload();
+                                    window.location.reload();
                                 });
                             }
                         });

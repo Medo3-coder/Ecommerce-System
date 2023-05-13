@@ -5,7 +5,6 @@
 @section('admin')
     <div class="container-full">
         <!-- Main content -->
-        <!-- Main content -->
         <section class="content">
 
             <!-- Basic Forms -->
@@ -18,7 +17,8 @@
                     <div class="col">
                         <form method="POST" action="{{ route('categories.update', ['id' => $category->id]) }}"
                             class="store form-horizontal" novalidate>
-
+                            @csrf
+                            @method('PUT')
                             <div class="col-12">
                                 <div class="row">
                                     @foreach (languages() as $lang)
@@ -57,6 +57,11 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-12 d-flex justify-content-center mt-3">
+                                        <button type="submit" class="btn btn-primary mr-1 mb-1 submit_button">{{__('admin.update')}}</button>
+                                        <a href="{{ url()->previous() }}" type="reset" class="btn btn-outline-warning mr-1 mb-1">{{__('admin.back')}}</a>
+                                    </div>
+
                                 </div>
                             </div>
                         </form>
@@ -70,3 +75,10 @@
 
 
 @endsection
+
+
+@push('js')
+    {{-- submit edit form script --}}
+    @include('backend.shared.submitEditForm')
+    {{-- submit edit form script --}}
+@endpush
