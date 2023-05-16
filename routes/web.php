@@ -1,16 +1,17 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Backend\AdminProfileController;
-use App\Http\Controllers\Backend\BrandController;
-use App\Http\Controllers\Backend\CategoryController;
-use App\Http\Controllers\backend\CouponController;
-use App\Http\Controllers\Backend\LanguageController;
-use App\Http\Controllers\backend\ProductController;
-use App\Http\Controllers\Backend\ShippingAreaController;
-use App\Http\Controllers\Backend\ShippingDistrictController;
-use App\Http\Controllers\Backend\ShippingStateController;
-use App\Http\Controllers\backend\SliderController;
+use App\Http\Controllers\Admin\AdminProfileController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\LanguageController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ShippingAreaController;
+use App\Http\Controllers\Admin\ShippingDistrictController;
+use App\Http\Controllers\Admin\ShippingStateController;
+use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Backend\AdminsController;
 use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\frontend\IndexController;
 use App\Http\Controllers\User\CartPageController;
@@ -54,6 +55,23 @@ Route::middleware(['auth:admin'])->group(function () {
 Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('User_dashboard');
+
+
+
+
+
+Route::prefix('admin/admins')->group(function () {
+
+    Route::get('/admin', [AdminsController::class, 'index'])->name('admin.index')->middleware('auth:admin');
+    Route::get('/admin/create', [AdminsController::class, 'create'])->name('admin.create')->middleware('auth:admin');
+    Route::get('/admin/{id}/edit', [AdminsController::class, 'edit'])->name('admin.edit')->middleware('auth:admin');
+    Route::post('/admin/store', [AdminsController::class, 'store'])->name('admin.store')->middleware('auth:admin');
+    Route::put('/admin/{id}', [AdminsController::class, 'update'])->name('admin.update')->middleware('auth:admin');
+    Route::get('/admin/{id}/show', [AdminsController::class, 'show'])->name('admin.show')->middleware('auth:admin');
+    Route::delete('/admin/{id}', [AdminsController::class, 'destroy'])->name('admin.delete')->middleware('auth:admin');
+});
+
+
 
 Route::get('/', [IndexController::class, 'index']);
 

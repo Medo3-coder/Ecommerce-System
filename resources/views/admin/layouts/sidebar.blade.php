@@ -29,6 +29,15 @@
                 </a>
             </li>
 
+
+
+            <li class="{{ $route == 'admin.index' ? 'active' : '' }}">
+                <a href="{{ route('admin.index') }}">
+                    <i data-feather="pie-chart"></i>
+                    <span>Admins</span>
+                </a>
+            </li>
+
             <li class="treeview {{ $prefix == 'admin/brand' ? 'active' : '' }}">
                 <a href="#">
                     <i data-feather="message-circle"></i>
@@ -43,6 +52,11 @@
                     {{-- <li><a href="calendar.html"><i class="ti-more"></i>Calendar</a></li> --}}
                 </ul>
             </li>
+
+
+
+
+
 
             <li class="treeview {{ $prefix == 'admin/category' ? 'active' : '' }} ">
                 <a href="#">
