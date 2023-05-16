@@ -15,12 +15,12 @@ class CategoryController extends Controller {
             $categories = Category::latest()->get();
         }
 
-        return view('backend.categories.table', compact('categories', 'id'));
+        return view('admin.categories.table', compact('categories', 'id'));
     }
 
     public function create($id = null) {
         $categories = Category::latest()->get();
-        return view('backend.categories.create', compact('categories', 'id'));
+        return view('admin.categories.create', compact('categories', 'id'));
     }
 
     public function store(Store $request) {
@@ -32,7 +32,7 @@ class CategoryController extends Controller {
     public function edit($id) {
         $category   = Category::findOrFail($id);
         $categories = Category::latest()->get();
-        return view('backend.categories.edit', compact('category', 'categories'));
+        return view('admin.categories.edit', compact('category', 'categories'));
     }
 
     public function update(Update $request, $id) {
@@ -44,7 +44,7 @@ class CategoryController extends Controller {
     public function show($id) {
         $category   = Category::findOrFail($id);
         $categories = Category::get();
-        return view('backend.categories.show', compact('categories', 'category'));
+        return view('admin.categories.show', compact('categories', 'category'));
     }
 
     public function destroy($id) {

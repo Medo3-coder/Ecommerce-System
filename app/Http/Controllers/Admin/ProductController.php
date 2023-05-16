@@ -26,7 +26,7 @@ class ProductController extends Controller
     {
         $categories = Category::latest()->paginate(10);
         $brands = Brand::latest()->paginate(10);
-        return view('backend.product.product_add', compact('categories', 'brands'));
+        return view('admin.product.product_add', compact('categories', 'brands'));
     }
 
 
@@ -43,7 +43,7 @@ class ProductController extends Controller
     {
 
         $products = Product::latest()->get();
-        return view('backend.product.product_manage', compact('products'));
+        return view('admin.product.product_manage', compact('products'));
     }
 
     public function editProduct(Product $product)
@@ -53,7 +53,7 @@ class ProductController extends Controller
         $subcategory = SubCategory::latest()->get();
         $sub_Subcategory = SubSubCategory::latest()->get();
         $multi_img = MultiImg::where('product_id', $product->id)->get();
-        return view('backend.product.product_edit', compact('product', 'categories', 'brands', 'sub_Subcategory', 'subcategory', 'multi_img'));
+        return view('admin.product.product_edit', compact('product', 'categories', 'brands', 'sub_Subcategory', 'subcategory', 'multi_img'));
     }
 
     public function UpdateProduct(UpdateProduct $request, productService $product, $product_id)
@@ -125,7 +125,7 @@ class ProductController extends Controller
         $subcategory = SubCategory::latest()->get();
         $sub_Subcategory = SubSubCategory::latest()->get();
         $multi_img = MultiImg::where('product_id', $product->id)->get();
-        return view('backend.product.product_show', compact('product', 'categories', 'brands', 'sub_Subcategory', 'subcategory', 'multi_img'));
+        return view('admin.product.product_show', compact('product', 'categories', 'brands', 'sub_Subcategory', 'subcategory', 'multi_img'));
     }
 
     public function productInactive(Product $product)

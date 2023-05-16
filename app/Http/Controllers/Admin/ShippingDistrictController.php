@@ -15,7 +15,7 @@ class ShippingDistrictController extends Controller
     {
        $division = ShipDivision::orderBy('division_name' , 'ASC')->get();
        $district = ShipDistrict::with('division')->orderBy('id', 'DESC')->get();
-       return  view('backend.shipping.district.view_district',compact('division','district'));
+       return  view('admin.shipping.district.view_district',compact('division','district'));
 
     }
 
@@ -28,7 +28,7 @@ class ShippingDistrictController extends Controller
     public function editdistrict(ShipDistrict $district)
     {
         $division = ShipDivision::orderBy('division_name' , 'ASC')->get();
-        return view('backend.shipping.district.edit_district' , compact('district' , 'division'));
+        return view('admin.shipping.district.edit_district' , compact('district' , 'division'));
     }
 
     public function updatedistrict(storeRequest $request , Districtservices $service , $id)

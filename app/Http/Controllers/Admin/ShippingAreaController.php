@@ -13,7 +13,7 @@ class ShippingAreaController extends Controller
     public function divisionView ()
     {
         $division = ShipDivision::orderBy('id' , 'DESC')->get();
-        return view('backend.shipping.division.view_division', compact('division'));
+        return view('admin.shipping.division.view_division', compact('division'));
     }
 
     public function divisionStore(StoreRequest $request , ShippingService $service)
@@ -25,7 +25,7 @@ class ShippingAreaController extends Controller
 
     public function editDivision(ShipDivision $shipDivision)
     {
-        return view('backend.shipping.division.edit_division' , compact('shipDivision'));
+        return view('admin.shipping.division.edit_division' , compact('shipDivision'));
     }
 
     public function updateDivision(StoreRequest $request , ShippingService $service , $id)

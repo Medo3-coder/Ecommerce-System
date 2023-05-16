@@ -16,7 +16,7 @@ class SliderController extends Controller
     public function sliderView()
     {
         $sliders = Slider::orderBy('id', 'desc')->get();
-        return view('backend.slider.slider_view', compact('sliders'));
+        return view('admin.slider.slider_view', compact('sliders'));
     }
 
 
@@ -57,7 +57,7 @@ class SliderController extends Controller
 
     public function sliderEdit(Slider $slider)
     {
-        return view('backend.slider.slider_edit', compact('slider'));
+        return view('admin.slider.slider_edit', compact('slider'));
     }
 
 

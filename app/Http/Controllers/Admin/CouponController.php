@@ -15,7 +15,7 @@ class CouponController extends Controller
     public function couponView()
     {
         $coupons = Coupon::orderBy('id', 'desc')->get();
-        return view('backend.coupon.coupon_view' , compact('coupons'));
+        return view('admin.coupon.coupon_view' , compact('coupons'));
     }
 
     public function couponStore(CouponService $services , StoreCouponRequest $request)
@@ -27,7 +27,7 @@ class CouponController extends Controller
 
     public function couponEdit(Coupon $coupon)
     {
-        return view('backend.coupon.edit_coupon' , compact('coupon'));
+        return view('admin.coupon.edit_coupon' , compact('coupon'));
     }
 
 

@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\ShippingAreaController;
 use App\Http\Controllers\Admin\ShippingDistrictController;
 use App\Http\Controllers\Admin\ShippingStateController;
 use App\Http\Controllers\Admin\SliderController;
-use App\Http\Controllers\Backend\AdminsController;
+use App\Http\Controllers\Admin\AdminsController;
 use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\frontend\IndexController;
 use App\Http\Controllers\User\CartPageController;

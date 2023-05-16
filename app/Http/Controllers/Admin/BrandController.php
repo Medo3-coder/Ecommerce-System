@@ -17,11 +17,11 @@ class BrandController extends Controller
 {
     public function index($id = null) {
         $brands = Brand::latest()->get();
-        return view('backend.brands.table', compact('brands'));
+        return view('admin.brands.table', compact('brands'));
     }
 
     public function create() {
-        return view('backend.brands.create');
+        return view('admin.brands.create');
     }
 
     public function store(store $request) {
@@ -32,7 +32,7 @@ class BrandController extends Controller
     public function edit($id)
     {
         $brand = Brand::findOrFail($id);
-        return view('backend.brands.edit', compact('brand'));
+        return view('admin.brands.edit', compact('brand'));
     }
 
 
@@ -43,7 +43,7 @@ class BrandController extends Controller
 
     public function show($id) {
         $brand   = Brand::findOrFail($id);
-        return view('backend.brands.show', compact('brand'));
+        return view('admin.brands.show', compact('brand'));
     }
 
     public function destroy($id) {

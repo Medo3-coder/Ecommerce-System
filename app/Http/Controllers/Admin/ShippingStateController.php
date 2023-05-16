@@ -18,7 +18,7 @@ class ShippingStateController extends Controller
         $district = ShipDistrict::orderBy('district_name','ASC')->get();
         $state = ShipState::with('division' , 'district')->orderBy('id','DESC')->get();
 
-        return view('backend.shipping.state.view_state',compact('division','district','state'));
+        return view('admin.shipping.state.view_state',compact('division','district','state'));
     }
 
     public function stateStore(storeStateRequest $request , StateService $service)
@@ -31,7 +31,7 @@ class ShippingStateController extends Controller
     {
         $division = ShipDivision::orderBy('division_name','ASC')->get();
         $district = ShipDistrict::orderBy('district_name','ASC')->get();
-        return view('backend.shipping.state.edit_state' , compact('state','district' , 'division'));
+        return view('admin.shipping.state.edit_state' , compact('state','district' , 'division'));
     }
 
     public function updatestate(storeStateRequest $request , StateService $service , $id)
