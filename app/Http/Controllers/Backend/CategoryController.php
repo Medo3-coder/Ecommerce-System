@@ -13,7 +13,6 @@ class CategoryController extends Controller {
             $categories = Category::find($id)->getAllChildren();
         } else {
             $categories = Category::latest()->get();
-
         }
 
         return view('backend.categories.table', compact('categories', 'id'));

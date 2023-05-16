@@ -9,13 +9,10 @@ use App\Http\Controllers\Backend\LanguageController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\Backend\ShippingAreaController;
 use App\Http\Controllers\Backend\ShippingDistrictController;
-
-use App\Http\Controllers\Backend\SubCategoryController;
-use App\Http\Controllers\backend\SubSubCategoryController;
-use App\Http\Controllers\frontend\IndexController;
+use App\Http\Controllers\Backend\ShippingStateController;
 use App\Http\Controllers\backend\SliderController;
 use App\Http\Controllers\frontend\CartController;
-use App\Http\Controllers\Backend\ShippingStateController;
+use App\Http\Controllers\frontend\IndexController;
 use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\WishlistController;
 use Illuminate\Support\Facades\Route;
@@ -29,12 +26,7 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
-
-
-
-
-
+ */
 
 //admin route
 
@@ -42,7 +34,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin:admin']], function ()
     Route::get('/login', [AdminController::class, 'loginForm']);
     Route::post('/login', [AdminController::class, 'store'])->name('admin.login');
 });
-
 
 Route::middleware(['auth:admin'])->group(function () {
 
@@ -58,8 +49,6 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::post('/update/change/password', [AdminProfileController::class, 'adminUpdateChangePassword'])->name('update.change.password');
     Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
 });
-
-
 
 //user all routes
 Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
@@ -78,22 +67,18 @@ Route::get('/user/change/password', [IndexController::class, 'userChangePassword
 
 Route::post('/user/pasword/update', [IndexController::class, 'userPasswordUpdate'])->name('user.password.update');
 
-
 // Admin Brand All Routes
 
 Route::prefix('admin/brand')->group(function () {
 
-    Route::get('/view', [BrandController::class, 'brandView'])->name('all.brand')->middleware('auth:admin');
-
-    Route::post('/store', [BrandController::class, 'brandStore'])->name('brand.store')->middleware('auth:admin');
-
-    Route::get('/edit/{id}', [BrandController::class, 'brandEdit'])->name('brand.edit')->middleware('auth:admin');
-
-    Route::post('/update/{id}', [BrandController::class, 'brandUpdate'])->name('brand.update')->middleware('auth:admin');
-
-    Route::get('/delete/{id}', [BrandController::class, 'brandDelete'])->name('brand.delete')->middleware('auth:admin');
+    Route::get('/brands', [BrandController::class, 'index'])->name('brands.index')->middleware('auth:admin');
+    Route::get('/brands/create', [BrandController::class, 'create'])->name('brands.create')->middleware('auth:admin');
+    Route::get('/brands/{id}/edit', [BrandController::class, 'edit'])->name('brands.edit')->middleware('auth:admin');
+    Route::post('/brands/store', [BrandController::class, 'store'])->name('brands.store')->middleware('auth:admin');
+    Route::put('/brands/{id}', [BrandController::class, 'update'])->name('brands.update')->middleware('auth:admin');
+    Route::get('/brands/{id}/show', [BrandController::class, 'show'])->name('brands.show')->middleware('auth:admin');
+    Route::delete('/brands/{id}', [BrandController::class, 'destroy'])->name('brands.delete')->middleware('auth:admin');
 });
-
 
 Route::prefix('admin/category')->group(function () {
 
@@ -101,55 +86,11 @@ Route::prefix('admin/category')->group(function () {
     Route::get('/categories/create/{id?}', [CategoryController::class, 'create'])->name('categories.create')->middleware('auth:admin');
     Route::get('/categories/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit')->middleware('auth:admin');
     Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store')->middleware('auth:admin');
-
-
     Route::put('/categories/{id}', [CategoryController::class, 'update'])->name('categories.update')->middleware('auth:admin');
     Route::get('/categories/{id}/show', [CategoryController::class, 'show'])->name('categories.show')->middleware('auth:admin');
     Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.delete')->middleware('auth:admin');
 
-
-
-
-
-    // Route::post('/store', [CategoryController::class, 'categoryStore'])->name('category.store')->middleware('auth:admin');
-
-    // Route::get('/edit/{category}', [CategoryController::class, 'categoryEdit'])->name('category.edit')->middleware('auth:admin');
-
-    // Route::post('/update/{category}', [CategoryController::class, 'categoryUpdate'])->name('category.update')->middleware('auth:admin');
-
-    // Route::get('/delete/{category}', [CategoryController::class, 'categoryDelete'])->name('category.delete')->middleware('auth:admin');
-
-
-    // Admin Sub Category All Routes
-
-    Route::get('/sub/view', [SubCategoryController::class, 'subCategoryView'])->name('all.subcategory')->middleware('auth:admin');
-
-    Route::post('/sub/store', [SubCategoryController::class, 'subCategoryStore'])->name('subcategory.store')->middleware('auth:admin');
-
-    Route::get('/sub/edit/{subcategory}', [SubCategoryController::class, 'subCategoryEdit'])->name('subcategory.edit')->middleware('auth:admin');
-
-    Route::post('/sub/update/{subcategory}', [SubCategoryController::class, 'subCategoryUpdate'])->name('subcategory.update')->middleware('auth:admin');
-
-    Route::get('/sub/delete/{subcategory}', [SubCategoryController::class, 'subCategoryDelete'])->name('subcategory.delete')->middleware('auth:admin');
-
-    // Admin Sub->Sub Category All Routes
-
-    Route::get('/sub/sub/view', [SubSubCategoryController::class, 'subSubCategoryView'])->name('all.subsubcategory')->middleware('auth:admin');
-
-    Route::get('/subcategory/ajax/{category_id}', [SubSubCategoryController::class, 'getSubCategory'])->middleware('auth:admin');
-
-    Route::get('/sub-subcategory/ajax/{subcategory_id}', [SubSubCategoryController::class, 'getSubSubCategory'])->middleware('auth:admin');
-
-    Route::post('/sub/sub/store', [SubSubCategoryController::class, 'subSubCategoryStore'])->name('subsubcategory.store')->middleware('auth:admin');
-
-    Route::get('/sub/sub/edit/{sub_subcategory}', [SubSubCategoryController::class, 'subSubCategoryEdit'])->name('subsubcategory.edit')->middleware('auth:admin');
-
-    Route::post('sub/sub/update/{sub_subcategory}', [SubSubCategoryController::class, 'subSubCategoryUpdate'])->name('subsubcategory.update')->middleware('auth:admin');
-
-    Route::get('/sub/sub/delete/{sub_subcategory}', [SubSubCategoryController::class, 'subSubCategoryDelete'])->name('subsubcategory.delete')->middleware('auth:admin');
 });
-
-
 
 // Admin product All Routes
 
@@ -180,10 +121,6 @@ Route::prefix('admin/product')->group(function () {
     Route::get('/delete/{product}', [ProductController::class, 'productDelete'])->name('product.delete')->middleware('auth:admin');
 });
 
-
-
-
-
 Route::prefix('admin/slider')->group(function () {
 
     Route::get('/view', [SliderController::class, 'sliderView'])->name('manage-slider')->middleware('auth:admin');
@@ -201,9 +138,6 @@ Route::prefix('admin/slider')->group(function () {
     Route::get('/edit/{slider}', [SliderController::class, 'sliderEdit'])->name('slider.edit')->middleware('auth:admin');
 });
 
-
-
-
 //// Frontend All Routes /////
 /// Multi Language All Routes ////
 
@@ -213,16 +147,12 @@ Route::get('/language/english', [LanguageController::class, 'english'])->name('e
 
 Route::get('/language/arabic', [LanguageController::class, 'arabic'])->name('arabic.language');
 
-
-
 // Frontend Product Details Page url
 Route::get('/product/details/{id}/{slug}', [IndexController::class, 'productDetails']);
-
 
 //product tags
 
 Route::get('/product/tag/{tag}', [IndexController::class, 'productTag']);
-
 
 Route::get('/category/product/{id}/{slug}', [IndexController::class, 'categoryWiseProduct']);
 
@@ -238,7 +168,6 @@ Route::get('product/view/modal/{id}', [IndexController::class, 'productViewModal
 //Add To cart with Ajax
 Route::post('/cart/data/store/{id}', [CartController::class, 'addToCart']);
 
-
 // Get Data from mini cart
 Route::get('/product/mini/cart/', [CartController::class, 'addMiniCart']);
 
@@ -246,92 +175,78 @@ Route::get('/product/mini/cart/', [CartController::class, 'addMiniCart']);
 Route::get('/minicart/product-remove/{rowId}', [CartController::class, 'removeMiniCart']);
 
 // Add to Wishlist
-Route::post('/add-to-wishlist/{product_id}' , [WishlistController::class, 'addToWishlist']);
+Route::post('/add-to-wishlist/{product_id}', [WishlistController::class, 'addToWishlist']);
 
-Route::group(['prefix' => 'user' , 'middleware'=>['user' , 'auth'] , 'namespace'=>'User'], function (){
+Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' => 'User'], function () {
 
 // Wishlist page
-Route::get('/wishlist' , [WishlistController::class, 'viewWishlist'])->name('wishlist');
+    Route::get('/wishlist', [WishlistController::class, 'viewWishlist'])->name('wishlist');
 
 //send product data to wishlist page
-Route::get('/get-wishlist-product' , [WishlistController::class, 'getWishlistProduct']);
+    Route::get('/get-wishlist-product', [WishlistController::class, 'getWishlistProduct']);
 
 //remove product from wishlist
-Route::get('/wishlist-remove/{id}' , [WishlistController::class , 'removeWishlistProduct']);
-
-
-
+    Route::get('/wishlist-remove/{id}', [WishlistController::class, 'removeWishlistProduct']);
 
 });
 
 //Mycart page
-Route::get('/cart' , [CartPageController::class, 'myCart'])->name('my-cart');
+Route::get('/cart', [CartPageController::class, 'myCart'])->name('my-cart');
 
-Route::get('/user/get-cart-product' , [CartPageController::class, 'getCartProduct']);
+Route::get('/user/get-cart-product', [CartPageController::class, 'getCartProduct']);
 
-Route::delete('/user/cart-remove/{id}' , [CartPageController::class , 'removeCartProduct']);
+Route::delete('/user/cart-remove/{id}', [CartPageController::class, 'removeCartProduct']);
 
+Route::get('/cart-increment/{rowId}', [CartPageController::class, 'incrementCartProduct']);
 
-Route::get('/cart-increment/{rowId}' , [CartPageController::class , 'incrementCartProduct']);
-
-Route::get('/cart-decrement/{rowId}' , [CartPageController::class , 'decrementCartProduct']);
-
+Route::get('/cart-decrement/{rowId}', [CartPageController::class, 'decrementCartProduct']);
 
 // Admin Coupons All Routes
 
-Route::prefix('admin/coupon')->group(function (){
+Route::prefix('admin/coupon')->group(function () {
 
-    Route::get('/view', [CouponController::class , 'couponView'])->name('manage-coupon')->middleware('auth:admin');
-    Route::post('/store', [CouponController::class , 'couponStore'])->name('coupon.store')->middleware('auth:admin');
-    Route::get('/edit/{coupon}' , [CouponController::class , 'couponEdit'])->name('coupon.edit')->middleware('auth:admin');
-    Route::post('update/{id}' , [CouponController::class , 'couponUpdate'])->name('coupon.update')->middleware('auth:admin');
-    Route::get('/delete/{coupon}' , [CouponController::class , 'couponDelete'])->name('coupon.delete')->middleware('auth:admin');
+    Route::get('/view', [CouponController::class, 'couponView'])->name('manage-coupon')->middleware('auth:admin');
+    Route::post('/store', [CouponController::class, 'couponStore'])->name('coupon.store')->middleware('auth:admin');
+    Route::get('/edit/{coupon}', [CouponController::class, 'couponEdit'])->name('coupon.edit')->middleware('auth:admin');
+    Route::post('update/{id}', [CouponController::class, 'couponUpdate'])->name('coupon.update')->middleware('auth:admin');
+    Route::get('/delete/{coupon}', [CouponController::class, 'couponDelete'])->name('coupon.delete')->middleware('auth:admin');
 });
-
 
 // Admin Shipping all Routes
 Route::prefix('admin/shipping')->group(function () {
-   Route::get('/division/view' , [ShippingAreaController::class , 'divisionView'])->name('manage-division')->middleware('auth:admin');
-   Route::post('/division/store' , [ShippingAreaController::class , 'divisionStore'])->name('division.store')->middleware('auth:admin');
-   Route::get('/division/edit/{shipDivision}' , [ShippingAreaController::class , 'editDivision'])->name('division.edit')->middleware('auth:admin');
-   Route::post('/division/update/{id}' , [ShippingAreaController::class , 'updateDivision'])->name('division.update')->middleware('auth:admin');
-   Route::get('/division/delete/{shipDivision}' , [ShippingAreaController::class , 'deleteDivision'])->name('division.delete')->middleware('auth:admin');
+    Route::get('/division/view', [ShippingAreaController::class, 'divisionView'])->name('manage-division')->middleware('auth:admin');
+    Route::post('/division/store', [ShippingAreaController::class, 'divisionStore'])->name('division.store')->middleware('auth:admin');
+    Route::get('/division/edit/{shipDivision}', [ShippingAreaController::class, 'editDivision'])->name('division.edit')->middleware('auth:admin');
+    Route::post('/division/update/{id}', [ShippingAreaController::class, 'updateDivision'])->name('division.update')->middleware('auth:admin');
+    Route::get('/division/delete/{shipDivision}', [ShippingAreaController::class, 'deleteDivision'])->name('division.delete')->middleware('auth:admin');
 });
-
 
 // Admin district all Routes
 Route::prefix('admin/district')->group(function () {
-    Route::get('/view' , [ShippingDistrictController::class , 'districtView'])->name('manage-district')->middleware('auth:admin');
-    Route::post('/store' , [ShippingDistrictController::class , 'districtStore'])->name('district.store')->middleware('auth:admin');
-    Route::get('/edit/{district}' , [ShippingDistrictController::class , 'editdistrict'])->name('district.edit')->middleware('auth:admin');
-    Route::post('/update/{id}' , [ShippingDistrictController::class , 'updatedistrict'])->name('district.update')->middleware('auth:admin');
-    Route::get('/delete/{district}' , [ShippingDistrictController::class , 'deletedistrict'])->name('district.delete')->middleware('auth:admin');
- });
+    Route::get('/view', [ShippingDistrictController::class, 'districtView'])->name('manage-district')->middleware('auth:admin');
+    Route::post('/store', [ShippingDistrictController::class, 'districtStore'])->name('district.store')->middleware('auth:admin');
+    Route::get('/edit/{district}', [ShippingDistrictController::class, 'editdistrict'])->name('district.edit')->middleware('auth:admin');
+    Route::post('/update/{id}', [ShippingDistrictController::class, 'updatedistrict'])->name('district.update')->middleware('auth:admin');
+    Route::get('/delete/{district}', [ShippingDistrictController::class, 'deletedistrict'])->name('district.delete')->middleware('auth:admin');
+});
 
-
-
- // Admin state all Routes
+// Admin state all Routes
 Route::prefix('admin/state')->group(function () {
-    Route::get('/view' , [ShippingStateController::class , 'stateView'])->name('manage-state')->middleware('auth:admin');
-    Route::post('/store' , [ShippingStateController::class , 'stateStore'])->name('state.store')->middleware('auth:admin');
-    Route::get('/edit/{state}' , [ShippingStateController::class , 'editstate'])->name('state.edit')->middleware('auth:admin');
-    Route::post('/update/{id}' , [ShippingStateController::class , 'updatestate'])->name('state.update')->middleware('auth:admin');
-    Route::get('/delete/{state}' , [ShippingStateController::class , 'deletestate'])->name('state.delete')->middleware('auth:admin');
- });
+    Route::get('/view', [ShippingStateController::class, 'stateView'])->name('manage-state')->middleware('auth:admin');
+    Route::post('/store', [ShippingStateController::class, 'stateStore'])->name('state.store')->middleware('auth:admin');
+    Route::get('/edit/{state}', [ShippingStateController::class, 'editstate'])->name('state.edit')->middleware('auth:admin');
+    Route::post('/update/{id}', [ShippingStateController::class, 'updatestate'])->name('state.update')->middleware('auth:admin');
+    Route::get('/delete/{state}', [ShippingStateController::class, 'deletestate'])->name('state.delete')->middleware('auth:admin');
+});
 
- // Frontend Coupon Option
+// Frontend Coupon Option
 
+Route::post('/coupon-apply', [CartPageController::class, 'couponApply']);
 
- Route::post('/coupon-apply' , [CartPageController::class , 'couponApply']);
+Route::get('/coupon-calculation', [CartPageController::class, 'couponCalculation']);
 
- Route::get('/coupon-calculation', [CartPageController::class , 'couponCalculation']);
+Route::get('/coupon-remove', [CartPageController::class, 'couponRemove']);
 
- Route::get('/coupon-remove' , [CartPageController::class , 'couponRemove']);
+//checkout
 
-
- //checkout
-
- Route::get('/checkout', [CartPageController::class , 'checkoutCreate'])->name('checkout');
-
-
-
+Route::get('/checkout', [CartPageController::class, 'checkoutCreate'])->name('checkout');

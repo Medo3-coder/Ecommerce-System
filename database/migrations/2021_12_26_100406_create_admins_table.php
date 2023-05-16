@@ -32,7 +32,7 @@ class CreateAdminsTable extends Migration
 
         Admin::create([
             'name'     => 'Manager',
-            'email'    => 'aait@info.com',
+            'email'    => 'admin@info.com',
             'phone'    => '0555105813',
             'password' => 123456,
             'role_id'  => 1,

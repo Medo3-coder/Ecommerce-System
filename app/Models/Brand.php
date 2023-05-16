@@ -11,7 +11,7 @@ class Brand extends Model {
     use HasFactory, HasTranslations, UploadTrait;
     const IMAGEPATH      = 'brands';
     protected $fillable  = ['name', 'slug', 'image'];
-    public $translatable = ['name'];
+    public $translatable = ['name','slug'];
 
     public function getImageAttribute() {
         if ($this->attributes['image']) {

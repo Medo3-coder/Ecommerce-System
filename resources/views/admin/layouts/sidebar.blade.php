@@ -37,10 +37,10 @@
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
-                <ul class="treeview-menu {{ $route == 'all.brand' ? 'active' : '' }}">
-                    <li class="{{ $route == 'all.brand' ? 'active' : '' }}"><a href="{{ route('all.brand') }}"><i
-                                class="ti-more"></i>All Brand</a></li>
-                    <li><a href="calendar.html"><i class="ti-more"></i>Calendar</a></li>
+                <ul class="treeview-menu {{ $route == 'brands.index' ? 'active' : '' }}">
+                    <li class="{{ $route == 'brands.index' ? 'active' : '' }}"><a href="{{ route('brands.index') }}"><i
+                                class="ti-more"></i>brands</a></li>
+                    {{-- <li><a href="calendar.html"><i class="ti-more"></i>Calendar</a></li> --}}
                 </ul>
             </li>
 
