@@ -38,7 +38,15 @@
                 </a>
             </li>
 
-            <li class="treeview {{ $prefix == 'admin/brand' ? 'active' : '' }}">
+
+            <li class="{{ $prefix == 'admin/brand' ? 'active' : '' }}">
+                <a href="{{ route('brands.index') }}">
+                    <i data-feather="message-circle"></i>
+                    <span>Brands</span>
+                </a>
+            </li>
+
+            {{-- <li class="treeview {{ $prefix == 'admin/brand' ? 'active' : '' }}">
                 <a href="#">
                     <i data-feather="message-circle"></i>
                     <span>Brands</span>
@@ -49,9 +57,9 @@
                 <ul class="treeview-menu {{ $route == 'brands.index' ? 'active' : '' }}">
                     <li class="{{ $route == 'brands.index' ? 'active' : '' }}"><a href="{{ route('brands.index') }}"><i
                                 class="ti-more"></i>brands</a></li>
-                    {{-- <li><a href="calendar.html"><i class="ti-more"></i>Calendar</a></li> --}}
+                    <li><a href="calendar.html"><i class="ti-more"></i>Calendar</a></li>
                 </ul>
-            </li>
+            </li> --}}
 
 
 
