@@ -123,6 +123,7 @@ return [
     "view_partner_success"                                   => "عرض شريك نجاح ",
     "date"                                                   => "التاريخ",
     "activation"                                             => "التفعيل",
+    "title"                                                  => "عنوان",
     "activate"                                               => "مفعل",
     "dis_activate"                                           => "غير مفعل",
     "add_admin"                                              => " اضافة مشرف",
@@ -156,6 +157,7 @@ return [
     "Send_user_notification"                                 => "ارسال اشعار للمستخدمين",
     "Send_email"                                             => "ارسال بريد الكتروني",
     "active"                                                 => "نشط",
+    "inactive"                                               => "غير نشط",
     "password"                                               => "كلمة السر",
     "incorrect_password"                                     => "كلمة السر غير صحيحة",
     "email"                                                  => "البريد الالكتروني",
@@ -409,9 +411,8 @@ return [
     'delete_region'                                          => 'حذف منطقة',
     'delete_group_of_regions'                                => 'حذف مجموعة من المناطق',
 
-
-    'followed_category'                                => 'القسم التابع له',
-    "main_section"                                     => " قسم رئيسي",
+    'followed_category'                                      => 'القسم التابع له',
+    "main_section"                                           => " قسم رئيسي",
 
     #new_comand_translations_here
     #!!!!!!!!!!!!!!!!!! don't delete the previous comment !!!!!!!!!!!!!!!!!

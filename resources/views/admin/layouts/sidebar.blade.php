@@ -92,7 +92,7 @@
 
 
 
-            <li class="treeview {{ $prefix == 'admin/slider' ? 'active' : '' }}">
+            {{-- <li class="treeview {{ $prefix == 'admin/slider' ? 'active' : '' }}">
                 <a href="#">
                     <i data-feather="file"></i>
                     <span>Slider</span>
@@ -105,6 +105,16 @@
                         <a href="{{ route('manage-slider') }}"><i class="ti-more"></i>Manage Sliders</a>
                     </li>
                 </ul>
+            </li> --}}
+
+
+
+
+            <li class="{{ $prefix == 'admin/slider' ? 'active' : '' }}">
+                <a href="{{ route('sliders.index') }}">
+                    <i data-feather="pie-chart"></i>
+                    <span>Sliders</span>
+                </a>
             </li>
 
 

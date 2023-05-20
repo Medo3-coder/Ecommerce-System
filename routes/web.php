@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\AdminProfileController;
+use App\Http\Controllers\Admin\AdminsController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
@@ -11,7 +12,6 @@ use App\Http\Controllers\Admin\ShippingAreaController;
 use App\Http\Controllers\Admin\ShippingDistrictController;
 use App\Http\Controllers\Admin\ShippingStateController;
 use App\Http\Controllers\Admin\SliderController;
-use App\Http\Controllers\Admin\AdminsController;
 use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\frontend\IndexController;
 use App\Http\Controllers\User\CartPageController;
@@ -56,10 +56,6 @@ Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function 
     return view('dashboard');
 })->name('User_dashboard');
 
-
-
-
-
 Route::prefix('admin/admins')->group(function () {
 
     Route::get('/admin', [AdminsController::class, 'index'])->name('admin.index')->middleware('auth:admin');
@@ -70,8 +66,6 @@ Route::prefix('admin/admins')->group(function () {
     Route::get('/admin/{id}/show', [AdminsController::class, 'show'])->name('admin.show')->middleware('auth:admin');
     Route::delete('/admin/{id}', [AdminsController::class, 'destroy'])->name('admin.delete')->middleware('auth:admin');
 });
-
-
 
 Route::get('/', [IndexController::class, 'index']);
 
@@ -96,6 +90,17 @@ Route::prefix('admin/brand')->group(function () {
     Route::put('/brands/{id}', [BrandController::class, 'update'])->name('brands.update')->middleware('auth:admin');
     Route::get('/brands/{id}/show', [BrandController::class, 'show'])->name('brands.show')->middleware('auth:admin');
     Route::delete('/brands/{id}', [BrandController::class, 'destroy'])->name('brands.delete')->middleware('auth:admin');
+});
+
+Route::prefix('admin/slider')->group(function () {
+
+    Route::get('/sliders', [SliderController::class, 'index'])->name('sliders.index')->middleware('auth:admin');
+    Route::get('/sliders/create', [SliderController::class, 'create'])->name('sliders.create')->middleware('auth:admin');
+    Route::get('/sliders/{id}/edit', [SliderController::class, 'edit'])->name('sliders.edit')->middleware('auth:admin');
+    Route::post('/sliders/store', [SliderController::class, 'store'])->name('sliders.store')->middleware('auth:admin');
+    Route::put('/sliders/{id}', [SliderController::class, 'update'])->name('sliders.update')->middleware('auth:admin');
+    Route::get('/sliders/{id}/show', [SliderController::class, 'show'])->name('sliders.show')->middleware('auth:admin');
+    Route::delete('/sliders/{id}', [SliderController::class, 'destroy'])->name('sliders.delete')->middleware('auth:admin');
 });
 
 Route::prefix('admin/category')->group(function () {
@@ -137,23 +142,6 @@ Route::prefix('admin/product')->group(function () {
     Route::get('/active/{product}', [ProductController::class, 'productActive'])->name('product.active')->middleware('auth:admin');
 
     Route::get('/delete/{product}', [ProductController::class, 'productDelete'])->name('product.delete')->middleware('auth:admin');
-});
-
-Route::prefix('admin/slider')->group(function () {
-
-    Route::get('/view', [SliderController::class, 'sliderView'])->name('manage-slider')->middleware('auth:admin');
-
-    Route::post('/store', [SliderController::class, 'sliderStore'])->name('slider.store')->middleware('auth:admin');
-
-    Route::get('/inactive/{slider}', [SliderController::class, 'sliderInactive'])->name('slider.inactive')->middleware('auth:admin');
-
-    Route::get('/active/{slider}', [SliderController::class, 'sliderActive'])->name('slider.active')->middleware('auth:admin');
-
-    Route::get('/delete/{slider}', [SliderController::class, 'sliderDelete'])->name('slider.delete')->middleware('auth:admin');
-
-    Route::post('/update/{id}', [SliderController::class, 'sliderUpdate'])->name('slider.update')->middleware('auth:admin');
-
-    Route::get('/edit/{slider}', [SliderController::class, 'sliderEdit'])->name('slider.edit')->middleware('auth:admin');
 });
 
 //// Frontend All Routes /////

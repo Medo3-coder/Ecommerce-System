@@ -4,15 +4,13 @@ namespace App\Http\Requests\Admin\slider;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SliderUpdate extends FormRequest
-{
+class Update extends FormRequest {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 
@@ -21,15 +19,13 @@ class SliderUpdate extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-
-            'slider_img' =>'required | image | mimes:jpeg,png,jpg,gif,svg | max:2048',
-            'title' => 'nullable',
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'title'       => 'nullable',
             'description' => 'nullable',
+            'status'      => 'nullable',
 
         ];
     }
-
 }

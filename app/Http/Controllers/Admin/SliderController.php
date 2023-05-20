@@ -3,49 +3,47 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Carbon\Carbon;
-use App\Models\Slider;
-use Intervention\Image\Facades\Image;
 use App\Http\Requests\Admin\slider\SliderStore;
 use App\Http\Requests\Admin\slider\SliderUpdate;
+use App\Http\Requests\Admin\slider\store;
+use App\Http\Requests\Admin\slider\Update;
+use App\Models\Slider;
 use App\Services\SliderService;
 
-class SliderController extends Controller
-{
-    public function sliderView()
-    {
+class SliderController extends Controller {
+    public function index($id = null) {
         $sliders = Slider::orderBy('id', 'desc')->get();
-        return view('admin.slider.slider_view', compact('sliders'));
+        return view('admin.sliders.table', compact('sliders'));
+    }
+
+    public function create() {
+        return view('admin.sliders.create');
+    }
+
+    public function store(store $request) {
+        Slider::create($request->validated());
+        return response()->json(['url' => route('sliders.index')]);
     }
 
 
-    public function sliderStore(SliderStore $request, SliderService $service)
+    public function edit($id)
     {
-        $service->sliderStore(
-            $request->slider_img,
-            $request->title,
-            $request->description,
-
-        );
-
-        return redirect()->route('manage-slider')->with('success', 'Slider Added Successfully');
+        $slider = Slider::findOrFail($id);
+        return view('admin.sliders.edit', compact('slider'));
     }
 
-    public function sliderUpdate(SliderUpdate $request, SliderService $service, $id)
-    {
-        $service->updateSlider(
-            $request->slider_img,
-            $request->title,
-            $request->description,
-            $id
-        );
-
-        return redirect()->route('manage-slider')->with('success', 'Slider Updated Successfully');
+    public function update(Update $request, $id) {
+        $slider = Slider::findOrFail($id)->update($request->validated());
+        return response()->json(['url' => route('sliders.index')]);
     }
 
-    public function sliderDelete(Slider $slider)
-    {
+
+    public function show($id) {
+        $slider   = Slider::findOrFail($id);
+        return view('admin.sliders.show', compact('slider'));
+    }
+
+    public function sliderDelete(Slider $slider) {
         $image = $slider->slider_img;
         if ($image) {
             unlink($image);
@@ -55,23 +53,18 @@ class SliderController extends Controller
         return response('Slider deleted successfully.', 200);
     }
 
-    public function sliderEdit(Slider $slider)
-    {
+    public function sliderEdit(Slider $slider) {
         return view('admin.slider.slider_edit', compact('slider'));
     }
 
-
-    public function sliderInactive(Slider $slider)
-    {
+    public function sliderInactive(Slider $slider) {
         $slider->update([
             'status' => 0,
         ]);
         return back()->with('success', 'Slider Inactive Successfully');
     }
 
-
-    public function sliderActive(Slider $slider)
-    {
+    public function sliderActive(Slider $slider) {
         $slider->update([
             'status' => 1,
         ]);
