@@ -3,12 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\slider\SliderStore;
-use App\Http\Requests\Admin\slider\SliderUpdate;
 use App\Http\Requests\Admin\slider\store;
 use App\Http\Requests\Admin\slider\Update;
 use App\Models\Slider;
-use App\Services\SliderService;
 
 class SliderController extends Controller {
     public function index($id = null) {
@@ -25,9 +22,7 @@ class SliderController extends Controller {
         return response()->json(['url' => route('sliders.index')]);
     }
 
-
-    public function edit($id)
-    {
+    public function edit($id) {
         $slider = Slider::findOrFail($id);
         return view('admin.sliders.edit', compact('slider'));
     }
@@ -37,37 +32,20 @@ class SliderController extends Controller {
         return response()->json(['url' => route('sliders.index')]);
     }
 
-
     public function show($id) {
-        $slider   = Slider::findOrFail($id);
+        $slider = Slider::findOrFail($id);
         return view('admin.sliders.show', compact('slider'));
     }
 
-    public function sliderDelete(Slider $slider) {
-        $image = $slider->slider_img;
-        if ($image) {
-            unlink($image);
-        }
-
-        $slider->delete();
-        return response('Slider deleted successfully.', 200);
+    public function destroy($id) {
+        $slider = Slider::findOrFail($id)->delete();
+        return response("__('the_selected_has_been_successfully_deleted)");
     }
 
-    public function sliderEdit(Slider $slider) {
-        return view('admin.slider.slider_edit', compact('slider'));
-    }
-
-    public function sliderInactive(Slider $slider) {
-        $slider->update([
-            'status' => 0,
-        ]);
-        return back()->with('success', 'Slider Inactive Successfully');
-    }
-
-    public function sliderActive(Slider $slider) {
-        $slider->update([
-            'status' => 1,
-        ]);
-        return back()->with('success', 'Slider Active Successfully');
-    }
+    // public function sliderActive(Slider $slider) {
+    //     $slider->update([
+    //         'status' => 1,
+    //     ]);
+    //     return back()->with('success', 'Slider Active Successfully');
+    // }
 }
