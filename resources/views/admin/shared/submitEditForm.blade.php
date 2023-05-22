@@ -43,7 +43,7 @@
 
                         $('.store .error.' + key ).after(`<span class="mt-5 text-danger">${value}</span>`);
 
-                        // normal inputs 
+                        // normal inputs
                         $('.store input[name^=' + key + ']').addClass(
                         'border-danger')
                         $('.store input[name^=' + key + ']').after(

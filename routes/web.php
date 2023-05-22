@@ -125,6 +125,28 @@ Route::prefix('admin/category')->group(function () {
 
 });
 
+
+Route::prefix('admin/coupon')->group(function () {
+
+
+
+    Route::get('/coupons', [CouponController::class, 'index'])->name('coupons.index')->middleware('auth:admin');
+    Route::get('/coupons/create', [CouponController::class, 'create'])->name('coupons.create')->middleware('auth:admin');
+    Route::get('/coupons/{id}/edit', [CouponController::class, 'edit'])->name('coupons.edit')->middleware('auth:admin');
+    Route::post('/coupons/store', [CouponController::class, 'store'])->name('coupons.store')->middleware('auth:admin');
+    Route::post('/coupons/renew', [CouponController::class, 'renew'])->name('coupons.renew')->middleware('auth:admin');
+    Route::put('/coupons/{id}', [CouponController::class, 'update'])->name('coupons.update')->middleware('auth:admin');
+    Route::get('/coupons/{id}/show', [CouponController::class, 'show'])->name('coupons.show')->middleware('auth:admin');
+    Route::delete('/coupons/{id}', [CouponController::class, 'destroy'])->name('coupons.delete')->middleware('auth:admin');
+
+
+    // Route::get('/view', [CouponController::class, 'couponView'])->name('manage-coupon')->middleware('auth:admin');
+    // Route::post('/store', [CouponController::class, 'couponStore'])->name('coupon.store')->middleware('auth:admin');
+    // Route::get('/edit/{coupon}', [CouponController::class, 'couponEdit'])->name('coupon.edit')->middleware('auth:admin');
+    // Route::post('update/{id}', [CouponController::class, 'couponUpdate'])->name('coupon.update')->middleware('auth:admin');
+    // Route::get('/delete/{coupon}', [CouponController::class, 'couponDelete'])->name('coupon.delete')->middleware('auth:admin');
+});
+
 // Admin product All Routes
 
 Route::prefix('admin/product')->group(function () {
@@ -220,14 +242,7 @@ Route::get('/cart-decrement/{rowId}', [CartPageController::class, 'decrementCart
 
 // Admin Coupons All Routes
 
-Route::prefix('admin/coupon')->group(function () {
 
-    Route::get('/view', [CouponController::class, 'couponView'])->name('manage-coupon')->middleware('auth:admin');
-    Route::post('/store', [CouponController::class, 'couponStore'])->name('coupon.store')->middleware('auth:admin');
-    Route::get('/edit/{coupon}', [CouponController::class, 'couponEdit'])->name('coupon.edit')->middleware('auth:admin');
-    Route::post('update/{id}', [CouponController::class, 'couponUpdate'])->name('coupon.update')->middleware('auth:admin');
-    Route::get('/delete/{coupon}', [CouponController::class, 'couponDelete'])->name('coupon.delete')->middleware('auth:admin');
-});
 
 // Admin Shipping all Routes
 Route::prefix('admin/shipping')->group(function () {

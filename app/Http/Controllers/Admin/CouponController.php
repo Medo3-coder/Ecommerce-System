@@ -3,47 +3,63 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Coupon\StoreCouponRequest;
-use App\Http\Requests\Admin\Coupon\UpdateCouponRequest;
-use App\Http\Requests\CouponRequest;
+use App\Http\Requests\Admin\coupons\renewCouponRequest;
+use App\Http\Requests\Admin\coupons\store;
+use App\Http\Requests\Admin\coupons\Update;
 use App\Models\Coupon;
-use App\Services\CouponService;
-use Illuminate\Http\Request;
 
-class CouponController extends Controller
-{
-    public function couponView()
-    {
-        $coupons = Coupon::orderBy('id', 'desc')->get();
-        return view('admin.coupon.coupon_view' , compact('coupons'));
+class CouponController extends Controller {
+    public function index($id = null) {
+        $coupons = Coupon::latest()->get();
+        return view('admin.coupon.table', compact('coupons'));
     }
 
-    public function couponStore(CouponService $services , StoreCouponRequest $request)
-    {
-        $services->storeCoupon($request->validated()) ;
-
-        return redirect()->route('manage-coupon')->with('success', 'Coupon added successfully');
+    public function create() {
+        return view('admin.coupon.create');
     }
 
-    public function couponEdit(Coupon $coupon)
-    {
-        return view('admin.coupon.edit_coupon' , compact('coupon'));
+    public function store(store $request) {
+        Coupon::create($request->except(['expire_date']) + (['expire_date' => date('Y-m-d H:i:s', strtotime($request->expire_date))]));
+        return response()->json(['url' => route('coupons.index')]);
     }
 
-
-    public function couponUpdate(UpdateCouponRequest $request ,  $id , CouponService $services)
-    {
-        $services->updateCoupon($request->validated() , $id) ;
-
-        return redirect()->route('manage-coupon')->with('success', 'Coupon updated successfully');
+    public function edit($id) {
+        $coupon = Coupon::findOrFail($id);
+        return view('admin.coupon.edit', ['coupon' => $coupon]);
     }
 
-    public function couponDelete(Coupon $coupon)
-    {
-        $coupon->delete();
-        return response('Coupon deleted successfully');
+    public function update(Update $request, $id) {
+        $coupon = Coupon::findOrFail($id)->update($request->except(['expire_date']) + (['expire_date' => date('Y-m-d H:i:s', strtotime($request->expire_date))]));
+        return response()->json(['url' => route('coupons.index')]);
     }
 
+    public function show($id) {
+        $coupon = Coupon::findOrFail($id);
+        return view('admin.coupon.show', ['coupon' => $coupon]);
+    }
 
+    public function destroy($id) {
+        $coupon = Coupon::findOrFail($id)->delete();
+        return response('coupon deleted successfully');
+    }
+
+    public function renew(renewCouponRequest $request)
+    {
+        $coupon = Coupon::findOrFail($request->id) ;
+        if ($request->status == 'closed') {
+            $coupon->update(['status' => 'closed']) ;
+            $html = '<span class="btn btn-sm round btn-outline-success open-coupon" data-toggle="modal" id="div_'.$coupon->id.'" data-target="#notify" data-id="'.$coupon->id.'">
+                        '.__('admin.reactivation_Coupon').'  <i class="feather icon-rotate-cw"></i>
+                    </span>'
+                    ;
+        }else{
+            $coupon->update($request->except(['expire_date'])  + ([ 'expire_date' => date('Y-m-d H:i:s', strtotime($request->expire_date))]));
+            $html = '<span class="btn btn-sm round btn-outline-danger change-coupon-status" data-status="closed" data-id="'.$coupon->id.'">
+                        '.__('admin.Stop_Coupon').'  <i class="feather icon-slash"></i>
+                    </span>';
+        }
+
+        return response()->json(['message' => __('admin.update_coupon_status_successfully') , 'html' => $html , 'id' => $request->id]) ;
+    }
 
 }

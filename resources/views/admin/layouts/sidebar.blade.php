@@ -45,7 +45,6 @@
                     <span>Brands</span>
                 </a>
             </li>
-
             {{-- <li class="treeview {{ $prefix == 'admin/brand' ? 'active' : '' }}">
                 <a href="#">
                     <i data-feather="message-circle"></i>
@@ -126,20 +125,13 @@
             </li>
 
 
-            <li class="treeview {{ $prefix == 'admin/coupons' ? 'active' : '' }}">
-                <a href="#">
-                    <i data-feather="file"></i>
+            <li class="{{ $prefix == 'admin/coupon' ? 'active' : '' }}">
+                <a href="{{ route('coupons.index') }}">
+                    <i class="fa fa-gift"></i>
                     <span>Coupons</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-right pull-right"></i>
-                    </span>
                 </a>
-                <ul class="treeview-menu">
-                    <li class="{{ $route == 'manage-coupon' ? 'active' : '' }}">
-                        <a href="{{ route('manage-coupon') }}"><i class="ti-more"></i>Manage Coupons</a>
-                    </li>
-                </ul>
             </li>
+
 
 
             <li class="treeview {{ $prefix == 'admin/shipping' ? 'active' : '' }}">

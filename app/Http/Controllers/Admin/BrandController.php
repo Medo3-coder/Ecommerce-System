@@ -48,6 +48,6 @@ class BrandController extends Controller
 
     public function destroy($id) {
         $category = Brand::findOrFail($id)->delete();
-        return response('Post deleted successfully');
+        return response('Brand deleted successfully');
     }
 }
