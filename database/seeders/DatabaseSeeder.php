@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesTableSeeder::class);
         $this->call(SliderTableSeeder::class);
         $this->call(CouponTableSeeder::class);
+        $this->call(ProductTableSeeder::class);
 
     }
 }

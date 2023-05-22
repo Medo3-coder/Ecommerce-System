@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\AdminProfileController;
+use App\Http\Controllers\Admin\AdminsController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
@@ -11,7 +12,6 @@ use App\Http\Controllers\Admin\ShippingAreaController;
 use App\Http\Controllers\Admin\ShippingDistrictController;
 use App\Http\Controllers\Admin\ShippingStateController;
 use App\Http\Controllers\Admin\SliderController;
-use App\Http\Controllers\Admin\AdminsController;
 use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\frontend\IndexController;
 use App\Http\Controllers\User\CartPageController;
@@ -56,10 +56,6 @@ Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function 
     return view('dashboard');
 })->name('User_dashboard');
 
-
-
-
-
 Route::prefix('admin/admins')->group(function () {
 
     Route::get('/admin', [AdminsController::class, 'index'])->name('admin.index')->middleware('auth:admin');
@@ -70,8 +66,6 @@ Route::prefix('admin/admins')->group(function () {
     Route::get('/admin/{id}/show', [AdminsController::class, 'show'])->name('admin.show')->middleware('auth:admin');
     Route::delete('/admin/{id}', [AdminsController::class, 'destroy'])->name('admin.delete')->middleware('auth:admin');
 });
-
-
 
 Route::get('/', [IndexController::class, 'index']);
 
@@ -98,8 +92,6 @@ Route::prefix('admin/brand')->group(function () {
     Route::delete('/brands/{id}', [BrandController::class, 'destroy'])->name('brands.delete')->middleware('auth:admin');
 });
 
-
-
 Route::prefix('admin/slider')->group(function () {
 
     Route::get('/sliders', [SliderController::class, 'index'])->name('sliders.index')->middleware('auth:admin');
@@ -122,14 +114,12 @@ Route::prefix('admin/category')->group(function () {
     Route::put('/categories/{id}', [CategoryController::class, 'update'])->name('categories.update')->middleware('auth:admin');
     Route::get('/categories/{id}/show', [CategoryController::class, 'show'])->name('categories.show')->middleware('auth:admin');
     Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.delete')->middleware('auth:admin');
+    Route::get('subcategories/{id}', [CategoryController::class, 'subcategories'])->name('getSubcategories')->middleware('auth:admin');
 
 });
 
-
 Route::prefix('admin/coupon')->group(function () {
-
-
-
+    
     Route::get('/coupons', [CouponController::class, 'index'])->name('coupons.index')->middleware('auth:admin');
     Route::get('/coupons/create', [CouponController::class, 'create'])->name('coupons.create')->middleware('auth:admin');
     Route::get('/coupons/{id}/edit', [CouponController::class, 'edit'])->name('coupons.edit')->middleware('auth:admin');
@@ -138,18 +128,19 @@ Route::prefix('admin/coupon')->group(function () {
     Route::put('/coupons/{id}', [CouponController::class, 'update'])->name('coupons.update')->middleware('auth:admin');
     Route::get('/coupons/{id}/show', [CouponController::class, 'show'])->name('coupons.show')->middleware('auth:admin');
     Route::delete('/coupons/{id}', [CouponController::class, 'destroy'])->name('coupons.delete')->middleware('auth:admin');
-
-
-    // Route::get('/view', [CouponController::class, 'couponView'])->name('manage-coupon')->middleware('auth:admin');
-    // Route::post('/store', [CouponController::class, 'couponStore'])->name('coupon.store')->middleware('auth:admin');
-    // Route::get('/edit/{coupon}', [CouponController::class, 'couponEdit'])->name('coupon.edit')->middleware('auth:admin');
-    // Route::post('update/{id}', [CouponController::class, 'couponUpdate'])->name('coupon.update')->middleware('auth:admin');
-    // Route::get('/delete/{coupon}', [CouponController::class, 'couponDelete'])->name('coupon.delete')->middleware('auth:admin');
 });
 
 // Admin product All Routes
 
 Route::prefix('admin/product')->group(function () {
+
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index')->middleware('auth:admin');
+    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create')->middleware('auth:admin');
+    Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit')->middleware('auth:admin');
+    Route::post('/products/store', [ProductController::class, 'store'])->name('products.store')->middleware('auth:admin');
+    Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update')->middleware('auth:admin');
+    Route::get('/products/{id}/show', [ProductController::class, 'show'])->name('products.show')->middleware('auth:admin');
+    Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.delete')->middleware('auth:admin');
 
     Route::get('/add', [ProductController::class, 'addProduct'])->name('add-product')->middleware('auth:admin');
 
@@ -175,7 +166,6 @@ Route::prefix('admin/product')->group(function () {
 
     Route::get('/delete/{product}', [ProductController::class, 'productDelete'])->name('product.delete')->middleware('auth:admin');
 });
-
 
 //// Frontend All Routes /////
 /// Multi Language All Routes ////
@@ -241,8 +231,6 @@ Route::get('/cart-increment/{rowId}', [CartPageController::class, 'incrementCart
 Route::get('/cart-decrement/{rowId}', [CartPageController::class, 'decrementCartProduct']);
 
 // Admin Coupons All Routes
-
-
 
 // Admin Shipping all Routes
 Route::prefix('admin/shipping')->group(function () {

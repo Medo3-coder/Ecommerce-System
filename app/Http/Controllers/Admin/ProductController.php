@@ -31,6 +31,24 @@ class ProductController extends Controller
 
 
 
+    // public function index()
+    // {
+    //     $products = Product::latest()->get();
+    //     return view('admin.product.table', compact('products'));
+    // }
+
+    public function index()
+    {
+        $products = Product::latest()->get();
+        return view('admin.product.table', compact('products'));
+    }
+
+
+    public function create() {
+        return view('admin.product.create');
+    }
+
+
     public function StoreProduct(StoreProduct $request, productService $productService)
     {
 

@@ -86,7 +86,15 @@
                 </a>
             </li>
 
-            <li class="treeview {{ $prefix == 'admin/product' ? 'active' : '' }}">
+
+            <li class="{{ $prefix == 'admin/product' ? 'active' : '' }}">
+                <a href="{{ route('products.index') }}">
+                    <i class="fa fa-list"></i>
+                    <span>Products</span>
+                </a>
+            </li>
+
+            {{-- <li class="treeview {{ $prefix == 'admin/product' ? 'active' : '' }}">
                 <a href="#">
                     <i data-feather="file"></i>
                     <span>Products</span>
@@ -102,7 +110,11 @@
                         <a href="{{ route('manage-product') }}"><i class="ti-more"></i>Manage products</a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
+
+
+
+
 
 
 

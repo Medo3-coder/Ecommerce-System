@@ -47,10 +47,12 @@ class CategoryController extends Controller {
         return view('admin.categories.show', compact('categories', 'category'));
     }
 
+    public function subcategories($id){
+       return Category::where('parent_id', $id)->get();
+    }
+
     public function destroy($id) {
         $category = Category::findOrFail($id)->delete();
-
-        // Report::addToLog('  حذف قسم') ;
         return response('Post deleted successfully');
     }
 
