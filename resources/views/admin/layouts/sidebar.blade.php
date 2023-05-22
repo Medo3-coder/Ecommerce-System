@@ -65,7 +65,7 @@
 
 
 
-            <li class="treeview {{ $prefix == 'admin/category' ? 'active' : '' }} ">
+            {{-- <li class="treeview {{ $prefix == 'admin/category' ? 'active' : '' }} ">
                 <a href="#">
                     <i data-feather="mail"></i> <span>Category</span>
                     <span class="pull-right-container">
@@ -76,6 +76,14 @@
                     <li class="{{ $route == 'categories.index' ? 'active' : '' }}"><a
                             href="{{ route('categories.index') }}"><i class="ti-more"></i> Categories</a></li>
                 </ul>
+            </li> --}}
+
+
+            <li class="{{ $prefix == 'admin/category' ? 'active' : '' }}">
+                <a href="{{ route('categories.index') }}">
+                    <i class="fa fa-list"></i>
+                    <span>Categories</span>
+                </a>
             </li>
 
             <li class="treeview {{ $prefix == 'admin/product' ? 'active' : '' }}">
