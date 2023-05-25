@@ -119,7 +119,7 @@ Route::prefix('admin/category')->group(function () {
 });
 
 Route::prefix('admin/coupon')->group(function () {
-    
+
     Route::get('/coupons', [CouponController::class, 'index'])->name('coupons.index')->middleware('auth:admin');
     Route::get('/coupons/create', [CouponController::class, 'create'])->name('coupons.create')->middleware('auth:admin');
     Route::get('/coupons/{id}/edit', [CouponController::class, 'edit'])->name('coupons.edit')->middleware('auth:admin');
@@ -142,29 +142,6 @@ Route::prefix('admin/product')->group(function () {
     Route::get('/products/{id}/show', [ProductController::class, 'show'])->name('products.show')->middleware('auth:admin');
     Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.delete')->middleware('auth:admin');
 
-    Route::get('/add', [ProductController::class, 'addProduct'])->name('add-product')->middleware('auth:admin');
-
-    Route::post('/store', [ProductController::class, 'storeProduct'])->name('store-product')->middleware('auth:admin');
-
-    Route::get('/manage', [ProductController::class, 'manageProduct'])->name('manage-product')->middleware('auth:admin');
-
-    Route::get('/edit/{product}', [ProductController::class, 'editProduct'])->name('edit-product')->middleware('auth:admin');
-
-    Route::post('/data/update/{product}', [ProductController::class, 'UpdateProduct'])->name('update-product')->middleware('auth:admin');
-
-    Route::post('/image/update', [ProductController::class, 'multiImageUpdate'])->name('update-product-image')->middleware('auth:admin');
-
-    Route::post('/thambnail/update/{id}', [ProductController::class, 'thambnailImageUpdate'])->name('update-product-thambnail')->middleware('auth:admin');
-
-    Route::get('/multiimg/delete/{id}', [ProductController::class, 'MultiImageDelete'])->name('product.multiimg.delete')->middleware('auth:admin');
-
-    Route::get('/show/{product}', [ProductController::class, 'showProduct'])->name('show-product')->middleware('auth:admin');
-
-    Route::get('/inactive/{product}', [ProductController::class, 'productInactive'])->name('product.inactive')->middleware('auth:admin');
-
-    Route::get('/active/{product}', [ProductController::class, 'productActive'])->name('product.active')->middleware('auth:admin');
-
-    Route::get('/delete/{product}', [ProductController::class, 'productDelete'])->name('product.delete')->middleware('auth:admin');
 });
 
 //// Frontend All Routes /////
