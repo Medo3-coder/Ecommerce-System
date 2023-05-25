@@ -1,18 +1,5 @@
 <?php
-
 return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Authentication Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines are used during authentication for various
-    | messages that we need to display to the user. You are free to modify
-    | these language lines according to your application's requirements.
-    |
-     */
-
     'activation_code_msg'     => 'كود التفعيل الخاص بك من تطبيق حراج هو  :code',
     'try_internet'            => 'جاري محاوله الاتصال بالانترنت',
     'internet_connected'      => 'تم الاتصال بالانترنت ',
@@ -20,9 +7,17 @@ return [
     'comment_not_found'       => 'تعذر ايجاد التعليق ! تم حذف التعليق',
     'deleteAllNotifications'  => 'حذف جميع الاشعارات',
     'choose_key'              => 'كود الدوله',
+    "long_desc_ar"            => "وصف طويل باللغة العربية",
+    "long_desc_en"            => "وصف طويل باللغة الانجليزية",
+    "color_ar"                => "اللون باللغة العربية",
+    "color_en"                => "اللون باللغة الانجليزية",
     "slug_ar"                 => "رمز التعريفي بالعربية",
-    "slug_en"                 => "slug in arabic,
+    "slug_en"                 => "رمز التعريفي الانجليزية",
+    "tags_ar"                 => "العلامة التعريفية باللغة العربية",
+    "tags_en"                 => "العلامة التعريفية باللغة الانجليزية",
     'blocked'                 => 'تم حظرك من قبل الاداره',
+    "short_desc_ar"           => "وصف قصير باللغة العربية",
+    "short_desc_en"           => "وصف قصير باللغة الانجليزية",
     'more'                    => 'المزيد',
     'phone_ex'                => 'رقم الهاتف غير موجود',
     'email_ex'                => 'البريد الالكتروني غير موجود',

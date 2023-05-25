@@ -31,7 +31,7 @@
                     <thead>
                         <tr>
                             <th>{{ __('admin.name') }}</th>
-                            <th>{{ __('admin.code') }}</th>
+                            <th>{{ __('admin.product_code') }}</th>
                             <th>{{ __('admin.qty') }}</th>
                             <th>{{ __('admin.selling_price') }}</th>
                             <th>{{ __('admin.status') }}</th>

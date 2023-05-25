@@ -220,11 +220,11 @@
                                 </li>
 
                                 <!--   // Get Category Table Data -->
-                                @php
+                                {{-- @php
                                     $categories = App\Models\Category::orderBy('category_name_en', 'ASC')->limit(8)->get();
-                                @endphp
+                                @endphp --}}
 
-                                @foreach ($categories as $category)
+                                {{-- @foreach ($categories as $category)
                                     <li class="dropdown yamm mega-menu"> <a href="home.html" data-hover="dropdown"
                                             class="dropdown-toggle"
                                             data-toggle="dropdown">
@@ -239,17 +239,17 @@
                                         <ul class="dropdown-menu container">
                                             <li>
                                                 <div class="yamm-content ">
-                                                    <div class="row">
+                                                    <div class="row"> --}}
 
 
                                                         <!--   // Get SubCategory Table Data -->
-                                                        @php
+                                                        {{-- @php
                                                             $subcategories = App\Models\SubCategory::where('category_id', $category->id)
                                                                 ->orderBy('sub_category_name_en', 'ASC')
                                                                 ->get();
-                                                        @endphp
+                                                        @endphp --}}
 
-
+{{--
                                                         @foreach ($subcategories as $subcategory)
                                                             <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
 
@@ -263,18 +263,18 @@
                                                                     {{ $subcategory->sub_category_name_en }}
                                                                     @endif
                                                                 </h2>
-                                                                </a>
+                                                                </a> --}}
 
 
 
                                                                 <!--   // Get SubSubCategory Table Data -->
-                                                                @php
+                                                                {{-- @php
                                                                     $subsubcategories = App\Models\SubSubCategory::where('subcategory_id', $subcategory->id)
                                                                         ->orderBy('subsubcategory_name_en', 'ASC')
                                                                         ->get();
-                                                                @endphp
+                                                                @endphp --}}
 
-
+{{--
                                                                 @foreach ($subsubcategories as $subsubcategory)
                                                                     <ul class="links">
                                                                         <li><a href="{{ url('subsubcategory/product/'.$subsubcategory->id.'/'.$subsubcategory->subsubcategory_slug_en ) }}">
@@ -288,10 +288,10 @@
                                                                         </a>
                                                                         </li>
                                                                     </ul>
-                                                                @endforeach
+                                                                @endforeach --}}
                                                             </div>
                                                             <!-- /.col -->
-                                                        @endforeach
+                                                        {{-- @endforeach --}}
 
                                                         <div class="col-xs-12 col-sm-6 col-md-4 col-menu banner-image">
                                                             <img class="img-responsive"
@@ -304,7 +304,7 @@
                                             </li>
                                         </ul>
                                     </li>
-                                @endforeach
+                                {{-- @endforeach --}}
 
 
                                 <li class="dropdown  navbar-right special-menu"> <a href="#">Todays offer</a> </li>

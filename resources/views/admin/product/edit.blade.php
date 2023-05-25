@@ -31,58 +31,172 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="col">
-                        <form method="POST" action="{{ route('coupons.update', ['id' => $coupon->id]) }}"
+                        <form method="POST" action="{{ route('products.update', ['id' => $product->id]) }}"
                             class="store form-horizontal" novalidate>
                             @csrf
                             @method('PUT')
                             <div class="form-body">
                                 <div class="row">
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="first-name-column">{{ __('admin.coupon_number') }}</label>
-                                            <div class="controls">
-                                                <input type="text" name="coupon_num" value="{{ $coupon->coupon_num }}"
-                                                    class="form-control" placeholder="{{ __('admin.enter_coupon_number') }}"
-                                                    required
-                                                    data-validation-required-message="{{ __('admin.this_field_is_required') }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="first-name-column">{{ __('admin.number_of_use') }}</label>
-                                            <div class="controls">
-                                                <input type="number" name="max_use" value="{{ $coupon->max_use }}"
-                                                    class="form-control" placeholder="{{ __('admin.enter_number_of_use') }}"
-                                                    required
-                                                    data-validation-required-message="{{ __('admin.this_field_is_required') }}">
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div class="col-md-6 col-12">
+                                    <div class="col-md-12 col-sm-12">
                                         <div class="form-group">
-                                            <label for="first-name-column">{{ __('admin.discount_type') }}</label>
+                                            <label for="first-name-column">{{ __('admin.brands') }}</label>
                                             <div class="controls">
-                                                <select name="type" class="select2 form-control" required
-                                                    data-validation-required-message="{{ __('admin.this_field_is_required') }}">
-                                                    <option value disabled>{{ __('admin.select_the_discount_state') }}</option>
-                                                    <option {{ $coupon->type == 'ratio' ? 'selected' : '' }}
-                                                        value="ratio">{{ __('admin.Percentage') }}</option>
-                                                    <option {{ $coupon->type == 'number' ? 'selected' : '' }}
-                                                        value="number">{{ __('admin.fixed_number') }}</option>
+                                                <select name="brand_id" class="form-control" required>
+                                                    <option value="" disabled>{{ __('admin.select_brands') }}
+                                                    </option>
+                                                    @foreach ($brands as $brand)
+                                                        <option {{ $brand->id == $product->brand_id ? 'selected' : '' }}
+                                                            value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
 
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="first-name-column">{{ __('admin.categories') }}</label>
+                                            <div class="controls">
+                                                <select name="category_id" class="form-control" required>
+                                                    <option value="" disabled>{{ __('admin.select_categories') }}
+                                                    </option>
+                                                    @foreach ($categories as $category)
+                                                        <option
+                                                            {{ $category->id == $product->category_id ? 'selected' : '' }}
+                                                            value="{{ $category->id }}">{{ $category->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="first-name-column">{{ __('admin.subcategory') }}</label>
+                                            <div class="controls">
+                                                <select name="subcategory_id" class="form-control">
+                                                    <option >
+                                                        {{ __('admin.select_subcategories') }}</option>
+
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="first-name-column">{{ __('admin.subSubcategory') }}</label>
+                                            <div class="controls">
+                                                <select name="subsubcategory_id" class="form-control">
+                                                    <option value="">{{ __('admin.select_subcategories') }}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    @foreach (languages() as $lang)
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="first-name-column">{{ __('site.name_' . $lang) }}</label>
+                                                <div class="controls">
+                                                    <input type="text" name="name[{{ $lang }}]"
+                                                        value="{{ $product->getTranslations('name')[$lang] }}"
+                                                        class="form-control"
+                                                        placeholder="{{ __('site.write') . __('site.name_' . $lang) }}"
+                                                        required
+                                                        data-validation-required-message="{{ __('admin.this_field_is_required') }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    @foreach (languages() as $lang)
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="first-name-column">{{ __('site.slug_' . $lang) }}</label>
+                                                <div class="controls">
+                                                    <input type="text" name="slug[{{ $lang }}]"
+                                                        value="{{ $product->getTranslations('slug')[$lang] }}"
+                                                        class="form-control"
+                                                        placeholder="{{ __('site.write') . __('site.slug_' . $lang) }}"
+                                                        required
+                                                        data-validation-required-message="{{ __('admin.this_field_is_required') }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+
+
+
+                                    @foreach (languages() as $lang)
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="first-name-column">{{ __('site.tags_' . $lang) }}</label>
+                                                <div class="controls">
+                                                    <input type="text" name="tags[{{ $lang }}]"
+                                                        value="{{ $product->getTranslations('tags')[$lang] }}"
+                                                        class="form-control"
+                                                        placeholder="{{ __('site.write') . __('site.tags_' . $lang) }}"
+                                                        required
+                                                        data-validation-required-message="{{ __('admin.this_field_is_required') }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+
+
+                                    @foreach (languages() as $lang)
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="first-name-column">{{ __('site.short_desc_' . $lang) }}</label>
+                                                <div class="controls">
+                                                    <textarea type="text" name="short_desc[{{ $lang }}]" class="form-control"placeholder="{{ __('site.write') . __('site.short_desc_' . $lang) }}" requireddata-validation-required-message="{{ __('admin.this_field_is_required') }}">{{ $product->getTranslations('short_desc')[$lang] }} </textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+
+                                    @foreach (languages() as $lang)
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="first-name-column">{{ __('site.color_' . $lang) }}</label>
+                                                <div class="controls">
+                                                    <input type="text" name="color[{{ $lang }}]"
+                                                        value="{{ $product->getTranslations('color')[$lang] }}"
+                                                        class="form-control" data-role="tagsinput" required
+                                                        data-validation-required-message="{{ __('admin.this_field_is_required') }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+
+
+
+                                    @foreach (languages() as $lang)
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="first-name-column">{{ __('site.long_desc_' . $lang) }}</label>
+                                                <div class="controls">
+                                                    <textarea type="text" name="long_desc[{{ $lang }}]" class="ckeditor form-control"placeholder="{{ __('site.write') . __('site.long_desc_' . $lang) }}" required required data-validation-required-message="{{ __('admin.this_field_is_required') }}"> {{ $product->getTranslations('long_desc')[$lang] }}</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+
+
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="first-name-column">{{ __('admin.discount_value') }}</label>
+                                            <label for="first-name-column">{{ __('admin.selling_price') }}</label>
                                             <div class="controls">
-                                                <input type="number" value="{{ $coupon->discount }}" name="discount"
-                                                    class="discount form-control"
-                                                    placeholder="{{ __('admin.type_the_value_of_the_discount') }}" required
+                                                <input type="number" name="selling_price" class="discount form-control"
+                                                value="{{$product->selling_price}}"
+                                                    placeholder="{{ __('admin.write_selling_price') }}" required
                                                     data-validation-required-message="{{ __('admin.this_field_is_required') }}">
                                             </div>
                                         </div>
@@ -90,28 +204,143 @@
 
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label
-                                                for="first-name-column">{{ __('admin.larger_value_for_discount') }}</label>
+                                            <label for="first-name-column">{{ __('admin.product_code') }}</label>
                                             <div class="controls">
-                                                <input readonly type="number" name="max_discount"
-                                                    value="{{ $coupon->max_discount }}" class="max_discount form-control"
-                                                    placeholder="{{ __('admin.write_the_greatest_value_for_the_discount') }}"
+                                                <input type="text" name="code" class="form-control generate_Code"
+                                                value="{{$product->code}}"
+                                                    placeholder="{{ __('admin.product_code') }}" required
+                                                    data-validation-required-message="{{ __('admin.this_field_is_required') }}">
+                                                <span class="input-group-append">
+                                                    <button class="btn btn-primary" type="button" id="generate_inField">
+                                                        Generate </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="first-name-column">{{ __('admin.qty') }}</label>
+                                            <div class="controls">
+                                                <input type="number" name="qty" class="form-control"
+                                                value="{{$product->qty}}"
+                                                    placeholder="{{ __('admin.qty') }}" required
+                                                    data-validation-required-message="{{ __('admin.this_field_is_required') }}">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="first-name-column">{{ __('admin.discount_price') }}</label>
+                                            <div class="controls">
+                                                <input type="number" name="discount_price"
+                                                    class="max_discount form-control"
+                                                    value="{{$product->discount_price}}"
+                                                    placeholder="{{ __('admin.write_the_greatest_value_for_discount_price') }}"
                                                     required
                                                     data-validation-required-message="{{ __('admin.this_field_is_required') }}">
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="first-name-column">{{ __('admin.expiry_date') }}</label>
+                                            <label for="first-name-column">{{ __('admin.product_thambnail') }}</label>
                                             <div class="controls">
-                                                <input type="date"
-                                                    value="{{ date('Y-m-d', strtotime($coupon->expire_date)) }}"
-                                                    name="expire_date" class=" form-control" required
+                                                <input type="file" name="product_thambnail" class="form-control"
+                                                    required onChange="mainThumbUrl(this)"
                                                     data-validation-required-message="{{ __('admin.this_field_is_required') }}">
+                                                <img src="{{$product->product_thambnail}}" id="mainThumb" alt="" width="100">
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-4">
+
+                                        <div class="form-group">
+                                            <h5>Multi Image <span class="text-danger">*</span></h5>
+                                            <div class="controls">
+                                                <input type="file" name="images[]" class="form-control"
+                                                multiple="" id="multiImg"
+                                                data-validation-required-message="{{ __('admin.this_field_is_required') }}">
+                                                {{-- fix later --}}
+                                                {{-- @foreach ($productImages as $image)
+                                                <img src="{{ $image->image }}">
+
+                                                @endforeach --}}
+                                                <div class="row" id="preview_img" >
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-12">
+                                        <div class="form-group">
+                                            <label for="first-name-column">{{ __('admin.status') }}</label>
+                                            <div class="controls">
+                                                <select name="status" class="select2 form-control" required
+                                                    data-validation-required-message="{{ __('admin.this_field_is_required') }}">
+                                                    <option value>{{ __('admin.status') }}</option>
+                                                    <option {{$product->status == 0 ? 'selected':''}} value="0">InActive </option>
+                                                    <option {{$product->status == 1 ? 'selected':''}}  value="1">Active </option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+
+                                                    <div class="controls">
+                                                        <fieldset>
+                                                            <input type="checkbox" id="checkbox_2" name="hot_deals"
+                                                            {{$product->hot_deals == 1 ? 'checked':''}}
+                                                                value="1">
+                                                            <label for="checkbox_2">Hot Deals</label>
+                                                        </fieldset>
+                                                        <fieldset>
+                                                            <input type="checkbox" id="checkbox_3" name="featured"
+                                                            {{$product->featured == 1 ? 'checked':''}}
+                                                                value="1">
+                                                            <label for="checkbox_3">Featured</label>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+
+                                                    <div class="controls">
+                                                        <fieldset>
+                                                            <input type="checkbox" id="checkbox_4" name="special_offer"
+                                                            {{$product->special_offer == 1 ? 'checked':''}}
+                                                                value="1">
+                                                            <label for="checkbox_4">Special offer</label>
+                                                        </fieldset>
+                                                        <fieldset>
+                                                            <input type="checkbox" id="checkbox_5" name="special_deals"
+                                                            {{$product->special_deals == 1 ? 'checked':''}}
+                                                                value="1">
+                                                            <label for="checkbox_5">Special Deals</label>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+
+
+
+
                                     <div class="col-12 d-flex justify-content-center mt-3">
                                         <button type="submit"
                                             class="btn btn-primary mr-1 mb-1 submit_button">{{ __('admin.update') }}</button>
@@ -135,23 +364,127 @@
 
 @push('js')
     <script>
-        $(document).on('change', '.select2', function() {
-            if ($(this).val() == 'ratio') {
-                $('.max_discount').prop('readonly', false);
+        function getSubcategories(id) {
+            $('select[name="subcategory_id"]').html('')
+            $.ajax({
+                url: "{{ url('admin/category/subcategories') }}" + '/' + id,
+                type: 'GET',
+                success: function(data) {
+                    $('select[name="subsubcategory_id"]').empty();
+
+                    for (let i = 0; i < data.length; i++) {
+                        $('select[name="subcategory_id"]').append(
+                            `<option value="${ data[i].id }">${ data[i].name['{{ lang() }}'] }</option>`
+                        )
+                    }
+                }
+            })
+        }
+
+        $(document).ready(function() {
+            var category_id = $('select[name="category_id"]').val();
+            getSubcategories(category_id)
+        })
+        $('select[name="category_id"]').change(function() {
+            var id = $(this).val();
+            getSubcategories(id)
+        })
+
+
+        function getsubSubcategories(id) {
+            $('select[name="subsubcategory_id"]').html('')
+            $.ajax({
+                url: "{{ url('admin/category/subcategories') }}" + '/' + id,
+                type: 'GET',
+                success: function(data) {
+                    $('select[name="subsubcategory_id"]').empty();
+
+                    for (let i = 0; i < data.length; i++) {
+                        $('select[name="subsubcategory_id"]').append(
+                            `<option value="${ data[i].id }">${ data[i].name['{{ lang() }}'] }</option>`
+                        )
+                    }
+                }
+            })
+        }
+        $(document).ready(function() {
+            var category_id = $('select[name="subcategory_id"]').val();
+            getsubSubcategories(category_id)
+        })
+
+
+        $('select[name="subcategory_id"]').change(function() {
+            var id = $(this).val();
+            getsubSubcategories(id)
+        })
+    </script>
+
+
+<script type="text/javascript">
+    function mainThumbUrl(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#mainThumb').attr('src', e.target.result).width(90).height(90);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+
+<script>
+    $(document).ready(function() {
+        $('#multiImg').on('change', function() { //on file input change
+            if (window.File && window.FileReader && window.FileList && window
+                .Blob) //check File API supported browser
+            {
+                var data = $(this)[0].files; //this file data
+
+                $.each(data, function(index, file) { //loop though each file
+                    if (/(\.|\/)(gif|jpe?g|png)$/i.test(file
+                            .type)) { //check supported file type
+                        var fRead = new FileReader(); //new filereader
+                        fRead.onload = (function(file) { //trigger function on successful read
+                            return function(e) {
+                                var img = $('<img/>').addClass('thumb').attr('src',
+                                        e.target.result).width(80)
+                                    .height(80); //create image element
+                                $('#preview_img').append(
+                                    img); //append image to output element
+                            };
+                        })(file);
+                        fRead.readAsDataURL(file); //URL representing the file's data.
+                    }
+                });
+
             } else {
-                $('.max_discount').prop('readonly', true);
+                alert("Your browser doesn't support File API!"); //if File API is absent
             }
         });
-    </script>
-    <script>
-        $(document).on('keyup', '.discount', function() {
-            if ($('.select2').val() == 'number') {
-                $('.max_discount').val($(this).val());
-            } else {
-                $('.max_discount').val(null);
-            }
-        });
-    </script>
+    });
+</script>
+
+
+
+<script>
+    function makeid(length) {
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for (var i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() *
+                charactersLength));
+        }
+        return result;
+    }
+
+
+    $(document).on('click', '#generate_inField', function() {
+        let result = makeid(8);
+        $('.generate_Code').val(result);
+    })
+</script>
     {{-- submit edit form script --}}
     @include('Admin.shared.submitEditForm')
     {{-- submit edit form script --}}

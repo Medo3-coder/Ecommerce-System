@@ -38,6 +38,64 @@
                             @csrf
                             <div class="form-body">
                                 <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="first-name-column">{{ __('admin.brands') }}</label>
+                                            <div class="controls">
+                                                <select name="brand_id" class="form-control" required>
+                                                    <option value="" disabled>{{ __('admin.select_brands') }}
+                                                    </option>
+                                                    @foreach ($brands as $brand)
+                                                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="first-name-column">{{ __('admin.categories') }}</label>
+                                            <div class="controls">
+                                                <select name="category_id" class="form-control" required>
+                                                    <option value="" disabled>{{ __('admin.select_categories') }}
+                                                    </option>
+                                                    @foreach ($categories as $category)
+                                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="first-name-column">{{ __('admin.subcategory') }}</label>
+                                            <div class="controls">
+                                                <select name="subcategory_id" class="form-control">
+                                                    <option value="">{{ __('admin.select_subcategories') }}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="first-name-column">{{ __('admin.subSubcategory') }}</label>
+                                            <div class="controls">
+                                                <select name="subsubcategory_id" class="form-control">
+                                                    <option value="">{{ __('admin.select_subSubcategories') }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                     @foreach (languages() as $lang)
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
@@ -92,43 +150,11 @@
                                                 <div class="controls">
                                                     <textarea type="text" name="short_desc[{{ $lang }}]" class="form-control"
                                                         placeholder="{{ __('site.write') . __('site.short_desc_' . $lang) }}" required
-                                                        data-validation-required-message="{{ __('admin.this_field_is_required') }}">
-                                                    </textarea>
+                                                        data-validation-required-message="{{ __('admin.this_field_is_required') }}"> </textarea>
                                                 </div>
                                             </div>
                                         </div>
                                     @endforeach
-
-
-                                    @foreach (languages() as $lang)
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="first-name-column">{{ __('site.short_desc_' . $lang) }}</label>
-                                                <div class="controls">
-                                                    <textarea type="text" name="short_desc[{{ $lang }}]" class="form-control"
-                                                        placeholder="{{ __('site.write') . __('site.short_desc_' . $lang) }}" required
-                                                        data-validation-required-message="{{ __('admin.this_field_is_required') }}">
-                                                </textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-
-
-                                    @foreach (languages() as $lang)
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="first-name-column">{{ __('site.long_desc_' . $lang) }}</label>
-                                                <div class="controls">
-                                                    <textarea type="text" name="long_desc[{{ $lang }}]" class="ckeditor form-control"
-                                                        placeholder="{{ __('site.write') . __('site.long_desc_' . $lang) }}" required required
-                                                        data-validation-required-message="{{ __('admin.this_field_is_required') }}">
-                                                    </textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-
 
                                     @foreach (languages() as $lang)
                                         <div class="col-md-6 col-12">
@@ -146,6 +172,24 @@
 
 
 
+                                    @foreach (languages() as $lang)
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="first-name-column">{{ __('site.long_desc_' . $lang) }}</label>
+                                                <div class="controls">
+                                                    <textarea type="text" name="long_desc[{{ $lang }}]" class="ckeditor form-control"
+                                                        placeholder="{{ __('site.write') . __('site.long_desc_' . $lang) }}" required required
+                                                        data-validation-required-message="{{ __('admin.this_field_is_required') }}"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+
+
+
+
+
+
 
 
 
@@ -157,8 +201,7 @@
                                             <label for="first-name-column">{{ __('admin.selling_price') }}</label>
                                             <div class="controls">
                                                 <input type="number" name="selling_price" class="discount form-control"
-                                                    placeholder="{{ __('admin.type_the_value_of_the_selling_price') }}"
-                                                    required
+                                                    placeholder="{{ __('admin.write_selling_price') }}" required
                                                     data-validation-required-message="{{ __('admin.this_field_is_required') }}">
                                             </div>
                                         </div>
@@ -166,11 +209,10 @@
 
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="first-name-column">{{ __('admin.selling_price') }}</label>
+                                            <label for="first-name-column">{{ __('admin.product_code') }}</label>
                                             <div class="controls">
                                                 <input type="text" name="code" class="form-control generate_Code"
-                                                    placeholder="{{ __('admin.type_the_value_of_the_selling_price') }}"
-                                                    required
+                                                    placeholder="{{ __('admin.product_code') }}" required
                                                     data-validation-required-message="{{ __('admin.this_field_is_required') }}">
                                                 <span class="input-group-append">
                                                     <button class="btn btn-primary" type="button" id="generate_inField">
@@ -181,7 +223,16 @@
                                     </div>
 
 
-
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="first-name-column">{{ __('admin.qty') }}</label>
+                                            <div class="controls">
+                                                <input type="number" name="qty" class="form-control"
+                                                    placeholder="{{ __('admin.qty') }}" required
+                                                    data-validation-required-message="{{ __('admin.this_field_is_required') }}">
+                                            </div>
+                                        </div>
+                                    </div>
 
 
                                     <div class="col-md-6 col-12">
@@ -204,7 +255,6 @@
                                                 <input type="file" name="product_thambnail" class="form-control"
                                                     required onChange="mainThumbUrl(this)"
                                                     data-validation-required-message="{{ __('admin.this_field_is_required') }}">
-
                                                 <img src="" id="mainThumb" alt="">
                                             </div>
                                         </div>
@@ -215,24 +265,33 @@
                                         <div class="form-group">
                                             <h5>Multi Image <span class="text-danger">*</span></h5>
                                             <div class="controls">
-                                                <input type="file" name="multi_img[]" class="form-control"
-                                                    multiple="" id="multiImg" required="">
-                                                @error('multi_img')
-                                                    <span class="text-danger" role="alert">
-                                                        {{ $message }}
-                                                    </span>
-                                                @enderror
+                                                <input type="file" name="images[]" class="form-control"
+                                                    multiple="" id="multiImg"
+                                                    data-validation-required-message="{{ __('admin.this_field_is_required') }}">
+
                                                 <div class="row" id="preview_img">
 
                                                 </div>
                                             </div>
                                         </div>
-
-
                                     </div>
-
-
                                 </div>
+
+
+                                <div class="col-md-12 col-12">
+                                    <div class="form-group">
+                                        <label for="first-name-column">{{ __('admin.status') }}</label>
+                                        <div class="controls">
+                                            <select name="status" class="select2 form-control" required
+                                                data-validation-required-message="{{ __('admin.this_field_is_required') }}">
+                                                <option value>{{ __('admin.status') }}</option>
+                                                <option value="0">InActive </option>
+                                                <option value="1">Active </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -292,6 +351,48 @@
 @endsection
 
 @push('js')
+    <script>
+        $('select[name="category_id"]').change(function() {
+            var id = $(this).val();
+            $('select[name="subcategory_id"]').html('')
+            $.ajax({
+                url: "{{ url('admin/category/subcategories') }}" + '/' + id,
+                type: 'GET',
+                success: function(data) {
+                    $('select[name="subcategory_id"]').empty();
+                    $('select[name="subsubcategory_id"]').empty();
+
+
+                    for (let i = 0; i < data.length; i++) {
+                        $('select[name="subcategory_id"]').append(`<option value="${ data[i].id }">${ data[i].name['{{ lang() }}'] }
+                      </option>`)
+                    }
+                }
+            })
+        })
+    </script>
+
+    <script>
+        $('select[name="subcategory_id"]').change(function() {
+            var id = $(this).val();
+            $('select[name="subsubcategory_id"]').html()
+            $.ajax({
+                url: "{{ url('admin/category/subcategories') }}" + '/' + id,
+                type: "GET",
+                success: function(data) {
+                    $('select[name="subsubcategory_id"]').empty();
+                    for (let i = 0; i < data.length; i++) {
+                        $('select[name="subsubcategory_id"]').append(`<option value="${data[i].id}"> ${data[i].name['{{ lang() }}']}
+                        </option>`)
+                    }
+
+
+                }
+            })
+        })
+    </script>
+
+
     <script type="text/javascript">
         function mainThumbUrl(input) {
             if (input.files && input.files[0]) {
