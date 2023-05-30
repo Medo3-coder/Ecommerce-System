@@ -17,12 +17,16 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/dashboard';            //for default user
+    public const HOME = '/home';            //for default user
 
-    public static function redirectTo($guard)  //guard = admin
-    {
-        return $guard.'/dashboard';         // admin/dashboard
-    }
+    // public static function redirectTo($guard)  //guard = admin
+    // {
+    //     return $guard.'/dashboard';         // admin/dashboard
+    // }
+    // protected $DashboardNamespace = 'App\\Http\\Controllers';
+    protected $namespace = 'App\Http\Controllers';
+    protected $DashboardNamespace  = 'App\Http\Controllers\Admin';
+
 
     /**
      * The controller namespace for the application.
@@ -52,8 +56,9 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
 
-                Route::prefix('admin')
-                ->namespace($this->namespace)
+                Route::middleware('web')
+                ->namespace($this->DashboardNamespace)
+                // ->prefix('dashboard')
                 ->group(base_path('routes/admin.php'));
         });
     }
