@@ -29,7 +29,7 @@
                     <br><br>
                     <ul class="list-group list-group-flush">
 
-                        <a href="{{ route('User_dashboard') }}" class="btn btn-primary btn-sm btn-block"> Home </a>
+                        <a href="{{ route('user.dashboard') }}" class="btn btn-primary btn-sm btn-block"> Home </a>
                         <a href="{{ route('user.profile') }}" class="btn btn-primary btn-sm btn-block"> Profile Update </a>
                         <a href=" {{ route('change.password') }}" class="btn btn-primary btn-sm btn-block"> Change Password
                         </a>

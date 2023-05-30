@@ -1,7 +1,5 @@
 @extends('frontend.main_master')
 
-
-
 @section('title', 'Login')
 
 @section('content')
@@ -26,30 +24,27 @@
                         <h4 class="">Sign in</h4>
                         <p class="">Hello, Welcome to your account.</p>
                         <div class="social-sign-in outer-top-xs">
-                            <a href="#" class="facebook-sign-in"><i class="fa fa-facebook"></i> Sign In with Facebook</a>
+                            <a href="#" class="facebook-sign-in"><i class="fa fa-facebook"></i> Sign In with
+                                Facebook</a>
                             <a href="#" class="twitter-sign-in"><i class="fa fa-twitter"></i> Sign In with Twitter</a>
                         </div>
-                        <form method="POST" action="{{ isset($guard) ? url($guard . '/login') : route('login') }}">
+                        <form method="POST" action="{{ route('siteLogin') }}">
                             @csrf
                             <div class="form-group">
-                                <label class="info-title" for="exampleInputEmail1">Email Address <span>*</span></label>
-                                <input type="email" name="email" class="form-control unicase-form-control text-input"
-                                    id="email">
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <label class="info-title" for="exampleInputEmail1">{{ __('site.email') }}
+                                    <span>*</span></label>
+                                <input type="email" name="email" class="form-control"
+                                    placeholder="{{ __('admin.enter_the_email') }}" required />
+                                <i class="fa-regular fa-circle-user"></i>
+
                             </div>
                             <div class="form-group">
-                                <label class="info-title" for="exampleInputPassword1">Password <span>*</span></label>
-                                <input type="password" name="password" class="form-control unicase-form-control text-input"
-                                    id="password">
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <label class="info-title" for="exampleInputPassword1">{{ __('site.password') }}
+                                    <span>*</span></label>
+                                <input type="password" name="password" class="form-control" required
+                                    placeholder="{{ __('admin.enter_the_password') }}"
+                                    data-validation-required-message="{{ __('admin.this_field_is_required') }}" />
+
                             </div>
                             <div class="radio outer-xs">
                                 <label>
@@ -57,17 +52,17 @@
                                     me!
                                 </label>
                                 @if (Route::has('password.request'))
-                                    <a href="{{ route('password.request') }}" class="forgot-password pull-right">Forgot
-                                        your Password?</a>
+                                    <a href="{{ route('password.request') }}"
+                                        class="forgot-password pull-right">{{ __('site.forgetPass') }}</a>
                                 @endif
                             </div>
-                            <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Login</button>
-
+                            <button type="submit"
+                                class="btn btn-primary mr-1 mb-1 submit_button">{{ __('admin.add') }}</button>
                         </form>
                         <br>
 
                         <p class="mt-15 mb-0 text-white">Don't have an account? <a href="{{ route('register') }}"
-                                class="text-info ml-5">Sign Up</a></p>
+                                class="text-info ml-5">{{ __('site.new_account') }}</a></p>
 
 
                     </div>
@@ -149,3 +144,9 @@
 
         </div><!-- /.body-content -->
     @endsection
+
+    @push('js')
+        {{-- submit add form script --}}
+        @include('admin.shared.submitAddForm')
+        {{-- submit add form script --}}
+    @endpush

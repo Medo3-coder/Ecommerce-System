@@ -28,7 +28,7 @@
 					  <h1 class="text-white font-size-180 font-weight-bold error-page-title"> 404</h1>
 					  <h1 class="text-white">Page Not Found !</h1>
 					  <h3 class="text-white">looks like, page doesn't exist</h3>
-					  <div class="my-30"><a href="{{ route('dashboard') }}" class="btn btn-danger btn-rounded">Back to dashboard</a></div>
+					  <div class="my-30"><a href="{{ route('admin.dashboard') }}" class="btn btn-danger btn-rounded">Back to dashboard</a></div>
 
 					  <form class="search-form mx-auto my-30 w-p75">
 						<div class="input-group rounded60 overflow-h">

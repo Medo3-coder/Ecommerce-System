@@ -356,7 +356,7 @@
             var id = $(this).val();
             $('select[name="subcategory_id"]').html('')
             $.ajax({
-                url: "{{ url('admin/category/subcategories') }}" + '/' + id,
+                url: "{{ url('admin/subcategories') }}" + '/' + id,
                 type: 'GET',
                 success: function(data) {
                     $('select[name="subcategory_id"]').empty();
@@ -377,7 +377,7 @@
             var id = $(this).val();
             $('select[name="subsubcategory_id"]').html()
             $.ajax({
-                url: "{{ url('admin/category/subcategories') }}" + '/' + id,
+                url: "{{ url('admin/subcategories') }}" + '/' + id,
                 type: "GET",
                 success: function(data) {
                     $('select[name="subsubcategory_id"]').empty();

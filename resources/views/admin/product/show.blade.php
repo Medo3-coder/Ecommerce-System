@@ -367,7 +367,7 @@
         function getSubcategories(id) {
             $('select[name="subcategory_id"]').html('')
             $.ajax({
-                url: "{{ url('admin/category/subcategories') }}" + '/' + id,
+                url: "{{ url('admin/subcategories') }}" + '/' + id,
                 type: 'GET',
                 success: function(data) {
 
