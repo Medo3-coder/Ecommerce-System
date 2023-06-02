@@ -60,6 +60,7 @@ class Kernel extends HttpKernel {
         'admin'                     => \App\Http\Middleware\Admin\AdminMiddleware::class,
         'guest'                     => \App\Http\Middleware\RedirectIfAuthenticated::class,
         // 'admin'                     => \App\Http\Middleware\AdminRedirectIfAuthenticated::class,
+        'admin-lang'                => \App\Http\Middleware\Admin\AdminLang::class,
         'user'                      => \App\Http\Middleware\UserRedirectIfAuthenticated::class,
         'web-cors'                  => \App\Http\Middleware\WebCors::class,
         'auth.status'               => \App\Http\Middleware\CheckUserStatus::class,

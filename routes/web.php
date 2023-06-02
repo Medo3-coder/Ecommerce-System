@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\ShippingStateController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\frontend\IndexController;
+use App\Http\Controllers\Site\AuthController;
 use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\WishlistController;
 use Illuminate\Support\Facades\Route;
@@ -31,16 +32,16 @@ use Illuminate\Support\Facades\Route;
 
 //admin route
 
-Route::group(['prefix' => 'admin', 'middleware' => ['admin:admin']], function () {
-    Route::get('/login', [AdminController::class, 'loginForm']);
-    Route::post('/login', [AdminController::class, 'store'])->name('admin.login');
-});
+// Route::group(['prefix' => 'admin', 'middleware' => ['admin:admin']], function () {
+//     Route::get('/login', [AdminController::class, 'loginForm']);
+//     Route::post('/login', [AdminController::class, 'store'])->name('admin.login');
+// });
 
 Route::middleware(['auth:admin'])->group(function () {
 
-    Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
-        return view('admin.index');
-    })->name('dashboard');
+    // Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
+    //     return view('admin.index');
+    // })->name('dashboard');
 
     // Admin All Routes
     Route::get('/admin/profile', [AdminProfileController::class, 'adminProfile'])->name('admin.profile');
@@ -52,20 +53,31 @@ Route::middleware(['auth:admin'])->group(function () {
 });
 
 //user all routes
-Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('User_dashboard');
 
-Route::prefix('admin/admins')->group(function () {
 
-    Route::get('/admin', [AdminsController::class, 'index'])->name('admin.index')->middleware('auth:admin');
-    Route::get('/admin/create', [AdminsController::class, 'create'])->name('admin.create')->middleware('auth:admin');
-    Route::get('/admin/{id}/edit', [AdminsController::class, 'edit'])->name('admin.edit')->middleware('auth:admin');
-    Route::post('/admin/store', [AdminsController::class, 'store'])->name('admin.store')->middleware('auth:admin');
-    Route::put('/admin/{id}', [AdminsController::class, 'update'])->name('admin.update')->middleware('auth:admin');
-    Route::get('/admin/{id}/show', [AdminsController::class, 'show'])->name('admin.show')->middleware('auth:admin');
-    Route::delete('/admin/{id}', [AdminsController::class, 'destroy'])->name('admin.delete')->middleware('auth:admin');
+
+
+Route::group(['middleware' => ['guest']], function () {
+    Route::get('login', [AuthController::class, 'showLogin'])->name('login');
+    Route::post('site-login', [AuthController::class, 'login'])->name('siteLogin');
 });
+
+
+
+    // Route::middleware(['middleware' => ['auth.status']])->get('/dashboard', function () {
+    //     return view('dashboard');
+    // });
+
+
+    Route::group(['middleware' => ['auth.status']], function () {
+
+        Route::get('/dashboard', function () {
+            return view('dashboard');
+        })->name('user.dashboard');
+    });
+
+
+
 
 Route::get('/', [IndexController::class, 'index']);
 
@@ -79,70 +91,11 @@ Route::get('/user/change/password', [IndexController::class, 'userChangePassword
 
 Route::post('/user/pasword/update', [IndexController::class, 'userPasswordUpdate'])->name('user.password.update');
 
-// Admin Brand All Routes
 
-Route::prefix('admin/brand')->group(function () {
 
-    Route::get('/brands', [BrandController::class, 'index'])->name('brands.index')->middleware('auth:admin');
-    Route::get('/brands/create', [BrandController::class, 'create'])->name('brands.create')->middleware('auth:admin');
-    Route::get('/brands/{id}/edit', [BrandController::class, 'edit'])->name('brands.edit')->middleware('auth:admin');
-    Route::post('/brands/store', [BrandController::class, 'store'])->name('brands.store')->middleware('auth:admin');
-    Route::put('/brands/{id}', [BrandController::class, 'update'])->name('brands.update')->middleware('auth:admin');
-    Route::get('/brands/{id}/show', [BrandController::class, 'show'])->name('brands.show')->middleware('auth:admin');
-    Route::delete('/brands/{id}', [BrandController::class, 'destroy'])->name('brands.delete')->middleware('auth:admin');
-});
 
-Route::prefix('admin/slider')->group(function () {
 
-    Route::get('/sliders', [SliderController::class, 'index'])->name('sliders.index')->middleware('auth:admin');
-    Route::get('/sliders/create', [SliderController::class, 'create'])->name('sliders.create')->middleware('auth:admin');
-    Route::get('/sliders/{id}/edit', [SliderController::class, 'edit'])->name('sliders.edit')->middleware('auth:admin');
-    Route::post('/sliders/store', [SliderController::class, 'store'])->name('sliders.store')->middleware('auth:admin');
-    Route::put('/sliders/{id}', [SliderController::class, 'update'])->name('sliders.update')->middleware('auth:admin');
-    Route::get('/sliders/{id}/show', [SliderController::class, 'show'])->name('sliders.show')->middleware('auth:admin');
-    Route::delete('/sliders/{id}', [SliderController::class, 'destroy'])->name('sliders.delete')->middleware('auth:admin');
-    // Route::get('/inactive/{slider}', [SliderController::class, 'sliderInactive'])->name('slider.inactive')->middleware('auth:admin');
-    // Route::get('/active/{slider}', [SliderController::class, 'sliderActive'])->name('slider.active')->middleware('auth:admin');
-});
 
-Route::prefix('admin/category')->group(function () {
-
-    Route::get('/categories-show/{id?}', [CategoryController::class, 'index'])->name('categories.index')->middleware('auth:admin');
-    Route::get('/categories/create/{id?}', [CategoryController::class, 'create'])->name('categories.create')->middleware('auth:admin');
-    Route::get('/categories/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit')->middleware('auth:admin');
-    Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store')->middleware('auth:admin');
-    Route::put('/categories/{id}', [CategoryController::class, 'update'])->name('categories.update')->middleware('auth:admin');
-    Route::get('/categories/{id}/show', [CategoryController::class, 'show'])->name('categories.show')->middleware('auth:admin');
-    Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.delete')->middleware('auth:admin');
-    Route::get('subcategories/{id}', [CategoryController::class, 'subcategories'])->name('getSubcategories')->middleware('auth:admin');
-
-});
-
-Route::prefix('admin/coupon')->group(function () {
-
-    Route::get('/coupons', [CouponController::class, 'index'])->name('coupons.index')->middleware('auth:admin');
-    Route::get('/coupons/create', [CouponController::class, 'create'])->name('coupons.create')->middleware('auth:admin');
-    Route::get('/coupons/{id}/edit', [CouponController::class, 'edit'])->name('coupons.edit')->middleware('auth:admin');
-    Route::post('/coupons/store', [CouponController::class, 'store'])->name('coupons.store')->middleware('auth:admin');
-    Route::post('/coupons/renew', [CouponController::class, 'renew'])->name('coupons.renew')->middleware('auth:admin');
-    Route::put('/coupons/{id}', [CouponController::class, 'update'])->name('coupons.update')->middleware('auth:admin');
-    Route::get('/coupons/{id}/show', [CouponController::class, 'show'])->name('coupons.show')->middleware('auth:admin');
-    Route::delete('/coupons/{id}', [CouponController::class, 'destroy'])->name('coupons.delete')->middleware('auth:admin');
-});
-
-// Admin product All Routes
-
-Route::prefix('admin/product')->group(function () {
-
-    Route::get('/products', [ProductController::class, 'index'])->name('products.index')->middleware('auth:admin');
-    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create')->middleware('auth:admin');
-    Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit')->middleware('auth:admin');
-    Route::post('/products/store', [ProductController::class, 'store'])->name('products.store')->middleware('auth:admin');
-    Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update')->middleware('auth:admin');
-    Route::get('/products/{id}/show', [ProductController::class, 'show'])->name('products.show')->middleware('auth:admin');
-    Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.delete')->middleware('auth:admin');
-
-});
 
 //// Frontend All Routes /////
 /// Multi Language All Routes ////

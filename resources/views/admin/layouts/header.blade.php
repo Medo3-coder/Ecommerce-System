@@ -14,16 +14,19 @@
 					<i class="nav-link-icon mdi mdi-crop-free"></i>
 			    </a>
 			</li>
-			<li class="btn-group nav-item d-none d-xl-inline-block">
-				<a href="#" class="waves-effect waves-light nav-link rounded svg-bt-icon" title="">
-					<i class="ti-check-box"></i>
-			    </a>
-			</li>
-			<li class="btn-group nav-item d-none d-xl-inline-block">
-				<a href="calendar.html" class="waves-effect waves-light nav-link rounded svg-bt-icon" title="">
-					<i class="ti-calendar"></i>
-			    </a>
-			</li>
+            <li class="btn-group nav-item">
+                <a class="waves-effect waves-light nav-link rounded svg-bt-icon" id="dropdown-flag" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                @if (lang() == 'ar')
+                    <i class="flag-icon flag-icon-sa"></i><span class="selected-language">عربي</span></a>
+                @else
+                    <i class="flag-icon flag-icon-us"></i><span class="selected-language">English</span></a>
+                @endif
+                <div class="dropdown-menu" aria-labelledby="dropdown-flag">
+                    <a class="dropdown-item" href="{{url('admin/lang/ar')}}" data-language="en"><i class="flag-icon flag-icon-sa"></i> عربي</a>
+                    <a class="dropdown-item" href="{{url('admin/lang/en')}}" data-language="en"><i class="flag-icon flag-icon-us"></i> English</a>
+                </div>
+            </li>
+
 		  </ul>
 	  </div>
 
