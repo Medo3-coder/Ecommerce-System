@@ -99,10 +99,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['web
         Route::get('/district/{id}/show', [ShippingDistrictController::class, 'show'])->name('district.show');
         Route::delete('/district/{id}', [ShippingDistrictController::class, 'destroy'])->name('district.delete');
 
-        // Admin state all Routes
-
-
-
+        //state
         Route::get('/state', [ShippingStateController::class, 'index'])->name('state.index');
         Route::get('/state/create', [ShippingStateController::class, 'create'])->name('state.create');
         Route::get('/state/{id}/edit', [ShippingStateController::class, 'edit'])->name('state.edit');
@@ -110,13 +107,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['web
         Route::put('/state/{id}', [ShippingStateController::class, 'update'])->name('state.update');
         Route::get('/state/{id}/show', [ShippingStateController::class, 'show'])->name('state.show');
         Route::delete('/state/{id}', [ShippingStateController::class, 'destroy'])->name('state.delete');
-
-
-        // Route::get('/view', [ShippingStateController::class, 'stateView'])->name('manage-state')->middleware('auth:admin');
-        // Route::post('/store', [ShippingStateController::class, 'stateStore'])->name('state.store')->middleware('auth:admin');
-        // Route::get('/edit/{state}', [ShippingStateController::class, 'editstate'])->name('state.edit')->middleware('auth:admin');
-        // Route::post('/update/{id}', [ShippingStateController::class, 'updatestate'])->name('state.update')->middleware('auth:admin');
-        // Route::get('/delete/{state}', [ShippingStateController::class, 'deletestate'])->name('state.delete')->middleware('auth:admin');
 
     });
 });
