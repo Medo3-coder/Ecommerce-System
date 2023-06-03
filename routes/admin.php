@@ -7,6 +7,9 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ShippingAreaController;
+use App\Http\Controllers\Admin\ShippingDistrictController;
+use App\Http\Controllers\Admin\ShippingStateController;
 use App\Http\Controllers\Admin\SliderController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +20,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['web
     Route::post('login', [AuthController::class, 'login'])->name('admin.login');
     Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
 
-    Route::group(['middleware' => ['admin' , 'admin-lang' ]], function () {
+    Route::group(['middleware' => ['admin', 'admin-lang']], function () {
         //admin home
         Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('admin.dashboard');
         //admins
@@ -78,6 +81,42 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['web
         Route::get('/products/{id}/show', [ProductController::class, 'show'])->name('products.show');
         Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.delete');
 
+        //division
+        Route::get('/division', [ShippingAreaController::class, 'index'])->name('division.index');
+        Route::get('/division/create', [ShippingAreaController::class, 'create'])->name('division.create');
+        Route::get('/division/{id}/edit', [ShippingAreaController::class, 'edit'])->name('division.edit');
+        Route::post('/division/store', [ShippingAreaController::class, 'store'])->name('division.store');
+        Route::put('/division/{id}', [ShippingAreaController::class, 'update'])->name('division.update');
+        Route::get('/division/{id}/show', [ShippingAreaController::class, 'show'])->name('division.show');
+        Route::delete('/division/{id}', [ShippingAreaController::class, 'destroy'])->name('division.delete');
+
+        //district
+        Route::get('/district', [ShippingDistrictController::class, 'index'])->name('district.index');
+        Route::get('/district/create', [ShippingDistrictController::class, 'create'])->name('district.create');
+        Route::get('/district/{id}/edit', [ShippingDistrictController::class, 'edit'])->name('district.edit');
+        Route::post('/district/store', [ShippingDistrictController::class, 'store'])->name('district.store');
+        Route::put('/district/{id}', [ShippingDistrictController::class, 'update'])->name('district.update');
+        Route::get('/district/{id}/show', [ShippingDistrictController::class, 'show'])->name('district.show');
+        Route::delete('/district/{id}', [ShippingDistrictController::class, 'destroy'])->name('district.delete');
+
+        // Admin state all Routes
+
+
+
+        Route::get('/state', [ShippingStateController::class, 'index'])->name('state.index');
+        Route::get('/state/create', [ShippingStateController::class, 'create'])->name('state.create');
+        Route::get('/state/{id}/edit', [ShippingStateController::class, 'edit'])->name('state.edit');
+        Route::post('/state/store', [ShippingStateController::class, 'store'])->name('state.store');
+        Route::put('/state/{id}', [ShippingStateController::class, 'update'])->name('state.update');
+        Route::get('/state/{id}/show', [ShippingStateController::class, 'show'])->name('state.show');
+        Route::delete('/state/{id}', [ShippingStateController::class, 'destroy'])->name('state.delete');
+
+
+        // Route::get('/view', [ShippingStateController::class, 'stateView'])->name('manage-state')->middleware('auth:admin');
+        // Route::post('/store', [ShippingStateController::class, 'stateStore'])->name('state.store')->middleware('auth:admin');
+        // Route::get('/edit/{state}', [ShippingStateController::class, 'editstate'])->name('state.edit')->middleware('auth:admin');
+        // Route::post('/update/{id}', [ShippingStateController::class, 'updatestate'])->name('state.update')->middleware('auth:admin');
+        // Route::get('/delete/{state}', [ShippingStateController::class, 'deletestate'])->name('state.delete')->middleware('auth:admin');
 
     });
 });

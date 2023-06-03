@@ -4,15 +4,13 @@ namespace App\Http\Requests\Admin\District;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class storeRequest extends FormRequest
-{
+class Store extends FormRequest {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 
@@ -21,11 +19,10 @@ class storeRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             'division_id' => 'required',
-            'district_name' => 'required|string|max:255'
+            'name'        => 'required|max:255',
         ];
     }
 }

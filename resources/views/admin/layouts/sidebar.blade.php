@@ -45,20 +45,7 @@
                     <span>Brands</span>
                 </a>
             </li>
-            {{-- <li class="treeview {{ $prefix == 'admin/brand' ? 'active' : '' }}">
-                <a href="#">
-                    <i data-feather="message-circle"></i>
-                    <span>Brands</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-right pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu {{ $route == 'brands.index' ? 'active' : '' }}">
-                    <li class="{{ $route == 'brands.index' ? 'active' : '' }}"><a href="{{ route('brands.index') }}"><i
-                                class="ti-more"></i>brands</a></li>
-                    <li><a href="calendar.html"><i class="ti-more"></i>Calendar</a></li>
-                </ul>
-            </li> --}}
+
 
 
 
@@ -119,20 +106,6 @@
 
 
 
-            {{-- <li class="treeview {{ $prefix == 'admin/slider' ? 'active' : '' }}">
-                <a href="#">
-                    <i data-feather="file"></i>
-                    <span>Slider</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-right pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="{{ $route == 'manage-slider' ? 'active' : '' }}">
-                        <a href="{{ route('manage-slider') }}"><i class="ti-more"></i>Manage Sliders</a>
-                    </li>
-                </ul>
-            </li> --}}
 
 
 
@@ -154,7 +127,7 @@
 
 
 
-            <li class="treeview {{ $prefix == 'admin/shipping' ? 'active' : '' }}">
+            <li class="treeview">
                 <a href="#">
                     <i data-feather="file"></i>
                     <span>Shipping Area</span>
@@ -163,17 +136,17 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ $route == 'manage-division' ? 'active' : '' }}">
-                        <a href="{{ route('manage-division') }}"><i class="ti-more"></i>Ship Division</a>
+                    <li class="">
+                        <a href="{{ route('division.index') }}"><i class="ti-more"></i>Ship Division</a>
                     </li>
 
-                    <li class="{{ $route == 'manage-district' ? 'active' : '' }}">
-                        <a href="{{ route('manage-district') }}"><i class="ti-more"></i>Ship District</a>
+                    <li class="">
+                        <a href="{{ route('district.index') }}"><i class="ti-more"></i>Ship District</a>
                     </li>
 
 
-                    <li class="{{ $route == 'manage-state' ? 'active' : '' }}">
-                        <a href="{{ route('manage-state') }}"><i class="ti-more"></i>Ship State</a>
+                    <li class="">
+                        <a href="{{ route('state.index') }}"><i class="ti-more"></i>Ship State</a>
                     </li>
 
 

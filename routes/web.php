@@ -162,32 +162,7 @@ Route::get('/cart-decrement/{rowId}', [CartPageController::class, 'decrementCart
 
 // Admin Coupons All Routes
 
-// Admin Shipping all Routes
-Route::prefix('admin/shipping')->group(function () {
-    Route::get('/division/view', [ShippingAreaController::class, 'divisionView'])->name('manage-division')->middleware('auth:admin');
-    Route::post('/division/store', [ShippingAreaController::class, 'divisionStore'])->name('division.store')->middleware('auth:admin');
-    Route::get('/division/edit/{shipDivision}', [ShippingAreaController::class, 'editDivision'])->name('division.edit')->middleware('auth:admin');
-    Route::post('/division/update/{id}', [ShippingAreaController::class, 'updateDivision'])->name('division.update')->middleware('auth:admin');
-    Route::get('/division/delete/{shipDivision}', [ShippingAreaController::class, 'deleteDivision'])->name('division.delete')->middleware('auth:admin');
-});
 
-// Admin district all Routes
-Route::prefix('admin/district')->group(function () {
-    Route::get('/view', [ShippingDistrictController::class, 'districtView'])->name('manage-district')->middleware('auth:admin');
-    Route::post('/store', [ShippingDistrictController::class, 'districtStore'])->name('district.store')->middleware('auth:admin');
-    Route::get('/edit/{district}', [ShippingDistrictController::class, 'editdistrict'])->name('district.edit')->middleware('auth:admin');
-    Route::post('/update/{id}', [ShippingDistrictController::class, 'updatedistrict'])->name('district.update')->middleware('auth:admin');
-    Route::get('/delete/{district}', [ShippingDistrictController::class, 'deletedistrict'])->name('district.delete')->middleware('auth:admin');
-});
-
-// Admin state all Routes
-Route::prefix('admin/state')->group(function () {
-    Route::get('/view', [ShippingStateController::class, 'stateView'])->name('manage-state')->middleware('auth:admin');
-    Route::post('/store', [ShippingStateController::class, 'stateStore'])->name('state.store')->middleware('auth:admin');
-    Route::get('/edit/{state}', [ShippingStateController::class, 'editstate'])->name('state.edit')->middleware('auth:admin');
-    Route::post('/update/{id}', [ShippingStateController::class, 'updatestate'])->name('state.update')->middleware('auth:admin');
-    Route::get('/delete/{state}', [ShippingStateController::class, 'deletestate'])->name('state.delete')->middleware('auth:admin');
-});
 
 // Frontend Coupon Option
 

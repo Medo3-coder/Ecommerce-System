@@ -8,6 +8,11 @@ return [
     "country_and_cities"                                     => "countries and cities",
     "Project_cases"                                          => "Project Cases",
     "users"                                                  => "Users",
+    "shipping_division"                                       => "shipping division",
+    "district"                                               => "district",
+    "districts"                                              => "districts" ,
+    "state"                                                  => "state",
+
     "active_users"                                           => " Active users ",
     "dis_active_users"                                       => " Inactive users ",
     "Prohibited_users"                                       => "Banned Users",

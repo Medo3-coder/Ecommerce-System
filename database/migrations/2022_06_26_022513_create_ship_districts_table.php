@@ -15,12 +15,9 @@ class CreateShipDistrictsTable extends Migration
     {
         Schema::create('ship_districts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('division_id');
-            $table->string('district_name');
+            $table->foreignId('division_id')->references('id')->on('ship_divisions')->onDelete('cascade');
+            $table->string('name');
             $table->timestamps();
-
-            $table->foreign('division_id')->references('id')->on('ship_divisions')->onDelete('cascade');
-
         });
     }
 

@@ -20,6 +20,20 @@
 
 </head>
 
+{{-- @if (session()->has('error'))
+<div class="alert alert-danger" role="alert">
+    {{ session()->get('error') }}
+</div>
+@endif
+
+@if ($errors->any())
+@foreach ($errors->all() as $error)
+    <div class="alert alert-danger" role="alert">
+        {{ $error }}
+    </div>
+@endforeach
+@endif --}}
+
 <body class="hold-transition theme-primary bg-gradient-primary">
 
     <div class="container h-p100">

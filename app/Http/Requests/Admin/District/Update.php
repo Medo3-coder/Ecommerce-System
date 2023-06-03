@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Shipping;
+namespace App\Http\Requests\Admin\District;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class Update extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,9 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'division_name'=>'required|max:40|string'
+            'name'  => 'nullable|max:191',
+            'division_id' => 'nullable',
+
         ];
     }
 }

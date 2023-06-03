@@ -3,40 +3,43 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Shipping\StoreRequest;
+use App\Http\Requests\Admin\Divisions\Store;
+use App\Http\Requests\Admin\Divisions\Update;
 use App\Models\ShipDivision;
-use App\Services\ShippingService;
-use Illuminate\Http\Request;
 
-class ShippingAreaController extends Controller
-{
-    public function divisionView ()
-    {
-        $division = ShipDivision::orderBy('id' , 'DESC')->get();
-        return view('admin.shipping.division.view_division', compact('division'));
+class ShippingAreaController extends Controller {
+
+    public function index($id = null) {
+        $divisions = ShipDivision::latest()->get();
+        return view('admin.shipping.division.table', compact('divisions'));
     }
 
-    public function divisionStore(StoreRequest $request , ShippingService $service)
-    {
-        $service->storeDivision($request->validated());
-
-        return redirect()->route('manage-division')->with('success', 'Division added Successfully');
+    public function create() {
+        return view('admin.shipping.division.create');
     }
 
-    public function editDivision(ShipDivision $shipDivision)
-    {
-        return view('admin.shipping.division.edit_division' , compact('shipDivision'));
+    public function store(Store $request) {
+        ShipDivision::create($request->validated());
+        return response()->json(['url' => route('division.index')]);
     }
 
-    public function updateDivision(StoreRequest $request , ShippingService $service , $id)
-    {
-        $service->UpdateDivision($request->validated() , $id);
-        return redirect()->route('manage-division')->with('success', 'Division Updated Successfully');
+    public function edit($id) {
+        $division = ShipDivision::findOrFail($id);
+        return view('admin.shipping.division.edit', compact('division'));
     }
 
-    public function deleteDivision(ShipDivision $shipDivision)
-    {
-        $shipDivision->delete();
-        return response('Division Deleted successfully.', 200);
+    public function update(Update $request, $id) {
+        $division = ShipDivision::findOrFail($id)->update($request->validated());
+        return response()->json(['url' => route('division.index')]);
+    }
+
+    public function show($id) {
+        $division = ShipDivision::findOrFail($id);
+        return view('admin.shipping.division.show', compact('division'));
+    }
+
+    public function destroy($id) {
+        $category = ShipDivision::findOrFail($id)->delete();
+        return response('Brand deleted successfully');
     }
 }
