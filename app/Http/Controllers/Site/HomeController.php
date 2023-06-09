@@ -18,52 +18,32 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\View;
 use Validator;
 
-class IndexController extends Controller
+class HomeController extends Controller
 {
     public function index()
     {
-        // $categories = Category::with(['subCategories'])->orderBy('category_name_en', 'ASC')->limit(8)->get();
+        $categories = Category::with(['childes','subChildes'])->orderBy('name', 'ASC')->limit(8)->get();
         //   dd($categories);
-        // $sliders =  Slider::where('status', 1)->orderBy('id', 'DESC')->limit(3)->get();
-        // $products = Product::where('status', 1)->orderBy('id', 'DESC')->limit(6)->get();
-        // $featured = Product::where('featured', 1)->orderBy('id', 'DESC')->limit(6)->get();
-        // $hot_deals = Product::where('hot_deals', 1)->orderBy('id', 'DESC')->limit(3)->get();
-        // $special_offer = Product::where('special_offer', 1)->where('discount_price', '!=', NULL)->orderBy('id', 'DESC')->limit(6)->get();
-        // $special_deals = Product::where('special_deals', 1)->orderBy('id', 'DESC')->limit(3)->get();
+        $sliders =  Slider::where('status', 1)->orderBy('id', 'DESC')->limit(3)->get();
+        $products = Product::where('status', 1)->orderBy('id', 'DESC')->limit(6)->get();
+        $featured = Product::where('featured', 1)->orderBy('id', 'DESC')->limit(6)->get();
+        $hot_deals = Product::where('hot_deals', 1)->orderBy('id', 'DESC')->limit(3)->get();
+        $special_offer = Product::where('special_offer', 1)->where('discount_price', '!=', NULL)->orderBy('id', 'DESC')->limit(6)->get();
+        $special_deals = Product::where('special_deals', 1)->orderBy('id', 'DESC')->limit(3)->get();
         // //  get product by category name
-        // $skip_category_0 = Category::skip(0)->first();
-        // $skip_product_0 = Product::where('status', 1)->where('category_id', $skip_category_0->id)->orderBy('id', 'DESC')->limit(8)->get();
-        // $skip_category_3 = Category::skip(3)->first();
-        // $skip_product_3 = Product::where('status', 1)->where('category_id', $skip_category_3->id)->orderBy('id', 'DESC')->limit(8)->get();
-        // //get product by brand name
-        // $skip_brand_Lenovo = Brand::skip(6)->first();
-        // $skip_product_Lenovo = Product::where('status', 1)->where('brand_id', $skip_brand_Lenovo->id)->orderBy('id', 'DESC')->limit(8)->get();
+        $skip_category_0 = Category::skip(0)->first();
+        $skip_product_0 = Product::where('status', 1)->where('category_id', $skip_category_0->id)->orderBy('id', 'DESC')->limit(8)->get();
+        $skip_category_3 = Category::skip(3)->first();
+        $skip_product_3 = Product::where('status', 1)->where('category_id', $skip_category_3->id)->orderBy('id', 'DESC')->limit(8)->get();
+        //get product by brand name
+        $skip_brand_Lenovo = Brand::skip(6)->first();
+        $skip_product_Lenovo = Product::where('status', 1)->where('brand_id', $skip_brand_Lenovo->id)->orderBy('id', 'DESC')->limit(8)->get();
         // // get tags by name
-        // $tags_en = Product::groupBy('product_tags_en')->select('product_tags_en')->get();
+        $tags = Product::groupBy('tags')->select('tags')->get();
         // $tags_ar = Product::groupBy('product_tags_ar')->select('product_tags_ar')->get();
         // $tags_hin = Product::groupBy('product_tags_hin')->select('product_tags_hin')->get();
 
-        // return view(
-        //     'frontend.index',
-        //     compact(
-        //         'categories',
-        //         'sliders',
-        //         'products',
-        //         'featured',
-        //         'hot_deals',
-        //         'special_offer',
-        //         'tags_en',
-        //         'tags_ar',
-        //         'tags_hin',
-        //         'special_deals',
-        //         'skip_product_0',
-        //         'skip_category_0',
-        //         'skip_product_3',
-        //         'skip_category_3',
-        //         'skip_product_Lenovo',
-        //         'skip_brand_Lenovo'
-        //     )
-        // );
+        return view('frontend.index',get_defined_vars());
     }
 
     public function userLogout()

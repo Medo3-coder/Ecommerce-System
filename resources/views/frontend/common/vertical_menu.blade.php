@@ -8,37 +8,25 @@
                 <li class="dropdown menu-item">
                     {{-- <a href="{{ url('category/product/' .$category->id.'/' .$category->category_slug_en ) }}"> --}}
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="icon {{ $category->category_icon }}" aria-hidden="true">
+                    <i class="icon" aria-hidden="true">
 
 
                     </i>
-
-                        @if (session()->get('language') == 'hindi')
-                            {{ $category->category_name_hin }}
-                        @elseif(session()->get('language') == 'arabic')
-                            {{ $category->category_name_ar }}
-                        @else
-                            {{ $category->category_name_en }}
-                        @endif
-
+                            {{ $category->name }}
                     </a>
                     {{-- </a> --}}
                     <ul class="dropdown-menu mega-menu">
                         <li class="yamm-content">
                             <div class="row">
-                                @foreach ($category->subCategories as $subcategory)
+                                @foreach ($category->childes as $childs)
                                     <div class="col-sm-12 col-md-3">
-                                        <a href="{{ url('subcategory/product/' .$subcategory->id. '/' .$subcategory->sub_category_slug_en) }}">
+                                        {{-- <a href="{{ url('subcategory/product/' .$subcategory->id. '/' .$subcategory->sub_category_slug_en) }}"> --}}
                                         <h2 class="title">
-                                            @if (session()->get('language') == 'hindi')
-                                                {{ $subcategory->sub_category_name_hin }}
-                                            @elseif(session()->get('language') == 'arabic')
-                                                {{ $subcategory->sub_category_name_ar }}
-                                            @else
-                                                {{ $subcategory->sub_category_name_en }}
+                                                {{ $childs->name }}
+
                                         </h2>
                                         </a>
-                                @endif
+
                                 </h2>
 
                                 {{-- <!--   // Get SubSubCategory Table Data -->
@@ -48,16 +36,11 @@
                                                                     ->get();
                                                             @endphp --}}
 
-                                @foreach ($subcategory->subSubCategories as $subsubcategory)
+                                @foreach ($category->subChildes as $subchiled)
                                     <ul class="links list-unstyled">
-                                        <li><a href="{{ url('subsubcategory/product/'.$subsubcategory->id.'/'.$subsubcategory->subsubcategory_slug_en ) }}">
-                                                @if (session()->get('language') == 'hindi')
-                                                    {{ $subsubcategory->subsubcategory_name_hin }}
-                                                @elseif(session()->get('language') == 'arabic')
-                                                    {{ $subsubcategory->subsubcategory_name_ar }}
-                                                @else
-                                                    {{ $subsubcategory->subsubcategory_name_en }}
-                                                @endif
+                                        <li>
+                                            {{-- <a href="{{ url('subsubcategory/product/'.$subsubcategory->id.'/'.$subsubcategory->subsubcategory_slug_en ) }}"> --}}
+                                                    {{ $subchiled->name }}
                                             </a>
                                         </li>
 

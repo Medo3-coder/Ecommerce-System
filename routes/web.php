@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\frontend\IndexController;
 use App\Http\Controllers\Site\AuthController;
+use App\Http\Controllers\Site\HomeController;
 use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\WishlistController;
 use Illuminate\Support\Facades\Route;
@@ -30,12 +31,7 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-//admin route
 
-// Route::group(['prefix' => 'admin', 'middleware' => ['admin:admin']], function () {
-//     Route::get('/login', [AdminController::class, 'loginForm']);
-//     Route::post('/login', [AdminController::class, 'store'])->name('admin.login');
-// });
 
 Route::middleware(['auth:admin'])->group(function () {
 
@@ -53,9 +49,6 @@ Route::middleware(['auth:admin'])->group(function () {
 });
 
 //user all routes
-
-
-
 
 Route::group(['middleware' => ['guest']], function () {
     Route::get('login', [AuthController::class, 'showLogin'])->name('login');
@@ -79,17 +72,17 @@ Route::group(['middleware' => ['guest']], function () {
 
 
 
-Route::get('/', [IndexController::class, 'index']);
+Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/user/logout', [IndexController::class, 'userLogout'])->name('user.logout');
+Route::get('/user/logout', [HomeController::class, 'userLogout'])->name('user.logout');
 
-Route::get('/user/profile', [IndexController::class, 'userProfile'])->name('user.profile');
+Route::get('/user/profile', [HomeController::class, 'userProfile'])->name('user.profile');
 
-Route::post('/user/profile/store', [IndexController::class, 'userProfileStore'])->name('user.profile.store');
+Route::post('/user/profile/store', [HomeController::class, 'userProfileStore'])->name('user.profile.store');
 
-Route::get('/user/change/password', [IndexController::class, 'userChangePassword'])->name('change.password');
+Route::get('/user/change/password', [HomeController::class, 'userChangePassword'])->name('change.password');
 
-Route::post('/user/pasword/update', [IndexController::class, 'userPasswordUpdate'])->name('user.password.update');
+Route::post('/user/pasword/update', [HomeController::class, 'userPasswordUpdate'])->name('user.password.update');
 
 
 
@@ -107,22 +100,22 @@ Route::get('/language/english', [LanguageController::class, 'english'])->name('e
 Route::get('/language/arabic', [LanguageController::class, 'arabic'])->name('arabic.language');
 
 // Frontend Product Details Page url
-Route::get('/product/details/{id}/{slug}', [IndexController::class, 'productDetails']);
+Route::get('/product/details/{id}/{slug}', [HomeController::class, 'productDetails']);
 
 //product tags
 
-Route::get('/product/tag/{tag}', [IndexController::class, 'productTag']);
+Route::get('/product/tag/{tag}', [HomeController::class, 'productTag']);
 
-Route::get('/category/product/{id}/{slug}', [IndexController::class, 'categoryWiseProduct']);
+Route::get('/category/product/{id}/{slug}', [HomeController::class, 'categoryWiseProduct']);
 
 // Frontend SubCategory wise Data
-Route::get('/subcategory/product/{id}/{slug}', [IndexController::class, 'subCategoryWiseProduct']);
+Route::get('/subcategory/product/{id}/{slug}', [HomeController::class, 'subCategoryWiseProduct']);
 
 // Frontend Sub-SubCategory wise Data
-Route::get('/subsubcategory/product/{id}/{slug}', [IndexController::class, 'subSubCategoryWiseProduct']);
+Route::get('/subsubcategory/product/{id}/{slug}', [HomeController::class, 'subSubCategoryWiseProduct']);
 
 // Product View Modal with Ajax
-Route::get('product/view/modal/{id}', [IndexController::class, 'productViewModal']);
+Route::get('product/view/modal/{id}', [HomeController::class, 'productViewModal']);
 
 //Add To cart with Ajax
 Route::post('/cart/data/store/{id}', [CartController::class, 'addToCart']);
