@@ -1,4 +1,4 @@
-@extends('frontend.main_master')
+@extends('site.main_master')
 
 @section('title', $product->product_name_en)
 @section('content')
@@ -25,7 +25,7 @@
 
 
                         <!-- ============================================== HOT DEALS ============================================== -->
-                        @include('frontend.common.hot_deals' , ['hot_deals'=>$hot_deals])
+                        @include('site.common.hot_deals', ['hot_deals' => $hot_deals])
                         <!-- ============================================== HOT DEALS: END ============================================== -->
 
                         <!-- ============================================== NEWSLETTER ============================================== -->
@@ -99,15 +99,15 @@
                                     <div id="owl-single-product">
 
 
-                                        @foreach ($multiImag  as $image)
-                                        <div class="single-product-gallery-item" id="slide{{ $image->id }}">
-                                            <a data-lightbox="image-1" data-title="Gallery"
-                                                href="{{ asset($image->photo_name) }}">
-                                                <img class="img-responsive" alt=""
-                                                    src="{{ asset($image->photo_name) }}"
-                                                    data-echo="{{ asset($image->photo_name) }}" />
-                                            </a>
-                                        </div><!-- /.single-product-gallery-item -->
+                                        @foreach ($multiImag as $image)
+                                            <div class="single-product-gallery-item" id="slide{{ $image->id }}">
+                                                <a data-lightbox="image-1" data-title="Gallery"
+                                                    href="{{ asset($image->photo_name) }}">
+                                                    <img class="img-responsive" alt=""
+                                                        src="{{ asset($image->photo_name) }}"
+                                                        data-echo="{{ asset($image->photo_name) }}" />
+                                                </a>
+                                            </div><!-- /.single-product-gallery-item -->
                                         @endforeach
 
                                     </div><!-- /.single-product-slider -->
@@ -117,15 +117,15 @@
 
 
                                         <div id="owl-single-product-thumbnails">
-                                            @foreach ($multiImag  as $image)
-                                            <div class="item">
-                                                <a class="horizontal-thumb active" data-target="#owl-single-product"
-                                                    data-slide="1" href="#slide{{ $image->id }}">
-                                                    <img class="img-responsive" width="85" alt=""
-                                                        src="{{ asset($image->photo_name) }}"
-                                                        data-echo="{{ asset($image->photo_name) }}" />
-                                                </a>
-                                            </div>
+                                            @foreach ($multiImag as $image)
+                                                <div class="item">
+                                                    <a class="horizontal-thumb active" data-target="#owl-single-product"
+                                                        data-slide="1" href="#slide{{ $image->id }}">
+                                                        <img class="img-responsive" width="85" alt=""
+                                                            src="{{ asset($image->photo_name) }}"
+                                                            data-echo="{{ asset($image->photo_name) }}" />
+                                                    </a>
+                                                </div>
                                             @endforeach
                                         </div><!-- /#owl-single-product-thumbnails -->
 
@@ -140,7 +140,7 @@
                             </div><!-- /.gallery-holder -->
                             <div class='col-sm-6 col-md-7 product-info-block'>
                                 <div class="product-info">
-                                    <h1 class="name"  id="product-name">
+                                    <h1 class="name" id="product-name">
                                         @if (session()->get('language') == 'hindi')
                                             {{ $product->product_name_hin }}
                                         @elseif (session()->get('language') == 'arabic')
@@ -195,8 +195,7 @@
                                             <div class="col-sm-6">
                                                 <div class="price-box">
                                                     @if ($product->discount_price == null)
-                                                        <span
-                                                            class="price">{{ $product->selling_price }}</span>
+                                                        <span class="price">{{ $product->selling_price }}</span>
                                                     @else
                                                         <span class="price">{{ $discountAmount }}</span>
                                                         <span class="price-strike">{{ $product->selling_price }}
@@ -224,16 +223,16 @@
 
                                             <div class="col-sm-6">
                                                 <div class="favorite-button m-t-10">
-                                                    <a class="btn btn-primary" data-toggle="tooltip" data-placement="right"
-                                                        title="Wishlist" href="#">
+                                                    <a class="btn btn-primary" data-toggle="tooltip"
+                                                        data-placement="right" title="Wishlist" href="#">
                                                         <i class="fa fa-heart"></i>
                                                     </a>
-                                                    <a class="btn btn-primary" data-toggle="tooltip" data-placement="right"
-                                                        title="Add to Compare" href="#">
+                                                    <a class="btn btn-primary" data-toggle="tooltip"
+                                                        data-placement="right" title="Add to Compare" href="#">
                                                         <i class="fa fa-signal"></i>
                                                     </a>
-                                                    <a class="btn btn-primary" data-toggle="tooltip" data-placement="right"
-                                                        title="E-mail" href="#">
+                                                    <a class="btn btn-primary" data-toggle="tooltip"
+                                                        data-placement="right" title="E-mail" href="#">
                                                         <i class="fa fa-envelope"></i>
                                                     </a>
                                                 </div>
@@ -251,10 +250,12 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="info-title control-label">Color <span>*</span></label>
-                                                <select class="form-control unicase-form-control selectpicker" id="color" style="display: none;">
+                                                <select class="form-control unicase-form-control selectpicker"
+                                                    id="color" style="display: none;">
                                                     <option selected="" disabled="">Choose Color</option>
                                                     @foreach ($color['product_color_en'] as $color)
-                                                    <option value="{{ $color }}">{{ ucwords($color) }}</option>
+                                                        <option value="{{ $color }}">{{ ucwords($color) }}
+                                                        </option>
                                                     @endforeach
 
 
@@ -265,18 +266,19 @@
                                         <div class="col-sm-6">
 
                                             <div class="form-group">
-                                                @if($product->product_size_en== null)
-
+                                                @if ($product->product_size_en == null)
                                                 @else
-                                                <label class="info-title control-label">Size<span>*</span></label>
-                                                <select class="form-control unicase-form-control selectpicker" style="display: none;" id="size">
-                                                    <option selected="" disabled=""> Choose Size </option>
-                                                    @foreach ($size['product_size_en'] as $size)
-                                                    <option value="{{ $size }}">{{ ucwords($size) }}</option>
-                                                    @endforeach
+                                                    <label class="info-title control-label">Size<span>*</span></label>
+                                                    <select class="form-control unicase-form-control selectpicker"
+                                                        style="display: none;" id="size">
+                                                        <option selected="" disabled=""> Choose Size </option>
+                                                        @foreach ($size['product_size_en'] as $size)
+                                                            <option value="{{ $size }}">{{ ucwords($size) }}
+                                                            </option>
+                                                        @endforeach
 
 
-                                                </select>
+                                                    </select>
                                                 @endif
 
                                             </div>
@@ -285,7 +287,7 @@
 
                                     </div><!-- /.row -->
 
-                                       {{-- //End Add product size and color  --}}
+                                    {{-- //End Add product size and color  --}}
 
 
 
@@ -311,23 +313,23 @@
                                                 <div class="cart-quantity">
                                                     <div class="quant-input">
                                                         <div class="arrows">
-                                                            <div class="arrow plus gradient"><span
-                                                                    class="ir"><i
+                                                            <div class="arrow plus gradient"><span class="ir"><i
                                                                         class="icon fa fa-sort-asc"></i></span></div>
-                                                            <div class="arrow minus gradient"><span
-                                                                    class="ir"><i
+                                                            <div class="arrow minus gradient"><span class="ir"><i
                                                                         class="icon fa fa-sort-desc"></i></span></div>
                                                         </div>
-                                                        <input type="text" id="Qty" value="1" min="1">
+                                                        <input type="text" id="Qty" value="1"
+                                                            min="1">
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <input type="hidden" id="product_id" value="{{ $product->id }}" min="1">
+                                            <input type="hidden" id="product_id" value="{{ $product->id }}"
+                                                min="1">
                                             <div class="col-sm-7">
-                                                   <button type="submit" class="btn btn-primary" onclick="addToCart()"><i
+                                                <button type="submit" class="btn btn-primary" onclick="addToCart()"><i
                                                         class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART
-                                                    </button>
+                                                </button>
                                             </div>
 
 
@@ -505,7 +507,8 @@
 
                                                     <div class="form-group">
                                                         <label for="exampleInputTag">Add Your Tags: </label>
-                                                        <input type="email" id="exampleInputTag" class="form-control txt">
+                                                        <input type="email" id="exampleInputTag"
+                                                            class="form-control txt">
 
 
                                                     </div>
@@ -536,79 +539,82 @@
                         <h3 class="section-title">Releted products</h3>
                         <div class="owl-carousel home-owl-carousel upsell-product custom-carousel owl-theme outer-top-xs">
 
-                            @foreach($related_product as $product)
-                            <div class="item item-carousel">
-                                <div class="products">
+                            @foreach ($related_product as $product)
+                                <div class="item item-carousel">
+                                    <div class="products">
 
-                                    <div class="product">
-                                        <div class="product-image">
-                                            <div class="image">
-                                                <a href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_en) }}">
-                                                            <img src="{{ asset($product->product_thambnail) }}"
-                                                                alt=""> </a>
-                                            </div><!-- /.image -->
+                                        <div class="product">
+                                            <div class="product-image">
+                                                <div class="image">
+                                                    <a
+                                                        href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_en) }}">
+                                                        <img src="{{ asset($product->product_thambnail) }}"
+                                                            alt=""> </a>
+                                                </div><!-- /.image -->
 
-                                            <div class="tag sale"><span>sale</span></div>
-                                        </div><!-- /.product-image -->
+                                                <div class="tag sale"><span>sale</span></div>
+                                            </div><!-- /.product-image -->
 
 
-                                        <div class="product-info text-left">
-                                            <h3 class="name"><a
-                                                href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_en) }}">
-                                                @if (session()->get('language') == 'hindi')
-                                                    {{ $product->product_name_hin }}
-                                                @elseif (session()->get('language') == 'arabic')
-                                                    {{ $product->product_name_ar }}
+                                            <div class="product-info text-left">
+                                                <h3 class="name"><a
+                                                        href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_en) }}">
+                                                        @if (session()->get('language') == 'hindi')
+                                                            {{ $product->product_name_hin }}
+                                                        @elseif (session()->get('language') == 'arabic')
+                                                            {{ $product->product_name_ar }}
+                                                        @else
+                                                            {{ $product->product_name_en }}
+                                                        @endif
+                                                    </a>
+                                                </h3>s
+                                                <div class="rating rateit-small"></div>
+                                                <div class="description"></div>
+
+                                                @if ($product->discount_price == null)
+                                                    <div class="product-price"> <span class="price">
+                                                            {{ $product->selling_price }} </div>
                                                 @else
-                                                    {{ $product->product_name_en }}
+                                                    <div class="product-price"> <span class="price">
+                                                            ${{ round($discountAmount) }} </span> <span
+                                                            class="price-before-discount">{{ $product->selling_price }}
+                                                        </span>
+                                                    </div>
                                                 @endif
-                                            </a>
-                                            </h3>s
-                                            <div class="rating rateit-small"></div>
-                                            <div class="description"></div>
+                                                <!-- /.product-price -->
 
-                                            @if ($product->discount_price == null)
-                                            <div class="product-price"> <span class="price">
-                                                    {{ $product->selling_price }} </div>
-                                        @else
-                                            <div class="product-price"> <span class="price">
-                                                    ${{ round($discountAmount) }} </span> <span
-                                                    class="price-before-discount">{{ $product->selling_price }} </span>
-                                            </div>
-                                        @endif<!-- /.product-price -->
+                                            </div><!-- /.product-info -->
+                                            <div class="cart clearfix animate-effect">
+                                                <div class="action">
+                                                    <ul class="list-unstyled">
+                                                        <li class="add-cart-button btn-group">
+                                                            <button class="btn btn-primary icon" data-toggle="dropdown"
+                                                                type="button">
+                                                                <i class="fa fa-shopping-cart"></i>
+                                                            </button>
+                                                            <button class="btn btn-primary cart-btn" type="button">Add to
+                                                                cart</button>
 
-                                        </div><!-- /.product-info -->
-                                        <div class="cart clearfix animate-effect">
-                                            <div class="action">
-                                                <ul class="list-unstyled">
-                                                    <li class="add-cart-button btn-group">
-                                                        <button class="btn btn-primary icon" data-toggle="dropdown"
-                                                            type="button">
-                                                            <i class="fa fa-shopping-cart"></i>
-                                                        </button>
-                                                        <button class="btn btn-primary cart-btn" type="button">Add to
-                                                            cart</button>
+                                                        </li>
 
-                                                    </li>
+                                                        <li class="lnk wishlist">
+                                                            <a class="add-to-cart" href="detail.html" title="Wishlist">
+                                                                <i class="icon fa fa-heart"></i>
+                                                            </a>
+                                                        </li>
 
-                                                    <li class="lnk wishlist">
-                                                        <a class="add-to-cart" href="detail.html" title="Wishlist">
-                                                            <i class="icon fa fa-heart"></i>
-                                                        </a>
-                                                    </li>
+                                                        <li class="lnk">
+                                                            <a class="add-to-cart" href="detail.html" title="Compare">
+                                                                <i class="fa fa-signal"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div><!-- /.action -->
+                                            </div><!-- /.cart -->
+                                        </div><!-- /.product -->
 
-                                                    <li class="lnk">
-                                                        <a class="add-to-cart" href="detail.html" title="Compare">
-                                                            <i class="fa fa-signal"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div><!-- /.action -->
-                                        </div><!-- /.cart -->
-                                    </div><!-- /.product -->
-
-                                </div><!-- /.products -->
-                            </div><!-- /.item -->
+                                    </div><!-- /.products -->
+                                </div><!-- /.item -->
                             @endforeach
 
 

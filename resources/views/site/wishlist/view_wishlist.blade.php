@@ -1,4 +1,4 @@
-@extends('frontend.main_master')
+@extends('site.main_master')
 @section('content')
 @section('title', 'WishList')
 
@@ -36,7 +36,7 @@
             </div><!-- /.row -->
         </div><!-- /.sigin-in-->
         <!-- ============================================== BRANDS CAROUSEL ============================================== -->
-     @include('frontend.layouts.brands')
+     @include('site.common.brands')
         <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->
     </div><!-- /.container -->
 </div><!-- /.body-content -->

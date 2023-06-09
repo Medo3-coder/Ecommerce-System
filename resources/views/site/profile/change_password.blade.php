@@ -1,4 +1,4 @@
-@extends('frontend.main_master')
+@extends('site.main_master')
 @section('title', 'Change Password')
 
 @section('content')

@@ -1,7 +1,6 @@
-@extends('frontend.main_master')
+@extends('site.main_master')
 @section('content')
-@section('title', 'Subcategory Products')
-
+@section('title', 'Tag Wise Product')
 
 
 
@@ -11,7 +10,7 @@
     <div class="container">
         <div class="breadcrumb-inner">
             <ul class="list-inline list-unstyled">
-                <li><a href="#">Home</a></li>
+                <li><a href="{{ url('/') }}">Home</a></li>
                 <li class='active'>Handbags</li>
             </ul>
         </div>
@@ -26,7 +25,7 @@
             <div class='col-md-3 sidebar'>
 
                 <!-- ===== == TOP NAVIGATION ======= ==== -->
-                @include('frontend.common.vertical_menu', ['categories' => $categories])
+                @include('site.common.vertical_menu', ['categories' => $categories])
 
                 <!-- = ==== TOP NAVIGATION : END === ===== -->
 
@@ -51,8 +50,6 @@
                                                     data-toggle="collapse" class="accordion-toggle collapsed">
                                                     @if (session()->get('language') == 'hindi')
                                                         {{ $category->category_name_hin }}
-                                                    @elseif(session()->get('language') == 'arabic')
-                                                        {{ $category->category_name_ar }}
                                                     @else
                                                         {{ $category->category_name_en }}
                                                     @endif
@@ -66,22 +63,13 @@
   $subcategories = App\Models\SubCategory::where('category_id',$category->id)->orderBy('subcategory_name_en','ASC')->get();
   @endphp --}}
 
-                                                    @foreach ($category->subCategories as $subcategory)
-                                                        <ul>
-                                                            <li><a
-                                                                    href="{{ url('subcategory/product/' . $subcategory->id . '/' . $subcategory->sub_category_slug_en) }}">
-                                                                    @if (session()->get('language') == 'hindi')
-                                                                        {{ $subcategory->sub_category_name_hin }}
-                                                                    @elseif(session()->get('language') == 'arabic')
-                                                                        {{ $subcategory->sub_category_name_ar }}
-                                                                    @else
-                                                                        {{ $subcategory->sub_category_name_en }}
-                                                                    @endif
-                                                                </a>
-                                                            </li>
+            @foreach ($category->subCategories as $subcategory)
+	    <ul>
+	      <li><a href="{{ url('subcategory/product/'.$subcategory->id.'/'.$subcategory->subcategory_slug_en ) }}">
+	      	@if (session()->get('language') == 'hindi') {{ $subcategory->subcategory_name_hin }} @else {{ $subcategory->subcategory_name_en }} @endif</a></li>
 
-                                                        </ul>
-                                                    @endforeach
+	    </ul>
+	@endforeach
 
 
                                                 </div>
@@ -185,10 +173,9 @@
 
 
                         <!-- == ====== PRODUCT TAGS ==== ======= -->
-                        @include('frontend.common.product_tags', [
-                            'tags_en' => $tags_en,
-                            'tags_ar' => $tags_ar,
-                            'tags_hin' => $tags_hin,
+                        @include('site.common.product_tags', [
+                            'tags' => $tags,
+
                         ])
                         <!-- /.sidebar-widget -->
                         <!-- == ====== END PRODUCT TAGS ==== ======= -->
@@ -200,7 +187,7 @@
 
                         <!----------- Testimonials------------->
 
-                        @include('frontend.common.testimonials')
+                        @include('site.common.testimonials')
                         <!-- == ========== Testimonials: END ======== ========= -->
 
 
@@ -300,6 +287,15 @@
                         </div>
                         <!-- /.col -->
                         <div class="col col-sm-6 col-md-4 text-right">
+                            <div class="pagination-container">
+                                <ul class="list-inline list-unstyled">
+
+                                        {{ $products->links() }}
+
+
+                                </ul>
+                                <!-- /.list-inline -->
+                            </div>
 
                             <!-- /.pagination-container -->
                         </div>
@@ -341,8 +337,7 @@
                                                                 <div class="tag new"><span>new</span></div>
                                                             @else
                                                                 <div class="tag hot">
-                                                                    <span>{{ round($discount_percent) }}%</span>
-                                                                </div>
+                                                                    <span>{{ round($discount_percent) }}%</span></div>
                                                             @endif
                                                         </div>
 
@@ -554,8 +549,7 @@
                                                         <div class="tag new"><span>new</span></div>
                                                     @else
                                                         <div class="tag hot">
-                                                            <span>{{ round($discount_percent) }}%</span>
-                                                        </div>
+                                                            <span>{{ round($discount_percent) }}%</span></div>
                                                     @endif
                                                 </div>
 
@@ -590,7 +584,7 @@
                         <div class="text-right">
                             <div class="pagination-container">
                                 <ul class="list-inline list-unstyled">
-                                    {{ $products->links() }}
+
                                 </ul>
                                 <!-- /.list-inline -->
                             </div>
@@ -609,7 +603,7 @@
         </div>
         <!-- /.row -->
         <!-- ============================================== BRANDS CAROUSEL ============================================== -->
-        @include('frontend.layouts.brands')
+        @include('site.common.brands')
         <!-- /.logo-slider -->
         <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->
     </div>
@@ -618,3 +612,19 @@
 </div>
 <!-- /.body-content -->
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

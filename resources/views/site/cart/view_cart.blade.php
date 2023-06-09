@@ -1,4 +1,4 @@
-@extends('frontend.main_master')
+@extends('site.layouts.master')
 @section('content')
 @section('title', 'My Cart')
 
@@ -107,7 +107,7 @@
             </div><!-- /.row -->
         </div><!-- /.sigin-in-->
         <!-- ============================================== BRANDS CAROUSEL ============================================== -->
-     @include('frontend.layouts.brands')
+     @include('site.common.brands')
         <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->
     </div><!-- /.container -->
 </div><!-- /.body-content -->

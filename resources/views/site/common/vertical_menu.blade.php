@@ -29,17 +29,13 @@
 
                                 </h2>
 
-                                {{-- <!--   // Get SubSubCategory Table Data -->
-                                                            @php
-                                                                $subsubcategories = App\Models\SubSubCategory::where('subcategory_id', $subcategory->id)
-                                                                    ->orderBy('subsubcategory_name_en', 'ASC')
-                                                                    ->get();
-                                                            @endphp --}}
+                                 <!--   // Get SubSubCategory Table Data -->
+
 
                                 @foreach ($category->subChildes as $subchiled)
                                     <ul class="links list-unstyled">
                                         <li>
-                                            {{-- <a href="{{ url('subsubcategory/product/'.$subsubcategory->id.'/'.$subsubcategory->subsubcategory_slug_en ) }}"> --}}
+                                  <a href="{{ url('subsubcategory/product/'.$subchiled->id.'/'.$subchiled->slug ) }}">
                                                     {{ $subchiled->name }}
                                             </a>
                                         </li>

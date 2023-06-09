@@ -1,4 +1,4 @@
-@extends('frontend.main_master')
+@extends('site.layouts.master')
 
 @section('title', 'Online Shop')
 
@@ -11,12 +11,12 @@
 
                     <!-- ================================== TOP NAVIGATION ================================== -->
 
-                    @include('frontend.common.vertical_menu', ['categories' => $categories])
+                    @include('site.common.vertical_menu', ['categories' => $categories])
 
                     <!-- ================================== TOP NAVIGATION : END ================================== -->
 
                     <!-- ============================================== HOT DEALS ============================================== -->
-                    @include('frontend.common.hot_deals', ['hot_deals' => $hot_deals])
+                    @include('site.common.hot_deals', ['hot_deals' => $hot_deals])
                     <!-- ============================================== HOT DEALS: END ============================================== -->
 
                     <!-- ============================================== SPECIAL OFFER ============================================== -->
@@ -105,7 +105,7 @@
 
 
                     <!-- ============================================== PRODUCT TAGS ============================================== -->
-                    @include('frontend.common.product_tags', ['tags' => $tags])
+                    @include('site.common.product_tags', ['tags' => $tags])
 
                     <!-- ============================================== PRODUCT TAGS : END ============================================== -->
 
@@ -197,7 +197,7 @@
                     <!-- ============================================== NEWSLETTER: END ============================================== -->
 
                     <!-- ============================================== Testimonials============================================== -->
-                    @include('frontend.common.testimonials')
+                    @include('site.common.testimonials')
 
                     <!-- ============================================== Testimonials: END ============================================== -->
 
@@ -1893,7 +1893,7 @@
             </div>
             <!-- /.row -->
             <!-- ============================================== BRANDS CAROUSEL ============================================== -->
-            @include('frontend.layouts.brands')
+            @include('site.common.brands')
             <!-- /.logo-slider -->
             <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->
         </div>

@@ -44,14 +44,14 @@
 
 
 
-    @include('frontend.layouts.header')
+    @include('site.layouts.partials.header')
     <!-- ============================================== HEADER : END ============================================== -->
 
     @yield('content')
     <!-- /#top-banner-and-menu -->
 
     <!-- ============================================================= FOOTER ============================================================= -->
-    @include('frontend.layouts.footer')
+    @include('site.layouts.partials.footer')
 
     <header class="header-style-1">
 
@@ -60,12 +60,6 @@
         <!-- /.header-top -->
         <!-- ============================================== TOP MENU : END ============================================== -->
 
-
-        <!-- ============================================================= FOOTER : END============================================================= -->
-
-        <!-- For demo purposes – can be removed on production -->
-
-        <!-- For demo purposes – can be removed on production : End -->
 
         <!-- JavaScripts placed at the end of the document so the pages load faster -->
         <script src="{{ asset('frontend/assets/js/jquery-1.11.1.min.js') }}"></script>
