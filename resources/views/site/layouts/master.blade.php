@@ -127,6 +127,9 @@
             })
         </script>
 
+        @stack('js')
+        
+
 
 
 

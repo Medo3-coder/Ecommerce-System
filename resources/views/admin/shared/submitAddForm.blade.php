@@ -20,15 +20,15 @@
             $('.store input').removeClass('border-danger')
             $(".submit_button").html("{{ __('admin.add') }}").attr(
               'disable', false)
-            Swal.fire({
-              position: 'top-start',
-              type: 'success',
-              title: '{{ __('admin.added_successfully') }}',
-              showConfirmButton: false,
-              timer: 1500,
-              confirmButtonClass: 'btn btn-primary',
-              buttonsStyling: false,
-            })
+            // Swal.fire({
+            //   position: 'top-start',
+            //   type: 'success',
+            //   title: '{{ __('admin.added_successfully') }}',
+            //   showConfirmButton: false,
+            //   timer: 1500,
+            //   confirmButtonClass: 'btn btn-primary',
+            //   buttonsStyling: false,
+            // })
 
             setTimeout(function() {
               window.location.replace(response.url)

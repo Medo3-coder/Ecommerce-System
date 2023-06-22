@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\View;
 
 class HomeController extends Controller {
-    public function index() {
+    public function home() {
         $categories = Category::with(['childes', 'subChildes'])->where('parent_id', NULL)->limit(8)->get();
         $sliders       = Slider::where('status', 1)->orderBy('id', 'DESC')->limit(3)->get();
         $products      = Product::where('status', 1)->orderBy('id', 'DESC')->limit(6)->get();
@@ -32,9 +32,14 @@ class HomeController extends Controller {
         //get product by brand name
         $skip_brand_Lenovo   = Brand::skip(6)->first();
         $skip_product_Lenovo = Product::where('status', 1)->where('brand_id', $skip_brand_Lenovo->id)->orderBy('id', 'DESC')->limit(8)->get();
-        // // get tags by name
+        // get tags by sname
         $tags = Product::groupBy('tags')->select('tags')->get();
         return view('site.layouts.index', get_defined_vars());
+    }
+
+    public function userDashboard()
+    {
+       return view('site.profile.dashboard');
     }
 
     public function userLogout() {

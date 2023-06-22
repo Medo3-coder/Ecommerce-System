@@ -79,6 +79,7 @@ return [
     'password'                => 'كلمه السر ',
     'forgetPass'              => 'نسيت كلمه المرور ؟',
     'register'                => 'إنشاء حساب',
+    "sign_up"                  => "اشتراك",
     'No_Account'              => 'ليس لديك حساب ؟',
     'have_Account'            => ' لديك حساب ؟',
     'check_password'          => 'تحقق من كلمه السر ',

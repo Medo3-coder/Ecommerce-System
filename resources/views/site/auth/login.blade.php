@@ -1,4 +1,4 @@
-@extends('frontend.main_master')
+@extends('site.layouts.master')
 
 @section('title', 'Login')
 
@@ -28,7 +28,7 @@
                                 Facebook</a>
                             <a href="#" class="twitter-sign-in"><i class="fa fa-twitter"></i> Sign In with Twitter</a>
                         </div>
-                        <form method="POST" action="{{ route('siteLogin') }}">
+                        <form method="POST" action="{{ route('siteLogin') }}" class="store">
                             @csrf
                             <div class="form-group">
                                 <label class="info-title" for="exampleInputEmail1">{{ __('site.email') }}
@@ -139,7 +139,7 @@
 
                 </div><!-- /.row -->
 
-                @include('frontend.layouts.brands')
+                @include('site.common.brands')
             </div><!-- /.sigin-in-->
 
         </div><!-- /.body-content -->

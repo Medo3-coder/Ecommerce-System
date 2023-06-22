@@ -100,7 +100,7 @@ class Handler extends ExceptionHandler
                 else
                 {
                     if ($exception->getStatusCode() == 404) {
-                        return response()->view('frontend.errors.404', [], 404);
+                        return response()->view('site.errors.404', [], 404);
                     }
                 }
 

@@ -97,6 +97,7 @@ return [
     'password'                => 'Password',
     'forgetPass'              => 'Forget Password ? ',
     'register'                => 'Register ',
+    "sign_up"                 => "Sign up",
     'No_Account'              => 'Have No Account ?',
     'have_Account'            => 'Have Account ?',
     'check_password'          => 'Check Password',

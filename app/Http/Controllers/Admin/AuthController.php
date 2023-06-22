@@ -8,8 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 
-class AuthController extends Controller {
-    public function SetLanguage($lang) {
+class AuthController extends Controller
+{
+    public function SetLanguage($lang)
+    {
         if (in_array($lang, ['ar', 'en'])) {
             if (session()->has('lang')) {
                 session()->forget('lang');
@@ -25,11 +27,13 @@ class AuthController extends Controller {
         return back();
     }
 
-    public function showLoginForm() {
+    public function showLoginForm()
+    {
         return view('admin.auth.login');
     }
 
-    public function login(loginRequest $request) {
+    public function login(loginRequest $request)
+    {
         if ($this->checkTooManyFailedAttempts()) {
             return $this->checkTooManyFailedAttempts();
         }
@@ -40,7 +44,6 @@ class AuthController extends Controller {
 
             session()->put('lang', 'ar');
             return response()->json(['status' => 'login', 'url' => route('admin.dashboard'), 'message' => __('admin.login_successfully_logged')]);
-
         } else {
             if (auth()->guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
                 auth('admin')->logout();
@@ -57,7 +60,8 @@ class AuthController extends Controller {
      *
      * @return string
      */
-    public function throttleKey() {
+    public function throttleKey()
+    {
         return Str::lower(request('email')) . '|' . request()->ip();
     }
 
@@ -66,14 +70,16 @@ class AuthController extends Controller {
      *
      * @return void
      */
-    public function checkTooManyFailedAttempts() {
+    public function checkTooManyFailedAttempts()
+    {
         if (!RateLimiter::tooManyAttempts($this->throttleKey(), 10)) {
             return;
         }
         return response()->json(['status' => 0, 'message' => 'IP address banned. Too many login attempts, try after 60 minute']);
     }
 
-    public function logout() {
+    public function logout()
+    {
         auth('admin')->logout();
         session()->invalidate();
         session()->regenerateToken();

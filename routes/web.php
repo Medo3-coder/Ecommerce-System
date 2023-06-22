@@ -31,23 +31,6 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-
-
-Route::middleware(['auth:admin'])->group(function () {
-
-    // Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
-    //     return view('admin.index');
-    // })->name('dashboard');
-
-    // Admin All Routes
-    Route::get('/admin/profile', [AdminProfileController::class, 'adminProfile'])->name('admin.profile');
-    Route::get('/admin/profile/edit', [AdminProfileController::class, 'adminProfileEdit'])->name('admin.profile.edit');
-    Route::post('/admin/profile/update', [AdminProfileController::class, 'adminProfileUpdate'])->name('admin.profile.update');
-    Route::get('/admin/change/password', [AdminProfileController::class, 'adminProfilepassword'])->name('admin.change.password');
-    Route::post('/update/change/password', [AdminProfileController::class, 'adminUpdateChangePassword'])->name('update.change.password');
-    Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
-});
-
 //user all routes
 
 Route::group(['middleware' => ['guest']], function () {
@@ -56,33 +39,24 @@ Route::group(['middleware' => ['guest']], function () {
 });
 
 
+Route::group(['middleware' => ['auth.status']], function () {
 
-    // Route::middleware(['middleware' => ['auth.status']])->get('/dashboard', function () {
-    //     return view('dashboard');
-    // });
-
-
-    Route::group(['middleware' => ['auth.status']], function () {
-
-        Route::get('/dashboard', function () {
-            return view('dashboard');
-        })->name('user.dashboard');
+    Route::group(['middleware' => ['auth.check']], function () {
+        Route::get('user/dashboard', [HomeController::class, "userDashboard"])->name('user.dashboard');
+        Route::get('user/logout', [HomeController::class, 'userLogout'])->name('user.logout');
+        Route::get('user/profile', [HomeController::class, 'userProfile'])->name('user.profile');
+        Route::post('user/profile/store', [HomeController::class, 'userProfileStore'])->name('user.profile.store');
+        Route::get('user/change/password', [HomeController::class, 'userChangePassword'])->name('change.password');
+        Route::post('user/pasword/update', [HomeController::class, 'userPasswordUpdate'])->name('user.password.update');
     });
+});
 
 
 
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'home']);
 
-Route::get('/user/logout', [HomeController::class, 'userLogout'])->name('user.logout');
 
-Route::get('/user/profile', [HomeController::class, 'userProfile'])->name('user.profile');
-
-Route::post('/user/profile/store', [HomeController::class, 'userProfileStore'])->name('user.profile.store');
-
-Route::get('/user/change/password', [HomeController::class, 'userChangePassword'])->name('change.password');
-
-Route::post('/user/pasword/update', [HomeController::class, 'userPasswordUpdate'])->name('user.password.update');
 
 
 
@@ -131,15 +105,14 @@ Route::post('/add-to-wishlist/{product_id}', [WishlistController::class, 'addToW
 
 Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' => 'User'], function () {
 
-// Wishlist page
+    // Wishlist page
     Route::get('/wishlist', [WishlistController::class, 'viewWishlist'])->name('wishlist');
 
-//send product data to wishlist page
+    //send product data to wishlist page
     Route::get('/get-wishlist-product', [WishlistController::class, 'getWishlistProduct']);
 
-//remove product from wishlist
+    //remove product from wishlist
     Route::get('/wishlist-remove/{id}', [WishlistController::class, 'removeWishlistProduct']);
-
 });
 
 //Mycart page

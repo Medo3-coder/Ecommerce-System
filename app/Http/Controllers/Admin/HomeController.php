@@ -10,6 +10,7 @@ class HomeController extends Controller
     public function dashboard()
     {
 
+
         return view('admin.layouts.index');
     }
 }
