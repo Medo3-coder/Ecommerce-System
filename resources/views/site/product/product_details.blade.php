@@ -1,4 +1,4 @@
-@extends('site.main_master')
+@extends('site.layouts.master')
 
 @section('title', $product->product_name_en)
 @section('content')

@@ -16,6 +16,7 @@ use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\frontend\IndexController;
 use App\Http\Controllers\Site\AuthController;
 use App\Http\Controllers\Site\HomeController;
+use App\Http\Controllers\Site\UserController;
 use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\WishlistController;
 use Illuminate\Support\Facades\Route;
@@ -33,28 +34,38 @@ use Illuminate\Support\Facades\Route;
 
 //user all routes
 
+
+Route::get('lang/{lang}', [HomeController::class, 'SetLanguage'])->name('SetLanguage');
+
+
+
 Route::group(['middleware' => ['guest']], function () {
     Route::get('login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('site-login', [AuthController::class, 'login'])->name('siteLogin');
+    Route::get('register', [AuthController::class, 'showRegister'])->name('register');
+
+
 });
 
 
 Route::group(['middleware' => ['auth.status']], function () {
 
     Route::group(['middleware' => ['auth.check']], function () {
-        Route::get('user/dashboard', [HomeController::class, "userDashboard"])->name('user.dashboard');
-        Route::get('user/logout', [HomeController::class, 'userLogout'])->name('user.logout');
-        Route::get('user/profile', [HomeController::class, 'userProfile'])->name('user.profile');
-        Route::post('user/profile/store', [HomeController::class, 'userProfileStore'])->name('user.profile.store');
-        Route::get('user/change/password', [HomeController::class, 'userChangePassword'])->name('change.password');
-        Route::post('user/pasword/update', [HomeController::class, 'userPasswordUpdate'])->name('user.password.update');
+        Route::get('user/dashboard', [UserController::class, "userDashboard"])->name('user.dashboard');
+        Route::get('user/logout', [UserController::class, 'userLogout'])->name('user.logout');
+        Route::get('user/profile', [UserController::class, 'userProfile'])->name('user.profile');
+        Route::post('user/profile/store', [UserController::class, 'userProfileStore'])->name('user.profile.store');
+        Route::get('user/change/password', [UserController::class, 'userChangePassword'])->name('change.password');
+        Route::post('user/pasword/update', [UserController::class, 'userPasswordUpdate'])->name('user.password.update');
     });
+
+    Route::get('/', [HomeController::class, 'home']);
 });
 
 
 
 
-Route::get('/', [HomeController::class, 'home']);
+
 
 
 
@@ -68,10 +79,6 @@ Route::get('/', [HomeController::class, 'home']);
 /// Multi Language All Routes ////
 
 Route::get('/language/hindi', [LanguageController::class, 'hindi'])->name('hindi.language');
-
-Route::get('/language/english', [LanguageController::class, 'english'])->name('english.language');
-
-Route::get('/language/arabic', [LanguageController::class, 'arabic'])->name('arabic.language');
 
 // Frontend Product Details Page url
 Route::get('/product/details/{id}/{slug}', [HomeController::class, 'productDetails']);

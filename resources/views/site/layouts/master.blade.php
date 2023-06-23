@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{{-- <html lang="{{lang()}}" dir="{{lang() == "ar" ? "rtl" : "ltr"}}"> --}}
 <html lang="en">
 
 <head>
@@ -27,6 +28,8 @@
 
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 
     <!-- Icons/Glyphs -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/font-awesome.css') }}">
@@ -78,22 +81,23 @@
 
         {{-- //sweet alert --}}
 
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
 
 
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        {{-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
 
-    @if(Session::has('success'))
-    <script>
-        toastr.success('{!! Session::get('success') !!}')
-    </script>
-    @endif
+        @if (Session::has('success'))
+            <script>
+                toastr.success('{!! Session::get('success') !!}')
+            </script>
+        @endif
 
 
-    @if(Session::has('error'))
-    <script>
-        toastr.error('{!! Session::get('error') !!}')
-    </script>
-    @endif
+        @if (Session::has('error'))
+            <script>
+                toastr.error('{!! Session::get('error') !!}')
+            </script>
+        @endif
 
 
 
@@ -117,8 +121,8 @@
             @endif
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"
-                integrity="sha512-jNDtFf7qgU0eH/+Z42FG4fw3w7DM/9zbgNPe3wfJlCylVDTT3IgKW5r92Vy9IHa6U50vyMz5gRByIu4YIXFtaQ=="
-                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            integrity="sha512-jNDtFf7qgU0eH/+Z42FG4fw3w7DM/9zbgNPe3wfJlCylVDTT3IgKW5r92Vy9IHa6U50vyMz5gRByIu4YIXFtaQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
         <script>
@@ -128,7 +132,7 @@
         </script>
 
         @stack('js')
-        
+
 
 
 
@@ -147,15 +151,13 @@
 
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel"><strong><span
-                                    id="product-name"></span></strong></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                            id="closeModals">
+                        <h5 class="modal-title" id="exampleModalLabel"><strong><span id="product-name"></span></strong>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModals">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -170,8 +172,8 @@
                             <div class="col-md-4">
 
                                 <div class="card" style="width: 18rem;">
-                                    <img src="" class="card-img-top" alt="..." style="width:200px; height:200;"
-                                        id="product-image">
+                                    <img src="" class="card-img-top" alt="..."
+                                        style="width:200px; height:200;" id="product-image">
                                 </div>
 
                             </div><!-- /.col-md-4 -->
@@ -227,12 +229,14 @@
 
                                 <div class="form-group">
                                     <label for="Qty">Quantity</label>
-                                    <input type="number" class="form-control" id="Qty" value="1" min="1">
+                                    <input type="number" class="form-control" id="Qty" value="1"
+                                        min="1">
 
                                 </div>
 
                                 <input type="hidden" id="product_id">
-                                <button type="submit" id="addToMiniCart" class="btn btn-primary mb-2" onclick="addToCart()">Add to
+                                <button type="submit" id="addToMiniCart" class="btn btn-primary mb-2"
+                                    onclick="addToCart()">Add to
                                     Cart</button>
 
 
@@ -725,7 +729,7 @@
             function cartRemove(id) {
                 $.ajax({
                     type: 'DELETE',
-                    url: '/user/cart-remove/'+id,
+                    url: '/user/cart-remove/' + id,
                     dataType: 'json',
                     success: function(data) {
                         couponCalculation();
@@ -765,70 +769,69 @@
 
 
 
-          // -------- CART INCREMENT --------//
+            // -------- CART INCREMENT --------//
 
-          function cartIncrement(rowId)
-            {
+            function cartIncrement(rowId) {
                 // console.log(rowId);
                 $.ajax({
-                      type: 'GET',
-                        url: '/cart-increment/'+rowId,
-                        dataType: 'json',
-                        success: function(data){
-                            couponCalculation();
-                            cart();
-                            miniCart();
-                        }
+                    type: 'GET',
+                    url: '/cart-increment/' + rowId,
+                    dataType: 'json',
+                    success: function(data) {
+                        couponCalculation();
+                        cart();
+                        miniCart();
+                    }
                 });
             }
 
-           // ---------- END CART INCREMENT -----///
+            // ---------- END CART INCREMENT -----///
 
 
 
-           // -------- CART Decrement --------//
+            // -------- CART Decrement --------//
 
 
-          function cartDecrement(rowId)
-          {
-             $.ajax({
-               type:'GET',
-               url: '/cart-decrement/'+rowId,
-               datatypes: 'json',
-                success: function(data){
-                  couponCalculation();
-                  cart();
-                  miniCart();
-                }
-             });
-          }
+            function cartDecrement(rowId) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/cart-decrement/' + rowId,
+                    datatypes: 'json',
+                    success: function(data) {
+                        couponCalculation();
+                        cart();
+                        miniCart();
+                    }
+                });
+            }
 
 
 
-             // --------END CART Decrement --------//
+            // --------END CART Decrement --------//
         </script>
 
 
         <!-- //End Load My cart / -->
 
 
-<!-- //////////////// =========== start Coupon Apply Start ================= //// -->
+        <!-- //////////////// =========== start Coupon Apply Start ================= //// -->
 
         <script type="text/javascript">
-        function applyCounpon()
-        {
-            let coupon_name = $('#coupon_name').val();
-            $.ajax({
-                type:'POST',
-                dataType: 'json',
-                url:"{{ url('/coupon-apply') }}",
-                // url:"/coupon-apply",
-                data:{coupon_name : coupon_name},
-                success : function(data) {
-                    couponCalculation(); // call coupon calculation function
-                    $('#couponField').hide(); // hide coupon field
-                    // Start Message
-                    const Toast = Swal.mixin({
+            function applyCounpon() {
+                let coupon_name = $('#coupon_name').val();
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: "{{ url('/coupon-apply') }}",
+                    // url:"/coupon-apply",
+                    data: {
+                        coupon_name: coupon_name
+                    },
+                    success: function(data) {
+                        couponCalculation(); // call coupon calculation function
+                        $('#couponField').hide(); // hide coupon field
+                        // Start Message
+                        const Toast = Swal.mixin({
                             toast: true,
                             position: 'top-end',
 
@@ -849,25 +852,22 @@
                             })
                         }
                         // End Message
-                }
+                    }
 
-            })
-        }
-
-
+                })
+            }
 
 
-        function couponCalculation()
-        {
-            $.ajax({
-                type:'GET',
-                url:'/coupon-calculation',
-                dataType: 'json',
-                success: function(data)
-                {
-                    if(data.total)
-                    {
-                        $('#Coupon_Calculated_Field').html(`
+
+
+            function couponCalculation() {
+                $.ajax({
+                    type: 'GET',
+                    url: '/coupon-calculation',
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.total) {
+                            $('#Coupon_Calculated_Field').html(`
                             <tr>
                                 <th>
                                     <div class="cart-sub-total">
@@ -879,10 +879,8 @@
                                 </th>
                             </tr>
                         `);
-                    }
-                    else
-                    {
-                        $('#Coupon_Calculated_Field').html(`
+                        } else {
+                            $('#Coupon_Calculated_Field').html(`
                             <tr>
                                 <th>
                                     <button type="submit" onclick="couponRemove()"><i class="fa fa-times"></i>  </button>
@@ -906,60 +904,59 @@
                                 </th>
                             </tr>
                         `);
+                        }
+
                     }
+                });
+            }
 
-                }
-            });
-        }
-
-        couponCalculation();  // call couponCalculation function
+            couponCalculation(); // call couponCalculation function
         </script>
 
-  <!-- //////////////// =========== End Coupon Apply Start ================= //// -->
+        <!-- //////////////// =========== End Coupon Apply Start ================= //// -->
 
 
-    <!-- //////////////// =========== start Coupon Remove Start ================= //// -->
+        <!-- //////////////// =========== start Coupon Remove Start ================= //// -->
 
-    <script type="text/javascript">
+        <script type="text/javascript">
+            function couponRemove() {
+                $.ajax({
+                    type: 'GET',
+                    url: "{{ url('/coupon-remove') }}",
+                    dataType: 'json',
+                    success: function(data) {
+                        couponCalculation();
+                        $('#couponField').show();
+                        $('#coupon_name').val('');
+                        // Start Message
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
 
-        function couponRemove(){
-           $.ajax({
-               type:'GET',
-               url: "{{ url('/coupon-remove') }}",
-               dataType: 'json',
-               success:function(data){
-                   couponCalculation();
-                   $('#couponField').show();
-                   $('#coupon_name').val('');
-                    // Start Message
-                   const Toast = Swal.mixin({
-                         toast: true,
-                         position: 'top-end',
-
-                         showConfirmButton: false,
-                         timer: 3000
-                       })
-                   if ($.isEmptyObject(data.error)) {
-                       Toast.fire({
-                           type: 'success',
-                           icon: 'success',
-                           title: data.success
-                       })
-                   }else{
-                       Toast.fire({
-                           type: 'error',
-                           icon: 'error',
-                           title: data.error
-                       })
-                   }
-                   // End Message
-               }
-           });
-        }
-   </script>
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                        if ($.isEmptyObject(data.error)) {
+                            Toast.fire({
+                                type: 'success',
+                                icon: 'success',
+                                title: data.success
+                            })
+                        } else {
+                            Toast.fire({
+                                type: 'error',
+                                icon: 'error',
+                                title: data.error
+                            })
+                        }
+                        // End Message
+                    }
+                });
+            }
+        </script>
 
 
-    <!-- //////////////// =========== start Coupon Remove Start ================= //// -->
+        <!-- //////////////// =========== start Coupon Remove Start ================= //// -->
 
 </body>
 

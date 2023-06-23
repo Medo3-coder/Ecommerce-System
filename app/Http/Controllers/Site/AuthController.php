@@ -32,4 +32,13 @@ class AuthController extends Controller {
         $user        = auth()->guard('web')->attempt($attemptData);
         return $user;
     }
+
+
+
+    public function showRegister() {
+        return view('site.auth.register');
+    }
+
+
+
 }

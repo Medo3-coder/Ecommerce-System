@@ -15,10 +15,8 @@
 
 
                         <li><a href="#"><i class="icon fa fa-user"></i>
-                                @if (session()->get('language') == 'arabic')
+                                @if (lang() == 'ar')
                                     حسابي الشخصي
-                                @elseif (session()->get('language') == 'hindi')
-                                    मेरी प्रोफाइल
                                 @else
                                     My Account
                                 @endif
@@ -60,25 +58,18 @@
                         </li>
                         <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle"
                                 data-hover="dropdown" data-toggle="dropdown"><span class="value">
-                                    @if (session()->get('language') == 'hindi')
-                                        हिन्दी
-                                    @elseif(session()->get('language') == 'arabic')
-                                        العربية
-                                    @else
+                                    @if (lang() == 'en')
                                         English
+                                    @else
+                                        Arabic
                                     @endif
                                 </span><b class="caret"></b></a>
                             <ul class="dropdown-menu">
 
-                                @if (session()->get('language') == 'hindi')
-                                    <li><a href="{{ route('english.language') }}">English</a></li>
-                                    <li><a href="{{ route('arabic.language') }}">Arabic</a></li>
-                                @elseif(session()->get('language') == 'arabic')
-                                    <li><a href="{{ route('hindi.language') }}">Hindi</a></li>
-                                    <li><a href="{{ route('english.language') }}">English</a></li>
+                                @if (lang() == 'en')
+                                    <li><a href="{{ route('SetLanguage', 'ar') }}">{{ __('site.arabic') }}</a></li>
                                 @else
-                                    <li><a href="{{ route('arabic.language') }}">Arabic</a></li>
-                                    <li><a href="{{ route('hindi.language') }}">Hindi</a></li>
+                                    <li><a href="{{ route('SetLanguage', 'en') }}">{{ __('site.english') }}</a></li>
                                 @endif
 
 
@@ -195,6 +186,6 @@
     </div>
     <!-- /.main-header -->
 
-  @include('site.layouts.partials.navbar')
+    @include('site.layouts.partials.navbar')
 
 </header>

@@ -5,26 +5,39 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
-use App\Models\MultiImg;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\Slider;
-use App\Models\User;
 use App\Services\ProductService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\View;
 
 class HomeController extends Controller {
+
+    public function SetLanguage($lang) {
+        if (in_array($lang, languages())) {
+            if (session()->has('lang')) {
+                session()->forget('lang');
+            }
+            session()->put('lang', $lang);
+        } else {
+            if (session()->has('lang')) {
+                session()->forget('lang');
+            }
+            session()->put('lang', 'ar');
+        }
+        return back();
+    }
+
     public function home() {
-        $categories = Category::with(['childes', 'subChildes'])->where('parent_id', NULL)->limit(8)->get();
+        // dd(lang());
+        $categories    = Category::with(['childes', 'subChildes'])->where('parent_id', NULL)->limit(8)->get();
         $sliders       = Slider::where('status', 1)->orderBy('id', 'DESC')->limit(3)->get();
         $products      = Product::where('status', 1)->orderBy('id', 'DESC')->limit(6)->get();
         $featured      = Product::where('featured', 1)->orderBy('id', 'DESC')->limit(6)->get();
         $hot_deals     = Product::where('hot_deals', 1)->orderBy('id', 'DESC')->limit(3)->get();
         $special_offer = Product::where('special_offer', 1)->where('discount_price', '!=', NULL)->orderBy('id', 'DESC')->limit(6)->get();
         $special_deals = Product::where('special_deals', 1)->orderBy('id', 'DESC')->limit(3)->get();
-        // //  get product by category name
+        //  get product by category name
         $skip_category_0 = Category::skip(0)->first();
         $skip_product_0  = Product::where('status', 1)->where('category_id', $skip_category_0->id)->orderBy('id', 'DESC')->limit(8)->get();
         $skip_category_3 = Category::skip(3)->first();
@@ -35,86 +48,6 @@ class HomeController extends Controller {
         // get tags by sname
         $tags = Product::groupBy('tags')->select('tags')->get();
         return view('site.layouts.index', get_defined_vars());
-    }
-
-    public function userDashboard()
-    {
-       return view('site.profile.dashboard');
-    }
-
-    public function userLogout() {
-        Auth::logout();
-        return redirect()->route('login');
-    }
-
-    public function userProfile() {
-        $id   = Auth::user()->id;
-        $user = User::find($id);
-        return view('frontend.profile.user_profile', compact('user'));
-    }
-
-    public function userProfileStore(Request $request) {
-
-        $Data        = User::find(Auth::user()->id);
-        $Data->name  = $request->name;
-        $Data->email = $request->email;
-        $Data->phone = $request->phone;
-
-        if ($request->file('profile_photo_path')) {
-            $image           = $request->file('profile_photo_path');
-            $destinationPath = public_path('upload/user_images/');
-            //to replace new Image  of old image
-            if (!empty($Data->profile_photo_path)) {
-                $repalceOldImg = unlink($destinationPath . $Data->profile_photo_path);
-            }
-
-            $imageName = date('YmdHi') . $image->getClientOriginalName();
-            $image->move($destinationPath, $imageName);
-            // $imagePath = $destinationPath . $imageName;
-            $Data['profile_photo_path'] = $imageName;
-        }
-        $Data->save();
-
-        $notification = array(
-            'message'    => 'User Profile Updated Successfully',
-            'alert-type' => 'success',
-        );
-        return redirect()->route('User_dashboard')->with($notification);
-    }
-
-    public function userChangePassword() {
-        $id   = Auth::user()->id;
-        $user = User::find($id);
-        return view('frontend.profile.change_password', compact('user'));
-    }
-
-    public function userPasswordUpdate(Request $request) {
-
-        $validate = $request->validate([
-            'oldpassword'           => 'required',
-            'password'              => 'required|confirmed|min:4|max:20',
-            'password_confirmation' => 'required| min:4|max:20',
-        ]);
-
-        // if($validator->fails()) {
-        //     return response()->json(['error'=>$validator->errors()->all()]);
-        // }
-
-        $hashedPassword = Auth::user()->password;
-        if (Hash::check($request->oldpassword, $hashedPassword)) {
-            $user           = User::find(Auth::id());
-            $user->password = Hash::make($request->password);
-            $user->save();
-            Auth::logout();
-
-            return redirect()->route('user.logout');
-        } else {
-            $notification = array(
-                'message'    => 'password is not match',
-                'alert-type' => 'error',
-            );
-            return redirect()->back()->with($notification);
-        }
     }
 
     public function productDetails($id, $slug, ProductService $Service) {
@@ -134,9 +67,9 @@ class HomeController extends Controller {
             ->where('id', '!=', $product->id)->orderBy('id', 'DESC')->limit(8)->get();
         // dd($related_product);
 
-        $multiImag = MultiImg::where('product_id', $id)->get();
+        $multiImag = ProductImage::where('product_id', $id)->get();
         // $categories = Category::with(['subCategories'])->orderBy('category_name_en', 'ASC')->limit(8)->get();
-        return view('frontend.product.product_details', compact('product', 'hot_deals', 'discountAmount', 'related_product', 'discount_percentage', 'discount_percent', 'multiImag', 'color', 'size'));
+        return view('site.product.product_details', compact('product', 'hot_deals', 'discountAmount', 'related_product', 'discount_percentage', 'discount_percent', 'multiImag', 'color', 'size'));
     }
 
     public function productTag($tag) {
