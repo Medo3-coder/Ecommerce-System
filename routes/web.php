@@ -1,12 +1,11 @@
 <?php
 
-use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Site\AuthController;
 use App\Http\Controllers\Site\CartController;
 use App\Http\Controllers\Site\CartPageController;
 use App\Http\Controllers\Site\HomeController;
 use App\Http\Controllers\Site\UserController;
-use App\Http\Controllers\User\WishlistController;
+use App\Http\Controllers\Site\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,58 +51,56 @@ Route::group(['middleware' => ['auth.status']], function () {
         Route::get('/coupon-remove', [CartPageController::class, 'couponRemove']);
         //checkout
         Route::get('/checkout', [CartPageController::class, 'checkoutCreate'])->name('checkout');
+
+        // Wishlist page
+        Route::get('/wishlist', [WishlistController::class, 'viewWishlist'])->name('wishlist');
+        //send product data to wishlist page
+        Route::get('/get-wishlist-product', [WishlistController::class, 'getWishlistProduct']);
+        //remove product from wishlist
+        Route::get('/wishlist-remove/{id}', [WishlistController::class, 'removeWishlistProduct']);
+
     });
 
     Route::get('/', [HomeController::class, 'home']);
+    Route::get('/product/details/{id}/{slug}', [HomeController::class, 'productDetails']);
+    //product tags
+    Route::get('/product/tag/{tag}', [HomeController::class, 'productTag']);
+    Route::get('/category/product/{id}/{slug}', [HomeController::class, 'categoryWiseProduct']);
 
-});
+    //Add To cart with Ajax
+    Route::post('/cart/data/store/{id}', [CartController::class, 'addToCart']);
 
-//// Frontend All Routes /////
-/// Multi Language All Routes ////
+    // Get Data from mini cart
+    Route::get('/product/mini/cart/', [CartController::class, 'addMiniCart']);
 
-Route::get('/language/hindi', [LanguageController::class, 'hindi'])->name('hindi.language');
+    // Remove mini cart
+    Route::get('/minicart/product-remove/{rowId}', [CartController::class, 'removeMiniCart']);
 
-// Frontend Product Details Page url
-Route::get('/product/details/{id}/{slug}', [HomeController::class, 'productDetails']);
-
-//product tags
-
-Route::get('/product/tag/{tag}', [HomeController::class, 'productTag']);
-
-Route::get('/category/product/{id}/{slug}', [HomeController::class, 'categoryWiseProduct']);
+    // Add to Wishlist
+    Route::post('/add-to-wishlist/{product_id}', [WishlistController::class, 'addToWishlist']);
 
 // Frontend SubCategory wise Data
-Route::get('/subcategory/product/{id}/{slug}', [HomeController::class, 'subCategoryWiseProduct']);
+    Route::get('/subcategory/product/{id}/{slug}', [HomeController::class, 'subCategoryWiseProduct']);
 
 // Frontend Sub-SubCategory wise Data
-Route::get('/subsubcategory/product/{id}/{slug}', [HomeController::class, 'subSubCategoryWiseProduct']);
+    Route::get('/subsubcategory/product/{id}/{slug}', [HomeController::class, 'subSubCategoryWiseProduct']);
 
 // Product View Modal with Ajax
-Route::get('product/view/modal/{id}', [HomeController::class, 'productViewModal']);
+    Route::get('product/view/modal/{id}', [HomeController::class, 'productViewModal']);
 
-//Add To cart with Ajax
-Route::post('/cart/data/store/{id}', [CartController::class, 'addToCart']);
-
-// Get Data from mini cart
-Route::get('/product/mini/cart/', [CartController::class, 'addMiniCart']);
-
-// Remove mini cart
-Route::get('/minicart/product-remove/{rowId}', [CartController::class, 'removeMiniCart']);
-
-// Add to Wishlist
-Route::post('/add-to-wishlist/{product_id}', [WishlistController::class, 'addToWishlist']);
-
-Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' => 'User'], function () {
-
-    // Wishlist page
-    Route::get('/wishlist', [WishlistController::class, 'viewWishlist'])->name('wishlist');
-
-    //send product data to wishlist page
-    Route::get('/get-wishlist-product', [WishlistController::class, 'getWishlistProduct']);
-
-    //remove product from wishlist
-    Route::get('/wishlist-remove/{id}', [WishlistController::class, 'removeWishlistProduct']);
 });
+
+// Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' => 'User'], function () {
+
+//     // Wishlist page
+//     Route::get('/wishlist', [WishlistController::class, 'viewWishlist'])->name('wishlist');
+
+//     //send product data to wishlist page
+//     Route::get('/get-wishlist-product', [WishlistController::class, 'getWishlistProduct']);
+
+//     //remove product from wishlist
+//     Route::get('/wishlist-remove/{id}', [WishlistController::class, 'removeWishlistProduct']);
+// });
 
 // Admin Coupons All Routes
 

@@ -73,10 +73,7 @@ class HomeController extends Controller {
 
     public function productTag($tag) {
         $products = Product::where('status', 1)->
-            where('product_tags_en', $tag)
-            ->orWhere('product_tags_ar', $tag)
-            ->orWhere('product_tags_hin', $tag)
-            ->paginate(4);
+            where('tags', $tag)->paginate(4);
         // dd($products);
 
         $categories = Category::with(['subCategories'])->orderBy('category_name_en', 'ASC')->limit(8)->get();
@@ -85,7 +82,7 @@ class HomeController extends Controller {
         $tags_en  = Product::groupBy('product_tags_en')->select('product_tags_en')->get();
         $tags_ar  = Product::groupBy('product_tags_ar')->select('product_tags_ar')->get();
         $tags_hin = Product::groupBy('product_tags_hin')->select('product_tags_hin')->get();
-        return view('frontend.common.tags_view', compact('products', 'categories', 'tags_en', 'tags_ar', 'tags_hin'));
+        return view('site.common.tags_view', compact('products', 'categories', 'tags_en', 'tags_ar', 'tags_hin'));
     }
 
     public function categoryWiseProduct($id, $slug) {
