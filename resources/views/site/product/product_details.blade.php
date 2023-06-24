@@ -102,10 +102,10 @@
                                         @foreach ($multiImag as $image)
                                             <div class="single-product-gallery-item" id="slide{{ $image->id }}">
                                                 <a data-lightbox="image-1" data-title="Gallery"
-                                                    href="{{ asset($image->photo_name) }}">
+                                                    href="{{$image->image}}">
                                                     <img class="img-responsive" alt=""
-                                                        src="{{ asset($image->photo_name) }}"
-                                                        data-echo="{{ asset($image->photo_name) }}" />
+                                                        src="{{$image->image }}"
+                                                        data-echo="{{ $image->image  }}" />
                                                 </a>
                                             </div><!-- /.single-product-gallery-item -->
                                         @endforeach
@@ -253,7 +253,7 @@
                                                 <select class="form-control unicase-form-control selectpicker"
                                                     id="color" style="display: none;">
                                                     <option selected="" disabled="">Choose Color</option>
-                                                    @foreach ($color['product_color_en'] as $color)
+                                                    @foreach ($color['colors'] as $color)
                                                         <option value="{{ $color }}">{{ ucwords($color) }}
                                                         </option>
                                                     @endforeach
@@ -266,13 +266,13 @@
                                         <div class="col-sm-6">
 
                                             <div class="form-group">
-                                                @if ($product->product_size_en == null)
+                                                @if ($product->size == null)
                                                 @else
                                                     <label class="info-title control-label">Size<span>*</span></label>
                                                     <select class="form-control unicase-form-control selectpicker"
                                                         style="display: none;" id="size">
                                                         <option selected="" disabled=""> Choose Size </option>
-                                                        @foreach ($size['product_size_en'] as $size)
+                                                        @foreach ($size['sizes'] as $size)
                                                             <option value="{{ $size }}">{{ ucwords($size) }}
                                                             </option>
                                                         @endforeach

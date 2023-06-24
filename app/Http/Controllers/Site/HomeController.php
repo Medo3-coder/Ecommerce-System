@@ -65,7 +65,6 @@ class HomeController extends Controller {
         //related product
         $related_product = Product::where('category_id', $product->category_id)
             ->where('id', '!=', $product->id)->orderBy('id', 'DESC')->limit(8)->get();
-        // dd($related_product);
 
         $multiImag = ProductImage::where('product_id', $id)->get();
         // $categories = Category::with(['subCategories'])->orderBy('category_name_en', 'ASC')->limit(8)->get();

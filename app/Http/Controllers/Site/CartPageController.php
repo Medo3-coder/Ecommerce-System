@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Models\Coupon;
@@ -14,7 +14,7 @@ class CartPageController extends Controller
 {
     public function myCart()
     {
-        return view('frontend.cart.view_cart');
+        return view('site.cart.view_cart');
     }
 
 
@@ -173,7 +173,7 @@ class CartPageController extends Controller
             $cartTotal = (int) str_replace(',','',Cart::total());   // 2,700.00 to 2700
             // $cartTotal =  Cart::total();
 
-            return view('frontend.checkout.checkout_view' , compact('carts' , 'cartQty','cartTotal'));
+            return view('site.checkout.checkout_view' , compact('carts' , 'cartQty','cartTotal'));
             }
             else
             {

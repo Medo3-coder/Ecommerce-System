@@ -78,7 +78,7 @@
                                             <label for="first-name-column">{{ __('admin.subcategory') }}</label>
                                             <div class="controls">
                                                 <select name="subcategory_id" class="form-control">
-                                                    <option >
+                                                    <option>
                                                         {{ __('admin.select_subcategories') }}</option>
 
 
@@ -134,6 +134,10 @@
 
 
 
+
+
+
+
                                     @foreach (languages() as $lang)
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
@@ -156,7 +160,9 @@
                                             <div class="form-group">
                                                 <label for="first-name-column">{{ __('site.short_desc_' . $lang) }}</label>
                                                 <div class="controls">
-                                                    <textarea type="text" name="short_desc[{{ $lang }}]" class="form-control"placeholder="{{ __('site.write') . __('site.short_desc_' . $lang) }}" requireddata-validation-required-message="{{ __('admin.this_field_is_required') }}">{{ $product->getTranslations('short_desc')[$lang] }} </textarea>
+                                                    <textarea type="text" name="short_desc[{{ $lang }}]"
+                                                        class="form-control"placeholder="{{ __('site.write') . __('site.short_desc_' . $lang) }}"
+                                                        requireddata-validation-required-message="{{ __('admin.this_field_is_required') }}">{{ $product->getTranslations('short_desc')[$lang] }} </textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -176,6 +182,22 @@
                                         </div>
                                     @endforeach
 
+                                    @foreach (languages() as $lang)
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="first-name-column">{{ __('admin.size_' . $lang) }}</label>
+                                                <div class="controls">
+                                                    <input type="text" name="size[{{ $lang }}]"
+                                                        value="{{ $product->getTranslations('size')[$lang] }}"
+                                                        class="form-control" data-role="tagsinput"
+                                                        placeholder="{{ __('site.write') . __('site.size_' . $lang) }}"
+                                                        required
+                                                        data-validation-required-message="{{ __('admin.this_field_is_required') }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+
 
 
                                     @foreach (languages() as $lang)
@@ -183,7 +205,9 @@
                                             <div class="form-group">
                                                 <label for="first-name-column">{{ __('site.long_desc_' . $lang) }}</label>
                                                 <div class="controls">
-                                                    <textarea type="text" name="long_desc[{{ $lang }}]" class="ckeditor form-control"placeholder="{{ __('site.write') . __('site.long_desc_' . $lang) }}" required required data-validation-required-message="{{ __('admin.this_field_is_required') }}"> {{ $product->getTranslations('long_desc')[$lang] }}</textarea>
+                                                    <textarea type="text" name="long_desc[{{ $lang }}]"
+                                                        class="ckeditor form-control"placeholder="{{ __('site.write') . __('site.long_desc_' . $lang) }}" required
+                                                        required data-validation-required-message="{{ __('admin.this_field_is_required') }}"> {{ $product->getTranslations('long_desc')[$lang] }}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -195,7 +219,7 @@
                                             <label for="first-name-column">{{ __('admin.selling_price') }}</label>
                                             <div class="controls">
                                                 <input type="number" name="selling_price" class="discount form-control"
-                                                value="{{$product->selling_price}}"
+                                                    value="{{ $product->selling_price }}"
                                                     placeholder="{{ __('admin.write_selling_price') }}" required
                                                     data-validation-required-message="{{ __('admin.this_field_is_required') }}">
                                             </div>
@@ -207,7 +231,7 @@
                                             <label for="first-name-column">{{ __('admin.product_code') }}</label>
                                             <div class="controls">
                                                 <input type="text" name="code" class="form-control generate_Code"
-                                                value="{{$product->code}}"
+                                                    value="{{ $product->code }}"
                                                     placeholder="{{ __('admin.product_code') }}" required
                                                     data-validation-required-message="{{ __('admin.this_field_is_required') }}">
                                                 <span class="input-group-append">
@@ -224,8 +248,8 @@
                                             <label for="first-name-column">{{ __('admin.qty') }}</label>
                                             <div class="controls">
                                                 <input type="number" name="qty" class="form-control"
-                                                value="{{$product->qty}}"
-                                                    placeholder="{{ __('admin.qty') }}" required
+                                                    value="{{ $product->qty }}" placeholder="{{ __('admin.qty') }}"
+                                                    required
                                                     data-validation-required-message="{{ __('admin.this_field_is_required') }}">
                                             </div>
                                         </div>
@@ -238,7 +262,7 @@
                                             <div class="controls">
                                                 <input type="number" name="discount_price"
                                                     class="max_discount form-control"
-                                                    value="{{$product->discount_price}}"
+                                                    value="{{ $product->discount_price }}"
                                                     placeholder="{{ __('admin.write_the_greatest_value_for_discount_price') }}"
                                                     required
                                                     data-validation-required-message="{{ __('admin.this_field_is_required') }}">
@@ -253,7 +277,8 @@
                                                 <input type="file" name="product_thambnail" class="form-control"
                                                     required onChange="mainThumbUrl(this)"
                                                     data-validation-required-message="{{ __('admin.this_field_is_required') }}">
-                                                <img src="{{$product->product_thambnail}}" id="mainThumb" alt="" width="100">
+                                                <img src="{{ $product->product_thambnail }}" id="mainThumb"
+                                                    alt="" width="100">
                                             </div>
                                         </div>
                                     </div>
@@ -264,14 +289,14 @@
                                             <h5>Multi Image <span class="text-danger">*</span></h5>
                                             <div class="controls">
                                                 <input type="file" name="images[]" class="form-control"
-                                                multiple="" id="multiImg"
-                                                data-validation-required-message="{{ __('admin.this_field_is_required') }}">
+                                                    multiple="" id="multiImg"
+                                                    data-validation-required-message="{{ __('admin.this_field_is_required') }}">
                                                 {{-- fix later --}}
                                                 {{-- @foreach ($productImages as $image)
                                                 <img src="{{ $image->image }}">
 
                                                 @endforeach --}}
-                                                <div class="row" id="preview_img" >
+                                                <div class="row" id="preview_img">
 
                                                 </div>
                                             </div>
@@ -284,8 +309,10 @@
                                                 <select name="status" class="select2 form-control" required
                                                     data-validation-required-message="{{ __('admin.this_field_is_required') }}">
                                                     <option value>{{ __('admin.status') }}</option>
-                                                    <option {{$product->status == 0 ? 'selected':''}} value="0">InActive </option>
-                                                    <option {{$product->status == 1 ? 'selected':''}}  value="1">Active </option>
+                                                    <option {{ $product->status == 0 ? 'selected' : '' }} value="0">
+                                                        InActive </option>
+                                                    <option {{ $product->status == 1 ? 'selected' : '' }} value="1">
+                                                        Active </option>
                                                 </select>
                                             </div>
                                         </div>
@@ -298,13 +325,13 @@
                                                     <div class="controls">
                                                         <fieldset>
                                                             <input type="checkbox" id="checkbox_2" name="hot_deals"
-                                                            {{$product->hot_deals == 1 ? 'checked':''}}
+                                                                {{ $product->hot_deals == 1 ? 'checked' : '' }}
                                                                 value="1">
                                                             <label for="checkbox_2">Hot Deals</label>
                                                         </fieldset>
                                                         <fieldset>
                                                             <input type="checkbox" id="checkbox_3" name="featured"
-                                                            {{$product->featured == 1 ? 'checked':''}}
+                                                                {{ $product->featured == 1 ? 'checked' : '' }}
                                                                 value="1">
                                                             <label for="checkbox_3">Featured</label>
                                                         </fieldset>
@@ -317,13 +344,13 @@
                                                     <div class="controls">
                                                         <fieldset>
                                                             <input type="checkbox" id="checkbox_4" name="special_offer"
-                                                            {{$product->special_offer == 1 ? 'checked':''}}
+                                                                {{ $product->special_offer == 1 ? 'checked' : '' }}
                                                                 value="1">
                                                             <label for="checkbox_4">Special offer</label>
                                                         </fieldset>
                                                         <fieldset>
                                                             <input type="checkbox" id="checkbox_5" name="special_deals"
-                                                            {{$product->special_deals == 1 ? 'checked':''}}
+                                                                {{ $product->special_deals == 1 ? 'checked' : '' }}
                                                                 value="1">
                                                             <label for="checkbox_5">Special Deals</label>
                                                         </fieldset>
@@ -341,21 +368,21 @@
 
 
 
-                                    <div class="col-12 d-flex justify-content-center mt-3">
-                                        <button type="submit"
-                                            class="btn btn-primary mr-1 mb-1 submit_button">{{ __('admin.update') }}</button>
-                                        <a href="{{ url()->previous() }}" type="reset"
-                                            class="btn btn-outline-warning mr-1 mb-1">{{ __('admin.back') }}</a>
-                                    </div>
+                                <div class="col-12 d-flex justify-content-center mt-3">
+                                    <button type="submit"
+                                        class="btn btn-primary mr-1 mb-1 submit_button">{{ __('admin.update') }}</button>
+                                    <a href="{{ url()->previous() }}" type="reset"
+                                        class="btn btn-outline-warning mr-1 mb-1">{{ __('admin.back') }}</a>
                                 </div>
                             </div>
-                        </form>
                     </div>
+                    </form>
                 </div>
-                <!-- /.col -->
             </div>
-        </section>
-        <!-- /.box-body -->
+            <!-- /.col -->
+    </div>
+    </section>
+    <!-- /.box-body -->
     </div>
 
 
@@ -420,71 +447,71 @@
     </script>
 
 
-<script type="text/javascript">
-    function mainThumbUrl(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#mainThumb').attr('src', e.target.result).width(90).height(90);
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-</script>
-
-
-<script>
-    $(document).ready(function() {
-        $('#multiImg').on('change', function() { //on file input change
-            if (window.File && window.FileReader && window.FileList && window
-                .Blob) //check File API supported browser
-            {
-                var data = $(this)[0].files; //this file data
-
-                $.each(data, function(index, file) { //loop though each file
-                    if (/(\.|\/)(gif|jpe?g|png)$/i.test(file
-                            .type)) { //check supported file type
-                        var fRead = new FileReader(); //new filereader
-                        fRead.onload = (function(file) { //trigger function on successful read
-                            return function(e) {
-                                var img = $('<img/>').addClass('thumb').attr('src',
-                                        e.target.result).width(80)
-                                    .height(80); //create image element
-                                $('#preview_img').append(
-                                    img); //append image to output element
-                            };
-                        })(file);
-                        fRead.readAsDataURL(file); //URL representing the file's data.
-                    }
-                });
-
-            } else {
-                alert("Your browser doesn't support File API!"); //if File API is absent
+    <script type="text/javascript">
+        function mainThumbUrl(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#mainThumb').attr('src', e.target.result).width(90).height(90);
+                };
+                reader.readAsDataURL(input.files[0]);
             }
-        });
-    });
-</script>
-
-
-
-<script>
-    function makeid(length) {
-        var result = '';
-        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        var charactersLength = characters.length;
-        for (var i = 0; i < length; i++) {
-            result += characters.charAt(Math.floor(Math.random() *
-                charactersLength));
         }
-        return result;
-    }
+    </script>
 
 
-    $(document).on('click', '#generate_inField', function() {
-        let result = makeid(8);
-        $('.generate_Code').val(result);
-    })
-</script>
+    <script>
+        $(document).ready(function() {
+            $('#multiImg').on('change', function() { //on file input change
+                if (window.File && window.FileReader && window.FileList && window
+                    .Blob) //check File API supported browser
+                {
+                    var data = $(this)[0].files; //this file data
+
+                    $.each(data, function(index, file) { //loop though each file
+                        if (/(\.|\/)(gif|jpe?g|png)$/i.test(file
+                                .type)) { //check supported file type
+                            var fRead = new FileReader(); //new filereader
+                            fRead.onload = (function(file) { //trigger function on successful read
+                                return function(e) {
+                                    var img = $('<img/>').addClass('thumb').attr('src',
+                                            e.target.result).width(80)
+                                        .height(80); //create image element
+                                    $('#preview_img').append(
+                                        img); //append image to output element
+                                };
+                            })(file);
+                            fRead.readAsDataURL(file); //URL representing the file's data.
+                        }
+                    });
+
+                } else {
+                    alert("Your browser doesn't support File API!"); //if File API is absent
+                }
+            });
+        });
+    </script>
+
+
+
+    <script>
+        function makeid(length) {
+            var result = '';
+            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var charactersLength = characters.length;
+            for (var i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() *
+                    charactersLength));
+            }
+            return result;
+        }
+
+
+        $(document).on('click', '#generate_inField', function() {
+            let result = makeid(8);
+            $('.generate_Code').val(result);
+        })
+    </script>
     {{-- submit edit form script --}}
     @include('Admin.shared.submitEditForm')
     {{-- submit edit form script --}}

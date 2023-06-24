@@ -1,23 +1,11 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Admin\AdminProfileController;
-use App\Http\Controllers\Admin\AdminsController;
-use App\Http\Controllers\Admin\BrandController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\LanguageController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\ShippingAreaController;
-use App\Http\Controllers\Admin\ShippingDistrictController;
-use App\Http\Controllers\Admin\ShippingStateController;
-use App\Http\Controllers\Admin\SliderController;
-use App\Http\Controllers\frontend\CartController;
-use App\Http\Controllers\frontend\IndexController;
 use App\Http\Controllers\Site\AuthController;
+use App\Http\Controllers\Site\CartController;
+use App\Http\Controllers\Site\CartPageController;
 use App\Http\Controllers\Site\HomeController;
 use App\Http\Controllers\Site\UserController;
-use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\WishlistController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,19 +22,14 @@ use Illuminate\Support\Facades\Route;
 
 //user all routes
 
-
 Route::get('lang/{lang}', [HomeController::class, 'SetLanguage'])->name('SetLanguage');
-
-
 
 Route::group(['middleware' => ['guest']], function () {
     Route::get('login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('site-login', [AuthController::class, 'login'])->name('siteLogin');
     Route::get('register', [AuthController::class, 'showRegister'])->name('register');
 
-
 });
-
 
 Route::group(['middleware' => ['auth.status']], function () {
 
@@ -57,23 +40,23 @@ Route::group(['middleware' => ['auth.status']], function () {
         Route::post('user/profile/store', [UserController::class, 'userProfileStore'])->name('user.profile.store');
         Route::get('user/change/password', [UserController::class, 'userChangePassword'])->name('change.password');
         Route::post('user/pasword/update', [UserController::class, 'userPasswordUpdate'])->name('user.password.update');
+
+        //cart page need to login first then add to cart
+        Route::get('/cart', [CartPageController::class, 'myCart'])->name('my-cart');
+        Route::get('/user/get-cart-product', [CartPageController::class, 'getCartProduct']);
+        Route::delete('/user/cart-remove/{id}', [CartPageController::class, 'removeCartProduct']);
+        Route::get('/cart-increment/{rowId}', [CartPageController::class, 'incrementCartProduct']);
+        Route::get('/cart-decrement/{rowId}', [CartPageController::class, 'decrementCartProduct']);
+        Route::post('/coupon-apply', [CartPageController::class, 'couponApply']);
+        Route::get('/coupon-calculation', [CartPageController::class, 'couponCalculation']);
+        Route::get('/coupon-remove', [CartPageController::class, 'couponRemove']);
+        //checkout
+        Route::get('/checkout', [CartPageController::class, 'checkoutCreate'])->name('checkout');
     });
 
     Route::get('/', [HomeController::class, 'home']);
+
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //// Frontend All Routes /////
 /// Multi Language All Routes ////
@@ -122,29 +105,6 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
     Route::get('/wishlist-remove/{id}', [WishlistController::class, 'removeWishlistProduct']);
 });
 
-//Mycart page
-Route::get('/cart', [CartPageController::class, 'myCart'])->name('my-cart');
-
-Route::get('/user/get-cart-product', [CartPageController::class, 'getCartProduct']);
-
-Route::delete('/user/cart-remove/{id}', [CartPageController::class, 'removeCartProduct']);
-
-Route::get('/cart-increment/{rowId}', [CartPageController::class, 'incrementCartProduct']);
-
-Route::get('/cart-decrement/{rowId}', [CartPageController::class, 'decrementCartProduct']);
-
 // Admin Coupons All Routes
 
-
-
 // Frontend Coupon Option
-
-Route::post('/coupon-apply', [CartPageController::class, 'couponApply']);
-
-Route::get('/coupon-calculation', [CartPageController::class, 'couponCalculation']);
-
-Route::get('/coupon-remove', [CartPageController::class, 'couponRemove']);
-
-//checkout
-
-Route::get('/checkout', [CartPageController::class, 'checkoutCreate'])->name('checkout');

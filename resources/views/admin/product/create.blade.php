@@ -171,6 +171,23 @@
                                     @endforeach
 
 
+                                    @foreach (languages() as $lang)
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="first-name-column">{{ __('admin.size_' . $lang) }}</label>
+                                                <div class="controls">
+                                                    <input type="text" name="size[{{ $lang }}]"
+                                                        class="form-control" value="big,small,Medium"
+                                                        data-role="tagsinput" required
+                                                        data-validation-required-message="{{ __('admin.this_field_is_required') }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+
+
+
+
 
                                     @foreach (languages() as $lang)
                                         <div class="col-md-6 col-12">
