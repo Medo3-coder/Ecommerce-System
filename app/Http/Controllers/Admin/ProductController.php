@@ -25,11 +25,13 @@ class ProductController extends Controller {
 
     public function store(store $request) {
         $product = Product::create($request->validated());
+        $images  = [];
         if (isset($request->images)) {
             foreach ($request->images as $image) {
-                ProductImage::create(['image' => $image, 'product_id' => $product->id]);
+                $images[] = new ProductImage(['image' => $image]);
             }
         }
+        $product->images()->saveMany($images);
         return response()->json(['url' => route('products.index')]);
     }
 
@@ -42,7 +44,17 @@ class ProductController extends Controller {
     }
 
     public function update(Update $request, $id) {
-        $product = Product::findOrFail($id)->update($request->validated());
+        $product = Product::findOrFail($id);
+        $product->update($request->validated());
+        $images = [];
+        if (isset($request->images)) {
+            $product->images->each->delete();
+            foreach ($request->images as $image) {
+                $images[] = new ProductImage(['image' => $image]);
+            }
+        }
+
+        $product->images()->saveMany($images);
         return response()->json(['url' => route('products.index')]);
     }
 
@@ -55,7 +67,9 @@ class ProductController extends Controller {
     }
 
     public function destroy($id) {
-        $Product = Product::findOrFail($id)->delete();
+        $Product = Product::with('images')->findOrFail($id);
+        $Product->images->each->delete();
+        $Product->delete();
         return response('Product deleted successfully');
     }
 
