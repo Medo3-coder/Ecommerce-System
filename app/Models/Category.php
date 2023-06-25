@@ -11,8 +11,8 @@ class Category extends Model {
 
     const IMAGEPATH = 'categories';
 
-    protected $fillable  = ['name', 'parent_id', 'image'];
-    public $translatable = ['name'];
+    protected $fillable  = ['name', 'parent_id', 'image' , 'slug'];
+    public $translatable = ['name', 'slug'];
 
     public function childes() {
         return $this->hasMany(self::class, 'parent_id');

@@ -101,11 +101,9 @@
 
                                         @foreach ($multiImag as $image)
                                             <div class="single-product-gallery-item" id="slide{{ $image->id }}">
-                                                <a data-lightbox="image-1" data-title="Gallery"
-                                                    href="{{$image->image}}">
-                                                    <img class="img-responsive" alt=""
-                                                        src="{{$image->image }}"
-                                                        data-echo="{{ $image->image  }}" />
+                                                <a data-lightbox="image-1" data-title="Gallery" href="{{ $image->image }}">
+                                                    <img class="img-responsive" alt="" src="{{ $image->image }}"
+                                                        data-echo="{{ $image->image }}" />
                                                 </a>
                                             </div><!-- /.single-product-gallery-item -->
                                         @endforeach
@@ -122,8 +120,7 @@
                                                     <a class="horizontal-thumb active" data-target="#owl-single-product"
                                                         data-slide="1" href="#slide{{ $image->id }}">
                                                         <img class="img-responsive" width="85" alt=""
-                                                            src="{{ asset($image->photo_name) }}"
-                                                            data-echo="{{ asset($image->photo_name) }}" />
+                                                            src="{{ $image->image }}" data-echo="{{ $image->image }}" />
                                                     </a>
                                                 </div>
                                             @endforeach
@@ -141,15 +138,8 @@
                             <div class='col-sm-6 col-md-7 product-info-block'>
                                 <div class="product-info">
                                     <h1 class="name" id="product-name">
-                                        @if (session()->get('language') == 'hindi')
-                                            {{ $product->product_name_hin }}
-                                        @elseif (session()->get('language') == 'arabic')
-                                            {{ $product->product_name_ar }}
-                                        @else
-                                            {{ $product->product_name_en }}
-                                        @endif
+                                        {{ $product->name }}
                                     </h1>
-
                                     <div class="rating-reviews m-t-20">
                                         <div class="row">
                                             <div class="col-sm-3">
@@ -179,13 +169,8 @@
                                     </div><!-- /.stock-container -->
 
                                     <div class="description-container m-t-20">
-                                        @if (session()->get('language') == 'hindi')
-                                            {{ $product->short_descp_hin }}
-                                        @elseif (session()->get('language') == 'arabic')
-                                            {{ $product->short_descp_ar }}
-                                        @else
-                                            {{ $product->short_descp_en }}
-                                        @endif
+                                        {{ $product->short_desc }}
+
                                     </div><!-- /.description-container -->
 
                                     <div class="price-container info-container m-t-20">
@@ -363,13 +348,7 @@
                                     <div id="description" class="tab-pane in active">
                                         <div class="product-tab">
                                             <p class="text">
-                                                @if (session()->get('language') == 'hindi')
-                                                    {!! $product->long_descp_hin !!}
-                                                @elseif (session()->get('language') == 'arabic')
-                                                    {!! $product->long_descp_ar !!}
-                                                @else
-                                                    {!! $product->long_descp_en !!}
-                                                @endif
+                                                {!! $product->long_desc !!}
                                             </p>
                                         </div>
                                     </div><!-- /.tab-pane -->
@@ -547,9 +526,8 @@
                                             <div class="product-image">
                                                 <div class="image">
                                                     <a
-                                                        href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_en) }}">
-                                                        <img src="{{ asset($product->product_thambnail) }}"
-                                                            alt=""> </a>
+                                                        href="{{ url('product/details/' . $product->id . '/' . $product->slug) }}">
+                                                        <img src="{{ $product->product_thambnail }}" alt=""> </a>
                                                 </div><!-- /.image -->
 
                                                 <div class="tag sale"><span>sale</span></div>
@@ -558,14 +536,8 @@
 
                                             <div class="product-info text-left">
                                                 <h3 class="name"><a
-                                                        href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_en) }}">
-                                                        @if (session()->get('language') == 'hindi')
-                                                            {{ $product->product_name_hin }}
-                                                        @elseif (session()->get('language') == 'arabic')
-                                                            {{ $product->product_name_ar }}
-                                                        @else
-                                                            {{ $product->product_name_en }}
-                                                        @endif
+                                                        href="{{ url('product/details/' . $product->id . '/' . $product->slug) }}">
+                                                        {{ $product->name }}
                                                     </a>
                                                 </h3>s
                                                 <div class="rating rateit-small"></div>

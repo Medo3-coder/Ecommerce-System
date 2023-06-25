@@ -1,4 +1,4 @@
-@extends('site.main_master')
+@extends('site.layouts.master')
 @section('title', 'user Profile')
 
 @section('content')

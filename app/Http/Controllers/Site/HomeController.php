@@ -29,7 +29,6 @@ class HomeController extends Controller {
     }
 
     public function home() {
-        // dd(lang());
         $categories    = Category::with(['childes', 'subChildes'])->where('parent_id', NULL)->limit(8)->get();
         $sliders       = Slider::where('status', 1)->orderBy('id', 'DESC')->limit(3)->get();
         $products      = Product::where('status', 1)->orderBy('id', 'DESC')->limit(6)->get();
@@ -64,47 +63,34 @@ class HomeController extends Controller {
 
         //related product
         $related_product = Product::where('category_id', $product->category_id)
-            ->where('id', '!=', $product->id)->orderBy('id', 'DESC')->limit(8)->get();
+        ->where('id', '!=', $product->id)->orderBy('id', 'DESC')->limit(8)->get();
 
         $multiImag = ProductImage::where('product_id', $id)->get();
-        // $categories = Category::with(['subCategories'])->orderBy('category_name_en', 'ASC')->limit(8)->get();
         return view('site.product.product_details', compact('product', 'hot_deals', 'discountAmount', 'related_product', 'discount_percentage', 'discount_percent', 'multiImag', 'color', 'size'));
     }
 
     public function productTag($tag) {
-        $products = Product::where('status', 1)->
-            where('tags', $tag)->paginate(4);
-        // dd($products);
+        $products   = Product::where('status', 1)->where('tags', $tag)->paginate(4);
+        $categories    = Category::with(['childes', 'subChildes'])->where('parent_id', NULL)->limit(8)->get();
 
-        $categories = Category::with(['subCategories'])->orderBy('category_name_en', 'ASC')->limit(8)->get();
-        //   dd($products);
-        // get tags by name
-        $tags_en  = Product::groupBy('product_tags_en')->select('product_tags_en')->get();
-        $tags_ar  = Product::groupBy('product_tags_ar')->select('product_tags_ar')->get();
-        $tags_hin = Product::groupBy('product_tags_hin')->select('product_tags_hin')->get();
-        return view('site.common.tags_view', compact('products', 'categories', 'tags_en', 'tags_ar', 'tags_hin'));
+        //to do  get tags by name bug here --->>>>
+        $tags = Product::groupBy('tags')->select('tags')->get();
+
+        return view('site.common.tags_view', compact('products', 'categories', 'tags'));
     }
 
     public function categoryWiseProduct($id, $slug) {
-        $products = Product::where('status', 1)->
-            where('category_id', $id)->orderBy('id', 'DESC')->paginate(8);
-        // dd($products);
-        $categories = Category::with(['subCategories'])->orderBy('category_name_en', 'ASC')->limit(8)->get();
-        $tags_en    = Product::groupBy('product_tags_en')->select('product_tags_en')->get();
-        $tags_ar    = Product::groupBy('product_tags_ar')->select('product_tags_ar')->get();
-        $tags_hin   = Product::groupBy('product_tags_hin')->select('product_tags_hin')->get();
-        return view('frontend.product.category_view', compact('products', 'categories', 'tags_en', 'tags_ar', 'tags_hin'));
+        $products = Product::where('status', 1)->where('category_id', $id)->orderBy('id', 'DESC')->paginate(8);
+        $categories    = Category::with(['childes', 'subChildes'])->where('parent_id', NULL)->limit(8)->get();
+        $tags       = Product::groupBy('tags')->select('tags')->get();
+        return view('site.product.category_view', compact('products', 'categories', 'tags'));
     }
 
     public function subCategoryWiseProduct($id, $slug) {
-        $products = Product::where('status', 1)->
-            where('subcategory_id', $id)->orderBy('id', 'DESC')->paginate(4);
-        // dd($products);
-        $categories = Category::with(['subCategories'])->orderBy('category_name_en', 'ASC')->limit(8)->get();
-        $tags_en    = Product::groupBy('product_tags_en')->select('product_tags_en')->get();
-        $tags_ar    = Product::groupBy('product_tags_ar')->select('product_tags_ar')->get();
-        $tags_hin   = Product::groupBy('product_tags_hin')->select('product_tags_hin')->get();
-        return view('frontend.product.subcategory_view', compact('products', 'categories', 'tags_en', 'tags_ar', 'tags_hin'));
+        $products = Product::where('status', 1)->where('subcategory_id', $id)->orderBy('id', 'DESC')->paginate(4);
+        $categories    = Category::with(['childes', 'subChildes'])->where('parent_id', NULL)->limit(8)->get();
+        $tags       = Product::groupBy('tags')->select('tags')->get();
+        return view('site.product.subcategory_view', compact('products', 'categories', 'tags'));
     }
 
     /**
@@ -122,15 +108,10 @@ class HomeController extends Controller {
     // }
 
     public function subSubCategoryWiseProduct($id, $slug) {
-        $products = Product::where('status', 1)->
-            where('subsubcategory_id', $id)->orderBy('id', 'DESC')->paginate(6);
-        $categories = Category::with(['subCategories'])->orderBy('category_name_en', 'ASC')->limit(8)->get();
-
-        $tags_en  = Product::groupBy('product_tags_en')->select('product_tags_en')->get();
-        $tags_ar  = Product::groupBy('product_tags_ar')->select('product_tags_ar')->get();
-        $tags_hin = Product::groupBy('product_tags_hin')->select('product_tags_hin')->get();
-
-        return view('frontend.product.subsubcategory_view', compact('products', 'categories', 'tags_en', 'tags_ar', 'tags_hin'));
+        $products = Product::where('status', 1)->where('subsubcategory_id', $id)->orderBy('id', 'DESC')->paginate(6);
+        $categories    = Category::with(['childes', 'subChildes'])->where('parent_id', NULL)->limit(8)->get();
+        $tags       = Product::groupBy('tags')->select('tags')->get();
+        return view('site.product.subsubcategory_view', compact('products', 'categories', 'tags'));
 
     }
 

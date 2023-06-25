@@ -1,4 +1,4 @@
-@extends('site.main_master')
+@extends('site.layouts.master')
 @section('content')
 @section('title', 'Sub Subcategory Products')
 
@@ -49,34 +49,19 @@
                                         <div class="accordion-group">
                                             <div class="accordion-heading"> <a href="#collapse{{ $category->id }}"
                                                     data-toggle="collapse" class="accordion-toggle collapsed">
-                                                    @if (session()->get('language') == 'hindi')
-                                                        {{ $category->category_name_hin }}
-                                                    @elseif(session()->get('language') == 'arabic')
-                                                        {{ $category->category_name_ar }}
-                                                    @else
-                                                        {{ $category->category_name_en }}
-                                                    @endif
+                                                    {{ $category->name }}
+
                                                 </a> </div>
                                             <!-- /.accordion-heading -->
                                             <div class="accordion-body collapse" id="collapse{{ $category->id }}"
                                                 style="height: 0px;">
                                                 <div class="accordion-inner">
-
-                                                    {{-- @php
-  $subcategories = App\Models\SubCategory::where('category_id',$category->id)->orderBy('subcategory_name_en','ASC')->get();
-  @endphp --}}
-
-                                                    @foreach ($category->subCategories as $subcategory)
+                                                    @foreach ($category->childes as $childs)
                                                         <ul>
                                                             <li><a
-                                                                    href="{{ url('subcategory/product/' . $subcategory->id . '/' . $subcategory->sub_category_slug_en) }}">
-                                                                    @if (session()->get('language') == 'hindi')
-                                                                        {{ $subcategory->sub_category_name_hin }}
-                                                                    @elseif(session()->get('language') == 'arabic')
-                                                                        {{ $subcategory->sub_category_name_ar }}
-                                                                    @else
-                                                                        {{ $subcategory->sub_category_name_en }}
-                                                                    @endif
+                                                                    href="{{ url('subcategory/product/' . $childs->id . '/' . $childs->slug) }}">
+                                                                    {{ $childs->name }}
+
                                                                 </a>
                                                             </li>
 
@@ -323,9 +308,10 @@
                                                 <div class="product">
                                                     <div class="product-image">
                                                         <div class="image"> <a
-                                                                href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_en) }}"><img
-                                                                    src="{{ asset($product->product_thambnail) }}"
-                                                                    alt=""></a> </div>
+                                                                href="{{ url('product/details/' . $product->id . '/' . $product->slug) }}">
+                                                                <img
+                                                                    src="{{ $product->product_thambnail }}"alt=""></a>
+                                                        </div>
                                                         <!-- /.image -->
 
                                                         @php
@@ -350,14 +336,8 @@
 
                                                     <div class="product-info text-left">
                                                         <h3 class="name"><a
-                                                                href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_en) }}">
-                                                                @if (session()->get('language') == 'hindi')
-                                                                    {{ $product->product_name_hin }}
-                                                                @elseif (session()->get('language') == 'arabic')
-                                                                    {{ $product->product_name_ar }}
-                                                                @else
-                                                                    {{ $product->product_name_en }}
-                                                                @endif
+                                                                href="{{ url('product/details/' . $product->id . '/' . $product->slug) }}">
+                                                                    {{ $product->name }}
                                                             </a>
                                                         </h3>
                                                         <div class="rating rateit-small"></div>
@@ -417,16 +397,6 @@
                                         <!-- /.item -->
                                     @endforeach
 
-
-
-
-
-
-
-
-
-
-
                                 </div>
                                 <!-- /.row -->
                             </div>
@@ -457,7 +427,7 @@
                                                     <div class="col col-sm-4 col-lg-4">
                                                         <div class="product-image">
                                                             <div class="image"> <img
-                                                                    src="{{ asset($product->product_thambnail) }}"
+                                                                    src="{{ $product->product_thambnail }}"
                                                                     alt=""> </div>
                                                         </div>
                                                         <!-- /.product-image -->
@@ -466,14 +436,9 @@
                                                     <div class="col col-sm-8 col-lg-8">
                                                         <div class="product-info">
                                                             <h3 class="name"><a
-                                                                    href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_en) }}">
-                                                                    @if (session()->get('language') == 'hindi')
-                                                                        {{ $product->product_name_hin }}
-                                                                    @elseif (session()->get('language') == 'arabic')
-                                                                        {{ $product->product_name_ar }}
-                                                                    @else
-                                                                        {{ $product->product_name_en }}
-                                                                    @endif
+                                                                    href="{{ url('product/details/' . $product->id . '/' . $product->slug) }}">
+                                                                        {{ $product->name }}
+
                                                                 </a>
                                                             </h3>
                                                             <div class="rating rateit-small"></div>
@@ -496,13 +461,7 @@
 
                                                             <!-- /.product-price -->
                                                             <div class="description m-t-10">
-                                                                @if (session()->get('language') == 'hindi')
-                                                                    {{ $product->short_descp_hin }}
-                                                                @elseif (session()->get('language') == 'arabic')
-                                                                    {{ $product->short_descp_ar }}
-                                                                @else
-                                                                    {{ $product->short_descp_en }}
-                                                                @endif
+                                                                    {{ $product->short_desc }}
                                                             </div>
                                                             <div class="cart clearfix animate-effect">
                                                                 <div class="action">

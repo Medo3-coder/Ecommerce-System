@@ -4,26 +4,23 @@
         <ul class="nav">
 
             @foreach ($categories as $category)
-            {{-- <a href="{{ url('category/product/' .$category->id.'/' .$category->category_slug_en ) }}"> --}}
+            <a href="{{ url('category/product/' .$category->id.'/' .$category->slug ) }}">
                 <li class="dropdown menu-item">
-                    {{-- <a href="{{ url('category/product/' .$category->id.'/' .$category->category_slug_en ) }}"> --}}
+                    <a href="{{ url('category/product/' .$category->id.'/' .$category->slug ) }}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="icon" aria-hidden="true">
-
-
                     </i>
                             {{ $category->name }}
                     </a>
-                    {{-- </a> --}}
+                    </a>
                     <ul class="dropdown-menu mega-menu">
                         <li class="yamm-content">
                             <div class="row">
                                 @foreach ($category->childes as $childs)
                                     <div class="col-sm-12 col-md-3">
-                                        {{-- <a href="{{ url('subcategory/product/' .$subcategory->id. '/' .$subcategory->sub_category_slug_en) }}"> --}}
+                                        <a href="{{ url('subcategory/product/' .$childs->id. '/' .$childs->slug) }}">
                                         <h2 class="title">
                                                 {{ $childs->name }}
-
                                         </h2>
                                         </a>
 

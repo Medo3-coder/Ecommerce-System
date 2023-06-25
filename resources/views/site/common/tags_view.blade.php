@@ -1,4 +1,4 @@
-@extends('site.main_master')
+@extends('site.layouts.master')
 @section('content')
 @section('title', 'Tag Wise Product')
 
@@ -48,28 +48,24 @@
                                         <div class="accordion-group">
                                             <div class="accordion-heading"> <a href="#collapse{{ $category->id }}"
                                                     data-toggle="collapse" class="accordion-toggle collapsed">
-                                                    @if (session()->get('language') == 'hindi')
-                                                        {{ $category->category_name_hin }}
-                                                    @else
-                                                        {{ $category->category_name_en }}
-                                                    @endif
+                                                    {{ $category->name }}
                                                 </a> </div>
                                             <!-- /.accordion-heading -->
                                             <div class="accordion-body collapse" id="collapse{{ $category->id }}"
                                                 style="height: 0px;">
                                                 <div class="accordion-inner">
 
-                                                    {{-- @php
-  $subcategories = App\Models\SubCategory::where('category_id',$category->id)->orderBy('subcategory_name_en','ASC')->get();
-  @endphp --}}
 
-            @foreach ($category->subCategories as $subcategory)
-	    <ul>
-	      <li><a href="{{ url('subcategory/product/'.$subcategory->id.'/'.$subcategory->subcategory_slug_en ) }}">
-	      	@if (session()->get('language') == 'hindi') {{ $subcategory->subcategory_name_hin }} @else {{ $subcategory->subcategory_name_en }} @endif</a></li>
+                                                    @foreach ($category->childes as $subcategory)
+                                                        <ul>
+                                                            <li><a
+                                                                    href="{{ url('subcategory/product/' . $subcategory->id . '/' . $subcategory->slug) }}">
+                                                                    {{ $subcategory->name }}
 
-	    </ul>
-	@endforeach
+                                                                </a></li>
+
+                                                        </ul>
+                                                    @endforeach
 
 
                                                 </div>
@@ -105,8 +101,8 @@
                             </div>
                             <div class="sidebar-widget-body m-t-10">
                                 <div class="price-range-holder"> <span class="min-max"> <span
-                                            class="pull-left">$200.00</span> <span
-                                            class="pull-right">$800.00</span> </span>
+                                            class="pull-left">$200.00</span> <span class="pull-right">$800.00</span>
+                                    </span>
                                     <input type="text" id="amount"
                                         style="border:0; color:#666666; font-weight:bold;text-align:center;">
                                     <input type="text" class="price-slider" value="">
@@ -175,7 +171,6 @@
                         <!-- == ====== PRODUCT TAGS ==== ======= -->
                         @include('site.common.product_tags', [
                             'tags' => $tags,
-
                         ])
                         <!-- /.sidebar-widget -->
                         <!-- == ====== END PRODUCT TAGS ==== ======= -->
@@ -193,7 +188,8 @@
 
 
                         <div class="home-banner"> <img
-                                src="{{ asset('frontend/assets/images/banners/LHS-banner.jpg') }}" alt="Image"> </div>
+                                src="{{ asset('frontend/assets/images/banners/LHS-banner.jpg') }}" alt="Image">
+                        </div>
                     </div>
                     <!-- /.sidebar-filter -->
                 </div>
@@ -208,9 +204,8 @@
 
                 <div id="category" class="category-carousel hidden-xs">
                     <div class="item">
-                        <div class="image"> <img
-                                src="{{ asset('frontend/assets/images/banners/cat-banner-1.jpg') }}" alt=""
-                                class="img-responsive"> </div>
+                        <div class="image"> <img src="{{ asset('frontend/assets/images/banners/cat-banner-1.jpg') }}"
+                                alt="" class="img-responsive"> </div>
                         <div class="container-fluid">
                             <div class="caption vertical-top text-left">
                                 <div class="big-text"> Big Sale </div>
@@ -244,7 +239,8 @@
                                 <div class="lbl-cnt"> <span class="lbl">Sort by</span>
                                     <div class="fld inline">
                                         <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
-                                            <button data-toggle="dropdown" type="button" class="btn dropdown-toggle">
+                                            <button data-toggle="dropdown" type="button"
+                                                class="btn dropdown-toggle">
                                                 Position <span class="caret"></span> </button>
                                             <ul role="menu" class="dropdown-menu">
                                                 <li role="presentation"><a href="#">position</a></li>
@@ -263,7 +259,8 @@
                                 <div class="lbl-cnt"> <span class="lbl">Show</span>
                                     <div class="fld inline">
                                         <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
-                                            <button data-toggle="dropdown" type="button" class="btn dropdown-toggle"> 1
+                                            <button data-toggle="dropdown" type="button"
+                                                class="btn dropdown-toggle"> 1
                                                 <span class="caret"></span> </button>
                                             <ul role="menu" class="dropdown-menu">
                                                 <li role="presentation"><a href="#">1</a></li>
@@ -290,7 +287,7 @@
                             <div class="pagination-container">
                                 <ul class="list-inline list-unstyled">
 
-                                        {{ $products->links() }}
+                                    {{ $products->links() }}
 
 
                                 </ul>
@@ -337,7 +334,8 @@
                                                                 <div class="tag new"><span>new</span></div>
                                                             @else
                                                                 <div class="tag hot">
-                                                                    <span>{{ round($discount_percent) }}%</span></div>
+                                                                    <span>{{ round($discount_percent) }}%</span>
+                                                                </div>
                                                             @endif
                                                         </div>
 
@@ -483,8 +481,7 @@
                                                                     </span>
                                                                 </div>
                                                             @else
-                                                                <div class="product-price"> <span
-                                                                        class="price">
+                                                                <div class="product-price"> <span class="price">
                                                                         ${{ $product->discount_price }} </span>
                                                                     <span class="price-before-discount">
                                                                         $ {{ $product->selling_price }}
@@ -507,19 +504,18 @@
                                                                     <ul class="list-unstyled">
                                                                         <li class="add-cart-button btn-group">
                                                                             <button class="btn btn-primary icon"
-                                                                                data-toggle="dropdown" type="button"> <i
-                                                                                    class="fa fa-shopping-cart"></i>
+                                                                                data-toggle="dropdown" type="button">
+                                                                                <i class="fa fa-shopping-cart"></i>
                                                                             </button>
                                                                             <button class="btn btn-primary cart-btn"
                                                                                 type="button">Add to cart</button>
                                                                         </li>
                                                                         <li class="lnk wishlist"> <a
-                                                                                class="add-to-cart"
-                                                                                href="detail.html" title="Wishlist"> <i
+                                                                                class="add-to-cart" href="detail.html"
+                                                                                title="Wishlist"> <i
                                                                                     class="icon fa fa-heart"></i> </a>
                                                                         </li>
-                                                                        <li class="lnk"> <a
-                                                                                class="add-to-cart"
+                                                                        <li class="lnk"> <a class="add-to-cart"
                                                                                 href="detail.html" title="Compare"> <i
                                                                                     class="fa fa-signal"></i> </a>
                                                                         </li>
@@ -549,7 +545,8 @@
                                                         <div class="tag new"><span>new</span></div>
                                                     @else
                                                         <div class="tag hot">
-                                                            <span>{{ round($discount_percent) }}%</span></div>
+                                                            <span>{{ round($discount_percent) }}%</span>
+                                                        </div>
                                                     @endif
                                                 </div>
 
@@ -612,19 +609,3 @@
 </div>
 <!-- /.body-content -->
 @endsection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
