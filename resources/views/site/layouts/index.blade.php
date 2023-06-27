@@ -622,7 +622,8 @@
                                                 @if ($product->discount_price == null)
                                                     <div class="tag hot"><span>hot</span></div>
                                                 @else
-                                                    <div class="tag hot"><span>{{ $discount_percentage }}%</span>
+                                                    <div class="tag hot">
+                                                        <span>{{ $discount_percentage }}%</span>
                                                     </div>
                                                 @endif
 
@@ -642,6 +643,7 @@
                                                 @if ($product->discount_price == null)
                                                     <div class="product-price"> <span class="price">
                                                             ${{ $product->selling_price }} </span>
+                                                    </div>
                                                     @else
                                                         <div class="product-price"> <span class="price">
                                                                 ${{ $discountAmount }} </span>
@@ -653,6 +655,7 @@
                                                 <!-- /.product-price -->
 
                                             </div>
+
                                             <!-- /.product-info -->
                                             <div class="cart clearfix animate-effect">
                                                 <div class="action">
@@ -691,8 +694,9 @@
                                     <!-- /.products -->
                                 </div>
                                 <!-- /.item -->
-                            @endforeach
 
+
+                            @endforeach
 
                         </div>
                         <!-- /.home-owl-carousel -->

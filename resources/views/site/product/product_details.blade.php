@@ -1,6 +1,6 @@
 @extends('site.layouts.master')
 
-@section('title', $product->product_name_en)
+@section('title', $product->name)
 @section('content')
     <div class="breadcrumb">
         <div class="container">
@@ -8,7 +8,7 @@
                 <ul class="list-inline list-unstyled">
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Clothing</a></li>
-                    <li class='active'>{{ $product->product_name_en }}</li>
+                    <li class='active'>{{ $product->name }}</li>
                 </ul>
             </div><!-- /.breadcrumb-inner -->
         </div><!-- /.container -->

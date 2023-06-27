@@ -4,82 +4,83 @@
         <ul class="nav">
 
             @foreach ($categories as $category)
-            <a href="{{ url('category/product/' .$category->id.'/' .$category->slug ) }}">
-                <li class="dropdown menu-item">
-                    <a href="{{ url('category/product/' .$category->id.'/' .$category->slug ) }}">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="icon" aria-hidden="true">
-                    </i>
+            {{-- to do fetch main category error --}}
+                {{-- <a href="{{ url('category/product/' . $category->id . '/' . $category->slug) }}"> --}}
+                    <li class="dropdown menu-item">
+                        <a href="{{ url('category/product/' . $category->id . '/' . $category->slug) }}" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon" aria-hidden="true">
+                            </i>
                             {{ $category->name }}
-                    </a>
-                    </a>
-                    <ul class="dropdown-menu mega-menu">
-                        <li class="yamm-content">
-                            <div class="row">
-                                @foreach ($category->childes as $childs)
-                                    <div class="col-sm-12 col-md-3">
-                                        <a href="{{ url('subcategory/product/' .$childs->id. '/' .$childs->slug) }}">
+                        </a>
+                {{-- </a> --}}
+                <ul class="dropdown-menu mega-menu">
+                    <li class="yamm-content">
+                        <div class="row">
+                            @foreach ($category->childes as $childs)
+                                <div class="col-sm-12 col-md-3">
+                                    <a href="{{ url('subcategory/product/' . $childs->id . '/' . $childs->slug) }}">
                                         <h2 class="title">
-                                                {{ $childs->name }}
+                                            {{ $childs->name }}
                                         </h2>
-                                        </a>
+                                    </a>
 
-                                </h2>
+                                    </h2>
 
-                                 <!--   // Get SubSubCategory Table Data -->
+                                    <!--   // Get SubSubCategory Table Data -->
 
 
-                                @foreach ($category->subChildes as $subchiled)
-                                    <ul class="links list-unstyled">
-                                        <li>
-                                  <a href="{{ url('subsubcategory/product/'.$subchiled->id.'/'.$subchiled->slug ) }}">
+                                    @foreach ($category->subChildes as $subchiled)
+                                        <ul class="links list-unstyled">
+                                            <li>
+                                                <a
+                                                    href="{{ url('subsubcategory/product/' . $subchiled->id . '/' . $subchiled->slug) }}">
                                                     {{ $subchiled->name }}
-                                            </a>
-                                        </li>
+                                                </a>
+                                            </li>
 
-                                    </ul>
-                                @endforeach
-                                <!-- // End SubSubCategory Foreach -->
+                                        </ul>
+                                    @endforeach
+                                    <!-- // End SubSubCategory Foreach -->
 
-                            </div>
-                            <!-- /.col -->
-            @endforeach <!-- End SubCategory Foreach -->
+                                </div>
+                                <!-- /.col -->
+                            @endforeach <!-- End SubCategory Foreach -->
 
-</div>
-<!-- /.row -->
-</li>
-<!-- /.yamm-content -->
-</ul>
-<!-- /.dropdown-menu -->
-</li>
-<!-- /.menu-item -->
-@endforeach <!-- End Category Foreach -->
+                        </div>
+                        <!-- /.row -->
+                    </li>
+                    <!-- /.yamm-content -->
+                </ul>
+                <!-- /.dropdown-menu -->
+                </li>
+                <!-- /.menu-item -->
+            @endforeach <!-- End Category Foreach -->
 
 
-<!-- /.menu-item -->
-<li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-            class="icon fa fa-paper-plane"></i>Kids and Babies</a>
-    <!-- /.dropdown-menu -->
-</li>
-<!-- /.menu-item -->
+            <!-- /.menu-item -->
+            <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                        class="icon fa fa-paper-plane"></i>Kids and Babies</a>
+                <!-- /.dropdown-menu -->
+            </li>
+            <!-- /.menu-item -->
 
-<li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-            class="icon fa fa-futbol-o"></i>Sports</a>
-    <!-- ================================== MEGAMENU VERTICAL ================================== -->
-    <!-- /.dropdown-menu -->
-    <!-- ================================== MEGAMENU VERTICAL ================================== -->
-</li>
-<!-- /.menu-item -->
+            <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                        class="icon fa fa-futbol-o"></i>Sports</a>
+                <!-- ================================== MEGAMENU VERTICAL ================================== -->
+                <!-- /.dropdown-menu -->
+                <!-- ================================== MEGAMENU VERTICAL ================================== -->
+            </li>
+            <!-- /.menu-item -->
 
-<li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-            class="icon fa fa-envira"></i>Home and Garden</a>
-    <!-- /.dropdown-menu -->
-</li>
-<!-- /.menu-item -->
+            <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                        class="icon fa fa-envira"></i>Home and Garden</a>
+                <!-- /.dropdown-menu -->
+            </li>
+            <!-- /.menu-item -->
 
-</ul>
-<!-- /.nav -->
-</nav>
-<!-- /.megamenu-horizontal -->
+        </ul>
+        <!-- /.nav -->
+    </nav>
+    <!-- /.megamenu-horizontal -->
 </div>
 <!-- /.side-menu -->

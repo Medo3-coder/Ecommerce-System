@@ -276,8 +276,6 @@
     });
   </script> --}}
 
-
-
         <script class="">
             $.ajaxSetup({
                 headers: {
@@ -287,24 +285,21 @@
 
             //product view
 
+
             function productView(id) {
-                //    alert(id);
-                //    console.log(id);
-
-
                 $.ajax({
                     url: '/product/view/modal/' + id,
                     type: 'GET',
                     dataType: 'json',
                     success: function(data) {
-
+                        console.log(data);
                         // console.log(data.product.product_name_en);
-                        $('#product-name').text(data.product.product_name_en);
+                        $('#product-name').text(data.product.name.{{ lang() }});
                         $('#product-price').text(data.product.selling_price);
-                        $('#product-code').text(data.product.product_code);
-                        $('#product-category').text(data.product.category.category_name_en);
-                        $('#product-brand').text(data.product.brand.brand_name_en);
-                        $('#product-image').attr('src', '/' + data.product.product_thambnail);
+                        $('#product-code').text(data.product.code);
+                        $('#product-category').text(data.product.category.name.{{ lang() }});
+                        $('#product-brand').text(data.product.brand.name.{{ lang() }});
+                        $('#product-image').attr('src', data.product.product_thambnail);
                         $('#product_id').val(id); // passing prduct id to hidden input on cart
 
                         $('#Qty').val(1);
@@ -325,7 +320,7 @@
 
 
                         //product quantity option
-                        if (data.product.product_qty > 0) {
+                        if (data.product.qty > 0) {
                             $('#available').empty();
                             $('#stockout').empty();
                             $('#available').text('available');
@@ -346,13 +341,13 @@
                         //color
                         // console.log(data.color.product_color_en);
                         $('select[name="color"]').empty();
-                        $.each(data.color.product_color_en, function(key, value) {
+                        $.each(data.color.colors, function(key, value) {
                             $('select[name="color"]').append('<option value =" ' + value + ' ">' + value +
                                 '</option>')
                         });
 
                         //to hide div color if no size option for product
-                        if (data.color.product_color_en == "") {
+                        if (data.color.colors == "") {
                             $('#colorArea').hide();
                         } else {
                             $('#colorArea').show();
@@ -363,13 +358,13 @@
 
                         //size
                         $('select[name="size"]').empty();
-                        $.each(data.size.product_size_en, function(key, value) {
+                        $.each(data.size.sizes, function(key, value) {
                             $('select[name="size"]').append('<option value=" ' + value + ' ">' + value +
                                 '</option>')
                         });
 
                         //to hide div size if no size option for product
-                        if (data.size.product_size_en == "") {
+                        if (data.size.sizes == "") {
                             $('#sizeArea').hide();
                         } else {
                             $('#sizeArea').show();
@@ -441,8 +436,9 @@
                     type: 'GET',
                     dataType: 'json',
                     success: function(response) {
+                        console.log(response);
                         var miniCart = "";
-                        // console.log(response.carts);
+                        console.log(response.carts);
                         // $('span[id="cartSubTotal"]').empty();
                         // $('#cartQty').empty();
                         $('span[id="cartSubTotal"]').text(response.cartTotal);
