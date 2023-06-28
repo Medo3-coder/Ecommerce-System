@@ -38,7 +38,7 @@ class CreateProductsTable extends Migration
 
             $table->longText('long_desc');
 
-            $table->string('product_thambnail');
+            $table->string('product_thambnail')->default('default-product.jpg');
             $table->integer('hot_deals')->nullable();
             $table->integer('featured')->nullable();
             $table->integer('special_offer')->nullable();

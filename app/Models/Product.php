@@ -9,7 +9,7 @@ use Spatie\Translatable\HasTranslations;
 
 class Product extends Model {
     use HasFactory, HasTranslations, UploadTrait;
-    const IMAGEPATH     = 'products';
+    const IMAGEPATH     = 'product_thambnail';
     protected $fillable = [
         'brand_id',
         'category_id',
@@ -57,16 +57,16 @@ class Product extends Model {
 
     public function setProductThambnailAttribute($value) {
         if ($value != null && is_file($value)) {
-            isset($this->attributes['product_thambnail']) ? $this->deleteFile($this->attributes['product_thambnail'], 'products') : '';
-            $this->attributes['product_thambnail'] = $this->uploadAllTyps($value, 'products');
+            isset($this->attributes['product_thambnail']) ? $this->deleteFile($this->attributes['product_thambnail'], 'product_thambnail') : '';
+            $this->attributes['product_thambnail'] = $this->uploadAllTyps($value, 'product_thambnail');
         }
     }
 
     public function getProductThambnailAttribute() {
         if ($this->attributes['product_thambnail']) {
-            $image = $this->getImage($this->attributes['product_thambnail'], 'products');
+            $image = $this->getImage($this->attributes['product_thambnail'], 'product_thambnail');
         } else {
-            $image = $this->defaultImage('product_image');
+            $image = $this->productDefaultImage('product_thambnail');
 
         }
 

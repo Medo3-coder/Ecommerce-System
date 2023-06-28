@@ -99,6 +99,11 @@ trait UploadTrait {
     return asset("/storage/images/$directory/default.png");
   }
 
+
+  public function productDefaultImage($directory) {
+    return asset("/storage/images/$directory/default-product.jpg");
+  }
+
   public static function getImage($name, $directory) {
     return asset("storage/images/$directory/" . $name);
   }
