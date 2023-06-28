@@ -19,7 +19,7 @@ class Slider extends Model {
         if ($this->attributes['image']) {
             $image = $this->getImage($this->attributes['image'], 'sliders');
         } else {
-            $image = $this->defaultImage('sliders');
+            $image = $this->sliderDefaultImage('sliders');
         }
         return $image;
     }

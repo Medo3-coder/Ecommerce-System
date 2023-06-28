@@ -14,7 +14,7 @@ class ProductImage extends Model {
         if ($this->attributes['image']) {
             $image = $this->getImage($this->attributes['image'], 'product_image');
         } else {
-            $image = $this->defaultImage('product_image');
+            $image = $this->productDefaultMultiImage('product_image');
         }
         return $image;
     }

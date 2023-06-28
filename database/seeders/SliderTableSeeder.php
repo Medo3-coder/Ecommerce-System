@@ -10,18 +10,37 @@ class SliderTableSeeder extends Seeder {
     public function run() {
 
         $faker = Faker::create('ar_SA');
-        $sliders = [];
 
-        for ($i = 0; $i < 10; $i++) {
-            $sliders[] = [
-                'title'       => json_encode(['en' => "slider$i", 'ar' => "$i سليدر"], JSON_UNESCAPED_UNICODE),
-                'description' => json_encode(['en' => "description$i", 'ar' => "$i وصف"], JSON_UNESCAPED_UNICODE),
-                'image'       => "default.png",
+        DB::table('sliders')->insert([
+            [
+                'title'       => json_encode(['en' => $faker->name, 'ar' => $faker->name], JSON_UNESCAPED_UNICODE),
+                'description' => json_encode(['en' => $faker->sentence, 'ar' => $faker->sentence], JSON_UNESCAPED_UNICODE),
+                'image'       => "slider1.jpg",
                 'status'      => rand(0, 1),
                 'created_at'  => Carbon::now(),
-            ];
-        }
-        DB::table('sliders')->insert($sliders);
+            ],
+            [
+                'title'       => json_encode(['en' => $faker->name, 'ar' => $faker->name], JSON_UNESCAPED_UNICODE),
+                'description' => json_encode(['en' => $faker->sentence, 'ar' => $faker->sentence], JSON_UNESCAPED_UNICODE),
+                'image'       => "slider2.jpg",
+                'status'      => rand(0, 1),
+                'created_at'  => Carbon::now(),
+            ],
+            [
+                'title'       => json_encode(['en' => $faker->name, 'ar' => $faker->name], JSON_UNESCAPED_UNICODE),
+                'description' => json_encode(['en' => $faker->sentence, 'ar' => $faker->sentence], JSON_UNESCAPED_UNICODE),
+                'image'       => "slider3.jpg",
+                'status'      => rand(0, 1),
+                'created_at'  => Carbon::now(),
+            ],
+            [
+                'title'       => json_encode(['en' => $faker->name, 'ar' => $faker->name], JSON_UNESCAPED_UNICODE),
+                'description' => json_encode(['en' => $faker->sentence, 'ar' => $faker->sentence], JSON_UNESCAPED_UNICODE),
+                'image'       => "slider4.jpg",
+                'status'      => rand(0, 1),
+                'created_at'  => Carbon::now(),
+            ],
+        ]);
 
     }
 }

@@ -104,6 +104,16 @@ trait UploadTrait {
     return asset("/storage/images/$directory/default-product.jpg");
   }
 
+
+  public function productDefaultMultiImage($directory) {
+    return asset("/storage/images/$directory/default.jpg");
+  }
+
+
+  public function sliderDefaultImage($directory) {
+    return asset("/storage/images/$directory/");
+  }
+
   public static function getImage($name, $directory) {
     return asset("storage/images/$directory/" . $name);
   }
