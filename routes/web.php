@@ -27,6 +27,7 @@ Route::group(['middleware' => ['guest']], function () {
     Route::get('login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('site-login', [AuthController::class, 'login'])->name('siteLogin');
     Route::get('register', [AuthController::class, 'showRegister'])->name('register');
+    Route::post('site-register', [AuthController::class, 'register'])->name('siteRegister');
 
 });
 

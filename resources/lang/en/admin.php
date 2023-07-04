@@ -323,6 +323,9 @@ return [
     "the_package_has_been_successfully_activated"            => "The package has been successfully activated",
     "modernization"                                          => "Modernization",
     "type_the_name_of_the_sender"                            => "Type the sender's name",
+    "minlength"                                              => "minimum 9 digits",
+    "maxlength"                                              => 'Maximum 11 digits',
+
     "type_the_password"                                      => "Type the password ",
     "type_the_user_name"                                     => "Type the username",
     "introductory_site"                                      => "Introductory site ",

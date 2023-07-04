@@ -419,6 +419,8 @@ return [
     "new_password"                                           => ' كلمة السر الجديدة',
     "new_password_confirm"                                   => ' تأكيد كلمة السر الجديدة',
     "not_old_password"                                       => '  كلمة السر القديمة غير صحيحة',
+    "minlength"                                              => "الحد الادني 9 اراقم",
+    "maxlength"                                              => 'الحد الاقصي 11 ارقام',
 
     'region'                                                 => 'منطقة',
     'regions'                                                => 'المناطق',

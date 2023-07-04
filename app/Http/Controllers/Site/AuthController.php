@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Site\Auth\loginRequest;
+use App\Http\Requests\Site\Auth\LoginRequest;
+use App\Http\Requests\Site\Auth\RegisterRequest;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller {
@@ -12,7 +14,7 @@ class AuthController extends Controller {
         return view('site.auth.login');
     }
 
-    public function login(loginRequest $request) {
+    public function login(LoginRequest $request) {
         $checkUser = $this->checkUser($request->validated());
         if ($checkUser) {
             $user = auth('web')->user();
@@ -33,12 +35,14 @@ class AuthController extends Controller {
         return $user;
     }
 
-
-
     public function showRegister() {
         return view('site.auth.register');
     }
 
-
+    public function Register(RegisterRequest $request) {
+        $user = User::create($request->validated());
+        // $user->sendVerificationCode();
+        return response()->json(['key' => 'success', 'url' => route('login'), 'msg' => __('auth.registered')]);
+    }
 
 }

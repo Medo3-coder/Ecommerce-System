@@ -57,7 +57,7 @@
                                 @endif
                             </div>
                             <button type="submit"
-                                class="btn btn-primary mr-1 mb-1 submit_button">{{ __('admin.add') }}</button>
+                                class="btn btn-primary mr-1 mb-1 submit_button">{{ __('admin.login') }}</button>
                         </form>
                         <br>
 
