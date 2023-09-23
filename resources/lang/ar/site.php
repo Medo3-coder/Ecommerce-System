@@ -6,6 +6,9 @@ return [
     'no_internet'             => 'مشكله في الاتصال بالانترنت ',
     'comment_not_found'       => 'تعذر ايجاد التعليق ! تم حذف التعليق',
     'deleteAllNotifications'  => 'حذف جميع الاشعارات',
+
+    'banned_by_the_admin'      => 'تم حظرك من قبل الإدارة',
+
     'choose_key'              => 'كود الدوله',
     "long_desc_ar"            => "وصف طويل باللغة العربية",
     "long_desc_en"            => "وصف طويل باللغة الانجليزية",

@@ -14,7 +14,7 @@
                         <input placeholder="Search" autocomplete="off">
                         <button class="  btn-default le-button">Go</button>
                     </form>
-                    <a href="{{ route('user.dashboard') }}"><i class="fa fa-home"></i> Go To Homepage</a>
+                    <a href="{{ url('/') }}"><i class="fa fa-home"></i> Go To Homepage</a>
                 </div>
             </div>
             <!-- /.row -->

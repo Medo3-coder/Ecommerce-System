@@ -91,6 +91,7 @@ return [
     'similerAds'              => 'Similer Ads :-',
     'reportAd'                => 'Report This Ad:-',
     'reportComment'           => 'Report This Comment :-',
+    'banned_by_the_admin'      => 'You have been banned by the administration',
     'save'                    => 'Save',
     'choose_reason'           => 'Select report reason',
     'reportAdded'             => 'Report Sended successfully',

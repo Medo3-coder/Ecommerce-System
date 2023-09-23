@@ -15,12 +15,17 @@ class AuthController extends Controller {
     }
 
     public function login(LoginRequest $request) {
+
         $checkUser = $this->checkUser($request->validated());
+
         if ($checkUser) {
+
             $user = auth('web')->user();
+ 
             if ($user->is_blocked == 1) {
                 Auth::logout();
                 return response()->json(['key' => 'blocked', 'url' => route('login'), 'msg' => __('site.banned_by_the_admin')]);
+
             }
             return response()->json(['key' => 'success', 'url' => route('user.dashboard'), 'msg' => __("site.logined")]);
 
