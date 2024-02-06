@@ -13,7 +13,7 @@ use App\Http\Controllers\Admin\ShippingStateController;
 use App\Http\Controllers\Admin\SliderController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['web-cors']], function () {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/lang/{lang}', [AuthController::class, 'SetLanguage']);
 
     Route::get('login', [AuthController::class, 'showLoginForm'])->name('show.login')->middleware('guest:admin');

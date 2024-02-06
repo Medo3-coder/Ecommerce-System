@@ -293,7 +293,6 @@
                     dataType: 'json',
                     success: function(data) {
                         console.log(data);
-                        // console.log(data.product.product_name_en);
                         $('#product-name').text(data.product.name.{{ lang() }});
                         $('#product-price').text(data.product.selling_price);
                         $('#product-code').text(data.product.code);
@@ -385,19 +384,20 @@
                 var size = $('#size option:selected').text();
                 var quantity = $('#Qty').val();
                 // console.log(id);
-
+                // $('#product-name').text(data.product.name.{{ lang() }});
                 $.ajax({
-                    url: "/cart/data/store/" + id,
                     type: 'POST',
                     dataType: 'json',
                     data: {
 
-                        product_name: product_name,
+                        name: product_name,
                         color: color,
                         size: size,
-                        quantity: quantity
+                        qty: quantity
                     },
+                    url: "/cart/data/store/" + id,
                     success: function(data) {
+                        // console.log(data.);
                         miniCart();
                         $('#closeModals').click();
                         // console.log(data)
@@ -521,7 +521,7 @@
                     dataType: 'json',
 
                     success: function(data) {
-                        // alert('Added to wishlist');
+                        alert('Added to wishlist');
 
                         // Start Message
                         const Toast = Swal.mixin({
@@ -572,7 +572,7 @@
                                 `<tr>
                 <td class="col-md-2"><img src="/${value.product.product_thambnail}" alt="imga"></td>
                 <td class="col-md-7">
-                    <div class="product-name"><a href="#">${value.product.product_name_en}</a></div>
+                    <div class="product-name"><a href="#">${value.product.name}</a></div>
 
                     <div class="price">
 

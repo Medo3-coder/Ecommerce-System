@@ -36,7 +36,7 @@
                             @csrf
                             <div class="form-body">
                                 <div class="col-12">
-                                    <div class="row">
+                                    <div class="row" >
 
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">

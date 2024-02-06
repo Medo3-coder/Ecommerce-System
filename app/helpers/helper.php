@@ -41,6 +41,6 @@ if (!function_exists('defaultLang')) {
   }
 
 
-  function lang(){
-    return App() -> getLocale();
-}
+    function lang(){
+        return App() -> getLocale();
+    }

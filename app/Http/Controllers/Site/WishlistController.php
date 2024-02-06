@@ -43,7 +43,7 @@ class WishlistController extends Controller
     public function viewWishlist()
     {
 
-        return view('frontend.wishlist.view_wishlist');
+        return view('site.wishlist.view');
     }
 
     public function getWishlistProduct()
