@@ -69,13 +69,13 @@ Route::group(['middleware' => ['auth.status']], function () {
     Route::get('/category/product/{id}/{slug}', [HomeController::class, 'categoryWiseProduct']);
 
     //Add To cart with Ajax
-    Route::post('/cart/data/store/{id}', [CartController::class, 'addToCart']);
+    Route::post('/cart/data/store/{id}', [CartController::class, 'addToCart'])->name('cart.store');;
 
     // Get Data from mini cart
-    Route::get('/product/mini/cart/', [CartController::class, 'addMiniCart']);
+    Route::get('/product/mini/cart/', [CartController::class, 'addMiniCart'])->name('mini.cart.store');
 
     // Remove mini cart
-    Route::get('/minicart/product-remove/{rowId}', [CartController::class, 'removeMiniCart']);
+    Route::get('/minicart/product-remove/{rowId}', [CartController::class, 'removeMiniCart'])->name('mini.cart.remove');
 
     // Add to Wishlist
     Route::post('/add-to-wishlist/{product_id}', [WishlistController::class, 'addToWishlist']);
