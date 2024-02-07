@@ -53,12 +53,14 @@ Route::group(['middleware' => ['auth.status']], function () {
         //checkout
         Route::get('/checkout', [CartPageController::class, 'checkoutCreate'])->name('checkout');
 
+
+        
         // Wishlist page
         Route::get('/wishlist', [WishlistController::class, 'viewWishlist'])->name('wishlist');
         //send product data to wishlist page
-        Route::get('/get-wishlist-product', [WishlistController::class, 'getWishlistProduct']);
+        Route::get('/get-wishlist-product', [WishlistController::class, 'getWishlistProduct'])->name('wishlist-product');
         //remove product from wishlist
-        Route::get('/wishlist-remove/{id}', [WishlistController::class, 'removeWishlistProduct']);
+        Route::get('/wishlist-remove/{id}', [WishlistController::class, 'removeWishlistProduct'])->name('wishlist-remove');
 
     });
 
@@ -78,7 +80,7 @@ Route::group(['middleware' => ['auth.status']], function () {
     Route::get('/minicart/product-remove/{rowId}', [CartController::class, 'removeMiniCart'])->name('mini.cart.remove');
 
     // Add to Wishlist
-    Route::post('/add-to-wishlist/{product_id}', [WishlistController::class, 'addToWishlist']);
+    Route::post('/add-to-wishlist/{product_id}', [WishlistController::class, 'addToWishlist'])->name('add.wishlist');
 
 // Frontend SubCategory wise Data
     Route::get('/subcategory/product/{id}/{slug}', [HomeController::class, 'subCategoryWiseProduct']);
@@ -96,8 +98,8 @@ Route::group(['middleware' => ['auth.status']], function () {
 //     // Wishlist page
 //     Route::get('/wishlist', [WishlistController::class, 'viewWishlist'])->name('wishlist');
 
-//     //send product data to wishlist page
-//     Route::get('/get-wishlist-product', [WishlistController::class, 'getWishlistProduct']);
+    //send product data to wishlist page
+    // Route::get('/get-wishlist-product', [WishlistController::class, 'getWishlistProduct']);
 
 //     //remove product from wishlist
 //     Route::get('/wishlist-remove/{id}', [WishlistController::class, 'removeWishlistProduct']);
